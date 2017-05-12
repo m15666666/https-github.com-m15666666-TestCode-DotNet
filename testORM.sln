@@ -11,6 +11,8 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebCoreWindows", "WebCoreWi
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebCore", "WebCore\WebCore.xproj", "{27444FB6-7309-4CAA-AC05-078F52F63C21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVCAutofac", "WebMVCAutofac\WebMVCAutofac.csproj", "{4F077D84-E0E5-4D73-88A3-14C832238338}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{27444FB6-7309-4CAA-AC05-078F52F63C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27444FB6-7309-4CAA-AC05-078F52F63C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27444FB6-7309-4CAA-AC05-078F52F63C21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F077D84-E0E5-4D73-88A3-14C832238338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F077D84-E0E5-4D73-88A3-14C832238338}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F077D84-E0E5-4D73-88A3-14C832238338}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F077D84-E0E5-4D73-88A3-14C832238338}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

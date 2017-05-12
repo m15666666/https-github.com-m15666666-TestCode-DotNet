@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using WebCore.Data;
 using WebCore.Models;
 using WebCore.Services;
+using Autofac;
 
 namespace WebCore
 {
@@ -33,6 +34,8 @@ namespace WebCore
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
+
+        public IContainer ApplicationContainer { get; private set; }
 
         public IConfigurationRoot Configuration { get; }
 
