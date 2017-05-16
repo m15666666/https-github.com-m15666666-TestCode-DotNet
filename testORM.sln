@@ -1,17 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testORM", "testORM\testORM.csproj", "{9B68E4DD-BA9B-4E30-A5CE-EDF1A856D65D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "WebMVC\WebMVC.csproj", "{67763F37-E243-482D-9102-17FF760C41C6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebCoreWindows", "WebCoreWindows\WebCoreWindows.xproj", "{0D86E423-31EA-4F6E-9BDB-A6EAB7667C40}"
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "WebCore", "WebCore\WebCore.xproj", "{27444FB6-7309-4CAA-AC05-078F52F63C21}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVCAutofac", "WebMVCAutofac\WebMVCAutofac.csproj", "{4F077D84-E0E5-4D73-88A3-14C832238338}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVCOwinAutofac", "WebMVCOwinAutofac\WebMVCOwinAutofac.csproj", "{F0E9F17F-4192-481E-8666-C7C5D5ED0C6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCore", "WebCore\WebCore.csproj", "{A36951FA-36D1-4D7E-8487-1E800DBB15C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,18 +27,18 @@ Global
 		{67763F37-E243-482D-9102-17FF760C41C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67763F37-E243-482D-9102-17FF760C41C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67763F37-E243-482D-9102-17FF760C41C6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D86E423-31EA-4F6E-9BDB-A6EAB7667C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D86E423-31EA-4F6E-9BDB-A6EAB7667C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D86E423-31EA-4F6E-9BDB-A6EAB7667C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D86E423-31EA-4F6E-9BDB-A6EAB7667C40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{27444FB6-7309-4CAA-AC05-078F52F63C21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{27444FB6-7309-4CAA-AC05-078F52F63C21}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{27444FB6-7309-4CAA-AC05-078F52F63C21}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{27444FB6-7309-4CAA-AC05-078F52F63C21}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F077D84-E0E5-4D73-88A3-14C832238338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F077D84-E0E5-4D73-88A3-14C832238338}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F077D84-E0E5-4D73-88A3-14C832238338}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F077D84-E0E5-4D73-88A3-14C832238338}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0E9F17F-4192-481E-8666-C7C5D5ED0C6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0E9F17F-4192-481E-8666-C7C5D5ED0C6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0E9F17F-4192-481E-8666-C7C5D5ED0C6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0E9F17F-4192-481E-8666-C7C5D5ED0C6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A36951FA-36D1-4D7E-8487-1E800DBB15C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A36951FA-36D1-4D7E-8487-1E800DBB15C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A36951FA-36D1-4D7E-8487-1E800DBB15C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A36951FA-36D1-4D7E-8487-1E800DBB15C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
