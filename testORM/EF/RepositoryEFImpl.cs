@@ -3,14 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System;
 using System.Data.Entity;
 
 namespace testORM.EF
 {
     public class RepositoryEFImpl : IRepository, IUnitOfWork
     {
-        public DbContext DbContext { get; set; }
+        #region 注入 DbContext
+
+        public DbContext DbContext { get {
+                if(_dbContext == null && DbContextFactory != null)
+                {
+                    return (_dbContext = DbContextFactory.GetDbContext());
+                }
+                return _dbContext;
+            }
+            set { _dbContext = value; }
+        }
+
+        private DbContext _dbContext;
+
+        private IDbContextFactory DbContextFactory { get; set; }
+
+        public RepositoryEFImpl()
+        {
+        }
+
+        public RepositoryEFImpl( IDbContextFactory dbContextFactory )
+        {
+            DbContextFactory = dbContextFactory;
+        }
+
+        #endregion
 
         private DbSet<T> GetDbSet<T>() where T : class
         {
