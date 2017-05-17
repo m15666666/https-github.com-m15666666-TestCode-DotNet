@@ -35,6 +35,17 @@ namespace WebCore
 
             // Add other framework services
 
+            // Adds a default in-memory implementation of IDistributedCache.
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.CookieHttpOnly = true;
+            });
+
+
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterModule<DefaultModule>();
@@ -61,6 +72,8 @@ namespace WebCore
 
             app.UseStaticFiles();
 
+            app.UseSession();
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
