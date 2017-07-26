@@ -1,0 +1,8 @@
+﻿
+CREATE SCHEMA `testorm` ;
+
+CREATE TABLE `testorm`.`bs_person` (
+  `Id_NR` INT NOT NULL,
+  `Name_TX` VARCHAR(50) NOT NULL,
+  `Description_TX` VARCHAR(500) NULL,
+  PRIMARY KEY (`Id_NR`));
