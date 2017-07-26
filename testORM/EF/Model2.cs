@@ -17,6 +17,7 @@ namespace testORM.EF
         {
         }
 
+
         // #1
         //public virtual DbSet<BS_Person> BS_Person { get; set; }
 
@@ -30,7 +31,10 @@ namespace testORM.EF
 
             // #1 和 #2 和 #3 可以互相替代， #2 和 #3 用于动态添加实体（表）
 
-
+            if (!string.IsNullOrWhiteSpace(DbEnvironmentUtils.DefaultDatabaseSchema))
+            {
+                modelBuilder.HasDefaultSchema(DbEnvironmentUtils.DefaultDatabaseSchema);
+            }
         }
 
         protected override void Dispose(bool disposing)

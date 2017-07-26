@@ -12,10 +12,19 @@ namespace testORM.IOC
     public class DefaultModule : Module
     {
         private const string DbContextKey = "MainDbContextKey";
-        private const string connectionString = "data source=10.3.2.188;initial catalog=testORM;persist security info=True;user id=sa;password=#db877350;MultipleActiveResultSets=True;App=EntityFramework";
+
+        // ms sqlserver
+        //private const string connectionString = "data source=10.3.2.188;initial catalog=testORM;persist security info=True;user id=sa;password=#db877350;MultipleActiveResultSets=True;App=EntityFramework";
+
+        // postgresql
+        private const string connectionString = "User ID=postgres;Password=admin;server=10.3.2.188;Port=5432;Database=testorm;Pooling=true;";
+        //private const string connectionString = "name=npgsql";
+        private const string DefaultDatabaseSchema = "public";
 
         protected override void Load(ContainerBuilder builder)
         {
+            DbEnvironmentUtils.DefaultDatabaseSchema = DefaultDatabaseSchema;
+
             //builder.RegisterType<CharacterRepository>().As<ICharacterRepository>();
             //builder.RegisterType<Model2>().Named<DbContext>(DbContextKey);
             builder.Register<DbContext>(context => {
