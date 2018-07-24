@@ -23,7 +23,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTopshelf", "TestTopshel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTSubscriber", "MQTTClient\MQTTSubscriber.csproj", "{9F33B4A9-7072-48CF-B656-ECEBADE0D59C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COAPSubscriber", "COAPSubscriber\COAPSubscriber.csproj", "{3698E663-6A23-4EA1-AC52-827B98A1B774}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "COAPSubscriber", "COAPSubscriber\COAPSubscriber.csproj", "{3698E663-6A23-4EA1-AC52-827B98A1B774}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestLeetCode", "leetcode-cn\TestLeetCode\TestLeetCode.csproj", "{D9A1469E-AC43-4766-8C09-E51293259C7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{3698E663-6A23-4EA1-AC52-827B98A1B774}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3698E663-6A23-4EA1-AC52-827B98A1B774}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3698E663-6A23-4EA1-AC52-827B98A1B774}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9A1469E-AC43-4766-8C09-E51293259C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9A1469E-AC43-4766-8C09-E51293259C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9A1469E-AC43-4766-8C09-E51293259C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9A1469E-AC43-4766-8C09-E51293259C7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
