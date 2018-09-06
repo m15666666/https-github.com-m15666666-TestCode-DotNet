@@ -7,15 +7,17 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            HashSet<int> set = new HashSet<int>();
-            //set.Contains()
+            ShuffleArraySolution.Test();
 
-            var containsDuplicateSolution = new ContainsDuplicateSolution();
-            containsDuplicateSolution.Test();
 
-            var rotateArraySolution = new RotateArraySolution();
+            //HashSet<int> set = new HashSet<int>();
 
-            rotateArraySolution.Test();
+            //var containsDuplicateSolution = new ContainsDuplicateSolution();
+            //containsDuplicateSolution.Test();
+
+            //var rotateArraySolution = new RotateArraySolution();
+
+            //rotateArraySolution.Test();
 
             Console.Read();
         }
