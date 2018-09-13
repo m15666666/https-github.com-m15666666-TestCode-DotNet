@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            ShuffleArraySolution.Test();
+            HammingWeightSolution.Test();
+            //ShuffleArraySolution.Test();
 
 
             //HashSet<int> set = new HashSet<int>();
