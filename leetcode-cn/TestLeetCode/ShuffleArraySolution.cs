@@ -64,12 +64,10 @@ class ShuffleArraySolution
             a.NextValue();
             if (a.ReachEnd)
             {
-                //if(a.LastValue.HasValue) _map.Remove(a.LastValue.Value);
                 Accessors[i] = null;
                 continue;
             }
 
-            //a.NextValue();
             currentIndex = i;
             break;
         }
