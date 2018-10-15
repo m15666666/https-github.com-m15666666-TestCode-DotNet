@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            CombinationSumSolution.Test();
+            SpiralOrderSolution.Test();
+            //CombinationSumSolution.Test();
             //SearchMidReversedArraySolution.Test(); ;
             //TwoNumDivideSolution.Test();
             //HammingWeightSolution.Test();
