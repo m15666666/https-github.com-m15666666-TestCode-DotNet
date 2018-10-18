@@ -73,3 +73,50 @@ class GetKthPermutationSolution
         BackTrade(high, low, k, smallN1, count - 1);
     }
 }
+
+/// <summary>
+/// 60.第K个排列,别人的答案，试一下
+/// </summary>
+class GetKthPermutationSolution_Others_1
+{
+    public static void Test()
+    {
+        var ret = GetPermutation(3, 2);
+        //int[] nums = new int[] {3, 2, 4};
+        //int k = 6;
+        //var ret = LevelOrder((int[]) nums.Clone(), k);
+
+        //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
+    }
+
+    public static string GetPermutation(int n, int k)
+    {
+        if (n == 1)
+            return "1";
+        int count = GetCount(n - 1);
+        Console.WriteLine(count + " " + k);
+        int x = (k - 1) / count + 1;
+        return replace(GetPermutation(n - 1, k - x * count + count), x);
+    }
+
+    private static int GetCount(int n)
+    {
+        int ret = 1;
+        for (int i = 1; i <= n; i++)
+            ret *= i;
+
+        return ret;
+    }
+
+    private static string replace(string s, int x)
+    {
+        //Console.WriteLine(s);
+        Console.WriteLine(x);
+        string ret = "";
+        ret += (char)('0' + x);
+        foreach (var n in s)
+            ret += n - '0' >= x ? (char)(n + 1) : n;
+
+        return ret;
+    }
+}
