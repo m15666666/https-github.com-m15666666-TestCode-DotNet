@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            GetKthPermutationSolution_Others_1.Test();
+            SortColorsSolution.Test();
+            //GetKthPermutationSolution_Others_1.Test();
             //CanJumpSolution.Test();
             //SpiralOrderSolution.Test();
             //CombinationSumSolution.Test();
