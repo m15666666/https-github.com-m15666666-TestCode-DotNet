@@ -8,10 +8,11 @@ using System.Text;
 /// https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/
 /// 105.从前序与中序遍历序列构造二叉树
 /// 根据一棵树的前序遍历与中序遍历构造二叉树。
+/// 注意:你可以假设树中没有重复的元素。
 /// https://www.jianshu.com/p/4ef1f50d45b5
 /// http://www.bubuko.com/infodetail-2638838.html
 /// </summary>
-class BuildTreeSolution
+class BuildTreeFromPreAndInSolution
 {
     public void Test()
     {
