@@ -18,7 +18,7 @@ namespace Zx2642UtilsScripts
 
         #endregion
 
-        public string[] _tables = new string[] 
+        private static readonly string[] _tables = new string[] 
         {
             "Analysis_MObjPicture",
             "Analysis_MObjPosition",
