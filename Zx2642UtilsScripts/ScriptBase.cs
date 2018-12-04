@@ -10,10 +10,17 @@ namespace Zx2642UtilsScripts
     /// </summary>
     public abstract class ScriptBase
     {
+        /// <summary>
+        /// 向输出写信息，然后换行
+        /// </summary>
+        /// <param name="message"></param>
         public void WriteLine( string message = "" )
         {
+            // 使用Visual Studio IDE 的输出窗口输出脚本
             Debug.WriteLine( message );
         }
+
+        #region 数据库相关
 
         /// <summary>
         /// 生成delete 语句
@@ -46,5 +53,38 @@ namespace Zx2642UtilsScripts
         {
             WriteLine($"INSERT INTO {table} {sql};");
         }
+
+        protected void GenerateObjectKeyStartValueSQL( List<string[]> tableAndKeyNames, int startValue, string objectKeyTable = "BS_ObjectKey" )
+        {
+            WriteLine($"{Environment.NewLine}{Environment.NewLine}");
+            WriteLine("--ObjectKeyStartValue");
+            WriteLine($"UPDATE {objectKeyTable} set KeyValue = {startValue};");
+            foreach (var tableAndKey in tableAndKeyNames)
+            {
+                var table = tableAndKey[0];
+                var key = tableAndKey[1];
+                WriteLine($"DELETE FROM {objectKeyTable} where Source_CD = '{table}' and KeyName = '{key}';");
+                WriteLine($"INSERT INTO {objectKeyTable} values('{table}','{key}',{startValue},null,null);");
+                WriteLine("");
+            }
+        }
+
+        #endregion
+
+        #region Entity framework 相关
+        
+        /// <summary>
+        /// 生成 public virtual DbSet<Analysis_PntPosition> Analysis_PntPosition { get; set; } 类似 语句
+        /// </summary>
+        /// <param name="classNames"></param>
+        protected void GenerateEfDbContextDbSet(IEnumerable<string> classNames )
+        {
+            foreach (var className in classNames )
+            {
+                WriteLine($"public virtual DbSet<{className}> {className}" + " { get; set; }");
+            }
+        }
+
+        #endregion
     }
 }

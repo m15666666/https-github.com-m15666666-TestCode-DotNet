@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 
 namespace testORM.EF
 {
@@ -46,6 +47,14 @@ namespace testORM.EF
             if( entity != null )
             {
                 GetDbSet<T>().Add( entity );
+            }
+        }
+
+        public void AddOrUpdate<T>(T entity) where T : class
+        {
+            if (entity != null)
+            {
+                GetDbSet<T>().AddOrUpdate(entity);
             }
         }
 
