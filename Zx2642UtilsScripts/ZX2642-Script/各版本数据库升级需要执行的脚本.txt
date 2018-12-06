@@ -1,0 +1,13 @@
+1.0.0.000000_1.0.1.120509£º
+DBUpdate.sql¡£
+InitDBStructDesc.sql¡£
+
+1.0.1.120509_1.0.2.120518£º
+DBUpdate.sql¡£
+InitDBStructDesc.sql¡£
+71.CreateView.sql¡£
+InitQueryViewConfig.sql¡£
+InitModule.sql
+Authorization.sql
+InitAppConfig.sql
+HistoryDataPackage.sql

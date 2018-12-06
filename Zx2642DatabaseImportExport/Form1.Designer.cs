@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnu_exportToExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_importExcelToDatabase = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,46 +41,35 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_exportToExcel,
             this.mnu_importExcelToDatabase});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(614, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
             // 
             // mnu_exportToExcel
             // 
             this.mnu_exportToExcel.Name = "mnu_exportToExcel";
-            this.mnu_exportToExcel.Size = new System.Drawing.Size(88, 20);
-            this.mnu_exportToExcel.Text = "ExportToExcel";
+            resources.ApplyResources(this.mnu_exportToExcel, "mnu_exportToExcel");
             this.mnu_exportToExcel.Click += new System.EventHandler(this.mnu_exportToExcel_Click);
             // 
             // mnu_importExcelToDatabase
             // 
             this.mnu_importExcelToDatabase.Name = "mnu_importExcelToDatabase";
-            this.mnu_importExcelToDatabase.Size = new System.Drawing.Size(134, 20);
-            this.mnu_importExcelToDatabase.Text = "ImportExcelToDatabase";
+            resources.ApplyResources(this.mnu_importExcelToDatabase, "mnu_importExcelToDatabase");
             this.mnu_importExcelToDatabase.Click += new System.EventHandler(this.mnu_importExcelToDatabase_Click);
             // 
             // rtb_log
             // 
-            this.rtb_log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_log.Location = new System.Drawing.Point(0, 24);
+            resources.ApplyResources(this.rtb_log, "rtb_log");
             this.rtb_log.Name = "rtb_log";
-            this.rtb_log.Size = new System.Drawing.Size(614, 424);
-            this.rtb_log.TabIndex = 3;
-            this.rtb_log.Text = "";
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(614, 448);
             this.Controls.Add(this.rtb_log);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "在线数据导入导出";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

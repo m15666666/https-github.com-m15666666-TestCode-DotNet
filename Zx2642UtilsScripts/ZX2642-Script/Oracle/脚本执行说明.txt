@@ -1,0 +1,31 @@
+﻿一、用创建用户登录，依次执行以下脚本：
+
+01.CreateTable.sql	创建表
+02.CommonPackage.sql	共用存储过程包
+03.OracleObjectMM.sql	Oracle 共用存储过程
+04.CreateView.sql	创建视图
+05.InitAppAction.sql	系统权限初始化脚本
+06.InitAppConfig.sql	初始化默认配置项
+07.InitDDType.sql	初始化数据字典
+08.InitQueryViewConfig.sql	创建查询视图配置脚本
+09.InitSysData.sql	初始化系统配置数据
+10.InitDBStructDesc.sql	数据库字段中文说明初始化
+11.InitPromptMessage.sql	消息提示初始化
+12.InitControlTitle.sql	
+13.InitModule.sql	模块、按钮配置脚本
+14.XTGLPackage.Sql	系统管理存储过程包
+15.JCXXPackage.sql	基准管理存储过程包
+16.DJGLPackage.sql	点检管理存储过程包
+17.BZGLPackage.sql	标准管理存储过程包
+18.XSTPTable.SQL	分区存储过程
+19.BGCycle.sql	后台周期计算相关存储过程
+20.BGProcess.sql	后台任务处理相关存储过程
+
+
+
+
+
+
+
+
+

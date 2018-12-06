@@ -1,0 +1,6 @@
+
+*、脚本使用bash shell脚本语言和CodeSmith模板等技术；shell脚本的执行可以使用msys工具；
+
+*、_MigrateInitDatasToSqlServer.sh、_MigrateProceduresToSqlServer.sh、_MigrateViewToSqlServer.sh是三个迁移脚本的入口点可以参考写法；
+
+*、ScriptReplace.cst是生成migrateFieldTypeToSqlServer.sed文件的模板，migrateFieldTypeToSqlServer.sed文件用于替换存储过程和函数中的oracle的列类型；

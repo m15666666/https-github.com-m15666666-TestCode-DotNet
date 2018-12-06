@@ -18,6 +18,9 @@ using Zx2642DatabaseImportExport.ObjectMaps;
 
 namespace Zx2642DatabaseImportExport
 {
+    /// <summary>
+    /// 使用C# 完美实现多语言版本Windows应用程序: https://blog.csdn.net/zjwen2007/article/details/43735077
+    /// </summary>
     public partial class Form1 : Form
     {
         public Form1()
@@ -54,11 +57,11 @@ namespace Zx2642DatabaseImportExport
                     ExportMOjbectToExcel(ds);
 
                     ExportToExcel<Sample_Server>(ds);
-                    ExportToExcel<Sample_PntChannel>(ds);
                     ExportToExcel<Sample_ServerDAU>(ds);
-                    ExportToExcel<Sample_DAUStation>(ds);
                     ExportToExcel<Sample_Station>(ds);
+                    ExportToExcel<Sample_DAUStation>(ds);
                     ExportToExcel<Sample_StationChannel>(ds);
+                    ExportToExcel<Sample_PntChannel>(ds);
 
                     ExportToExcel<Analysis_PntPosition>(ds);
                     ExportToExcel<Analysis_MObjPosition>(ds);
@@ -96,11 +99,11 @@ namespace Zx2642DatabaseImportExport
                     ImportExcelToDatabase_MObject();
 
                     ImportExcelToDatabase<Sample_Server>();
-                    ImportExcelToDatabase<Sample_PntChannel>();
                     ImportExcelToDatabase<Sample_ServerDAU>();
-                    ImportExcelToDatabase<Sample_DAUStation>();
                     ImportExcelToDatabase<Sample_Station>();
+                    ImportExcelToDatabase<Sample_DAUStation>();
                     ImportExcelToDatabase<Sample_StationChannel>();
+                    ImportExcelToDatabase<Sample_PntChannel>();
 
                     ImportExcelToDatabase<Analysis_PntPosition>();
                     ImportExcelToDatabase<Analysis_MObjPosition>();
@@ -350,6 +353,11 @@ namespace Zx2642DatabaseImportExport
                 Write(message);
                 Write(Environment.NewLine);
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

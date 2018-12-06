@@ -1,0 +1,38 @@
+﻿http://www.cnblogs.com/moveofgod/p/3540575.html
+https://blog.csdn.net/liushengxi_root/article/details/72810319
+
+// 在file_name文件中找到word所在的所有行并显示。-n 为显示行号
+grep   -n   'word'  file_name
+
+// 在file_name文件中找到wall 或者是well 所在的所有行并显示
+grep   'w[ea]ll'   file_name
+
+// 在file_name文件中找到”非well” 所在的所有行并显示
+grep    'w[^e]ll'   file_name
+
+// 在file_name文件中找到以The开头的所有行并显示（请与上一条命令进行区别）
+grep   '^The'   file_name 
+
+// 在file_name文件中找到goo(任意字符)(任意字符)le的所有行并显示(即总共七个字符)
+grep       'goo..le'      file_name
+
+// 在file_name文件中找到g , gg , ggg等的所有行并显示（*代表重复前一个字符0～～无穷多次）
+grep    'g*g'     file_name
+
+// 在file_name文件中找到Tyy,Tyyy的所有行并显示(注意{}在 shell中有特殊含义，故需要转义)
+grep   'Ty\{2,3\}'    file_name 
+
+
+// 下面是基本命令
+grep(关键字: 截取) 文本搜集工具, 结合正则表达式非常强大
+主要参数 []
+-c : 只输出匹配的行
+-I : 不区分大小写
+-h : 查询多文件时不显示文件名
+-l : 查询多文件时, 只输出包含匹配字符的文件名
+-n : 显示匹配的行号及行
+-v : 显示不包含匹配文本的所有行(我经常用除去grep本身)
+基本工作方式: grep 要匹配的内容 文件名, 例如:
+grep 'test' d* 显示所有以d开头的文件中包含test的行
+grep 'test' aa bb cc 显示在 aa bb cc 文件中包含test的行
+grep '[a-z]\{5}\' aa 显示所有包含字符串至少有5个连续小写字母的串
