@@ -50,3 +50,42 @@ class InsertionSortListSolution
         return root.next;
     }
 }
+
+/*
+ * 
+
+
+
+    public ListNode InsertionSortList(ListNode head) {
+        ListNode node = head;
+        ListNode lastNode = head;
+        while (node != null)
+        {
+            ListNode compare = head;
+            ListNode lastCompare = head;
+            while (compare != node)
+            {
+                if (node.val < compare.val)
+                {
+                    //insert
+                    ListNode tmp = node.next;
+                    node.next = compare;
+                    lastNode.next = tmp;
+                    if (compare != lastCompare)
+                        lastCompare.next = node;
+                    if (compare == head)
+                        head = node;
+                    node = lastNode;
+                    break;
+                }
+                lastCompare = compare;
+                compare = compare.next;
+            }
+            lastNode = node;
+            node = node.next;
+        }
+        return head;
+    }
+
+ * 
+ * /
