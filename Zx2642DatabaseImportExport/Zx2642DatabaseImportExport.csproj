@@ -85,6 +85,8 @@
     <Compile Include="EntityFramework\Mob_MObject.cs" />
     <Compile Include="EntityFramework\Mob_MobjectStructure.cs" />
     <Compile Include="EntityFramework\MyDbContext.cs" />
+    <Compile Include="EntityFramework\Pnt_DataVar.cs" />
+    <Compile Include="EntityFramework\Pnt_PntDataVar.cs" />
     <Compile Include="EntityFramework\Pnt_Point.cs" />
     <Compile Include="EntityFramework\Sample_DAUStation.cs" />
     <Compile Include="EntityFramework\Sample_PntChannel.cs" />

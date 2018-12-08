@@ -43,6 +43,8 @@ namespace Zx2642DatabaseImportExport.EntityFramework
         public virtual DbSet<Analysis_MObjPicture> Analysis_MObjPicture { get; set; }
         //public virtual DbSet<> { get; set; }
 
+        public virtual DbSet<Pnt_DataVar> Pnt_DataVar { get; set; }
+        public virtual DbSet<Pnt_PntDataVar> Pnt_PntDataVar { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -67,6 +67,9 @@ namespace Zx2642DatabaseImportExport
                     ExportToExcel<Analysis_MObjPosition>(ds);
                     ExportToExcel<Analysis_MObjPicture>(ds);
 
+                    ExportToExcel<Pnt_DataVar>(ds);
+                    ExportToExcel<Pnt_PntDataVar>(ds);
+
                     ExcelUtils.DataSetToExcel(ExcelFilePath, ds);
 
                     AddLog("导出完成!");
@@ -108,6 +111,9 @@ namespace Zx2642DatabaseImportExport
                     ImportExcelToDatabase<Analysis_PntPosition>();
                     ImportExcelToDatabase<Analysis_MObjPosition>();
                     ImportExcelToDatabase<Analysis_MObjPicture>();
+
+                    ImportExcelToDatabase<Pnt_DataVar>();
+                    ImportExcelToDatabase<Pnt_PntDataVar>();
 
                     AddLog("导入完成!");
                 }
