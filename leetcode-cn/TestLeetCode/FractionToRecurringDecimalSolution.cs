@@ -18,11 +18,13 @@ using System.Text;
 /// 示例 3:
 /// 输入: numerator = 2, denominator = 3
 /// 输出: "0.(6)"
+/// http://www.cnblogs.com/leo-lzj/p/9613643.html
 /// </summary>
 class FractionToRecurringDecimalSolution
 {
-    public void Test()
+    public static void Test()
     {
+        var ret = FractionToDecimal(7, -12);
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -30,24 +32,52 @@ class FractionToRecurringDecimalSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
-    
-    public int ClimbStairs(int n)
+
+    public static string FractionToDecimal(int numerator, int denominator)
     {
-        Dictionary<int, int> n2PathCount = new Dictionary<int, int>();
-        return ClimbStairs(n, n2PathCount);
-    }
+        if (numerator == 0) return "0";
 
-    private int ClimbStairs(int n, Dictionary<int, int> n2PathCount)
-    {
-        if (n <= 1) return 1;
-        if (n == 2) return 2;
+        long nu = numerator;
+        long de = denominator;
 
-        if (n2PathCount.ContainsKey(n)) return n2PathCount[n];
+        StringBuilder sb = new StringBuilder();
+        var isNegative = nu < 0 ^ de < 0;
+        if (isNegative) sb.Append("-");
 
-        var ret = ClimbStairs(n - 1, n2PathCount) + ClimbStairs(n - 2, n2PathCount);
+        if (nu < 0) nu = -nu;
+        if (de < 0) de = -de;
 
-        if (!n2PathCount.ContainsKey(n)) n2PathCount[n] = ret;
+        // 整数部分
+        sb.Append(nu / de);
 
-        return ret;
+        var remainder = nu % de;
+        if ( remainder == 0 ) return sb.ToString();
+
+        sb.Append(".");
+
+        Dictionary<long, int> remainders = new Dictionary<long, int>();
+
+        // 记录当前添加的小数在答案中的位置
+        int decimalPosition = sb.Length;
+
+        while ( remainder != 0 )
+        {
+            // 若重复出现余数，则证明出现循环
+            if ( remainders.ContainsKey(remainder) )
+            {
+                sb.Insert(remainders[remainder], "(");
+                sb.Append(")");
+                return sb.ToString();
+            }
+
+            // 记录余数出现的位置，顺便递增pos
+            remainders[remainder] = decimalPosition++;
+
+            long currentNumerator = 10 * remainder;
+            sb.Append( currentNumerator / de );
+            remainder = currentNumerator % de;
+        }
+
+        return sb.ToString();
     }
 }

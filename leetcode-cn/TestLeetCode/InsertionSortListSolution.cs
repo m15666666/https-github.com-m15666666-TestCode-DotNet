@@ -52,10 +52,7 @@ class InsertionSortListSolution
 }
 
 /*
- * 
-
-
-
+ 
     public ListNode InsertionSortList(ListNode head) {
         ListNode node = head;
         ListNode lastNode = head;
@@ -87,5 +84,4 @@ class InsertionSortListSolution
         return head;
     }
 
- * 
- * /
+*/
