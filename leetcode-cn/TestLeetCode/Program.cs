@@ -7,6 +7,7 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
+            CourseScheduleSolution.Test();
             BitwiseANDOfNumbersRangeSolution.Test();
             //NumberOfIslandsSolution.Test();
             //FractionToRecurringDecimalSolution.Test();
