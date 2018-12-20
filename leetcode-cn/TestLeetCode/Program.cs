@@ -7,9 +7,10 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            Trie.Test();
-            CourseScheduleSolution.Test();
-            BitwiseANDOfNumbersRangeSolution.Test();
+            MinimumSizeSubarraySumSolution.Test();
+            //Trie.Test();
+            //CourseScheduleSolution.Test();
+            //BitwiseANDOfNumbersRangeSolution.Test();
             //NumberOfIslandsSolution.Test();
             //FractionToRecurringDecimalSolution.Test();
             //SortColorsSolution.Test();
