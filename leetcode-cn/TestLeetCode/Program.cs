@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            MinimumSizeSubarraySumSolution.Test();
+            CourseScheduleIISolution.Test();
+            //MinimumSizeSubarraySumSolution.Test();
             //Trie.Test();
             //CourseScheduleSolution.Test();
             //BitwiseANDOfNumbersRangeSolution.Test();
