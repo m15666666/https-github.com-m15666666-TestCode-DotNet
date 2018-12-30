@@ -65,3 +65,52 @@ class MaximalSquareSolution
         return maxLength * maxLength;
     }
 }
+/*
+// 别人的算法
+public class Solution {
+    public int MaximalSquare(char[,] matrix)
+        {
+            int len = matrix.GetLength(0);
+            int len2 = matrix.GetLength(1);
+
+            int max = 0;
+
+            for (int i = 0; i < len; ++i)
+            {
+                for (int j = 0; j < len2; ++j)
+                {
+                    max = Math.Max(max, GetArea(matrix,i, j));
+                }
+            }
+
+            return max;
+        }
+
+        public int GetArea(char[,] list, int x, int y)
+        {
+            if (list[x, y] == 48)
+                return 0;
+
+            int len = 1;
+            while (true)
+            {
+                if (x + len >= list.GetLength(0) || y + len >= list.GetLength(1))
+                    return len * len;
+
+                for (int i = x; i <= x+len; ++i)
+                {
+                    if (list[i, y + len] == 48)
+                        return len * len;
+                }
+
+                for (int i = y; i <= y+len; ++i)
+                {
+                    if (list[x + len, i] == 48)
+                        return len *len;
+                }
+
+                len++;
+            }
+        }
+}
+*/
