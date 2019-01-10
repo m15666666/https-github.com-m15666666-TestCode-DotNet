@@ -22,6 +22,18 @@ namespace Zx2642UtilsScripts
         private List<string[]> opc_mid_2642varNames = new List<string[]> {
             new string[]{ "OpcItemName", "ItemName", "VarName"},
             new string[]{ "OpcItemName2", "ItemName2", "VarName2"},
+            new string[]{ "-6-1同步机负荷端温度转换输出值-", "V3020201", "V3020201"},
+new string[]{ "-6-1同步机非负荷端温度转换输出值-", "V3020202", "V3020202"},
+new string[]{ "-6-1球磨机副轴负荷端温度转换输出值-", "V3020203", "V3020203"},
+new string[]{ "-6-1球磨机副轴非负荷端温度转换输出值-", "V3020204", "V3020204"},
+new string[]{ "-6-1球磨机主轴负荷端温度1转换输出值-", "V3020205", "V3020205"},
+new string[]{ "-6-1球磨机主轴负荷端温度2转换输出值-", "V3020206", "V3020206"},
+new string[]{ "-6-1球磨机主轴负荷端温度3转换输出值-", "V3020207", "V3020207"},
+new string[]{ "-6-1球磨机主轴非负荷端温度1转换输出值-", "V3020208", "V3020208"},
+new string[]{ "-6-1球磨机主轴非负荷端温度2转换输出值-", "V3020209", "V3020209"},
+new string[]{ "-6-1球磨机主轴非负荷端温度3转换输出值-", "V3020210", "V3020210"},
+new string[]{ "-6-1球磨机主轴负荷端油流转换输出值-", "V3022201", "V3022201"},
+
             //new string[]{ "", "", ""},
             //new string[]{ "", "", ""},
         };
