@@ -20,8 +20,8 @@ namespace Zx2642UtilsScripts
         /// 需要修改
         /// </summary>
         private List<string[]> opc_mid_2642varNames = new List<string[]> {
-            new string[]{ "OpcItemName", "ItemName", "VarName"},
-            new string[]{ "OpcItemName2", "ItemName2", "VarName2"},
+            //new string[]{ "OpcItemName", "ItemName", "VarName"},
+            //new string[]{ "OpcItemName2", "ItemName2", "VarName2"},
             new string[]{ "-6-1同步机负荷端温度转换输出值-", "V3020201", "V3020201"},
 new string[]{ "-6-1同步机非负荷端温度转换输出值-", "V3020202", "V3020202"},
 new string[]{ "-6-1球磨机副轴负荷端温度转换输出值-", "V3020203", "V3020203"},
