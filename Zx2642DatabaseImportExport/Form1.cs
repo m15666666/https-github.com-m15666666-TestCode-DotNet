@@ -98,22 +98,22 @@ namespace Zx2642DatabaseImportExport
             WaitCallback action = state => {
                 try
                 {
-                    ImportExcelToDatabase<Pnt_Point>();
-                    ImportExcelToDatabase_MObject();
+                    //ImportExcelToDatabase<Pnt_Point>();
+                    //ImportExcelToDatabase_MObject();
 
                     ImportExcelToDatabase<Sample_Server>();
-                    ImportExcelToDatabase<Sample_ServerDAU>();
-                    ImportExcelToDatabase<Sample_Station>();
-                    ImportExcelToDatabase<Sample_DAUStation>();
-                    ImportExcelToDatabase<Sample_StationChannel>();
-                    ImportExcelToDatabase<Sample_PntChannel>();
+                    //ImportExcelToDatabase<Sample_ServerDAU>();
+                    //ImportExcelToDatabase<Sample_Station>();
+                    //ImportExcelToDatabase<Sample_DAUStation>();
+                    //ImportExcelToDatabase<Sample_StationChannel>();
+                    //ImportExcelToDatabase<Sample_PntChannel>();
 
-                    ImportExcelToDatabase<Analysis_PntPosition>();
-                    ImportExcelToDatabase<Analysis_MObjPosition>();
-                    ImportExcelToDatabase<Analysis_MObjPicture>();
+                    //ImportExcelToDatabase<Analysis_PntPosition>();
+                    //ImportExcelToDatabase<Analysis_MObjPosition>();
+                    //ImportExcelToDatabase<Analysis_MObjPicture>();
 
-                    ImportExcelToDatabase<Pnt_DataVar>();
-                    ImportExcelToDatabase<Pnt_PntDataVar>();
+                    //ImportExcelToDatabase<Pnt_DataVar>();
+                    //ImportExcelToDatabase<Pnt_PntDataVar>();
 
                     AddLog("导入完成!");
                 }
