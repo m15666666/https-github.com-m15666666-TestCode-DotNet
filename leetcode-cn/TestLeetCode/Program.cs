@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            AdditiveNumberSolution.Test();
+            new CoinChangeSolution().Test();
+            //AdditiveNumberSolution.Test();
             //PerfectSquaresSolution.Test();
             //BasicCalculatorIISolution.Test();
             //HouseRobberIISolution.Test();
