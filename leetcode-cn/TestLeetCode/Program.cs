@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new ReconstructItinerarySolution().Test();
+            new IncreasingTripletSubsequenceSolution().Test();
+            //new ReconstructItinerarySolution().Test();
             //new CoinChangeSolution().Test();
             //AdditiveNumberSolution.Test();
             //PerfectSquaresSolution.Test();
