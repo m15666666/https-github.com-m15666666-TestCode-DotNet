@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new GuessNumberHigherOrLowerIISolution().Test();
+            new CombinationSumIVSolution().Test();
+            //new GuessNumberHigherOrLowerIISolution().Test();
             //new FindKPairsWithSmallestSumsSolution().Test();
             //new LargestDivisibleSubsetSolution().Test();
             //new TopKFrequentElementsSolution().Test();
