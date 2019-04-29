@@ -20,6 +20,9 @@ namespace Zx2642DatabaseImportExport.EntityFramework
         [NotMapped] // ignore 不映射成数据库字段
         public int Parent_ID { get; set; }
 
+        [NotMapped] // ignore 不映射成数据库字段
+        public int Lever_NR { get; set; }
+
         public int Org_ID { get; set; }
 
         public string Mobject_CD { get; set; }

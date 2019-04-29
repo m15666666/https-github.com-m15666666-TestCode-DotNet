@@ -1,6 +1,6 @@
 ﻿namespace Zx2642DatabaseImportExport
 {
-    partial class ChangeMObjectTreeForm
+    partial class ChangePointLocationForm
     {
         /// <summary>
         /// Required designer variable.
@@ -54,7 +54,7 @@
             this.btn_LoadMObjectTree.Name = "btn_LoadMObjectTree";
             this.btn_LoadMObjectTree.Size = new System.Drawing.Size(344, 23);
             this.btn_LoadMObjectTree.TabIndex = 1;
-            this.btn_LoadMObjectTree.Text = "加载设备";
+            this.btn_LoadMObjectTree.Text = "加载树";
             this.btn_LoadMObjectTree.UseVisualStyleBackColor = true;
             this.btn_LoadMObjectTree.Click += new System.EventHandler(this.btn_LoadMObjectTree_Click);
             // 
@@ -65,7 +65,7 @@
             this.btn_Cut.Name = "btn_Cut";
             this.btn_Cut.Size = new System.Drawing.Size(344, 23);
             this.btn_Cut.TabIndex = 1;
-            this.btn_Cut.Text = "剪切设备";
+            this.btn_Cut.Text = "剪切测点";
             this.btn_Cut.UseVisualStyleBackColor = true;
             this.btn_Cut.Click += new System.EventHandler(this.btn_Cut_Click);
             // 
@@ -76,7 +76,7 @@
             this.btn_Paste.Name = "btn_Paste";
             this.btn_Paste.Size = new System.Drawing.Size(344, 23);
             this.btn_Paste.TabIndex = 1;
-            this.btn_Paste.Text = "粘贴设备";
+            this.btn_Paste.Text = "粘贴测点";
             this.btn_Paste.UseVisualStyleBackColor = true;
             this.btn_Paste.Click += new System.EventHandler(this.btn_Paste_Click);
             // 
@@ -101,7 +101,7 @@
             this.rtb_log.TabIndex = 4;
             this.rtb_log.Text = "";
             // 
-            // ChangeMObjectTreeForm
+            // ChangePointLocationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -112,9 +112,9 @@
             this.Controls.Add(this.btn_Cut);
             this.Controls.Add(this.btn_LoadMObjectTree);
             this.Controls.Add(this.tv_MObject);
-            this.Name = "ChangeMObjectTreeForm";
+            this.Name = "ChangePointLocationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "调整设备树";
+            this.Text = "调整测点位置";
             this.ResumeLayout(false);
 
         }

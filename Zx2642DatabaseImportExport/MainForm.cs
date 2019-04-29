@@ -26,5 +26,10 @@ namespace Zx2642DatabaseImportExport
         {
             new ChangeMObjectTreeForm().Show();
         }
+
+        private void mnu_ChangePointLocation_Click(object sender, EventArgs e)
+        {
+            new ChangePointLocationForm().Show();
+        }
     }
 }

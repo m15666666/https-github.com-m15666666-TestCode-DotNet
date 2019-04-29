@@ -31,6 +31,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnu_ExportImportDBToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_ChangeMObjectTree = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnu_ChangePointLocation = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,7 +39,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnu_ExportImportDBToolStripMenuItem,
-            this.mnu_ChangeMObjectTree});
+            this.mnu_ChangeMObjectTree,
+            this.mnu_ChangePointLocation});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 25);
@@ -59,6 +61,13 @@
             this.mnu_ChangeMObjectTree.Text = "改变设备树";
             this.mnu_ChangeMObjectTree.Click += new System.EventHandler(this.mnu_ChangeMObjectTree_Click);
             // 
+            // mnu_ChangePointLocation
+            // 
+            this.mnu_ChangePointLocation.Name = "mnu_ChangePointLocation";
+            this.mnu_ChangePointLocation.Size = new System.Drawing.Size(92, 21);
+            this.mnu_ChangePointLocation.Text = "改变测点位置";
+            this.mnu_ChangePointLocation.Click += new System.EventHandler(this.mnu_ChangePointLocation_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -68,7 +77,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
+            this.Text = "在线数据调整工具";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -81,5 +90,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnu_ExportImportDBToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnu_ChangeMObjectTree;
+        private System.Windows.Forms.ToolStripMenuItem mnu_ChangePointLocation;
     }
 }
