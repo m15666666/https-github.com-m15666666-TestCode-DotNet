@@ -15,6 +15,8 @@ namespace Zx2642DatabaseImportExport
         public MainForm()
         {
             InitializeComponent();
+
+            mnu_ExportImportDBToolStripMenuItem.Visible = false;
         }
 
         private void mnu_ExportImportDBToolStripMenuItem_Click(object sender, EventArgs e)

@@ -162,6 +162,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="使用说明.docx" />
+    <None Include="发布\2019-05-07-调整设备测点层次工具.7z" />
+    <None Include="调整设备测点层次使用说明.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
