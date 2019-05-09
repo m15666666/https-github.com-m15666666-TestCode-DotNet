@@ -20,6 +20,7 @@ namespace Zx2642DatabaseImportExport
             InitializeComponent();
         }
 
+        private List<BS_Org> _orgs = new List<BS_Org>();
         private Dictionary<int, Mob_MObject> _mobjectId2MObject = new Dictionary<int, Mob_MObject>();
         private Dictionary<int, Mob_MobjectStructure> _mobjectId2MStructure = new Dictionary<int, Mob_MobjectStructure>();
         private Dictionary<int, TreeNode> _mobjectId2Node = new Dictionary<int, TreeNode>();
@@ -32,8 +33,9 @@ namespace Zx2642DatabaseImportExport
             _mobjectId2MStructure.Clear();
             _mobjectId2Node.Clear();
 
-            var mobjects = RepositoryQuery.List<Mob_MObject>().ToList();
-            var mstructures = RepositoryQuery.List<Mob_MobjectStructure>().ToList();
+            var orgId = OrgId;
+            var mobjects = RepositoryQuery.List<Mob_MObject>( m =>m.Org_ID == orgId && m.Active_YN == "1" ).ToList();
+            var mstructures = RepositoryQuery.List<Mob_MobjectStructure>(m => m.Org_ID == orgId).ToList();
 
             foreach (var m in mstructures)
             {
@@ -97,6 +99,14 @@ namespace Zx2642DatabaseImportExport
             Repository = new RepositoryEFImpl() { DbContext = dbContext };
             RepositoryQuery = new RepositoryQueryEFImpl() { DbContext = dbContext };
 
+            DataBaseHelper = new DataBaseHelper()
+            {
+                Repository = Repository,
+                RepositoryQuery = RepositoryQuery
+            };
+
+            DataBaseHelper.BindOrgs(cmb_Orgs);
+
             //IUnitOfWork unitOfWork = (repository as IUnitOfWork);
 
             //int personID1 = 1;
@@ -115,8 +125,17 @@ namespace Zx2642DatabaseImportExport
             //unitOfWork.Commit();
         }
 
+        /// <summary>
+        /// 当前选择的OrgId
+        /// </summary>
+        private int OrgId
+        {
+            get { return 0 < cmb_Orgs.Items.Count ? (int)cmb_Orgs.SelectedValue : -1; }
+        }
+
         #region ef
 
+        private DataBaseHelper DataBaseHelper { get; set; }
         private DbContext DbContext { get; set; }
         private IRepository Repository { get; set; }
 

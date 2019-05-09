@@ -88,12 +88,14 @@
     <Compile Include="ChangeMObjectTreeForm.Designer.cs">
       <DependentUpon>ChangeMObjectTreeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataBaseHelper.cs" />
     <Compile Include="EntityFramework\AlmStand_CommonSetting.cs" />
     <Compile Include="EntityFramework\AlmStand_PntCommon.cs" />
     <Compile Include="EntityFramework\AlmStand_SixFreqBnd.cs" />
     <Compile Include="EntityFramework\Analysis_MObjPicture.cs" />
     <Compile Include="EntityFramework\Analysis_MObjPosition.cs" />
     <Compile Include="EntityFramework\Analysis_PntPosition.cs" />
+    <Compile Include="EntityFramework\BS_Org.cs" />
     <Compile Include="EntityFramework\Mob_MObject.cs" />
     <Compile Include="EntityFramework\Mob_MobjectStructure.cs" />
     <Compile Include="EntityFramework\MyDbContext.cs" />

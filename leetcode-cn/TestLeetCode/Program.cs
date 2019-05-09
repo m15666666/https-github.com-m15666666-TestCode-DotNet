@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new QueueReconstructionByHeightSolution().Test();
+            new PartitionEqualSubsetSumSolution().Test();
+            //new QueueReconstructionByHeightSolution().Test();
             //new MiniParserSolution().Test();
             //new CombinationSumIVSolution().Test();
             //new GuessNumberHigherOrLowerIISolution().Test();

@@ -24,7 +24,8 @@ namespace Zx2642DatabaseImportExport.EntityFramework
         }
 
 
-        
+        public virtual DbSet<BS_Org> BS_Org { get; set; }
+
         public virtual DbSet<Pnt_Point> Pnt_Point { get; set; }
 
         public virtual DbSet<Mob_MObject> Mob_MObject { get; set; }
