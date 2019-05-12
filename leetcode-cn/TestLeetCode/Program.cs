@@ -7,6 +7,7 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
+            new MaximumXOROfTwoNumbersInAnArraySolution().Test();
             new PartitionEqualSubsetSumSolution().Test();
             //new QueueReconstructionByHeightSolution().Test();
             //new MiniParserSolution().Test();
