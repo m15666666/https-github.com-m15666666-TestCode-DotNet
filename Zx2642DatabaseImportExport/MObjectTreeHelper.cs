@@ -18,10 +18,6 @@ namespace Zx2642DatabaseImportExport
     /// </summary>
     public class MObjectTreeHelper
     {
-        public Dictionary<int, Mob_MObject> MobjectId2MObject { get; set; }
-        public Dictionary<int, Mob_MobjectStructure> MobjectId2MStructure { get; set; }
-        public Dictionary<int, TreeNode> MobjectId2Node { get; set; }
-
         #region ef
 
         public DataBaseHelper DataBaseHelper { get; set; }
@@ -31,6 +27,17 @@ namespace Zx2642DatabaseImportExport
 
         #endregion
 
+        #region 加载设备树
+
+        public Dictionary<int, Mob_MObject> MobjectId2MObject { get; set; }
+        public Dictionary<int, Mob_MobjectStructure> MobjectId2MStructure { get; set; }
+        public Dictionary<int, TreeNode> MobjectId2Node { get; set; }
+
+        /// <summary>
+        /// 加载设备树
+        /// </summary>
+        /// <param name="tv_MObject"></param>
+        /// <param name="orgId"></param>
         public void LoadMObjectTree(TreeView tv_MObject, int orgId )
         {
             tv_MObject.CheckBoxes = false;
@@ -67,6 +74,12 @@ namespace Zx2642DatabaseImportExport
             tv_MObject.Nodes.AddRange(topNodes.ToArray());
         }
 
+        /// <summary>
+        /// 添加设备树节点
+        /// </summary>
+        /// <param name="topNodes"></param>
+        /// <param name="mobjectId2Node"></param>
+        /// <param name="m"></param>
         private void AddTreeNode(List<TreeNode> topNodes, Dictionary<int, TreeNode> mobjectId2Node, Mob_MObject m)
         {
             if (mobjectId2Node.ContainsKey(m.Mobject_ID)) return;
@@ -89,5 +102,7 @@ namespace Zx2642DatabaseImportExport
 
             mobjectId2Node[parentId].Nodes.Add(node);
         }
+
+        #endregion
     }
 }

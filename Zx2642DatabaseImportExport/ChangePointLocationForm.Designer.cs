@@ -34,6 +34,7 @@
             this.btn_Paste = new System.Windows.Forms.Button();
             this.lv_ChildNodes = new System.Windows.Forms.ListView();
             this.rtb_log = new System.Windows.Forms.RichTextBox();
+            this.cmb_Orgs = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // tv_MObject
@@ -50,7 +51,7 @@
             // btn_LoadMObjectTree
             // 
             this.btn_LoadMObjectTree.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_LoadMObjectTree.Location = new System.Drawing.Point(475, 0);
+            this.btn_LoadMObjectTree.Location = new System.Drawing.Point(475, 20);
             this.btn_LoadMObjectTree.Name = "btn_LoadMObjectTree";
             this.btn_LoadMObjectTree.Size = new System.Drawing.Size(344, 23);
             this.btn_LoadMObjectTree.TabIndex = 1;
@@ -61,7 +62,7 @@
             // btn_Cut
             // 
             this.btn_Cut.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_Cut.Location = new System.Drawing.Point(475, 23);
+            this.btn_Cut.Location = new System.Drawing.Point(475, 43);
             this.btn_Cut.Name = "btn_Cut";
             this.btn_Cut.Size = new System.Drawing.Size(344, 23);
             this.btn_Cut.TabIndex = 1;
@@ -72,7 +73,7 @@
             // btn_Paste
             // 
             this.btn_Paste.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btn_Paste.Location = new System.Drawing.Point(475, 46);
+            this.btn_Paste.Location = new System.Drawing.Point(475, 66);
             this.btn_Paste.Name = "btn_Paste";
             this.btn_Paste.Size = new System.Drawing.Size(344, 23);
             this.btn_Paste.TabIndex = 1;
@@ -95,11 +96,21 @@
             // rtb_log
             // 
             this.rtb_log.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtb_log.Location = new System.Drawing.Point(475, 69);
+            this.rtb_log.Location = new System.Drawing.Point(475, 89);
             this.rtb_log.Name = "rtb_log";
-            this.rtb_log.Size = new System.Drawing.Size(344, 134);
+            this.rtb_log.Size = new System.Drawing.Size(344, 114);
             this.rtb_log.TabIndex = 4;
             this.rtb_log.Text = "";
+            // 
+            // cmb_Orgs
+            // 
+            this.cmb_Orgs.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cmb_Orgs.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_Orgs.FormattingEnabled = true;
+            this.cmb_Orgs.Location = new System.Drawing.Point(475, 0);
+            this.cmb_Orgs.Name = "cmb_Orgs";
+            this.cmb_Orgs.Size = new System.Drawing.Size(344, 20);
+            this.cmb_Orgs.TabIndex = 6;
             // 
             // ChangePointLocationForm
             // 
@@ -111,6 +122,7 @@
             this.Controls.Add(this.btn_Paste);
             this.Controls.Add(this.btn_Cut);
             this.Controls.Add(this.btn_LoadMObjectTree);
+            this.Controls.Add(this.cmb_Orgs);
             this.Controls.Add(this.tv_MObject);
             this.Name = "ChangePointLocationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -127,5 +139,6 @@
         private System.Windows.Forms.Button btn_Paste;
         private System.Windows.Forms.ListView lv_ChildNodes;
         private System.Windows.Forms.RichTextBox rtb_log;
+        private System.Windows.Forms.ComboBox cmb_Orgs;
     }
 }

@@ -20,82 +20,25 @@ namespace Zx2642DatabaseImportExport
             InitializeComponent();
         }
 
-        private Dictionary<int, Mob_MObject> _mobjectId2MObject = new Dictionary<int, Mob_MObject>();
-        private Dictionary<int, Mob_MobjectStructure> _mobjectId2MStructure = new Dictionary<int, Mob_MobjectStructure>();
-        private Dictionary<int, TreeNode> _mobjectId2Node = new Dictionary<int, TreeNode>();
-
         private Dictionary<int, Pnt_Point> _pointId2Point = new Dictionary<int, Pnt_Point>();
         private List<Pnt_Point> _points = new List<Pnt_Point>();
 
         private void btn_LoadMObjectTree_Click(object sender, EventArgs e)
         {
-            tv_MObject.CheckBoxes = false;
-            tv_MObject.Nodes.Clear();
             lv_ChildNodes.Items.Clear();
-            _mobjectId2MObject.Clear();
-            _mobjectId2MStructure.Clear();
-            _mobjectId2Node.Clear();
             _pointId2Point.Clear();
+            MObjectTreeHelper.LoadMObjectTree(tv_MObject, OrgId);
 
-            var mobjects = RepositoryQuery.List<Mob_MObject>().ToList();
-            var mstructures = RepositoryQuery.List<Mob_MobjectStructure>().ToList();
             _points = RepositoryQuery.List<Pnt_Point>().ToList();
-
             foreach( var p in _points)
             {
                 _pointId2Point[p.Point_ID] = p;
             }
-
-            foreach (var m in mstructures)
-            {
-                _mobjectId2MStructure.Add(m.Mobject_ID, m);
-            }
-
-            foreach ( var m in mobjects )
-            {
-                if (!_mobjectId2MStructure.ContainsKey(m.Mobject_ID)) continue;
-
-                var structure = _mobjectId2MStructure[m.Mobject_ID];
-                m.Parent_ID = structure.Parent_ID;
-                m.Lever_NR = structure.Lever_NR;
-                _mobjectId2MObject.Add(m.Mobject_ID, m);
-            }
-
-            mobjects = mobjects.OrderBy(m => m.Lever_NR).ThenBy(m => m.MobjectName_TX).ToList();
-
-            List<TreeNode> topNodes = new List<TreeNode>();
-            foreach (var m in mobjects)
-                AddTreeNode(topNodes, _mobjectId2Node, m);
-
-            tv_MObject.Nodes.AddRange(topNodes.ToArray());
-        }
-
-        private void AddTreeNode(List<TreeNode> topNodes, Dictionary<int, TreeNode> mobjectId2Node, Mob_MObject m)
-        {
-            if (mobjectId2Node.ContainsKey(m.Mobject_ID)) return;
-
-            TreeNode node = new TreeNode(m.MobjectName_TX);
-            node.Tag = m.Mobject_ID;
-            mobjectId2Node[m.Mobject_ID] = node;
-
-            var parentId = m.Parent_ID;
-            if( parentId == 0)
-            {
-                topNodes.Add(node);
-                return;
-            }
-            if (!mobjectId2Node.ContainsKey(parentId))
-            {
-                if (!_mobjectId2MObject.ContainsKey(parentId)) return;
-                AddTreeNode(topNodes, mobjectId2Node, _mobjectId2MObject[parentId]);
-            }
-
-            mobjectId2Node[parentId].Nodes.Add(node);
         }
 
         protected override void OnClosed(EventArgs e)
         {
-            using (DbContext) { }
+            using (DataBaseHelper) { }
             base.OnClosed(e);
         }
 
@@ -103,43 +46,42 @@ namespace Zx2642DatabaseImportExport
         {
             base.OnLoad(e);
 
-            var dbContext = new MyDbContext();
-            DbContext = dbContext;
-            Repository = new RepositoryEFImpl() { DbContext = dbContext };
-            RepositoryQuery = new RepositoryQueryEFImpl() { DbContext = dbContext };
+            var dataBaseHelper = DataBaseHelper = new DataBaseHelper();
+            dataBaseHelper.InitDataBaseConnection();
 
-            //IUnitOfWork unitOfWork = (repository as IUnitOfWork);
+            dataBaseHelper.BindOrgs(cmb_Orgs);
 
-            //int personID1 = 1;
-            //repository.DeleteByKeys<BS_Person>(personID1);
-            //unitOfWork.Commit();
-
-            //BS_Person p1 = new BS_Person { Id_NR = personID1, Name_TX = "P1-张" };
-            //repository.Add(p1);
-
-            //unitOfWork.Commit();
-
-            //p1 = repository.GetByKeys<BS_Person>(personID1);
-            //p1.Description_TX = "张三";
-            //repository.Update(p1);
-
-            //unitOfWork.Commit();
+            MObjectTreeHelper = new MObjectTreeHelper { DataBaseHelper = dataBaseHelper };
         }
 
         #region ef
 
-        private DbContext DbContext { get; set; }
-        private IRepository Repository { get; set; }
+        private DataBaseHelper DataBaseHelper { get; set; }
+        private IRepository Repository => DataBaseHelper.Repository;
+        private IUnitOfWork UnitOfWork => DataBaseHelper.UnitOfWork;
+        private IRepositoryQuery RepositoryQuery => DataBaseHelper.RepositoryQuery;
 
-        private IRepositoryQuery RepositoryQuery { get; set; }
+        #endregion
 
-        private IUnitOfWork UnitOfWork => Repository as IUnitOfWork;
+        #region 设备树
 
+        /// <summary>
+        /// 当前选择的OrgId
+        /// </summary>
+        private int OrgId
+        {
+            get { return 0 < cmb_Orgs.Items.Count ? (int)cmb_Orgs.SelectedValue : -1; }
+        }
+
+        private Dictionary<int, Mob_MObject> MobjectId2MObject => MObjectTreeHelper.MobjectId2MObject;
+        private Dictionary<int, Mob_MobjectStructure> MobjectId2MStructure => MObjectTreeHelper.MobjectId2MStructure;
+        private Dictionary<int, TreeNode> MobjectId2Node => MObjectTreeHelper.MobjectId2Node;
 
         #endregion
 
         #region cut points
 
+        private MObjectTreeHelper MObjectTreeHelper { get; set; }
         private int _lastSelectedMObjectId = 0;
         private int _cutFromMObjectId = 0;
         private List<int> _cutPointIds = new List<int>();
@@ -208,21 +150,21 @@ namespace Zx2642DatabaseImportExport
 
                 var parentId = _lastSelectedMObjectId;
 
-                var parentStructure = _mobjectId2MStructure[parentId];
-                List<Pnt_Point> changedMObjects = new List<Pnt_Point>();
+                var parentStructure = MobjectId2MStructure[parentId];
+                List<Pnt_Point> changedPoints = new List<Pnt_Point>();
 
                 foreach( var pointId in _cutPointIds)
                 {
                     var p = _pointId2Point[pointId];
                     p.Mobject_ID = parentId;
-                    changedMObjects.Add(p);
+                    changedPoints.Add(p);
                 }
 
                 _cutPointIds.Clear();
 
                 IRepository repository = Repository;
 
-                foreach (var item in changedMObjects)
+                foreach (var item in changedPoints)
                 {
                     repository.AddOrUpdate(item);
                 }
