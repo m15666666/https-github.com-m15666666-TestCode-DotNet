@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new SortCharactersByFrequencySolution().Test();
+            new The132PatternSolution().Test();
+            //new SortCharactersByFrequencySolution().Test();
             //new MaximumXOROfTwoNumbersInAnArraySolution().Test();
             //new PartitionEqualSubsetSumSolution().Test();
             //new QueueReconstructionByHeightSolution().Test();
