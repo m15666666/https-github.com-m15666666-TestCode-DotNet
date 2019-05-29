@@ -41,11 +41,13 @@ nums[i] ≠ 0
 /// <summary>
 /// https://leetcode-cn.com/problems/circular-array-loop/
 /// 457. 环形数组循环
+/// https://blog.csdn.net/SundyGuo/article/details/80915501
 /// </summary>
 class CircularArrayLoopSolution
 {
     public void Test()
     {
+        var ret = CircularArrayLoop(new int[] { -1 });
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -55,6 +57,32 @@ class CircularArrayLoopSolution
 
     public bool CircularArrayLoop(int[] nums)
     {
+        var ret = false;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            int j = i, k = GetNextIndex(nums, i);
+            while (nums[i] * nums[j] > 0 && nums[i] * nums[k] > 0 && nums[i] * nums[GetNextIndex(nums, k)] > 0)
+            {
+                if (j == k)
+                {
+                    if (j == GetNextIndex(nums, j))
+                    {
+                        break;
+                    }
+                    return true;
+                }
+                j = GetNextIndex(nums, j);
+                k = GetNextIndex(nums, GetNextIndex(nums, k));
+            }
+        }
+        return ret;
+    }
 
+    private static int GetNextIndex(int[] nums, int i)
+    {
+        int length = nums.Length;
+        int nextPosition = i + nums[i];
+        if (nextPosition < 0) nextPosition = nextPosition % length;
+        return nextPosition >= 0 ? nextPosition % length : length + nextPosition;
     }
 }
