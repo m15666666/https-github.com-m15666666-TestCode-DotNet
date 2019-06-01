@@ -37,6 +37,25 @@ namespace Zx2642UtilsScripts
         }
 
         /// <summary>
+        /// 生成insert into select from 语句，按月分区的方式
+        /// </summary>
+        /// <param name="tables"></param>
+        /// <param name="sourceTablePrefix"></param>
+        protected void GenerateInsertIntoSelectFromSQL_PartitionByMonth(string table, string sourceTablePrefix, int year, int month )
+        {
+            var targetTable = $"{table}{year}{month:00}";
+
+            var dtBegin = new DateTime(year, month, 1);
+            var dtEnd = dtBegin.AddMonths(1).AddSeconds(-1);
+
+            const string PartitionIdFormat = "yyyyMMddHHmmss";
+            var partitionIdBegin = dtBegin.ToString(PartitionIdFormat);
+            var partitionIdEnd = dtEnd.ToString(PartitionIdFormat);
+
+            WriteLine($"INSERT INTO {targetTable} SELECT * FROM {sourceTablePrefix}.{table} WHERE PARTITION_ID BETWEEN {partitionIdBegin} AND {partitionIdEnd};");
+        }
+
+        /// <summary>
         /// 生成insert into select from 语句
         /// </summary>
         /// <param name="tables"></param>

@@ -23,6 +23,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements-ii/
 /// 462. 最少移动次数使数组元素相等 II
+/// https://www.cnblogs.com/wemo/wemo/p/10480299.html
 /// </summary>
 class MinimumMovesToEqualArrayElementsIISolution
 {
@@ -37,6 +38,34 @@ class MinimumMovesToEqualArrayElementsIISolution
 
     public int MinMoves2(int[] nums)
     {
+        if (nums == null || nums.Length < 2) return 0;
 
+        Array.Sort(nums);
+
+        int mid = nums[nums.Length / 2];
+
+        int ret = 0;
+        foreach (var v in nums) ret += Math.Abs( v - mid);
+
+        return ret;
     }
 }
+/*
+public class Solution {
+    public int MinMoves2(int[] nums) {
+        int n = nums.Length;
+        if (n <= 1) {
+            return 0;
+        }
+        
+        Array.Sort(nums);
+        int mid = nums[n/2];
+        int count = 0;
+        for (int i = 0; i < n; i ++) {
+            count += Math.Abs(nums[i] - mid);
+        }
+        
+        return count;
+    }
+} 
+*/
