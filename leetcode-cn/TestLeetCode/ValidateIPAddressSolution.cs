@@ -58,6 +58,186 @@ class ValidateIPAddressSolution
 
     public string ValidIPAddress(string IP)
     {
+        const string IPv4 = "IPv4";
+        const string IPv6 = "IPv6";
+        const string Neither = "Neither";
+
+        if (string.IsNullOrWhiteSpace(IP)) return Neither;
+        IP = IP.ToLowerInvariant();
+
+        if (IP.Contains('.'))
+        {
+            if (IsIPV4(IP)) return IPv4;
+        }
+        else if (IP.Contains(':'))
+        {
+            if (IsIPV6(IP)) return IPv6;
+        }
+        return Neither;
+    }
+
+    private static bool IsIPV4(string ip)
+    {
+        var parts = ip.Split('.');
+        if (parts.Length != 4) return false;
+
+        foreach( var part in parts)
+        {
+            if (string.IsNullOrEmpty(part)) return false;
+            if(1 < part.Length && part[0] == '0') return false;
+
+            int sum = 0;
+            foreach( var c in part)
+            {
+                if (!('0' <= c && c <= '9')) return false;
+                sum = 10 * sum + (c - '0');
+            }
+
+            if (!(0 <= sum && sum <= 255 )) return false;
+        }
+
+        return true;
+    }
+
+    private static bool IsIPV6(string ip)
+    {
+        ip = ip.ToLowerInvariant();
+        var parts = ip.Split(':');
+
+        if (parts.Length != 8) return false;
+
+        foreach (var part in parts)
+        {
+            if (string.IsNullOrEmpty(part)) return false;
+            if ( 4 < part.Length ) return false;
+
+            foreach (var c in part)
+            {
+                if (!(('0' <= c && c <= '9') || ('a' <= c && c <= 'f') )) return false;
+            }
+        }
+
+        return true;
+    }
+}
+/*
+public class Solution {
+    public string ValidIPAddress(string IP) {
+        if (IP.Contains('.'))
+        {
+            string[] nums = IP.Split('.');
+            if (nums.Length != 4)
+                return "Neither";
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int num = 0;
+                if (nums[i] == "") return "Neither";
+                try
+                {
+                    num = Convert.ToInt32(nums[i]);
+                }
+                catch
+                {
+                    return "Neither";
+                }
+                if (num.ToString() != nums[i] || (num < 0 || num > 255))
+                {
+                    return "Neither";
+                }
+            }
+            return "IPv4";
+        };
+        if (IP.Contains(':'))
+        {
+            string[] nums = IP.Split(':');
+            if (nums.Length != 8)
+                return "Neither";
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == "" || nums[i].Length > 4) return "Neither";
+                bool flag = true;
+                for (int j = 0; j < nums[i].Length; j++)
+                {
+                    if (!((nums[i][j] >= '0' && nums[i][j] <= '9') || (nums[i][j] >= 'A' && nums[i][j] <= 'F') || (nums[i][j] >= 'a' && nums[i][j] <= 'f')))
+                        flag = false;
+                }
+                if (!flag)
+                    return "Neither";
+            }
+            return "IPv6";
+        }
+        return "Neither";
+    }
+}
+ using System.Text.RegularExpressions;
+ using System.Linq;
+public class Solution {
+    public string ValidIPAddress(string IP) {
+        var arr=new string[]{"IPv4","IPv6","Neither"};
+        if(IP.Length<7||IP.Length>71)
+        {
+            return  arr[2];
+        }
+        if(IP.Length<16&&IP.IndexOf('.')>-1)
+        {
+            var strs=IP.Split(".");
+            if(strs.Length!=4)
+            {
+                return arr[2];
+            }
+            for (int i = 0; i < strs.Length; i++)
+            {
+                if(string.IsNullOrEmpty(strs[i]))
+                {
+                    return arr[2];
+                }
+                if(strs[i].Length>1&&strs[i][0]=='0')
+                {
+                    return arr[2];
+                }
+                if(!Regex.IsMatch(strs[i],@"^\d{1,3}$"))
+                {
+                    return arr[2];
+                }
+                var value=0;
+                if(int.TryParse(strs[i],out value))
+                {
+                    if(value>255)
+                    {
+                        return arr[2];
+                    }
+                }
+                else
+                {
+                    return arr[2];
+                }
+            }
+            return arr[0];
+        }
+        var str_v6=IP.Split(":");
+        if(str_v6.Length!=8)
+        {
+            return arr[2];
+        }
+        for (int i = 0; i < str_v6.Length; i++)
+        {
+            if(string.IsNullOrEmpty(str_v6[i]))
+            {
+                return  arr[2];
+            }
+            if(str_v6[i].Length>4)
+            {
+                return arr[2];
+            }
+            
+            if(!Regex.IsMatch(str_v6[i],@"(^(\d|[A-F]|[a-f]){2,4})$|(^(0|[a-f]|[A-F])$)"))
+            {
+                return arr[2];
+            }
+
+        }
+        return arr[1];
 
     }
 }
+*/
