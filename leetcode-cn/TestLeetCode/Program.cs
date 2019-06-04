@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new CircularArrayLoopSolution().Test();
+            new MatchsticksToSquareSolution().Test();
+            //new CircularArrayLoopSolution().Test();
             //new The132PatternSolution().Test();
             //new SortCharactersByFrequencySolution().Test();
             //new MaximumXOROfTwoNumbersInAnArraySolution().Test();
