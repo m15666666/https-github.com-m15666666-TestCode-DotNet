@@ -31,6 +31,9 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/ones-and-zeroes/
 /// 474. 一和零
+/// https://blog.csdn.net/koukehui0292/article/details/84425574
+/// https://zhuanlan.zhihu.com/p/50732119
+/// http://www.dongcoder.com/detail-894561.html
 /// </summary>
 class OnesAndZeroesSolution
 {
@@ -45,6 +48,59 @@ class OnesAndZeroesSolution
 
     public int FindMaxForm(string[] strs, int m, int n)
     {
+        int[,] dp = new int[m + 1,n+1];
+        
+        foreach (string str in strs)
+        {
+            int zeros = str.Count(c => c == '0');
+            int ones = str.Length - zeros;
 
+            for (int i = m; i >= zeros; --i)
+	        {
+		        for (int j = n; j >= ones; --j)
+		        {
+			        dp[i,j] = Math.Max(dp[i,j], dp[i - zeros,j - ones] + 1);
+                }
+	        }
+        }
+        return dp[m,n];
     }
 }
+/*
+public class Solution {
+    public int FindMaxForm(string[] strs, int m, int n) {
+        int [,] Cost = new int[2, strs.Length];
+        
+        for(int i = 0; i < strs.Length ; i++)
+        {
+            foreach(char c in strs[i])
+            {
+                Cost[c == '0' ? 0 : 1, i ]++;
+            }
+        }
+        
+        int [,] package = new int [m + 1, n + 1];
+        
+        void FindMax(int x, int y, int i)
+        {
+            if(x >= Cost[0, i - 1] && y >= Cost[1, i - 1])
+                package[x, y] = Math.Max(package[x, y], package[x - Cost[0, i - 1], y - Cost[1, i - 1]] + 1);
+        }
+        
+        for(int i = 1; i < strs.Length; i++)
+        {
+            for(int M = m; M >= 0; M--)
+            {
+                for(int N = n; N >= 0; N--)
+                {
+                    FindMax(M, N, i);
+                }
+            }
+        }
+        
+        FindMax(m , n, strs.Length);
+        
+        return package[m,n];
+    }
+} 
+*/

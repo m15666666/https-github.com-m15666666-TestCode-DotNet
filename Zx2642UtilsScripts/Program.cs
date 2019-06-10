@@ -7,8 +7,8 @@ namespace Zx2642UtilsScripts
     {
         static void Main(string[] args)
         {
-            new DaLianXiTiScript().GenerateExportSQLs();
-            //new OpcAgent2642Script().GenerateXmlSegments();
+            //new DaLianXiTiScript().GenerateExportSQLs();
+            new OpcAgent2642Script().GenerateXmlSegments();
             //new WineSteelScript().GenerateExportSQLs();
 
             Console.WriteLine("Zx2642UtilsScripts");
