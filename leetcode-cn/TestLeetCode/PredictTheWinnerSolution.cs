@@ -5,7 +5,8 @@ using System.Text;
 
 
 /*
-给定一个表示分数的非负整数数组。 玩家1从数组任意一端拿取一个分数，随后玩家2继续从剩余数组任意一端拿取分数，然后玩家1拿，……。每次一个玩家只能拿取一个分数，分数被拿取之后不再可取。直到没有剩余分数可取时游戏结束。最终获得分数总和最多的玩家获胜。
+给定一个表示分数的非负整数数组。 玩家1从数组任意一端拿取一个分数，随后玩家2继续从剩余数组任意一端拿取分数，然后玩家1拿，……。
+每次一个玩家只能拿取一个分数，分数被拿取之后不再可取。直到没有剩余分数可取时游戏结束。最终获得分数总和最多的玩家获胜。
 
 给定一个表示分数的数组，预测玩家1是否会成为赢家。你可以假设每个玩家的玩法都会使他的分数最大化。
 
@@ -32,6 +33,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/predict-the-winner/
 /// 486. 预测赢家
+/// https://blog.csdn.net/OneDeveloper/article/details/79929819
 /// </summary>
 class PredictTheWinnerSolution
 {
@@ -46,6 +48,30 @@ class PredictTheWinnerSolution
 
     public bool PredictTheWinner(int[] nums)
     {
+        int n = nums.Length;
 
+        // dp[left,right]表示，left<-->right 区间内 先取玩家 总得分与 后取玩家 总得分的差值，注意：先取玩家和后取玩家总是在变动。
+        int[,] dp = new int[n,n];
+        dp[n - 1,n - 1] = nums[n - 1];
+        for (int left = n - 2; left >= 0; left--)
+        {
+            for (int right = left; right < n; right++)
+            {
+                if (left == right)
+                {
+                    dp[left,right] = nums[left];
+                    continue;
+                }
+
+                // 首先去左1
+                int pickLeft = nums[left] - dp[left + 1,right];
+
+                // 首先取友1
+                int pickRight = nums[right] - dp[left,right - 1];
+
+                dp[left,right] = Math.Max(pickLeft, pickRight);
+            }
+        }
+        return dp[0,n - 1] >= 0;
     }
 }
