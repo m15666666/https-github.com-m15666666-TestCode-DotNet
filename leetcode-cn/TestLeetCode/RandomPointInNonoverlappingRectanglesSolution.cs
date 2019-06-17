@@ -41,6 +41,8 @@ pick 最多被调用10000次。
 /// <summary>
 /// https://leetcode-cn.com/problems/random-point-in-non-overlapping-rectangles/
 /// 497. 非重叠矩形中的随机点
+/// https://blog.csdn.net/zrh_CSDN/article/details/85016742
+/// https://www.jianshu.com/p/aea1016435a2
 /// </summary>
 class RandomPointInNonoverlappingRectanglesSolution
 {
@@ -55,11 +57,40 @@ class RandomPointInNonoverlappingRectanglesSolution
 
     public RandomPointInNonoverlappingRectanglesSolution(int[][] rects)
     {
+        _rects = rects;
+        _areas = new int[rects.Length];
 
+        int sumArea = 0;
+        int index = 0;
+        foreach( var rect in rects)
+        {
+            int area = (rect[2] - rect[0] + 1) * (rect[3] - rect[1] + 1);
+            sumArea += area;
+            _areas[index++] = sumArea;
+        }
     }
 
+    private int[][] _rects = null;
+    private int[] _areas;
+    private Random _random = new Random();
+    private Random _random2 = new Random();
     public int[] Pick()
     {
+        var randomSumArea = _random.Next(_areas[_areas.Length - 1]+1);
 
+        int index = 0;
+        for( int i = 0; i < _areas.Length; i++)
+        {
+            if(randomSumArea <= _areas[i])
+            {
+                index = i;
+                break;
+            }
+        }
+
+        var rect = _rects[index];
+        var x = rect[0] + _random2.Next(rect[2] - rect[0]+1);
+        var y = rect[1] + _random2.Next(rect[3] - rect[1]+1);
+        return new int[]{ x,y};
     }
 }
