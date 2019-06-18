@@ -7,8 +7,6 @@ using System.Text;
 /*
 给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。 
 
- 
-
 示例 1:
 
 输入: amount = 5, coins = [1, 2, 5]
@@ -27,7 +25,6 @@ using System.Text;
 
 输入: amount = 10, coins = [10] 
 输出: 1
- 
 
 注意:
 
@@ -41,6 +38,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/coin-change-2/
 /// 518. 零钱兑换 II
+/// https://www.jianshu.com/p/4557890d1bbc
 /// </summary>
 class CoinChangeIISolution
 {
@@ -55,6 +53,31 @@ class CoinChangeIISolution
 
     public int Change(int amount, int[] coins)
     {
+        if (amount == 0) return 1;
+        if (coins == null || coins.Length == 0) return 0;
 
+        int coinTypes = coins.Length;
+        int columns = amount + 1;
+        int[,] dp = new int[coinTypes,columns];
+
+        for (int i = 0; i < columns; i++)
+        {
+            if (i % coins[0] == 0)
+                dp[0,i] = 1;
+        }
+
+        for (int i = 1; i < coinTypes; i++)
+        {
+            dp[i,0] = 1;
+            int coin = coins[i];
+            for (int j = 1; j < columns; j++)
+            {
+                if ( coin <= j )
+                    dp[i,j] = dp[i - 1,j] + dp[i,j - coin];
+                else
+                    dp[i,j] = dp[i - 1,j];
+            }
+        }
+        return dp[coinTypes - 1,amount];
     }
 }
