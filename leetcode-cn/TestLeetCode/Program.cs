@@ -7,7 +7,10 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new MatchsticksToSquareSolution().Test();
+            new LongestWordInDictionaryThroughDeletingSolution().Test();
+            //new ContinuousSubArraySumSolution().Test();
+            //new LongestUncommonSubsequenceIISolution().Test();
+            //new MatchsticksToSquareSolution().Test();
             //new CircularArrayLoopSolution().Test();
             //new The132PatternSolution().Test();
             //new SortCharactersByFrequencySolution().Test();

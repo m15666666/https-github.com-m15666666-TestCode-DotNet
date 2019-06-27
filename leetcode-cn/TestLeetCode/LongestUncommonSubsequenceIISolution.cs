@@ -27,11 +27,13 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/longest-uncommon-subsequence-ii/
 /// 522. 最长特殊序列 II
+/// https://zhuanlan.zhihu.com/p/56515275
 /// </summary>
 class LongestUncommonSubsequenceIISolution
 {
     public void Test()
     {
+        var ret = FindLUSlength(new string[] { "aabbcc", "aabbcc", "c", "e", "aabbcd" });
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -41,6 +43,46 @@ class LongestUncommonSubsequenceIISolution
 
     public int FindLUSlength(string[] strs)
     {
+        if (strs == null || strs.Length == 0) return -1;
+        strs = strs.Where( s => !string.IsNullOrEmpty(s) ).OrderBy(s =>s.Length).ToArray();
 
+        int n = strs.Length;
+        if (n == 1) return strs[0].Length;
+        if (strs[n - 2].Length < strs[n - 1].Length) return strs[n - 1].Length;
+
+        int ret = -1;
+        HashSet<string> set = new HashSet<string>();
+        for (int i = 0; i < n; i++)
+        {
+            var sI = strs[i];
+            if (set.Contains(sI)) continue;
+            set.Add(sI);
+
+            int j = i + 1;
+            for (; j < n; j++)
+                if (IsSubString(sI, strs[j])) break;
+
+            if (j == n)
+            {
+                var r = sI.Length;
+                if (ret < r) ret = r;
+            }
+        }
+
+        return ret;
+
+        bool IsSubString(string s1, string s2)
+        {
+            int i = 0;
+            foreach (var c in s2)
+            {
+                if (c == s1[i])
+                {
+                    i++;
+                    if (i == s1.Length) break;
+                }
+            }
+            return i == s1.Length;
+        }
     }
 }
