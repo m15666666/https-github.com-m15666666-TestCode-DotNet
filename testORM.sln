@@ -31,11 +31,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zx2642UtilsScripts", "Zx264
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zx2642DatabaseImportExport", "Zx2642DatabaseImportExport\Zx2642DatabaseImportExport.csproj", "{0DA8BB19-6BB7-4257-892D-789243162EC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNettyServer", "DotNettyServer\DotNettyServer.csproj", "{E97E8448-F215-4F57-BF5D-C4A559935BBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNettyServer", "DotNettyServer\DotNettyServer.csproj", "{E97E8448-F215-4F57-BF5D-C4A559935BBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNettyClient", "DotNettyClient\DotNettyClient.csproj", "{04A630C0-2AA3-4938-826E-DA4262D7DBC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNettyClient", "DotNettyClient\DotNettyClient.csproj", "{04A630C0-2AA3-4938-826E-DA4262D7DBC8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNettyShared", "DotNettyShared\DotNettyShared.csproj", "{900E0A1B-2114-4BA9-AA96-449AE7075819}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNettyShared", "DotNettyShared\DotNettyShared.csproj", "{900E0A1B-2114-4BA9-AA96-449AE7075819}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestMath.Net", "TestMath.Net\TestMath.Net.csproj", "{7665FA2B-80F3-46CF-8D4E-676BC13A9914}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{900E0A1B-2114-4BA9-AA96-449AE7075819}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{900E0A1B-2114-4BA9-AA96-449AE7075819}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{900E0A1B-2114-4BA9-AA96-449AE7075819}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7665FA2B-80F3-46CF-8D4E-676BC13A9914}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7665FA2B-80F3-46CF-8D4E-676BC13A9914}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7665FA2B-80F3-46CF-8D4E-676BC13A9914}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7665FA2B-80F3-46CF-8D4E-676BC13A9914}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
