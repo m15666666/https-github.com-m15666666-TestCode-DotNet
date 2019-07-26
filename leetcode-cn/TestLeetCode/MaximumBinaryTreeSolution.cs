@@ -33,7 +33,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/maximum-binary-tree/
 /// 654. 最大二叉树
-/// 
+/// https://blog.csdn.net/romeo12334/article/details/81304442
 /// </summary>
 class MaximumBinaryTreeSolution
 {
@@ -48,6 +48,65 @@ class MaximumBinaryTreeSolution
 
     public TreeNode ConstructMaximumBinaryTree(int[] nums)
     {
+        if (nums == null || nums.Length == 0) return null;
+        return ConstructMaximumBinaryTree(nums, 0, nums.Length - 1);
+    }
 
+    private static TreeNode ConstructMaximumBinaryTree(int[] nums, int startIndex, int endIndex )
+    {
+        var index = startIndex;
+        int max = nums[index];
+        for( int i = startIndex + 1; i <= endIndex; i++)
+        {
+            var v = nums[i];
+            if ( max < v)
+            {
+                index = i;
+                max = v;
+            }
+        }
+
+        TreeNode ret = new TreeNode(max);
+        if (startIndex <= index - 1)  ret.left = ConstructMaximumBinaryTree(nums, startIndex, index - 1);
+        if(index + 1 <= endIndex) ret.right = ConstructMaximumBinaryTree(nums, index + 1, endIndex);
+        return ret;
     }
 }
+/*
+public class Solution {
+    public TreeNode ConstructMaximumBinaryTree(int[] nums) {
+        if(nums.Length<1)
+            return null;
+        return Gen(nums,0,nums.Length);
+    }
+    public TreeNode Gen(int[] nums,
+                       int l,int r)
+    {
+        if(r-l==1)
+        {
+            TreeNode n1=new 
+                TreeNode(nums[l]);
+            return n1;
+        }
+        int max=nums[l];
+        int index=l;
+        for(int i=l+1;i<r;++i)
+        {
+            if(nums[i]>max)
+            {
+                max=nums[i];
+                index=i;
+            }
+        }
+        TreeNode n=new TreeNode(
+            nums[index]);
+        if(index>l)
+            n.left=Gen(nums,l,index);
+        if(index<r-1)
+            n.right=
+            Gen(nums,index+1,r);
+        return n;
+    }
+}
+
+*/

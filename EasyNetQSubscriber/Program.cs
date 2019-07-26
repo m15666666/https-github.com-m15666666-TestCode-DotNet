@@ -8,11 +8,17 @@ namespace EasyNetQSubscriber
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("EasyNetQSubscriber Listening for messages. Hit <return> to quit.");
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Red;
+
             using (var bus = RabbitHutch.CreateBus(TextMessage.ConnectionString))
             {
                 #region 测试Send/Receive
 
-                bus.Receive<TextMessage>("my.queue", message => Console.WriteLine("MyMessage: {0}", message.Text));
+                bus.Receive<TextMessage>("my.queue", message => Console.WriteLine("my.queue message: {0}", message.Text));
+                bus.Receive<string>("my.queue.string", message => Console.WriteLine("my.queue.string message: {0}", message));
+                bus.Receive<byte[]>("my.queue.bytes", message => Console.WriteLine("my.queue.bytes message: {0}", string.Join(",", message)));
                 bus.Send("my.queue", new TextMessage { Text = "Hello Widgets!" });
 
                 #endregion
@@ -21,7 +27,7 @@ namespace EasyNetQSubscriber
 
                 TestRequest_Respond( bus );
 
-                Console.WriteLine("Listening for messages. Hit <return> to quit.");
+                
                 Console.ReadLine();
             }
         }
@@ -48,9 +54,9 @@ namespace EasyNetQSubscriber
 
         static void HandleTextMessage(TextMessage textMessage)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            //Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Got message: {0}", textMessage.Text);
-            Console.ResetColor();
+            //Console.ResetColor();
         }
     }
 }
