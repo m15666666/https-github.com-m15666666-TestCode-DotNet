@@ -63,5 +63,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EasyNetQMessages2\EasyNetQMessages2.csproj">
+      <Project>{d5829110-4277-4daa-a702-2fa7ab3b1764}</Project>
+      <Name>EasyNetQMessages2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Moons.Common20\Moons.Common20.csproj">
+      <Project>{cd36b657-1352-4dd4-a760-b3e01a3fc824}</Project>
+      <Name>Moons.Common20</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

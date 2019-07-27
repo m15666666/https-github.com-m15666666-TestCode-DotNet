@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EasyNetQMessages\EasyNetQMessages.csproj" />
+    <ProjectReference Include="..\EasyNetQMessages2\EasyNetQMessages2.csproj" />
   </ItemGroup>
 
 </Project>

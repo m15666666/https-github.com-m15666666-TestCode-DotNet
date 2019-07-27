@@ -41,6 +41,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestMath.Net", "TestMath.Ne
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQSubscriber4.6", "EasyNetQSubscriber4.6\EasyNetQSubscriber4.6.csproj", "{DC53524C-292D-415E-9A41-C47DADEC9BAC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Common20", "Moons.Common20\Moons.Common20.csproj", "{CD36B657-1352-4DD4-A760-B3E01A3FC824}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQMessages2", "EasyNetQMessages2\EasyNetQMessages2.csproj", "{D5829110-4277-4DAA-A702-2FA7AB3B1764}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +127,14 @@ Global
 		{DC53524C-292D-415E-9A41-C47DADEC9BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC53524C-292D-415E-9A41-C47DADEC9BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC53524C-292D-415E-9A41-C47DADEC9BAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD36B657-1352-4DD4-A760-B3E01A3FC824}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD36B657-1352-4DD4-A760-B3E01A3FC824}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD36B657-1352-4DD4-A760-B3E01A3FC824}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD36B657-1352-4DD4-A760-B3E01A3FC824}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5829110-4277-4DAA-A702-2FA7AB3B1764}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5829110-4277-4DAA-A702-2FA7AB3B1764}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5829110-4277-4DAA-A702-2FA7AB3B1764}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5829110-4277-4DAA-A702-2FA7AB3B1764}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
