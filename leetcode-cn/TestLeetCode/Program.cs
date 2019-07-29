@@ -7,8 +7,9 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new ShoppingOffersSolution().Test();
-            new ExclusiveTimeOfFunctionsSolution().Test();
+            new BeautifulArrangementIISolution().Test();
+            //new ShoppingOffersSolution().Test();
+            //new ExclusiveTimeOfFunctionsSolution().Test();
             //new NextGreaterElementIIISolution().Test();
             //new LongestWordInDictionaryThroughDeletingSolution().Test();
             //new ContinuousSubArraySumSolution().Test();
