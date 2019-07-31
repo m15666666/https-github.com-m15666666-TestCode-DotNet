@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpZipLib" Version="1.1.0" />
+    <ProjectReference Include="..\Moons.Common20\Moons.Common20.csproj" />
   </ItemGroup>
 
 </Project>
