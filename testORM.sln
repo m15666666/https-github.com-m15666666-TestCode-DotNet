@@ -45,15 +45,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Common20", "Moons.Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNetQMessages2", "EasyNetQMessages2\EasyNetQMessages2.csproj", "{D5829110-4277-4DAA-A702-2FA7AB3B1764}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalysisAlgorithm", "AnalysisAlgorithm\AnalysisAlgorithm.csproj", "{5C6CF8A2-4737-4406-9420-D7CB91417122}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalysisAlgorithm", "AnalysisAlgorithm\AnalysisAlgorithm.csproj", "{5C6CF8A2-4737-4406-9420-D7CB91417122}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalysisAlgorithm.Tests", "AnalysisAlgorithm.Tests\AnalysisAlgorithm.Tests.csproj", "{DB1B1A74-AC0F-4227-BEB2-F269FC708981}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalysisAlgorithm.Tests", "AnalysisAlgorithm.Tests\AnalysisAlgorithm.Tests.csproj", "{DB1B1A74-AC0F-4227-BEB2-F269FC708981}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalysisData", "AnalysisData\AnalysisData.csproj", "{F42D3358-C926-4279-8581-AD1E8FF4D124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalysisData", "AnalysisData\AnalysisData.csproj", "{F42D3358-C926-4279-8581-AD1E8FF4D124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnalysisUtils", "AnalysisUtils\AnalysisUtils.csproj", "{45CBBEA2-3E32-4EF4-BCB9-814D90272D02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalysisUtils", "AnalysisUtils\AnalysisUtils.csproj", "{45CBBEA2-3E32-4EF4-BCB9-814D90272D02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketLib", "SocketLib\SocketLib.csproj", "{6986A3AF-98BB-43EF-A6E1-DFE1DEFCF52E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketLib", "SocketLib\SocketLib.csproj", "{6986A3AF-98BB-43EF-A6E1-DFE1DEFCF52E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSampler", "DataSampler\DataSampler.csproj", "{09E87C5E-4464-493B-9A13-FC49755949AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSampler.Core", "DataSampler.Core\DataSampler.Core.csproj", "{25BD1A83-38D3-4B7D-86C0-3D34031100A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +169,14 @@ Global
 		{6986A3AF-98BB-43EF-A6E1-DFE1DEFCF52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6986A3AF-98BB-43EF-A6E1-DFE1DEFCF52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6986A3AF-98BB-43EF-A6E1-DFE1DEFCF52E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09E87C5E-4464-493B-9A13-FC49755949AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09E87C5E-4464-493B-9A13-FC49755949AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09E87C5E-4464-493B-9A13-FC49755949AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09E87C5E-4464-493B-9A13-FC49755949AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BD1A83-38D3-4B7D-86C0-3D34031100A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BD1A83-38D3-4B7D-86C0-3D34031100A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BD1A83-38D3-4B7D-86C0-3D34031100A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BD1A83-38D3-4B7D-86C0-3D34031100A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
