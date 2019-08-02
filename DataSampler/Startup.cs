@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using log4net;
+using log4net.Config;
+using log4net.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Moons.Common20;
 
 namespace DataSampler
 {
@@ -18,6 +22,19 @@ namespace DataSampler
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
+            // 默认简单配置，输出至控制台
+            //BasicConfigurator.Configure(repository);
+            XmlConfigurator.Configure(repository, new System.IO.FileInfo("log4net.config"));
+            ILog log = LogManager.GetLogger(repository.Name, "NETCorelog4net");
+
+            var logger = EnvironmentUtils.Logger = new Log4netWrapper(log);
+
+            logger.Info("NETCorelog4net log");
+            logger.Info("test log");
+            logger.Error("error");
+            logger.Info("linezero");
         }
 
         public IConfiguration Configuration { get; }

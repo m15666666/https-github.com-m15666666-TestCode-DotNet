@@ -9,11 +9,15 @@ namespace Moons.Common20
     /// </summary>
     public interface ILogNet
     {
+        bool IsDebug { get;  }
+
         /// <summary>
         /// Debug
         /// </summary>
         /// <param name="message"></param>
         void Debug(string message);
+
+        bool IsError { get; }
 
         /// <summary>
         /// Error
@@ -23,6 +27,8 @@ namespace Moons.Common20
 
         void Error(string message, Exception ex);
 
+        bool IsFatal { get; }
+
         /// <summary>
         /// Fatal
         /// </summary>
@@ -31,11 +37,15 @@ namespace Moons.Common20
 
         void Fatal(string message, Exception ex);
 
+        bool IsInfo { get; }
+
         /// <summary>
         /// Info
         /// </summary>
         /// <param name="message"></param>
         void Info(string message);
+
+        bool IsWarn { get; }
 
         /// <summary>
         /// Warn

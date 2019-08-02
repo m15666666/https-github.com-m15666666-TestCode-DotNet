@@ -16,6 +16,16 @@ namespace Moons.Common20
         /// </summary>
         public ILogNet Logger { private get; set; }
 
+        public bool IsDebug => Logger.IsDebug;
+
+        public bool IsError => Logger.IsError;
+
+        public bool IsFatal => Logger.IsFatal;
+
+        public bool IsInfo => Logger.IsInfo;
+
+        public bool IsWarn => Logger.IsWarn;
+
         #endregion
 
         #region 输出日志
