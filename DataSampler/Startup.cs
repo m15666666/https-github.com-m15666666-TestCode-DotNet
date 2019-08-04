@@ -27,14 +27,10 @@ namespace DataSampler
             // 默认简单配置，输出至控制台
             //BasicConfigurator.Configure(repository);
             XmlConfigurator.Configure(repository, new System.IO.FileInfo("log4net.config"));
-            ILog log = LogManager.GetLogger(repository.Name, "NETCorelog4net");
+            ILog log = LogManager.GetLogger(repository.Name, "Datasampler");
 
-            var logger = EnvironmentUtils.Logger = new Log4netWrapper(log);
-
-            logger.Info("NETCorelog4net log");
-            logger.Info("test log");
-            logger.Error("error");
-            logger.Info("linezero");
+            EnvironmentUtils.Logger = new Log4netWrapper(log);
+            TraceUtils.Info("Starting Datasampler. time stamp: 2019-08-02.");
         }
 
         public IConfiguration Configuration { get; }

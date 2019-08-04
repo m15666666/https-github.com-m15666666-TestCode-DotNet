@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSampler", "DataSampler\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSampler.Core", "DataSampler.Core\DataSampler.Core.csproj", "{25BD1A83-38D3-4B7D-86C0-3D34031100A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineSampleCommon", "OnlineSampleCommon\OnlineSampleCommon.csproj", "{0522A521-51CD-4312-8097-CE613BE73C16}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -177,6 +179,10 @@ Global
 		{25BD1A83-38D3-4B7D-86C0-3D34031100A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25BD1A83-38D3-4B7D-86C0-3D34031100A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25BD1A83-38D3-4B7D-86C0-3D34031100A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0522A521-51CD-4312-8097-CE613BE73C16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0522A521-51CD-4312-8097-CE613BE73C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0522A521-51CD-4312-8097-CE613BE73C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0522A521-51CD-4312-8097-CE613BE73C16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

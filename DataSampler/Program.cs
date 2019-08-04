@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Moons.Common20;
 
 namespace DataSampler
 {
@@ -15,6 +16,8 @@ namespace DataSampler
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
+
+            TraceUtils.Info("DataSampler exit.");
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
