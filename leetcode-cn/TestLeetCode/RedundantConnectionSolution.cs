@@ -39,12 +39,15 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/redundant-connection/
 /// 684. 冗余连接
-/// 
+/// https://blog.csdn.net/gl486546/article/details/79780126
+/// https://www.cnblogs.com/kexinxin/p/10400341.html
 /// </summary>
 class RedundantConnectionSolution
 {
     public void Test()
     {
+        var ret = FindRedundantConnection(new int[][] { new int[] { 1, 2 }, new int[] { 1, 3 }, new int[] { 2, 3 } });
+        ret = FindRedundantConnection(new int[][] { new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { 1, 4 }, new int[] { 1, 5 } });
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -54,6 +57,124 @@ class RedundantConnectionSolution
 
     public int[] FindRedundantConnection(int[][] edges)
     {
+        int n = edges.Length;
+        int[] parents = new int[n+1];
+        for (int i = 1; i <= n; ++i)
+        {
+            parents[i] = i;
+        }
+        foreach (var e in edges)
+        {
+            int x = e[0];
+            int y = e[1];
 
+            int l1 = Find(x, parents);
+            int l2 = Find(y, parents);
+
+            if (l1 == l2) return e;
+
+            parents[l1] = l2;
+        }
+        return new int[]{ -1,-1};
+    }
+    private static int Find(int x, int[] parents)
+    {
+        return x == parents[x] ? x : parents[x] = Find(parents[x], parents);
     }
 }
+/*
+public class Solution {
+    public int[] FindRedundantConnection(int[][] edges) {
+        int n = edges.Length;
+        UnionFind uf = new UnionFind(n);
+        
+        foreach (var e in edges)
+        {
+            // Console.WriteLine("Check connect {e[0]} and {e[1]}");
+            if (uf.Find(e[0]) == uf.Find(e[1]))
+            {
+                return e;
+            }
+            else
+            {
+                // Console.WriteLine("Union {e[0]} and {e[1]}");
+                uf.Union(e[0], e[1]);
+            }
+        }
+        
+        return null;
+    }
+    
+    public class UnionFind
+    {
+        int[] a = null;
+        int[] rank = null;
+        public UnionFind(int n)
+        {
+            a = new int[n + 1];
+            rank = new int[n + 1];
+            for (int i = 0; i <= n; i++)
+            {
+                a[i] = i;
+                rank[i] = 1;
+            }
+        }
+        
+        public int Find(int s)
+        {
+            while (s != a[s])
+            {
+                s = a[s];
+            }
+            return s;
+        }
+        
+        public void Union(int s, int t)
+        {
+            int sID = Find(s);
+            int tID = Find(t);
+            if (sID == tID) return;          
+            if (rank[sID] <= rank[tID])
+            {
+                a[sID] = tID;
+                rank[tID] += rank[sID];
+            }
+            else
+            {
+                a[tID] = sID;
+                rank[sID] += rank[tID];
+            }
+        }
+    }
+} 
+ublic class Solution {
+    public int[] FindRedundantConnection(int[][] edges) {
+            var tempEdges = edges.ToList();
+            var index = new List<int>();
+            var res = new int[2];
+            for(int i=0;i<2000;i++){
+                index.Add(i);
+            }
+            tempEdges.ForEach(t=>{
+                int node1 = t[0];
+                int node2 = t[1];
+                while(node1!=index[node1])
+                {
+                    node1=index[node1];
+                }
+                while(node2!=index[node2])
+                {
+                    node2=index[node2];
+                }
+                if(node1==node2)
+                {
+                    res=t;
+                }
+                else
+                    index[node1]=node2;
+            });
+          
+            return res;
+    }
+}
+*/
