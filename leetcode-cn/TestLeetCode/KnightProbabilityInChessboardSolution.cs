@@ -42,7 +42,7 @@ K 的取值范围为 [0, 100]
 /// <summary>
 /// https://leetcode-cn.com/problems/knight-probability-in-chessboard/
 /// 688. “马”在棋盘上的概率
-/// 
+/// https://blog.csdn.net/xx_123_1_rj/article/details/81149267
 /// </summary>
 class KnightProbabilityInChessboardSolution
 {
@@ -57,6 +57,48 @@ class KnightProbabilityInChessboardSolution
 
     public double KnightProbability(int N, int K, int r, int c)
     {
+        Dictionary<int, double> coordination2Probability = new Dictionary<int, double>();
+        Dictionary<int, double> coordination2Probability2 = new Dictionary<int, double>();
 
+        coordination2Probability.Add(ToKey(r, c), 1);
+        for ( int i = 0; i < K; i++)
+        {
+            if (coordination2Probability.Count == 0) break;
+            coordination2Probability2.Clear();
+
+            foreach ( var pair in coordination2Probability )
+            {
+                double probability = pair.Value / 8f;// 保留棋盘内的概率（除以8，是因为有八个方向，每个方向是八分之一）
+                KeyToRC(pair.Key, ref r, ref c);
+                for (int j = 0; j < Drs.Length; j++)
+                {
+                    var newR = r + Drs[j];
+                    var newC = c + Dcs[j];
+                    if (0 <= newR && newR < N && 0 <= newC && newC < N)// 判断是否出界
+                    {
+                        int newKey = ToKey(newR, newC);
+                        if (!coordination2Probability2.ContainsKey(newKey)) coordination2Probability2.Add(newKey, probability);
+                        else coordination2Probability2[newKey] += probability;  
+                    }
+                }
+            }
+            var c2p = coordination2Probability;
+            coordination2Probability = coordination2Probability2;
+            coordination2Probability2 = c2p;
+        }
+        return coordination2Probability.Values.Sum();
     }
+
+    private static int ToKey(int r, int c)
+    {
+        return r * 100 + c;
+    }
+    private static void KeyToRC(int key, ref int r, ref int c)
+    {
+        c = key % 100;
+        r = key / 100;
+    }
+
+    private static readonly int[] Drs = new int[] { 2, 2, -2, -2, 1, 1, -1, -1 };
+    private static readonly int[] Dcs = new int[] { 1, -1, 1, -1, 2, -2, 2, -2 };
 }

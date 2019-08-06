@@ -78,7 +78,7 @@ namespace Moons.Common20.Serialization
                 {StringEncodingID.UTF8, Encoding.UTF8},
                 {StringEncodingID.BigEndianUnicode, Encoding.BigEndianUnicode},
                 {StringEncodingID.Unicode, Encoding.Unicode},
-                {StringEncodingID.GB2312, StringUtils.GB2312},
+                {StringEncodingID.GB2312, Encoding.ASCII},//StringUtils.GB2312},//.net core不支持Encoding.GetEncoding("GB2312")
             };
 
         /// <summary>

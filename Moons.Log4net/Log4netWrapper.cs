@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace DataSampler
+namespace Moons.Log4net
 {
     public class Log4netWrapper : ILogNet
     {

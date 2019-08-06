@@ -12,7 +12,7 @@ namespace Moons.Common20
         /// <summary>
         ///     日志对象
         /// </summary>
-        private static ILogNet Logger
+        public static ILogNet Logger
         {
             get { return EnvironmentUtils.Logger; }
         }
@@ -56,6 +56,15 @@ namespace Moons.Common20
         public static void Debug( string message )
         {
             Logger.Debug( message );
+        }
+
+        /// <summary>
+        ///     Debug
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Debug(string message, Exception ex)
+        {
+            Logger.Debug(message);
         }
 
         /// <summary>
@@ -106,12 +115,30 @@ namespace Moons.Common20
         }
 
         /// <summary>
+        ///     Info
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Info(string message, Exception ex)
+        {
+            Logger.Info(message);
+        }
+
+        /// <summary>
         ///     Warn
         /// </summary>
         /// <param name="message"></param>
         public static void Warn( string message )
         {
             Logger.Warn( message );
+        }
+
+        /// <summary>
+        ///     Warn
+        /// </summary>
+        /// <param name="message"></param>
+        public static void Warn(string message, Exception ex)
+        {
+            Logger.Warn(message);
         }
 
         #endregion

@@ -10,6 +10,7 @@ using Moons.Common20;
 using Moons.Common20.Serialization;
 using SocketLib;
 using System.IO;
+using DataSampler.Core.Helper;
 
 namespace DataSampler
 {
@@ -20,33 +21,33 @@ namespace DataSampler
     {
         #region debug
 
-        ///// <summary>
-        ///// 发送测试用的采集工作站命令
-        ///// </summary>
-        //private void SendDebugSampleStationCommand()
-        //{
-        //    try
-        //    {
-        //        var sampleStationProxy = new SampleStationProxy();
-        //        sampleStationProxy.SampleStationData.DataSamplerIP = "127.0.0.1";
+        /// <summary>
+        /// 发送测试用的采集工作站命令
+        /// </summary>
+        private void SendDebugSampleStationCommand()
+        {
+            try
+            {
+                var sampleStationProxy = new SampleStationProxy();
+                sampleStationProxy.SampleStationData.DataSamplerIP = "127.0.0.1";
 
-        //        sampleStationProxy.StartNormalSample();
-        //        sampleStationProxy.StopSample();
-        //        //sampleStationProxy.SendAlmEventData_Test();
-        //        sampleStationProxy.GetSampleStationStatus();
-        //        sampleStationProxy.GetHardwareInfo();
+                //sampleStationProxy.StartNormalSample();
+                //sampleStationProxy.StopSample();
+                sampleStationProxy.SendAlmEventData_Test();
+                sampleStationProxy.GetSampleStationStatus();
+                sampleStationProxy.GetHardwareInfo();
 
-        //        SampleStationParameterErrorDataCollection error = null;
-        //        sampleStationProxy.DownloadSampleConfig( ref error );
+                SampleStationParameterErrorDataCollection error = null;
+                sampleStationProxy.DownloadSampleConfig(ref error);
 
-        //        List<TrendData> trendDatas = sampleStationProxy.GetData( new int[1] );
-        //        sampleStationProxy.Timing( DateTime.Now );
-        //    }
-        //    catch( Exception ex )
-        //    {
-        //        TraceUtils.Error( "发送测试用的采集工作站命令出错！", ex );
-        //    }
-        //}
+                List<TrendData> trendDatas = sampleStationProxy.GetData(new int[1]);
+                sampleStationProxy.Timing(DateTime.Now);
+            }
+            catch (Exception ex)
+            {
+                TraceUtils.Error("发送测试用的采集工作站命令出错！", ex);
+            }
+        }
 
         #endregion
 
@@ -63,11 +64,6 @@ namespace DataSampler
         private readonly TimerWrapper _sampleTimer;
 
         /// <summary>
-        ///     Socket连接的计数器
-        /// </summary>
-        private readonly ArrayList _sockets = ArrayList.Synchronized( new ArrayList() );
-
-        /// <summary>
         /// ip字符串映射socket，使用这个对象作为访问这个对象的锁。
         /// </summary>
         public readonly Dictionary<string, SocketWrapper> _ip2SocketOfControl = new Dictionary<string, SocketWrapper>();
@@ -76,14 +72,6 @@ namespace DataSampler
         ///     发送队列
         /// </summary>
         private readonly ITaskSendQueue _taskSender = new TasksSender();
-
-        /// <summary>
-        ///     内部使用的锁
-        /// </summary>
-        public object InnerLock
-        {
-            get { return _lock; }
-        }
 
         /// <summary>
         ///     是否停止采集
@@ -144,16 +132,22 @@ namespace DataSampler
         private DataSamplerController()
         {
             State = DataSamplerState.Stop;
+        }
 
-            _sampleTimer = new TimerWrapper { Callback = SampleData, Interval = new TimeSpan( 0, 0, 1 ) };
-
+        /// <summary>
+        /// 初始化内部状态
+        /// </summary>
+        public void Init()
+        {
             Config.InitStructReadWriteHandler();
 
             Config.InitFirmware4Upgrade();
 
             StartListenSocket();
 
-            InitDebugHandler();
+            Config.InitDebugHandler();
+
+            new NettyListener().RunServerAsync();
         }
 
         /// <summary>
@@ -162,63 +156,6 @@ namespace DataSampler
         public static DataSamplerController Instance
         {
             get { return _instance; }
-        }
-
-        /// <summary>
-        ///     初始化调试的代理
-        /// </summary>
-        private static void InitDebugHandler()
-        {
-            if( EnvironmentUtils.IsDebug )
-            {
-                SocketLibConfig.SendBytesEvent += SocketLibConfig_SendBytesEvent;
-                SocketLibConfig.ReceiveBytesEvent += SocketLibConfig_ReceiveBytesEvent;
-
-                SampleStationProxy.ReceiveCommandMessage = Config.LogCommandMessage;
-            }
-        }
-
-        /// <summary>
-        ///     响应接收了字节的事件
-        /// </summary>
-        private static void SocketLibConfig_ReceiveBytesEvent( SocketWrapper socket, byte[] buffer, int offset, int size )
-        {
-            string hex = StringUtils.ToHex( buffer, offset, size );
-            TraceUtils.Info( string.Format( "{1} receive data: ({0})", hex, socket.IPPortInfo ) );
-        }
-
-        /// <summary>
-        ///     响应发送了字节的事件
-        /// </summary>
-        private static void SocketLibConfig_SendBytesEvent( SocketWrapper socket, byte[] buffer, int offset, int size )
-        {
-            string hex = StringUtils.ToHex( buffer, offset, size );
-            TraceUtils.Info( string.Format( "{1} send data: ({0})", hex, socket.IPPortInfo ) );
-        }
-
-        #endregion
-
-        #region 采集数据
-
-        /// <summary>
-        ///     当前的活动采集工作站集合
-        /// </summary>
-        private ActiveSampleStationData[] ActiveSampleStationDatas { get; set; }
-
-        /// <summary>
-        ///     采集数据
-        /// </summary>
-        /// <param name="stateInfo">状态对象</param>
-        private void SampleData( object stateInfo )
-        {
-        }
-
-        /// <summary>
-        ///     采集并发送数据到队列
-        /// </summary>
-        /// <param name="state"></param>
-        private void SampleAndSend( object state )
-        {
         }
 
         #endregion
@@ -230,23 +167,24 @@ namespace DataSampler
         /// </summary>
         private void StartListenSocket()
         {
-            int port = 1283;//ConfigBase.ListenPort;
-            if( port == 0 )
-            {
-                TraceUtils.Info( string.Format( "Port number is zero, exit." ) );
-                return;
-            }
+            StartListenSocket("Listen4Data", ref _listenSocket, Config.ListenPortOfData, OnAccept4Data);
+            StartListenSocket("Listen4Control", ref _listenSocketOfControl, Config.ListenPortOfControl, OnAccept4Control);
+        }
 
-            _listenSocket = SocketWrapper.CreateTcpSocket();
-            BindTcpPort( _listenSocket, port );
+        /// <summary>
+        ///     启动Socket侦听
+        /// </summary>
+        private void StartListenSocket( string prefix, ref SocketWrapper socket, int port , Action<SocketWrapper> onAccept)
+        {
+            if (port == 0) return;
 
-            int portOfControl = Config.ListenPortOfControl;
-            _listenSocketOfControl = SocketWrapper.CreateTcpSocket();
-            BindTcpPort(_listenSocketOfControl, portOfControl);
+            TraceUtils.Info($"{prefix} StartListenSocket.");
+            var s = socket = SocketWrapper.CreateTcpSocket();
+            BindTcpPort(socket, port);
 
-            Thread threadListen = ThreadUtils.CreateBackgroundThread( StartAccept, "StartAccept" );
-            Thread threadListen2 = ThreadUtils.CreateBackgroundThread( StartAcceptSocketOfControl, "StartAcceptSocketOfControl");
-            ThreadUtils.Start( threadListen, threadListen2 );
+            ThreadStart startAccept = () => { StartAccept(prefix, s, onAccept); };
+            Thread threadListen = ThreadUtils.CreateBackgroundThread(startAccept, $"{prefix}-StartAccept");
+            ThreadUtils.Start(threadListen);
         }
 
         private void BindTcpPort( SocketWrapper socketWrapper, int port )
@@ -269,169 +207,151 @@ namespace DataSampler
         /// <summary>
         ///     开始接入客户端连接
         /// </summary>
-        private void StartAccept()
+        private void StartAccept( string prefix, SocketWrapper socket, Action<SocketWrapper> onAccept )
         {
-            TraceUtils.Info("StartAccept.");
-
-            var socket = _listenSocket;
-            while ( true )
-            {
-                try
-                {
-                    if( socket.Disposed )
-                    {
-                        break;
-                    }
-
-                    OnAcceptSuccess( socket.Accept() );
-                }
-                catch( Exception ex )
-                {
-                    if( socket.IsListenClose( ex ) )
-                    {
-                        TraceUtils.Error("Listening socket close(SocketException)", ex );
-                        break;
-                    }
-
-                    TraceUtils.Error("Listening thread error", ex );
-                    break;
-                }
-            } // while( true )
-
-            TraceUtils.Info( "Listening thread exit." );
-        }
-
-        /// <summary>
-        ///     开始接入客户端连接
-        /// </summary>
-        private void StartAcceptSocketOfControl()
-        {
-            TraceUtils.Info("StartAcceptSocketOfControl.");
-
-            var socket = _listenSocketOfControl;
+            TraceUtils.Info($"{prefix} StartAccept.");
             while (true)
             {
                 try
                 {
-                    if ( socket.Disposed )
+                    if (socket.Disposed)
                     {
                         break;
                     }
 
-                    SocketWrapper acceptedSocket = socket.Accept();
-
-                    WaitCallback cacheSocketOfControl = state => {
-                        SocketWrapper socketWrapper = null;
-                        try {
-                            socketWrapper = (SocketWrapper)state;
-
-                            TraceUtils.LogDebugInfo($"StartAcceptSocketOfControl cacheSocketOfControl: {socketWrapper.IPPortInfo}");
-
-                            socketWrapper.SendTimeout = socketWrapper.ReceiveTimeout = Config.SendReceiveTimeoutInMs;
-
-                            byte[] buffer = new byte[128];
-                            socketWrapper.ReceiveBytes( buffer );
-
-                            string hex = StringUtils.ToHex(buffer, 0, buffer.Length);
-                            TraceUtils.LogDebugInfo($"StartAcceptSocketOfControl cacheSocketOfControl: {socketWrapper.IPPortInfo}, received data: {hex}");
-
-                            List<byte> text = new List<byte>();
-                            foreach ( var c in buffer )
-                            {
-                                if ( c == 0 ) break;
-                                text.Add( c );
-                            }
-
-                            const string IdPrefix = "msid=";
-                            var message = StringUtils.TrimToLower( System.Text.Encoding.UTF8.GetString( text.ToArray() ) );
-                            if( !string.IsNullOrWhiteSpace(message))
-                            {
-                                TraceUtils.LogDebugInfo( $"StartAcceptSocketOfControl receive id: {message}" );
-
-                                var idIndex = message.IndexOf(IdPrefix);
-                                if( -1 < idIndex)
-                                {
-                                    var ipIndex = idIndex + IdPrefix.Length;
-                                    var semiColonIndex = message.IndexOf( ";", ipIndex );
-                                    var ip = -1 < semiColonIndex ? message.Substring(ipIndex, semiColonIndex - ipIndex ) : message.Substring(ipIndex);
-                                    if (!string.IsNullOrWhiteSpace( ip ))
-                                    {
-                                        var map = _ip2SocketOfControl;
-                                        lock (map)
-                                        {
-                                            if (map.ContainsKey(ip)) {
-                                                var oldSocket = map[ip];
-                                                oldSocket.KeepSocketWrapperAlive = false;
-                                                DisposeUtils.Dispose( oldSocket );
-                                            }
-
-                                            socketWrapper.KeepSocketWrapperAlive = true;
-                                            map[ip] = socketWrapper;
-                                            return;
-                                        }
-                                    }
-                                }
-                            }
-
-                            DisposeUtils.Dispose(socketWrapper);
-                        }
-                        catch( Exception ex )
-                        {
-                            DisposeUtils.Dispose( socketWrapper );
-                            TraceUtils.Error( "Accept control socket error.", ex );
-                        }
-                    };
-
-                    ThreadPool.QueueUserWorkItem( cacheSocketOfControl, acceptedSocket );
+                    var s = socket.Accept();
+                    TraceUtils.Info($"{prefix} accept success: {s.IPPortInfo}");
+                    onAccept(s);
                 }
                 catch (Exception ex)
                 {
-                    if ( socket.IsListenClose(ex) )
+                    if (socket.IsListenClose(ex))
                     {
-                        TraceUtils.Error("Listening socket close(SocketException)", ex);
+                        TraceUtils.Error($"{prefix} Listening socket close(SocketException)", ex);
                         break;
                     }
 
-                    TraceUtils.Error("Listening thread error", ex);
+                    TraceUtils.Error($"{prefix} Listening thread error", ex);
                     break;
                 }
             } // while( true )
 
-            TraceUtils.Info("Listening thread exit.");
+            TraceUtils.Info($"{prefix} Listening thread exit.");
         }
-
 
         /// <summary>
         ///     接入成功
         /// </summary>
-        private void OnAcceptSuccess( SocketWrapper socketWrapper )
+        private void OnAccept4Data( SocketWrapper acceptedSocket )
         {
             try
             {
-                TraceUtils.Info( string.Format( "OnAcceptSuccess ({0}).", socketWrapper.IPPortInfo ) );
-
                 PackageSendReceive packageSendReceive =
-                    PackageSendReceive.CreatePackageSendReceive_Server( socketWrapper );
-                socketWrapper.LinkedObject = packageSendReceive;
+                    PackageSendReceive.CreatePackageSendReceive_Server( acceptedSocket );
+                acceptedSocket.LinkedObject = packageSendReceive;
 
                 packageSendReceive.ReadPackageSuccess = OnReadPackageSuccess;
 
                 packageSendReceive.ReadPackageFail = OnReadPackageFail;
 
                 packageSendReceive.BeginReceivePackage();
-
-                _sockets.Add( socketWrapper );
             }
             catch( Exception ex )
             {
                 string error = "OnAcceptSuccess error";
-                if( socketWrapper.IsDisconnect( ex ) )
+                if( acceptedSocket.IsDisconnect( ex ) )
                 {
-                    error = string.Format( "OnAcceptSuccess Socket closed({0})", socketWrapper.SocketErrorInfo );
+                    error = string.Format( "OnAcceptSuccess Socket closed({0})", acceptedSocket.SocketErrorInfo );
                 }
                 TraceUtils.Error( error, ex );
 
-                DisposeUtils.Dispose( socketWrapper );
+                DisposeUtils.Dispose( acceptedSocket );
+            }
+        }
+
+        /// <summary>
+        ///     接入成功
+        /// </summary>
+        private void OnAccept4Control(SocketWrapper acceptedSocket)
+        {
+            try
+            {
+                WaitCallback cacheSocketOfControl = state => {
+                    SocketWrapper socketWrapper = null;
+                    try
+                    {
+                        socketWrapper = (SocketWrapper)state;
+
+                        TraceUtils.Info($"StartAcceptSocketOfControl cacheSocketOfControl: {socketWrapper.IPPortInfo}");
+
+                        socketWrapper.SendTimeout = socketWrapper.ReceiveTimeout = Config.SendReceiveTimeoutInMs;
+
+                        byte[] buffer = new byte[128];
+                        socketWrapper.ReceiveBytes(buffer);
+
+                        string hex = StringUtils.ToHex(buffer, 0, buffer.Length);
+                        TraceUtils.LogDebugInfo($"StartAcceptSocketOfControl cacheSocketOfControl: {socketWrapper.IPPortInfo}, received data: {hex}");
+
+                        List<byte> text = new List<byte>();
+                        foreach (var c in buffer)
+                        {
+                            if (c == 0) break;
+                            text.Add(c);
+                        }
+
+                        const string IdPrefix = "msid=";
+                        var message = StringUtils.TrimToLower(System.Text.Encoding.UTF8.GetString(text.ToArray()));
+                        if (!string.IsNullOrWhiteSpace(message))
+                        {
+                            TraceUtils.LogDebugInfo($"StartAcceptSocketOfControl receive id: {message}");
+
+                            var idIndex = message.IndexOf(IdPrefix);
+                            if (-1 < idIndex)
+                            {
+                                var ipIndex = idIndex + IdPrefix.Length;
+                                var semiColonIndex = message.IndexOf(";", ipIndex);
+                                var ip = -1 < semiColonIndex ? message.Substring(ipIndex, semiColonIndex - ipIndex) : message.Substring(ipIndex);
+                                if (!string.IsNullOrWhiteSpace(ip))
+                                {
+                                    var map = _ip2SocketOfControl;
+                                    lock (map)
+                                    {
+                                        if (map.ContainsKey(ip))
+                                        {
+                                            var oldSocket = map[ip];
+                                            oldSocket.KeepSocketWrapperAlive = false;
+                                            DisposeUtils.Dispose(oldSocket);
+                                        }
+
+                                        socketWrapper.KeepSocketWrapperAlive = true;
+                                        map[ip] = socketWrapper;
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+
+                        DisposeUtils.Dispose(socketWrapper);
+                    }
+                    catch (Exception ex)
+                    {
+                        DisposeUtils.Dispose(socketWrapper);
+                        TraceUtils.Error("Accept control socket error.", ex);
+                    }
+                };
+
+                ThreadPool.QueueUserWorkItem(cacheSocketOfControl, acceptedSocket);
+            }
+            catch (Exception ex)
+            {
+                string error = "OnAcceptSuccess error";
+                if (acceptedSocket.IsDisconnect(ex))
+                {
+                    error = string.Format("OnAcceptSuccess Socket closed({0})", acceptedSocket.SocketErrorInfo);
+                }
+                TraceUtils.Error(error, ex);
+
+                DisposeUtils.Dispose(acceptedSocket);
             }
         }
 
@@ -469,8 +389,8 @@ namespace DataSampler
             }
             catch( Exception ex )
             {
-                TryCloseSocket( sendReceive, "OnReadPackageSuccess异常" );
-                TraceUtils.Error( "OnReadPackageSuccess异常！", ex );
+                TryCloseSocket( sendReceive, "OnReadPackageSuccess error." );
+                TraceUtils.Error( "OnReadPackageSuccess error.", ex );
             }
         }
 
@@ -726,16 +646,7 @@ namespace DataSampler
         /// </summary>
         private void CloseSocket( PackageSendReceive sendReceive )
         {
-            RemoveSocketFromList( sendReceive );
             DisposeUtils.Dispose( sendReceive.InnerSocketWrapper );
-        }
-
-        /// <summary>
-        ///     从列表移除Socket
-        /// </summary>
-        private void RemoveSocketFromList( PackageSendReceive sendReceive )
-        {
-            TryCatchUtils.Catch( _sockets.Remove, sendReceive.InnerSocketWrapper );
         }
 
         #endregion
@@ -778,8 +689,6 @@ namespace DataSampler
 
                 //#endregion
 
-                SamplerConfigData samplerConfig = GetSamplerConfig();
-                SampleStationData[] sampleStationDatas = null;
                 try
                 {
                     //OnlineSampleServiceClient onlineSampleServiceClient = GetOnlineSampleServiceClient();
@@ -822,7 +731,7 @@ namespace DataSampler
                     //    _variant2PointData = variant2PointData;
                     //}
 
-                    Config.InitFirmware4Upgrade();
+                    //Config.InitFirmware4Upgrade();
                 }
                 catch( Exception ex )
                 {
@@ -859,7 +768,7 @@ namespace DataSampler
                 //    _sampleItems = sampleItems;
                 //}
 
-                _taskSender.StartSend();
+                //_taskSender.StartSend();
 
                 State = DataSamplerState.NormalSample;
                 if( Config.Probe.StartSampleSuccessCount < int.MaxValue )
@@ -912,6 +821,7 @@ namespace DataSampler
             if( disposing )
             {
                 DisposeUtils.Dispose( _listenSocket );
+                DisposeUtils.Dispose( _listenSocketOfControl );
             }
 
             //  一定要调用基类的Dispose函数

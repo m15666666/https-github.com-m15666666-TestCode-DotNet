@@ -15,8 +15,12 @@ namespace DataSampler
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            using ( var sampler = DataSamplerController.Instance )
+            {
+                CreateWebHostBuilder(args).Build().Run();
 
+                sampler.StopSample();
+            }
             TraceUtils.Info("DataSampler exit.");
         }
 

@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moons.Common20;
+using Moons.Log4net;
 
 namespace DataSampler
 {
@@ -31,6 +32,20 @@ namespace DataSampler
 
             EnvironmentUtils.Logger = new Log4netWrapper(log);
             TraceUtils.Info("Starting Datasampler. time stamp: 2019-08-02.");
+
+            try
+            {
+                EnvironmentUtils.IsDebug = true;
+
+                var sampler = DataSamplerController.Instance;
+                sampler.Init();
+                
+                sampler.StartNormalSample();
+            }
+            catch( Exception ex)
+            {
+                TraceUtils.Error("Init datasampler error.", ex);
+            }
         }
 
         public IConfiguration Configuration { get; }

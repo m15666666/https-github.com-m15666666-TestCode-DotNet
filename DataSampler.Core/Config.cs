@@ -45,6 +45,38 @@ namespace DataSampler
             }
         }
 
+        /// <summary>
+        ///     初始化调试的代理
+        /// </summary>
+        public static void InitDebugHandler()
+        {
+            if (EnvironmentUtils.IsDebug)
+            {
+                SocketLibConfig.SendBytesEvent += SocketLibConfig_SendBytesEvent;
+                SocketLibConfig.ReceiveBytesEvent += SocketLibConfig_ReceiveBytesEvent;
+
+                SampleStationProxy.ReceiveCommandMessage = Config.LogCommandMessage;
+            }
+        }
+
+        /// <summary>
+        ///     响应接收了字节的事件
+        /// </summary>
+        private static void SocketLibConfig_ReceiveBytesEvent(SocketWrapper socket, byte[] buffer, int offset, int size)
+        {
+            string hex = StringUtils.ToHex(buffer, offset, size);
+            TraceUtils.Info(string.Format("{1} receive data: ({0})", hex, socket.IPPortInfo));
+        }
+
+        /// <summary>
+        ///     响应发送了字节的事件
+        /// </summary>
+        private static void SocketLibConfig_SendBytesEvent(SocketWrapper socket, byte[] buffer, int offset, int size)
+        {
+            string hex = StringUtils.ToHex(buffer, offset, size);
+            TraceUtils.Info(string.Format("{1} send data: ({0})", hex, socket.IPPortInfo));
+        }
+
         #endregion
 
         #region 探针数据对象
@@ -112,8 +144,11 @@ namespace DataSampler
         /// <returns>SamplerConfigData</returns>
         internal static SamplerConfigData ReadSamplerConfig()
         {
-            return XmlUtils.XmlDeserializeFromFile<SamplerConfigData>( DataSamplerConfigFilePath );
+            return SamplerConfig;
+            //return XmlUtils.XmlDeserializeFromFile<SamplerConfigData>( DataSamplerConfigFilePath );
         }
+
+        public static SamplerConfigData SamplerConfig { get; set; }
 
         #endregion
 
@@ -132,6 +167,17 @@ namespace DataSampler
         #endregion
 
         #region 与Socket相关
+
+        /// <summary>
+        /// 本地侦听的端口，用于接受数据，默认1283
+        /// </summary>
+        internal static int ListenPortOfData
+        {
+            get
+            {
+                return 1283;
+            }
+        }
 
         /// <summary>
         /// 本地侦听的端口，用于采集工作站TCP控制链接的接入，默认1284
@@ -224,8 +270,10 @@ namespace DataSampler
         /// </summary>
         public static void InitFirmware4Upgrade()
         {
-            var firmware4UpgradeDir = "Firmware4Upgrade";
-            foreach( var dir in Directory.EnumerateDirectories( firmware4UpgradeDir ) )
+            var firmware4UpgradeDir = AppPath.GetPath( "Firmware4Upgrade" );
+            if (!Directory.Exists(firmware4UpgradeDir)) return;
+
+            foreach ( var dir in Directory.EnumerateDirectories( firmware4UpgradeDir ) )
             {
                 try
                 {

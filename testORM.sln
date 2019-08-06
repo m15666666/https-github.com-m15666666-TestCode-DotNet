@@ -55,11 +55,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AnalysisUtils", "AnalysisUt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocketLib", "SocketLib\SocketLib.csproj", "{6986A3AF-98BB-43EF-A6E1-DFE1DEFCF52E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSampler", "DataSampler\DataSampler.csproj", "{09E87C5E-4464-493B-9A13-FC49755949AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSampler", "DataSampler\DataSampler.csproj", "{09E87C5E-4464-493B-9A13-FC49755949AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSampler.Core", "DataSampler.Core\DataSampler.Core.csproj", "{25BD1A83-38D3-4B7D-86C0-3D34031100A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSampler.Core", "DataSampler.Core\DataSampler.Core.csproj", "{25BD1A83-38D3-4B7D-86C0-3D34031100A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineSampleCommon", "OnlineSampleCommon\OnlineSampleCommon.csproj", "{0522A521-51CD-4312-8097-CE613BE73C16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineSampleCommon", "OnlineSampleCommon\OnlineSampleCommon.csproj", "{0522A521-51CD-4312-8097-CE613BE73C16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSampler.Test", "DataSampler.Test\DataSampler.Test.csproj", "{5FAEBE32-3BAA-4DCE-888A-4AF50783DD31}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Log4net", "Moons.Log4net\Moons.Log4net.csproj", "{05B3B7EE-1733-4149-9D22-BD504E8017E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +187,14 @@ Global
 		{0522A521-51CD-4312-8097-CE613BE73C16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0522A521-51CD-4312-8097-CE613BE73C16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0522A521-51CD-4312-8097-CE613BE73C16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FAEBE32-3BAA-4DCE-888A-4AF50783DD31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FAEBE32-3BAA-4DCE-888A-4AF50783DD31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FAEBE32-3BAA-4DCE-888A-4AF50783DD31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FAEBE32-3BAA-4DCE-888A-4AF50783DD31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05B3B7EE-1733-4149-9D22-BD504E8017E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05B3B7EE-1733-4149-9D22-BD504E8017E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05B3B7EE-1733-4149-9D22-BD504E8017E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05B3B7EE-1733-4149-9D22-BD504E8017E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

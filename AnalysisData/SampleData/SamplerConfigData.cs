@@ -27,5 +27,10 @@ namespace AnalysisData.SampleData
         /// </summary>
         [XmlElement( ElementName = "SampleServerServiceAddress" )]
         public string SampleServerServiceAddress { get; set; }
+
+        /// <summary>
+        /// 是否使用netty
+        /// </summary>
+        public bool UseNetty { get; set; }
     }
 }

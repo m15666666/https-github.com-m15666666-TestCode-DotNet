@@ -54,7 +54,7 @@ namespace DataSampler.Helper
         /// </summary>
         public SampleStationStatusData GetSampleStationStatus()
         {
-            return GetSampleStationInfo<SampleStationStatusData>( CommandID.GetStatus, "采集器状态" );
+            return GetSampleStationInfo<SampleStationStatusData>( CommandID.GetStatus, "SampleStationStatus");
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace DataSampler.Helper
         /// </summary>
         public SampleStationHardwareInfoData GetHardwareInfo()
         {
-            return GetSampleStationInfo<SampleStationHardwareInfoData>( CommandID.GetHardwareInfo, "采集器硬件信息" );
+            return GetSampleStationInfo<SampleStationHardwareInfoData>( CommandID.GetHardwareInfo, "HardwareInfo");
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace DataSampler.Helper
         /// </summary>
         public string GetHardwareDebugInfo()
         {
-            return GetSampleStationInfo<string>( CommandID.GetHardwareDebugInfo, "采集器调试信息" );
+            return GetSampleStationInfo<string>( CommandID.GetHardwareDebugInfo, "HardwareDebugInfo");
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace DataSampler.Helper
             }
             catch( Exception ex )
             {
-                TraceUtils.Error( string.Format( "获取{0}出错！", infoMame ), ex );
+                TraceUtils.Error( string.Format( "Get {0} error.", infoMame ), ex );
                 throw;
             }
         }
@@ -106,7 +106,7 @@ namespace DataSampler.Helper
             }
             catch( Exception ex )
             {
-                TraceUtils.Error( "开始正常采集出错！", ex );
+                TraceUtils.Error("StartNormalSample error.", ex );
                 throw;
             }
         }
@@ -123,7 +123,7 @@ namespace DataSampler.Helper
             }
             catch( Exception ex )
             {
-                TraceUtils.Error( "停止采集出错！", ex );
+                TraceUtils.Error("StopSample error.", ex );
                 throw;
             }
         }
@@ -638,7 +638,7 @@ namespace DataSampler.Helper
         private SocketWrapper CreateSocket()
         {
             var ip = IPAddress.IP;
-            if( ip.StartsWith( "127." ) )
+            if( ip != "127.0.0.1" && ip.StartsWith( "127." ) )
             {
                 var map = DataSamplerController.Instance._ip2SocketOfControl;
                 lock (map)
