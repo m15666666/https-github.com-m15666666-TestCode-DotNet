@@ -124,7 +124,7 @@ namespace OnlineSampleCommon.SendTask
             ClearQueue();
             StopSendThread();
 
-            Sender.StopSend();
+            Sender?.StopSend();
         }
 
         /// <summary>

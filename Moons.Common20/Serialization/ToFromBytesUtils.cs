@@ -953,10 +953,33 @@ namespace Moons.Common20.Serialization
         {
             using( MemoryStream stream = byteBuffer.CreateReadStream() )
             {
-                using( var reader = new BinaryReader( stream ) )
-                {
-                    return ReadCommandMessage( new ToFromBytesUtils( reader ) {ByteCountLeft2Read = (int)stream.Length} );
-                }
+                return ReadCommandMessage(stream);
+            }
+        }
+
+        /// <summary>
+        ///     解析命令对象
+        /// </summary>
+        /// <param name="byteBuffer">ByteBuffer</param>
+        /// <returns>命令对象</returns>
+        public static CommandMessage ReadCommandMessage(byte[] bytes)
+        {
+            using (MemoryStream stream = new MemoryStream(bytes))
+            {
+                return ReadCommandMessage(stream);
+            }
+        }
+
+        /// <summary>
+        ///     解析命令对象
+        /// </summary>
+        /// <param name="stream">Stream</param>
+        /// <returns>命令对象</returns>
+        public static CommandMessage ReadCommandMessage(Stream stream)
+        {
+            using (var reader = new BinaryReader(stream))
+            {
+                return ReadCommandMessage(new ToFromBytesUtils(reader) { ByteCountLeft2Read = (int)stream.Length });
             }
         }
 
@@ -974,7 +997,7 @@ namespace Moons.Common20.Serialization
             Func20<ToFromBytesUtils, object> handler = _structTypeID2CustomDataReader[structTypeID];
             if( handler == null )
             {
-                throw new ArgumentOutOfRangeException( string.Format( "无法识别的结构类型ID({0})！", structTypeID ) );
+                throw new ArgumentOutOfRangeException( string.Format( "Unkown struct type ID({0}).", structTypeID ) );
             }
 
             object data = handler( toFromBytesUtils );

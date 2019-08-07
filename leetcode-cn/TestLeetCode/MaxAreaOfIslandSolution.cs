@@ -45,6 +45,6 @@ class MaxAreaOfIslandSolution
 
     public int MaxAreaOfIsland(int[][] grid)
     {
-
+        return 0;
     }
 }

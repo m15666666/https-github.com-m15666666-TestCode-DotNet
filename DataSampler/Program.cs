@@ -15,13 +15,16 @@ namespace DataSampler
     {
         public static void Main(string[] args)
         {
+            DataSampler.Config.DatasamplerConfigDto.UseNetty = true;
             using ( var sampler = DataSamplerController.Instance )
             {
                 CreateWebHostBuilder(args).Build().Run();
-
                 sampler.StopSample();
             }
             TraceUtils.Info("DataSampler exit.");
+
+            Console.WriteLine("Press enter to exit.");
+            Console.ReadLine();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

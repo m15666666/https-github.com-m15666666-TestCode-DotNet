@@ -125,6 +125,11 @@ namespace DataSampler
         private SocketWrapper _listenSocket;
 
         /// <summary>
+        ///     侦听的Socket，接入接收数据的Socket连接。
+        /// </summary>
+        private NettyListener _nettyListener = new NettyListener();
+
+        /// <summary>
         ///     侦听的Socket，接入发送控制命令的Socket连接，侦听端口1284。
         /// </summary>
         private SocketWrapper _listenSocketOfControl;
@@ -167,7 +172,15 @@ namespace DataSampler
         /// </summary>
         private void StartListenSocket()
         {
-            StartListenSocket("Listen4Data", ref _listenSocket, Config.ListenPortOfData, OnAccept4Data);
+            if (Config.DatasamplerConfigDto.UseNetty)
+            {
+                _nettyListener.Init();
+                _nettyListener.RunServerAsync();
+            }
+            else
+            {
+                StartListenSocket("Listen4Data", ref _listenSocket, Config.ListenPortOfData, OnAccept4Data);
+            }
             StartListenSocket("Listen4Control", ref _listenSocketOfControl, Config.ListenPortOfControl, OnAccept4Control);
         }
 
@@ -409,107 +422,117 @@ namespace DataSampler
         /// </summary>
         private void OnReceiveCommandMessage( PackageSendReceive sendReceive, CommandMessage commandMessage )
         {
-            switch( commandMessage.CommandID )
+            Action<byte[]> sendHandler = sendReceive.SendPackage;
+            OnReceiveCommandMessage(commandMessage, sendHandler);
+        }
+
+        /// <summary>
+        ///     响应命令包
+        /// </summary>
+        internal void OnReceiveCommandMessage( CommandMessage commandMessage, Action<byte[]> sendHandler )
+        {
+            switch (commandMessage.CommandID)
             {
                 case CommandID.UploadData2DB:
-                {
-                    Upload2DB( commandMessage.Data );
-                    break;
-                }
+                    {
+                        Upload2DB(commandMessage.Data);
+                        break;
+                    }
 
                 case CommandID.Timing:
-                {
-                    var sendCommand = new CommandMessage
                     {
-                        CommandID = CommandID.CommandSuccess,
-                        StructTypeID = StructTypeID.TimingData,
-                        Data = new TimingData {Now = DateTime.Now}
-                    };
-                    sendReceive.SendPackage( ToFromBytesUtils.ToBytes( sendCommand ) );
-                    return;
-                }
+                        var sendCommand = new CommandMessage
+                        {
+                            CommandID = CommandID.CommandSuccess,
+                            StructTypeID = StructTypeID.TimingData,
+                            Data = new TimingData { Now = DateTime.Now }
+                        };
+                        sendHandler(ToFromBytesUtils.ToBytes(sendCommand));
+                        return;
+                    }
 
                 case CommandID.PushFileVersion:
-                {
-                    // 参数是：固件文件名 + 半角逗号 + 版本号 + 半角逗号 + 采集工作站IP  + 半角逗号 + 采集工作站端口，例如：”MS1000-A,1010,192.168.1.100 ,1283”
-                    var text = commandMessage.Data as string;
-
-                    Action errorAction = () => sendReceive.SendPackage(
-                        ToFromBytesUtils.ToBytes( SampleDataReadWrite.FailCommand_PackageCommand ) );
-                    try
                     {
-                        var parameters = StringUtils.SplitByComma( text );
+                        // 参数是：固件文件名 + 半角逗号 + 版本号 + 半角逗号 + 采集工作站IP  + 半角逗号 + 采集工作站端口，例如：”MS1000-A,1010,192.168.1.100 ,1283”
+                        var text = commandMessage.Data as string;
 
-                        var firmFileName = parameters[0];
-                        var version = parameters[1];
-                        var sampleStationIp = parameters[2];
-                        var sampleStationPort = Convert.ToInt32( parameters[3] );
-
-                        var firmwareFileInfoData = Config.GetFirmwareFileInfoDataByName( firmFileName );
-                        if( firmwareFileInfoData == null )
+                        Action errorAction = () => sendHandler(
+                            ToFromBytesUtils.ToBytes(SampleDataReadWrite.FailCommand_PackageCommand));
+                        try
                         {
-                            string error = string.Format( "{0} firmwarefile not exist.", firmFileName );
-                            TraceUtils.Error( error );
+                            var parameters = StringUtils.SplitByComma(text);
 
-                            errorAction();
-                            return;
-                        }
+                            var firmFileName = parameters[0];
+                            var version = parameters[1];
+                            var sampleStationIp = parameters[2];
+                            var sampleStationPort = Convert.ToInt32(parameters[3]);
 
-                        // 需要升级
-                        var targetVersion = firmwareFileInfoData.FirmwareFileVersion;
-                        if( VersionUtils.IsVersionGreater( targetVersion, version ) )
-                        {
-                            TraceUtils.Info( string.Format( "{3}:{4} Upgrade firmware ({0}, {1} => {2}) ...",
-                                firmFileName,
-                                version,
-                                targetVersion, sampleStationIp, sampleStationPort ) );
-
-                            var sampleStationProxy = new SampleStationProxy
+                            var firmwareFileInfoData = Config.GetFirmwareFileInfoDataByName(firmFileName);
+                            if (firmwareFileInfoData == null)
                             {
-                                SampleStationData =
-                                    new SampleStationData
-                                    {
-                                        SampleStationIP = sampleStationIp,
-                                        SampleStationPort = sampleStationPort
-                                    }
-                            };
+                                string error = string.Format("{0} firmwarefile not exist.", firmFileName);
+                                TraceUtils.Error(error);
 
-                            TraceUtils.LogDebugInfo( string.Format( "PushFirmwareFileBytes to {0}...",
-                                sampleStationProxy.IPAddress ) );
+                                errorAction();
+                                return;
+                            }
 
-                            sampleStationProxy.PushFirmwareFileBytes( firmwareFileInfoData );
-
-                            TraceUtils.Info( string.Format( "{3}:{4} Upgrade firmware ({0}, {1} => {2}) succeed.",
-                                firmFileName,
-                                version,
-                                targetVersion, sampleStationIp, sampleStationPort ) );
-
-                            // 返回表示需要升级的包
-                            sendReceive.SendPackage( ToFromBytesUtils.ToBytes( new CommandMessage
+                            // 需要升级
+                            var targetVersion = firmwareFileInfoData.FirmwareFileVersion;
+                            if (VersionUtils.IsVersionGreater(targetVersion, version))
                             {
-                                CommandID = CommandID.CommandSuccess,
-                                StructTypeID = StructTypeID.ErrorMessage,
-                                Data = new ErrorMessageData
+                                TraceUtils.Info(string.Format("{3}:{4} Upgrade firmware ({0}, {1} => {2}) ...",
+                                    firmFileName,
+                                    version,
+                                    targetVersion, sampleStationIp, sampleStationPort));
+
+                                var sampleStationProxy = new SampleStationProxy
                                 {
-                                    ErrorCode = SampleStationErrorCode.InfoCode_NeedUpgradeFireware
-                                }
-                            } ) );
-                            return;
+                                    SampleStationData =
+                                        new SampleStationData
+                                        {
+                                            SampleStationIP = sampleStationIp,
+                                            SampleStationPort = sampleStationPort
+                                        }
+                                };
+
+                                TraceUtils.LogDebugInfo(string.Format("PushFirmwareFileBytes to {0}...",
+                                    sampleStationProxy.IPAddress));
+
+                                sampleStationProxy.PushFirmwareFileBytes(firmwareFileInfoData);
+
+                                TraceUtils.Info(string.Format("{3}:{4} Upgrade firmware ({0}, {1} => {2}) succeed.",
+                                    firmFileName,
+                                    version,
+                                    targetVersion, sampleStationIp, sampleStationPort));
+
+                                // 返回表示需要升级的包
+                                sendHandler(ToFromBytesUtils.ToBytes(new CommandMessage
+                                {
+                                    CommandID = CommandID.CommandSuccess,
+                                    StructTypeID = StructTypeID.ErrorMessage,
+                                    Data = new ErrorMessageData
+                                    {
+                                        ErrorCode = SampleStationErrorCode.InfoCode_NeedUpgradeFireware
+                                    }
+                                }));
+                                return;
+                            }
                         }
+                        catch (Exception)
+                        {
+                            errorAction();
+                            throw;
+                        }
+                        break;
                     }
-                    catch( Exception )
-                    {
-                        errorAction();
-                        throw;
-                    }
-                    break;
-                }
 
                 default:
-                    throw new SampleStationException( "Receive wrong data." ) {ErrorCode = SampleStationErrorCode.PackageCommand};
+                    //throw new SampleStationException("Receive wrong data.") { ErrorCode = SampleStationErrorCode.PackageCommand };
+                    break;
             }
 
-            sendReceive.SendPackage( ToFromBytesUtils.ToBytes( SampleDataReadWrite.SuccessCommand ) );
+            sendHandler(ToFromBytesUtils.ToBytes(SampleDataReadWrite.SuccessCommand));
         }
 
         /// <summary>
@@ -822,6 +845,8 @@ namespace DataSampler
             {
                 DisposeUtils.Dispose( _listenSocket );
                 DisposeUtils.Dispose( _listenSocketOfControl );
+                DisposeUtils.Dispose( _nettyListener );
+                
             }
 
             //  一定要调用基类的Dispose函数

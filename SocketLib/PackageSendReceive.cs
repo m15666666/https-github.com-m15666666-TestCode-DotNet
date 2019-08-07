@@ -22,12 +22,22 @@ namespace SocketLib
             Send_PackageHeadBytes = new byte[Receive_PackageHeadBytes.Length];
             Send_PackageTailBytes = new byte[Receive_PackageTailBytes.Length];
 
-            PackageHeads.CopyTo( Send_PackageHeadBytes, PackageHeadBytesIndex );
-            VersionBytes.CopyTo( Send_PackageHeadBytes, VersionBytesIndex );
-
-            PackageTails.CopyTo( Send_PackageTailBytes, PackageTailBytesIndex );
+            InitPackageHeadTailBuffer(Send_PackageHeadBytes, Send_PackageTailBytes);
 
             ReadByteBuffer = new ByteBuffer { CheckReadEnough = false };
+        }
+
+        /// <summary>
+        /// 初始化包头包尾的缓存
+        /// </summary>
+        /// <param name="headBytes">包头缓存</param>
+        /// <param name="tailBytes">包尾缓存</param>
+        private static void InitPackageHeadTailBuffer(byte[] headBytes, byte[] tailBytes)
+        {
+            PackageHeads.CopyTo(headBytes, PackageHeadBytesIndex);
+            VersionBytes.CopyTo(headBytes, VersionBytesIndex);
+
+            PackageTails.CopyTo(tailBytes, PackageTailBytesIndex);
         }
 
         /// <summary>
@@ -152,6 +162,28 @@ namespace SocketLib
         /// </summary>
         private static readonly int Count_Version = VersionBytes.Length;
 
+        /// <summary>
+        /// 包头字节数
+        /// </summary>
+        public static int Count_Head
+        {
+            get
+            {
+                return Count_PackageHeads + Count_Version + Count_PackageBodyLength + Count_Crc;
+            }
+        }
+
+        /// <summary>
+        /// 包尾字节数
+        /// </summary>
+        public static int Count_Tail
+        {
+            get
+            {
+                return Count_Crc + Count_PackageTails;
+            }
+        }
+
         #endregion
 
         #region 包头下标
@@ -255,6 +287,31 @@ namespace SocketLib
             //SendBytes( tailBytes );
         }
 
+        /// <summary>
+        /// 初始化用于发送的包
+        /// </summary>
+        /// <param name="headBytes"></param>
+        /// <param name="tailBytes"></param>
+        /// <param name="packageBody"></param>
+        public static void InitPackage4Sending( byte[] headBytes, byte[] tailBytes, byte[] packageBody )
+        {
+            InitPackageHeadTailBuffer(headBytes, tailBytes);
+
+            ByteUtils.Int32ToBytes(packageBody.Length).CopyTo(headBytes, PackageBodyLengthBytesIndex);
+
+            // 只校验版本号和包体长度
+            byte headCrc = CrcUtils.CrcDefault8;
+            XORCRC8.Crc(headBytes, VersionBytesIndex, Count_Version + Count_PackageBodyLength, ref headCrc);
+
+            headBytes[PackageHeadCrcIndex] = headCrc;
+
+            // 只校验包体数据
+            byte bodyCrc = CrcUtils.CrcDefault8;
+            XORCRC8.Crc(packageBody, ref bodyCrc);
+
+            tailBytes[0] = bodyCrc;
+        }
+
         #endregion
 
         #region 数据接收
@@ -266,19 +323,26 @@ namespace SocketLib
         /// </summary>
         private void CheckPart1()
         {
-            byte[] headBytes = Receive_PackageHeadBytes;
-            bool ok = ArrayUtils.Equal( PackageHeads, 0, headBytes, PackageHeadBytesIndex, PackageHeads.Length );
-            if( !ok )
+            CheckPart1( Receive_PackageHeadBytes );
+        }
+
+        /// <summary>
+        /// 检查第一部分：包头分界符、包头版本号。
+        /// </summary>
+        public static void CheckPart1(byte[] headBytes)
+        {
+            bool ok = ArrayUtils.Equal(PackageHeads, 0, headBytes, PackageHeadBytesIndex, PackageHeads.Length);
+            if (!ok)
             {
-                throw new PackageStructException( string.Format( "Package head split error({0})", StringUtils.ToHex( headBytes ) ) )
-                          { StructError = PackageStructError.PackageHead };
+                throw new PackageStructException(string.Format("Package head split error({0})", StringUtils.ToHex(headBytes)))
+                { StructError = PackageStructError.PackageHead };
             }
 
-            ok = ArrayUtils.Equal( VersionBytes, 0, headBytes, VersionBytesIndex, VersionBytes.Length );
-            if( !ok )
+            ok = ArrayUtils.Equal(VersionBytes, 0, headBytes, VersionBytesIndex, VersionBytes.Length);
+            if (!ok)
             {
-                throw new PackageStructException( string.Format( "Package head version error({0})", StringUtils.ToHex( headBytes ) ) )
-                          { StructError = PackageStructError.PackageHeadVersion };
+                throw new PackageStructException(string.Format("Package head version error({0})", StringUtils.ToHex(headBytes)))
+                { StructError = PackageStructError.PackageHeadVersion };
             }
         }
 
@@ -288,21 +352,28 @@ namespace SocketLib
         /// <param name="bodyLength">包体长度</param>
         private void CheckPart2( out int bodyLength )
         {
-            byte[] headBytes = Receive_PackageHeadBytes;
+            CheckPart2(Receive_PackageHeadBytes, out bodyLength);
+        }
 
+        /// <summary>
+        /// 检查第二部分：包头crc。
+        /// </summary>
+        /// <param name="bodyLength">包体长度</param>
+        public static void CheckPart2(byte[] headBytes, out int bodyLength)
+        {
             byte headCrc = CrcUtils.CrcDefault8;
-            XORCRC8.Crc( headBytes, VersionBytesIndex, Count_Version + Count_PackageBodyLength, ref headCrc );
+            XORCRC8.Crc(headBytes, VersionBytesIndex, Count_Version + Count_PackageBodyLength, ref headCrc);
 
-            byte transferHeadCrc = ArrayUtils.Last( headBytes );
+            byte transferHeadCrc = ArrayUtils.Last(headBytes);
             bool ok = headCrc == transferHeadCrc;
-            if( !ok )
+            if (!ok)
             {
-                throw new PackageStructException( string.Format( "包头crc错误，{0} != {1}({2})！", headCrc, transferHeadCrc,
-                                                                 StringUtils.ToHex( headBytes ) ) )
-                          { StructError = PackageStructError.PackageHeadCrc };
+                throw new PackageStructException(string.Format("Package head crc error, {0} != {1}({2}).", headCrc, transferHeadCrc,
+                                                                 StringUtils.ToHex(headBytes)))
+                { StructError = PackageStructError.PackageHeadCrc };
             }
 
-            bodyLength = BitConverter.ToInt32( headBytes, PackageBodyLengthBytesIndex );
+            bodyLength = BitConverter.ToInt32(headBytes, PackageBodyLengthBytesIndex);
         }
 
         /// <summary>
@@ -310,25 +381,32 @@ namespace SocketLib
         /// </summary>
         private void CheckPart3()
         {
-            byte bodyCrc = CrcUtils.CrcDefault8;
             ByteBuffer readByteBuffer = ReadByteBuffer;
-            XORCRC8.Crc( readByteBuffer.Buffer, readByteBuffer.Offset, readByteBuffer.Size2Read, ref bodyCrc );
+            CheckPart3(readByteBuffer.Buffer, readByteBuffer.Offset, readByteBuffer.Size2Read, Receive_PackageTailBytes);
+        }
 
-            byte[] tailBytes = Receive_PackageTailBytes;
-            byte transferBodyCrc = ArrayUtils.First( tailBytes );
+        /// <summary>
+        /// 检查第三部分：包体、包尾crc，包尾分界符。
+        /// </summary>
+        public static void CheckPart3(byte[] buffer, int offset, int size, byte[] tailBytes)
+        {
+            byte bodyCrc = CrcUtils.CrcDefault8;
+            XORCRC8.Crc(buffer, offset, size, ref bodyCrc);
+
+            byte transferBodyCrc = ArrayUtils.First(tailBytes);
             bool ok = bodyCrc == transferBodyCrc;
-            if( !ok )
+            if (!ok)
             {
-                throw new PackageStructException( string.Format( "包尾crc错误，{0} != {1}({2})！", bodyCrc, transferBodyCrc,
-                                                                 StringUtils.ToHex( tailBytes ) ) )
-                          { StructError = PackageStructError.PackageTailCrc };
+                throw new PackageStructException(string.Format("Package tail crc error, {0} != {1}({2}).", bodyCrc, transferBodyCrc,
+                                                                 StringUtils.ToHex(tailBytes)))
+                { StructError = PackageStructError.PackageTailCrc };
             }
 
-            ok = ArrayUtils.Equal( PackageTails, 0, tailBytes, PackageTailBytesIndex, PackageTails.Length );
-            if( !ok )
+            ok = ArrayUtils.Equal(PackageTails, 0, tailBytes, PackageTailBytesIndex, PackageTails.Length);
+            if (!ok)
             {
-                throw new PackageStructException( string.Format( "包尾分界符错误({0})！", StringUtils.ToHex( tailBytes ) ) )
-                          { StructError = PackageStructError.PackageTail };
+                throw new PackageStructException(string.Format("Package tail split error({0}).", StringUtils.ToHex(tailBytes)))
+                { StructError = PackageStructError.PackageTail };
             }
         }
 

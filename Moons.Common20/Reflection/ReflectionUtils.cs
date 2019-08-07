@@ -159,12 +159,12 @@ namespace Moons.Common20.Reflection
                 try
                 {
                     value = GetPropertyValue( propertyInfo, obj );
+                    list.Add(string.Format("{0} = {1}", propertyInfo.Name, value ?? StringUtils.NullReference));
                 }
                 catch
                 {
-                    value = "_访_问_异_常_";
+                    //value = "_访_问_异_常_";
                 }
-                list.Add( string.Format( "{0} = {1}", propertyInfo.Name, value ?? StringUtils.NullReference ) );
             }
 
             return string.Format( "[{0}]", StringUtils.Join( list.ToArray() ) );

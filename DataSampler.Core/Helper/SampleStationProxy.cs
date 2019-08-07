@@ -529,7 +529,7 @@ namespace DataSampler.Helper
             }
             catch( Exception ex )
             {
-                TraceUtils.Error( "推送(固件)文件的字节数组出错！", ex );
+                TraceUtils.Error( "Push firmware file bytes error.", ex );
                 throw;
             }
         }

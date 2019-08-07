@@ -93,7 +93,7 @@ namespace Moons.Common20
                 {
                     throw new Exception(
                         string.Format(
-                            "缓存未读满(Size2Read:{0}, ReadCount:{1}, Offset:{2})！",
+                            "Not read full(Size2Read:{0}, ReadCount:{1}, Offset:{2})！",
                             Size2Read, ReadCount, Offset ) );
                 }
 

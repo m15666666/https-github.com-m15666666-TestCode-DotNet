@@ -43,11 +43,11 @@ namespace DataSampler.Test
                 //sampleStationProxy.GetSampleStationStatus();
                 //sampleStationProxy.GetHardwareInfo();
 
-                SampleStationParameterErrorDataCollection error = null;
-                sampleStationProxy.DownloadSampleConfig(ref error);
+                //SampleStationParameterErrorDataCollection error = null;
+                //sampleStationProxy.DownloadSampleConfig(ref error);
 
-                List<TrendData> trendDatas = sampleStationProxy.GetData(new int[1]);
-                sampleStationProxy.Timing(DateTime.Now);
+                //List<TrendData> trendDatas = sampleStationProxy.GetData(new int[1]);
+                //sampleStationProxy.Timing(DateTime.Now);
             }
             catch (Exception ex)
             {
@@ -60,15 +60,16 @@ namespace DataSampler.Test
 
         private static void Do(string title, Action action)
         {
-            TraceUtils.Info($"{title} ...");
+            TraceUtils.Info($"{title} begin ...");
             try
             {
                 action();
             }
             catch (Exception ex)
             {
-                TraceUtils.Error($"{title} error.", ex);
+                //TraceUtils.Error($"{title} error.", ex);
             }
+            TraceUtils.Info($"{title} end .");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 
 namespace Moons.Common20
 {
@@ -108,9 +109,18 @@ namespace Moons.Common20
         {
             foreach( Thread thread in threads )
             {
-                thread.Join();
+                if (thread == null) continue;
 
-                TraceUtils.Debug( GetThreadDescription( thread ) + "end." );
+                try
+                {
+                    thread.Join();
+
+                    TraceUtils.Debug(GetThreadDescription(thread) + "end.");
+                }
+                catch( Exception )
+                {
+
+                }
             }
         }
 

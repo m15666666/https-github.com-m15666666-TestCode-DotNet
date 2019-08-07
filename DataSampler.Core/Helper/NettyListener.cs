@@ -37,6 +37,7 @@ namespace DataSampler.Core.Helper
 
         protected override void Dispose(bool disposing)
         {
+            TraceUtils.Info($"dispose netty listener : {disposing}");
             if (IsDisposed)
             {
                 return;
@@ -44,13 +45,17 @@ namespace DataSampler.Core.Helper
 
             if (disposing)
             {
-                _CloseSocketEvent.Set();
-                //_boundChannel.CloseAsync().Wait();
+                TraceUtils.Info($"before _boundChannel.CloseAsync().Wait()");
+                //_CloseSocketEvent.Set();
+                _boundChannel.CloseAsync().Wait();
 
-                ////释放工作组线程
-                //Task.WhenAll(
-                //    _bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
-                //    _workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1))).Wait();
+                TraceUtils.Info($"after _boundChannel.CloseAsync().Wait()");
+
+                //释放工作组线程
+                Task.WhenAll(
+                    _bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                    _workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1))).Wait();
+                TraceUtils.Info($"after _bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1))");
             }
 
             //  一定要调用基类的Dispose函数
@@ -107,29 +112,38 @@ namespace DataSampler.Core.Helper
                         }
                         //日志拦截器
                         pipeline.AddLast(new LoggingHandler("SRV-CONN"));
-                        ////出栈消息，通过这个handler 在消息顶部加上消息的长度
-                        //pipeline.AddLast("framing-enc", new LengthFieldPrepender(2));
-                        ////入栈消息通过该Handler,解析消息的包长信息，并将正确的消息体发送给下一个处理Handler，该类比较常用，后面单独说明
-                        //pipeline.AddLast("framing-dec", new LengthFieldBasedFrameDecoder(ushort.MaxValue, 0, 2, 0, 2));
-                        ////业务handler ，这里是实际处理Echo业务的Handler
-                        //pipeline.AddLast("echo", new EchoServerHandler());
+                        // 出栈消息通过这个handler
+                        pipeline.AddLast("SamplerEncoder", new SamplerEncoder());
+                        // 入栈消息通过该Handler
+                        pipeline.AddLast("SamplerDecoder", new SamplerDecoder());
+                        // 业务handler
+                        pipeline.AddLast("SamplerServerHandler", new SamplerServerHandler());
                     }));
 
                 // bootstrap绑定到指定端口的行为 就是服务端启动服务，同样的Serverbootstrap可以bind到多个端口
                 _boundChannel = await bootstrap.BindAsync(Config.ListenPortOfData);
 
-                _CloseSocketEvent.WaitOne();
+                TraceUtils.Info($"before _CloseSocketEvent.WaitOne(); ");
+                //_CloseSocketEvent.WaitOne();
+                //TraceUtils.Info($"after _CloseSocketEvent.WaitOne(); ");
 
                 //Console.ReadLine();
                 //关闭服务
-                await _boundChannel.CloseAsync();
+                //await _boundChannel.CloseAsync();
             }
-            finally
+            catch(Exception)
             {
                 //释放工作组线程
                 await Task.WhenAll(
                     _bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
                     _workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
+            }
+            finally
+            {
+                //释放工作组线程
+                //await Task.WhenAll(
+                //    _bossGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)),
+                //    _workerGroup.ShutdownGracefullyAsync(TimeSpan.FromMilliseconds(100), TimeSpan.FromSeconds(1)));
             }
         }
     }

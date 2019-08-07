@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using AnalysisData.SampleData;
 using AnalysisData.ToFromBytes;
+using DataSampler.Core.Dto;
 using DataSampler.Helper;
 using Moons.Common20;
 using Moons.Common20.Serialization;
@@ -39,6 +40,7 @@ namespace DataSampler
         /// <param name="commandMessage">CommandMessage</param>
         internal static void LogCommandMessage( CommandMessage commandMessage )
         {
+            if(EnvironmentUtils.IsDebug)
             {
                 string info = string.Format( "commandMessage: {0}", commandMessage );
                 TraceUtils.Info( info );
@@ -149,6 +151,11 @@ namespace DataSampler
         }
 
         public static SamplerConfigData SamplerConfig { get; set; }
+
+        /// <summary>
+        /// datasampler ≈‰÷√ ˝æ›
+        /// </summary>
+        public static DatasamplerConfigDto DatasamplerConfigDto { get; set; } = new DatasamplerConfigDto() { UseNetty = true};
 
         #endregion
 

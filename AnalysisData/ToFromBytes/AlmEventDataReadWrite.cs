@@ -251,7 +251,7 @@ namespace AnalysisData.ToFromBytes
                 var errorMessage = (ErrorMessageData)commandMessage.Data;
                 if( errorMessage.ErrorCode != SampleStationErrorCode.None )
                 {
-                    throw new SampleStationException( "采集工作站错误信息" ) { ErrorCode = errorMessage.ErrorCode };
+                    throw new SampleStationException( "SampleStation error." ) { ErrorCode = errorMessage.ErrorCode };
                 }
             }
 
