@@ -153,6 +153,11 @@ namespace AnalysisData.ToFromBytes
         public const int SampleExtraDatas = CommandIDBase + 201;
 
         /// <summary>
+        ///     重置电池状态（用于无线传感器+无线网关）
+        /// </summary>
+        public const int ResetBattery = CommandIDBase + 202;
+
+        /// <summary>
         ///     报警灯复位
         /// </summary>
         public const int ResetAlmLight = CommandIDBase + 301;

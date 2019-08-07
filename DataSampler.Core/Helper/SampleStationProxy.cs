@@ -237,12 +237,34 @@ namespace DataSampler.Helper
         {
             try
             {
-                CommandMessage sendCommand = SampleDataReadWrite.CreateCommand( CommandID.ResetAlmLight );
-                SendReceiveCommand( sendCommand );
+                CommandMessage sendCommand = SampleDataReadWrite.CreateCommand(CommandID.ResetAlmLight);
+                SendReceiveCommand(sendCommand);
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
-                TraceUtils.Error( "报警灯复位！", ex );
+                TraceUtils.Error("ResetAlmLight error.", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        ///     重置电池状态（用于无线传感器+无线网关）
+        /// </summary>
+        public void ResetBattery(string identifiers)
+        {
+            try
+            {
+                var sendCommand = new CommandMessage
+                {
+                    CommandID = CommandID.ResetBattery,
+                    StructTypeID = StructTypeIDs.VarString,
+                    Data = identifiers
+                };
+                SendReceiveCommand(sendCommand);
+            }
+            catch (Exception ex)
+            {
+                TraceUtils.Error("ResetBattery error.", ex);
                 throw;
             }
         }

@@ -93,6 +93,8 @@ namespace AnalysisData.SampleData
                     switch( AlmSourceID )
                     {
                         case FeatureValueID.Error_Transducer:
+                        case FeatureValueID.Error_Transducer_Temperature:
+                        case FeatureValueID.Error_Transducer_Vib:
                         case FeatureValueID.Error_TransducerBatteryLow:
                         case FeatureValueID.Error_SamplerUnknown:
                         case FeatureValueID.Error_SampleBoardConfig:

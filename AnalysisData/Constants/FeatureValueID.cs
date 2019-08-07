@@ -107,9 +107,19 @@ namespace AnalysisData.Constants
         #region 用于无线传感器的常量
 
         /// <summary>
-        ///     传感器通讯中断
+        /// 传感器失效，只有二级报警
         /// </summary>
         public const int Error_Transducer = 10001;
+
+        /// <summary>
+        /// 传感器失效-温度，只有二级报警
+        /// </summary>
+        public const int Error_Transducer_Temperature = 10002;
+
+        /// <summary>
+        /// 传感器失效-振动，只有二级报警
+        /// </summary>
+        public const int Error_Transducer_Vib = 10003;
 
         /// <summary>
         ///     传感器电池电量低
@@ -291,7 +301,13 @@ namespace AnalysisData.Constants
                     return FeatureValueName.DualSpectrum1X_ImaginaryPart;
 
                 case Error_Transducer:
-                    return "传感器通讯中断";
+                    return "传感器故障";
+
+                case Error_Transducer_Temperature:
+                    return "温度传感器故障";
+
+                case Error_Transducer_Vib:
+                    return "振动传感器故障";
 
                 case Error_TransducerBatteryLow:
                     return "传感器电池电量低";

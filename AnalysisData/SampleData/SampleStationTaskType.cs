@@ -22,6 +22,11 @@ namespace AnalysisData.SampleData
         ///     上传数据，目前支持：从OPC服务器读取的TrendData、。
         /// </summary>
         UploadData,
+
+        /// <summary>
+        ///     重置电池状态。
+        /// </summary>
+        ResetBattery,
     }
 
     /// <summary>

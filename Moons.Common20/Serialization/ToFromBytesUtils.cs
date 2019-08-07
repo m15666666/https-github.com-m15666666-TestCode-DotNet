@@ -860,6 +860,13 @@ namespace Moons.Common20.Serialization
                         // 空的自定义数据类
                         {StructTypeIDs.EmptyCustomData, ( object data, ToFromBytesUtils toFromBytesUtils ) => { }},
 
+                        // 变长字符串
+                        {
+                            StructTypeIDs.VarString,
+                            ( object data, ToFromBytesUtils toFromBytesUtils ) => 
+                            toFromBytesUtils.WriteVarString(data as string, StringEncodingID.ASCII)
+                        },
+
                         // 不带长度标识的字节数组
                         {
                             StructTypeIDs.ByteArray,
