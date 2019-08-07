@@ -36,6 +36,7 @@ namespace DataSampler
             try
             {
                 EnvironmentUtils.IsDebug = true;
+                DataSampler.Config.DatasamplerConfigDto.UseNetty = true;
 
                 var sampler = DataSamplerController.Instance;
                 sampler.Init();

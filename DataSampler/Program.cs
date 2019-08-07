@@ -15,7 +15,6 @@ namespace DataSampler
     {
         public static void Main(string[] args)
         {
-            DataSampler.Config.DatasamplerConfigDto.UseNetty = true;
             using ( var sampler = DataSamplerController.Instance )
             {
                 CreateWebHostBuilder(args).Build().Run();

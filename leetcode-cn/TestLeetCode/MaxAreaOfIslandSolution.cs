@@ -31,6 +31,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/max-area-of-island/
 /// 695. 岛屿的最大面积
+/// https://blog.csdn.net/w8253497062015/article/details/79967958
 /// </summary>
 class MaxAreaOfIslandSolution
 {
@@ -45,6 +46,33 @@ class MaxAreaOfIslandSolution
 
     public int MaxAreaOfIsland(int[][] grid)
     {
-        return 0;
+        int ret = 0;
+        int n = grid.Length;
+        int m = grid[0].Length;
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < m; j++)
+            {
+                if (grid[i][j] == 1)
+                {
+                    var max = Dfs(grid, n, m, i, j);
+                    if (ret < max) ret = max;
+                }
+            }
+        return ret;
+    }
+
+    private static int[,] Directions = new int[,] { { 0, 1 }, { 0, -1 }, { 1, 0 }, { -1, 0 } };
+    private static int Dfs(int[][] grid, int n, int m, int x0, int y0)
+    {
+        int sum = 1;
+
+        grid[x0][y0] = 0; // 当前元素设置为0，避免再次搜索到
+        for(int i=0; i<4; i++){
+            int x = x0 + Directions[i,0];
+            int y = y0 + Directions[i,1];
+            if(0 <= x && x < n && 0 <= y && y < m && grid[x][y] == 1 )
+                sum += Dfs(grid, n, m, x, y);
+        }
+        return sum;
     }
 }

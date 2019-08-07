@@ -151,8 +151,6 @@ namespace DataSampler
             StartListenSocket();
 
             Config.InitDebugHandler();
-
-            new NettyListener().RunServerAsync();
         }
 
         /// <summary>
