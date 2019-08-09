@@ -40,7 +40,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/insert-into-a-binary-search-tree/
 /// 701. 二叉搜索树中的插入操作
-/// 
+/// https://www.cnblogs.com/xiagnming/p/9706692.html
 /// </summary>
 class InsertIntoABinarySearchTreeSolution
 {
@@ -55,6 +55,29 @@ class InsertIntoABinarySearchTreeSolution
 
     public TreeNode InsertIntoBST(TreeNode root, int val)
     {
-
+        if (root == null) { return new TreeNode(val); }
+        TreeNode cur = root;
+        TreeNode pre = null;
+        while (cur != null)
+        {
+            pre = cur;
+            if (cur.val > val)
+            {
+                cur = cur.left;
+                if (cur == null)
+                {
+                    pre.left = new TreeNode(val);
+                }
+            }
+            else
+            {
+                cur = cur.right;
+                if (cur == null)
+                {
+                    pre.right = new TreeNode(val);
+                }
+            }
+        }
+        return root;
     }
 }
