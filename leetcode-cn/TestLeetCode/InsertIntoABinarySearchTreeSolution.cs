@@ -81,3 +81,39 @@ class InsertIntoABinarySearchTreeSolution
         return root;
     }
 }
+/*
+public class Solution {
+    public TreeNode InsertIntoBST(TreeNode root, int val) {
+        TreeNode f=root;
+        TreeNode t=root;
+        while(t!=null)
+        {
+            f=t;
+            if(t.val<val)
+                t=t.right;
+            else
+                t=t.left;
+        }
+        TreeNode n=new TreeNode(val);
+        if(f.val>val)
+            f.left=n;
+        else f.right=n;
+        return root;
+    }
+}
+public class Solution
+{
+    public TreeNode InsertIntoBST(TreeNode root, int val)
+    {
+        if (root is null)
+            return new TreeNode(val);
+        
+        if (root.val < val)
+            root.right = InsertIntoBST(root.right, val);
+        else
+            root.left = InsertIntoBST(root.left, val);
+        
+        return root;
+    }
+}
+*/
