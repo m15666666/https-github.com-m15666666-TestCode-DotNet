@@ -4,7 +4,9 @@ using AnalysisData.SampleData;
 using AnalysisData.ToFromBytes;
 using DataSampler.Core.Dto;
 using DataSampler.Helper;
+using Microsoft.Extensions.Options;
 using Moons.Common20;
+using Moons.Common20.IOC;
 using Moons.Common20.Serialization;
 using OnlineSampleCommon.SendTask;
 using SocketLib;
@@ -26,13 +28,7 @@ namespace DataSampler
         /// <summary>
         /// 用于测试的采集工作站的IP
         /// </summary>
-        internal static string TestSampleStationIP
-        {
-            get
-            {
-                return "127.0.0.1";
-            }
-        }
+        internal static string TestSampleStationIP => "127.0.0.1";
 
         /// <summary>
         /// 记录CommandMessage对象
@@ -155,7 +151,22 @@ namespace DataSampler
         /// <summary>
         /// datasampler 配置数据
         /// </summary>
-        public static DatasamplerConfigDto DatasamplerConfigDto { get; set; } = new DatasamplerConfigDto() { UseNetty = true};
+        public static DatasamplerConfigDto DatasamplerConfigDto { get {
+                return GetDatasamplerConfigDto();
+                //return new DatasamplerConfigDto() { UseNetty = true };
+            }
+        }
+
+        public static DatasamplerConfigDto _datasamplerConfigDto;
+        private static DatasamplerConfigDto GetDatasamplerConfigDto()
+        {
+            if(_datasamplerConfigDto == null)
+            {
+                var options = IocUtils.Instance.GetRequiredService<IOptions<DatasamplerConfigDto>>();
+                _datasamplerConfigDto = options.Value;
+            }
+            return _datasamplerConfigDto;
+        }
 
         #endregion
 
@@ -178,43 +189,22 @@ namespace DataSampler
         /// <summary>
         /// 本地侦听的端口，用于接受数据，默认1283
         /// </summary>
-        internal static int ListenPortOfData
-        {
-            get
-            {
-                return 1283;
-            }
-        }
+        internal static int ListenPortOfData => DatasamplerConfigDto.ListenPortOfData;
 
         /// <summary>
         /// 本地侦听的端口，用于采集工作站TCP控制链接的接入，默认1284
         /// </summary>
-        internal static int ListenPortOfControl
-        {
-            get
-            {
-                return 1284 ;
-            }
-        }
+        internal static int ListenPortOfControl => DatasamplerConfigDto.ListenPortOfControl;
 
         /// <summary>
         /// 发送和接收超时，以毫秒表示，默认为20000（20秒）
         /// </summary>
-        internal static int SendReceiveTimeoutInMs
-        {
-            get
-            {
-                return 20000;
-            }
-        }
+        internal static int SendReceiveTimeoutInMs => DatasamplerConfigDto.SendReceiveTimeoutInMs;
 
         /// <summary>
         /// 正常采集时，队列中对象数量的最大值
         /// </summary>
-        internal static int MaxQueueLength_NormalSample
-        {
-            get { return 1000; }
-        }
+        internal static int MaxQueueLength_NormalSample => DatasamplerConfigDto.MaxQueueLength_NormalSample;
 
         /// <summary>
         /// 创建Socket连接

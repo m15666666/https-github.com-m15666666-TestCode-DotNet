@@ -24,7 +24,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/subarray-product-less-than-k/
 /// 713. 乘积小于K的子数组
-/// 
+/// https://blog.csdn.net/xuxuxuqian1/article/details/81075350
 /// </summary>
 class SubarrayProductLessThanKSolution
 {
@@ -39,6 +39,21 @@ class SubarrayProductLessThanKSolution
 
     public int NumSubarrayProductLessThanK(int[] nums, int k)
     {
+        if (k <= 1) return 0;
 
+        int count = 0;
+        int leftIndex = 0;
+        int multiply = 1;
+        for (int rightIndex = 0; rightIndex < nums.Length; rightIndex++)
+        {
+            multiply *= nums[rightIndex];
+            while (multiply >= k)
+            {
+                multiply /= nums[leftIndex];
+                leftIndex++;
+            }
+            count += rightIndex - leftIndex + 1;
+        }
+        return count;
     }
 }

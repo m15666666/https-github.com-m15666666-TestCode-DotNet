@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DataSampler.Core;
+using DataSampler.Core.Dto;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
@@ -11,6 +13,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moons.Common20;
@@ -23,30 +26,6 @@ namespace DataSampler
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
-            // 默认简单配置，输出至控制台
-            //BasicConfigurator.Configure(repository);
-            XmlConfigurator.Configure(repository, new System.IO.FileInfo("log4net.config"));
-            ILog log = LogManager.GetLogger(repository.Name, "Datasampler");
-
-            EnvironmentUtils.Logger = new Log4netWrapper(log);
-            TraceUtils.Info("Starting Datasampler. time stamp: 2019-08-02.");
-
-            try
-            {
-                EnvironmentUtils.IsDebug = true;
-                DataSampler.Config.DatasamplerConfigDto.UseNetty = true;
-
-                var sampler = DataSamplerController.Instance;
-                sampler.Init();
-                
-                sampler.StartNormalSample();
-            }
-            catch( Exception ex)
-            {
-                TraceUtils.Error("Init datasampler error.", ex);
-            }
         }
 
         public IConfiguration Configuration { get; }
@@ -55,10 +34,13 @@ namespace DataSampler
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddHostedService<DataSamplerHostedService>();
+            services.Configure<DatasamplerConfigDto>(Configuration.GetSection("DatasamplerConfigDto"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {

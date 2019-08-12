@@ -11,6 +11,7 @@ using Moons.Common20.Serialization;
 using SocketLib;
 using System.IO;
 using DataSampler.Core.Helper;
+using Moons.Common20.IOC;
 
 namespace DataSampler
 {
@@ -144,6 +145,7 @@ namespace DataSampler
         /// </summary>
         public void Init()
         {
+            TraceUtils.Info("DataSamplerController Init().");
             Config.InitStructReadWriteHandler();
 
             Config.InitFirmware4Upgrade();
@@ -696,7 +698,8 @@ namespace DataSampler
         /// </summary>
         public void StartNormalSample()
         {
-            lock( _lock )
+            TraceUtils.Info("DataSamplerController StartNormalSample().");
+            lock ( _lock )
             {
                 if( IsSampling )
                 {
@@ -813,7 +816,8 @@ namespace DataSampler
         /// </summary>
         public void StopSample()
         {
-            lock( _lock )
+            TraceUtils.Info("DataSamplerController StopSample().");
+            lock ( _lock )
             {
                 if( IsStop )
                 {

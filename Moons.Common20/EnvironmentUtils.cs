@@ -3,11 +3,6 @@
 using System;
 using Moons.Common20.StringResources;
 
-    #region !SILVERLIGHT
-
-
-#endregion
-
 #endregion
 
 namespace Moons.Common20
@@ -196,7 +191,7 @@ namespace Moons.Common20
         }
 #endif
         #endregion
-#if !SILVERLIGHT
+
         #region 输出日志
 
         /// <summary>
@@ -214,7 +209,6 @@ namespace Moons.Common20
         }
 
         #endregion
-#endif
 
         #region 数据库超时相关
 
