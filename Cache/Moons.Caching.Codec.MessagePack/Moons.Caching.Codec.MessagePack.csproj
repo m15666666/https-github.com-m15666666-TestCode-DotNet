@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Description></Description>
+    <PackageProjectUrl></PackageProjectUrl>
+    <Company></Company>
+    <Authors></Authors>
+    <Version>1.2.0.1</Version>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MessagePack" Version="1.7.3.7" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Moons.Caching\Moons.Caching.csproj" />
+  </ItemGroup>
+
+</Project>

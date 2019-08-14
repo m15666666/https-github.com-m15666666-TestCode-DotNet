@@ -18,11 +18,6 @@ namespace DataSampler
     /// </summary>
     public static class Config
     {
-        /// <summary>
-        /// 发送数据对象
-        /// </summary>
-        public static ITaskSender SampleDataSender { get; set; }
-
         #region 测试参数
 
         /// <summary>
@@ -146,15 +141,27 @@ namespace DataSampler
             //return XmlUtils.XmlDeserializeFromFile<SamplerConfigData>( DataSamplerConfigFilePath );
         }
 
-        public static SamplerConfigData SamplerConfig { get; set; }
+        internal static SamplerConfigData SamplerConfig { get; set; }
 
         /// <summary>
         /// datasampler 配置数据
         /// </summary>
-        public static DatasamplerConfigDto DatasamplerConfigDto => _datasamplerConfigDto ??
+        internal static DatasamplerConfigDto DatasamplerConfigDto => _datasamplerConfigDto ??
             (_datasamplerConfigDto = IocUtils.Instance.GetRequiredService<IOptions<DatasamplerConfigDto>>().Value);
 
         private static DatasamplerConfigDto _datasamplerConfigDto;
+
+        #endregion
+
+        #region 发送数据对象
+
+        /// <summary>
+        /// 发送数据对象
+        /// </summary>
+        internal static ITaskSender SampleDataSender => _sampleDataSender ??
+            (_sampleDataSender = IocUtils.Instance.GetRequiredService<ITaskSender>());
+
+        private static ITaskSender _sampleDataSender;
 
         #endregion
 
@@ -253,7 +260,7 @@ namespace DataSampler
         /// <summary>
         ///     初始化固件升级结构
         /// </summary>
-        public static void InitFirmware4Upgrade()
+        internal static void InitFirmware4Upgrade()
         {
             var firmware4UpgradeDir = AppPath.GetPath( "Firmware4Upgrade" );
             if (!Directory.Exists(firmware4UpgradeDir)) return;
@@ -306,7 +313,7 @@ namespace DataSampler
         /// </summary>
         /// <param name="firmwareFileName">固件文件名</param>
         /// <returns>固件文件信息对象</returns>
-        public static FirmwareFileInfoData GetFirmwareFileInfoDataByName( string firmwareFileName )
+        internal static FirmwareFileInfoData GetFirmwareFileInfoDataByName( string firmwareFileName )
         {
             lock( _firmwareFileName2InfoDatas )
             {

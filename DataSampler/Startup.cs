@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moons.Common20;
 using Moons.Log4net;
+using OnlineSampleCommon.SendTask;
 
 namespace DataSampler
 {
@@ -35,6 +36,7 @@ namespace DataSampler
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddSingleton<ITaskSender, NullTaskSender>();
             services.AddHostedService<DataSamplerHostedService>();
             services.Configure<DatasamplerConfigDto>(Configuration.GetSection("DatasamplerConfigDto"));
         }

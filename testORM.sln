@@ -65,9 +65,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataSampler.Test", "DataSam
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Log4net", "Moons.Log4net\Moons.Log4net.csproj", "{05B3B7EE-1733-4149-9D22-BD504E8017E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.DataSample.Shared", "Moons.DataSample.Shared\Moons.DataSample.Shared.csproj", "{2CAB1343-6AB2-4F58-BA1D-078F0FAAD983}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.DataSample.Shared", "Moons.DataSample.Shared\Moons.DataSample.Shared.csproj", "{2CAB1343-6AB2-4F58-BA1D-078F0FAAD983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleServer.Core", "SampleServer.Core\SampleServer.Core.csproj", "{8475E58B-CC3C-4167-BD58-F19B7BA42A2B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleServer.Core", "SampleServer.Core\SampleServer.Core.csproj", "{6D24575D-3643-4EB3-B6C6-A41EE827BB09}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cache", "Cache", "{55CBD08B-A99F-4626-A40C-9254577B2CD1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching", "Cache\Moons.Caching\Moons.Caching.csproj", "{008AD88E-9E38-46D3-86F0-125560F66100}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.Codec.MessagePack", "Cache\Moons.Caching.Codec.MessagePack\Moons.Caching.Codec.MessagePack.csproj", "{21148C2D-E66B-46E5-96F8-D93A19A56045}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.Codec.ProtoBuffer", "Cache\Moons.Caching.Codec.ProtoBuffer\Moons.Caching.Codec.ProtoBuffer.csproj", "{960BE6C2-03A7-412F-98CD-D24095AA2628}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.InMemory", "Cache\Moons.Caching.InMemory\Moons.Caching.InMemory.csproj", "{E7036583-5FE5-4D72-B92F-8EB2280B02BD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.StackExchangeRedis", "Cache\Moons.Caching.StackExchangeRedis\Moons.Caching.StackExchangeRedis.csproj", "{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Caching.Test", "Moons.Caching.Test\Moons.Caching.Test.csproj", "{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -203,13 +217,45 @@ Global
 		{2CAB1343-6AB2-4F58-BA1D-078F0FAAD983}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CAB1343-6AB2-4F58-BA1D-078F0FAAD983}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CAB1343-6AB2-4F58-BA1D-078F0FAAD983}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8475E58B-CC3C-4167-BD58-F19B7BA42A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8475E58B-CC3C-4167-BD58-F19B7BA42A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8475E58B-CC3C-4167-BD58-F19B7BA42A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8475E58B-CC3C-4167-BD58-F19B7BA42A2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D24575D-3643-4EB3-B6C6-A41EE827BB09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D24575D-3643-4EB3-B6C6-A41EE827BB09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D24575D-3643-4EB3-B6C6-A41EE827BB09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D24575D-3643-4EB3-B6C6-A41EE827BB09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{008AD88E-9E38-46D3-86F0-125560F66100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{008AD88E-9E38-46D3-86F0-125560F66100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{008AD88E-9E38-46D3-86F0-125560F66100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{008AD88E-9E38-46D3-86F0-125560F66100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21148C2D-E66B-46E5-96F8-D93A19A56045}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21148C2D-E66B-46E5-96F8-D93A19A56045}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21148C2D-E66B-46E5-96F8-D93A19A56045}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21148C2D-E66B-46E5-96F8-D93A19A56045}.Release|Any CPU.Build.0 = Release|Any CPU
+		{960BE6C2-03A7-412F-98CD-D24095AA2628}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{960BE6C2-03A7-412F-98CD-D24095AA2628}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{960BE6C2-03A7-412F-98CD-D24095AA2628}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{960BE6C2-03A7-412F-98CD-D24095AA2628}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7036583-5FE5-4D72-B92F-8EB2280B02BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7036583-5FE5-4D72-B92F-8EB2280B02BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7036583-5FE5-4D72-B92F-8EB2280B02BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7036583-5FE5-4D72-B92F-8EB2280B02BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{008AD88E-9E38-46D3-86F0-125560F66100} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
+		{21148C2D-E66B-46E5-96F8-D93A19A56045} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
+		{960BE6C2-03A7-412F-98CD-D24095AA2628} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
+		{E7036583-5FE5-4D72-B92F-8EB2280B02BD} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
+		{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
+		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DC060E9-C762-46B9-AA23-B34AFA45B59E}
