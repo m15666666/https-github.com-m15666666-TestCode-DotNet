@@ -48,6 +48,7 @@ namespace EasyNetQSubscriber
                 #region 测试Send/Receive，EasyNetQ库
 
                 bus.Receive<TextMessage>("my.queue", message => Console.WriteLine("my.queue message: {0}", message.Text));
+                bus.Receive<TextMessage>("my.queue", message => Console.WriteLine("my.queue message: {0}", message.Text));
                 bus.Receive<string>("my.queue.string", message => Console.WriteLine("my.queue.string message: {0}", message));
                 bus.Receive<byte[]>("my.queue.bytes", message => Console.WriteLine("my.queue.bytes message: {0}", string.Join(",", message)));
                 bus.Send("my.queue", new TextMessage { Text = "Hello Widgets!" });

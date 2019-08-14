@@ -151,22 +151,10 @@ namespace DataSampler
         /// <summary>
         /// datasampler ≈‰÷√ ˝æ›
         /// </summary>
-        public static DatasamplerConfigDto DatasamplerConfigDto { get {
-                return GetDatasamplerConfigDto();
-                //return new DatasamplerConfigDto() { UseNetty = true };
-            }
-        }
+        public static DatasamplerConfigDto DatasamplerConfigDto => _datasamplerConfigDto ??
+            (_datasamplerConfigDto = IocUtils.Instance.GetRequiredService<IOptions<DatasamplerConfigDto>>().Value);
 
-        public static DatasamplerConfigDto _datasamplerConfigDto;
-        private static DatasamplerConfigDto GetDatasamplerConfigDto()
-        {
-            if(_datasamplerConfigDto == null)
-            {
-                var options = IocUtils.Instance.GetRequiredService<IOptions<DatasamplerConfigDto>>();
-                _datasamplerConfigDto = options.Value;
-            }
-            return _datasamplerConfigDto;
-        }
+        private static DatasamplerConfigDto _datasamplerConfigDto;
 
         #endregion
 

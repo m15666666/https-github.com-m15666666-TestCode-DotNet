@@ -16,6 +16,7 @@
     <ProjectReference Include="..\AnalysisAlgorithm\AnalysisAlgorithm.csproj" />
     <ProjectReference Include="..\AnalysisData\AnalysisData.csproj" />
     <ProjectReference Include="..\Moons.Common20\Moons.Common20.csproj" />
+    <ProjectReference Include="..\Moons.DataSample.Shared\Moons.DataSample.Shared.csproj" />
     <ProjectReference Include="..\OnlineSampleCommon\OnlineSampleCommon.csproj" />
     <ProjectReference Include="..\SocketLib\SocketLib.csproj" />
   </ItemGroup>

@@ -10,6 +10,11 @@ namespace DataSampler.Core.Dto
     public class DatasamplerConfigDto
     {
         /// <summary>
+        /// 是否为调试模式
+        /// </summary>
+        public bool Debug { get; set; }
+
+        /// <summary>
         /// 是否使用netty
         /// </summary>
         public bool UseNetty { get; set; }

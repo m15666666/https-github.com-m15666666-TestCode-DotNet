@@ -52,7 +52,7 @@ namespace DataSampler
             if (obj is TrendData)
             {
                 var dataUsageID = (obj as TrendData).DataUsageID;
-                if (dataUsageID == DataUsageID.Mornitor && !SendMonitorData) {
+                if (dataUsageID == DataUsageID.Monitor && !SendMonitorData) {
                     //AddSenderLog("!SendMonitorData");
                     return;
                 }

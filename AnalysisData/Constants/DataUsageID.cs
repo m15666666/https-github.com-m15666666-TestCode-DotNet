@@ -8,7 +8,7 @@
         /// <summary>
         /// 监测
         /// </summary>
-        public const int Mornitor = 0;
+        public const int Monitor = 0;
 
         /// <summary>
         /// 存储到数据库

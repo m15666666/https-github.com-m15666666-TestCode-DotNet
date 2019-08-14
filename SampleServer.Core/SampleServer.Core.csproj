@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AnalysisAlgorithm\AnalysisAlgorithm.csproj" />
+    <ProjectReference Include="..\AnalysisData\AnalysisData.csproj" />
+    <ProjectReference Include="..\AnalysisUtils\AnalysisUtils.csproj" />
+    <ProjectReference Include="..\Moons.Common20\Moons.Common20.csproj" />
+    <ProjectReference Include="..\Moons.DataSample.Shared\Moons.DataSample.Shared.csproj" />
+    <ProjectReference Include="..\Moons.Log4net\Moons.Log4net.csproj" />
+    <ProjectReference Include="..\SocketLib\SocketLib.csproj" />
+  </ItemGroup>
+
+</Project>

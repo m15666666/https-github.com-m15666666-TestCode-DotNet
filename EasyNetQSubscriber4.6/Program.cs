@@ -65,15 +65,17 @@ namespace EasyNetQSubscriber4._6
         {
             #region 测试Subscribe/Publish
 
-            bus.Subscribe<TextMessage>("test4.6", m => HandleTextMessage(m));
+            bus.Subscribe<TextMessage>("test4.6", m => HandleTextMessage(m, ": test4.6"));
+            bus.Subscribe<TextMessage>("test4.6", m => HandleTextMessage(m, ": test4.6"));
+            bus.Subscribe<TextMessage>("test4.6.1", m => HandleTextMessage(m, ": test4.6.1"));
 
             #endregion
         }
 
-        static void HandleTextMessage(TextMessage textMessage)
+        static void HandleTextMessage(TextMessage textMessage, string suffix)
         {
             //Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Got message: {0}", textMessage.Text);
+            Console.WriteLine("Got message: {0}", textMessage.Text + suffix);
             //Console.ResetColor();
         }
     }

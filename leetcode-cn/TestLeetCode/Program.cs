@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new RedundantConnectionSolution().Test();
+            new AccountsMergeSolution().Test();
+            //new RedundantConnectionSolution().Test();
             //new BeautifulArrangementIISolution().Test();
             //new ShoppingOffersSolution().Test();
             //new ExclusiveTimeOfFunctionsSolution().Test();

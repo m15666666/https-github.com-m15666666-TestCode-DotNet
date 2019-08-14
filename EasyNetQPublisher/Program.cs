@@ -39,33 +39,38 @@ namespace EasyNetQPublisher
                 #endregion
 
                 var input = "";
-                
+                int count = 10000;
                 while ((input = Console.ReadLine()) != "Quit")
                 {
-                    #region 测试Subscribe/Publish，EasyNetQ库
-
-                    bus.Publish(new TextMessage
+                    Console.WriteLine($"Begin {DateTime.Now}.");
+                    for (int i = 0; i < count; i++)
                     {
-                        Text = input
-                    });
+                        #region 测试Subscribe/Publish，EasyNetQ库
 
-                    string msg = input;
+                        bus.Publish(new TextMessage
+                        {
+                            Text = input
+                        });
 
-                    bus.Send("my.queue", new TextMessage { Text = msg });
-                    bus.Send("my.queue.string", msg);
-                    bus.Send("my.queue.bytes", System.Text.Encoding.UTF8.GetBytes(msg));
+                        string msg = input;
 
-                    #endregion
+                        bus.Send("my.queue", new TextMessage { Text = msg });
+                        bus.Send("my.queue.string", msg);
+                        bus.Send("my.queue.bytes", System.Text.Encoding.UTF8.GetBytes(msg));
 
-                    #region rabbitmq 自己的客户端库
+                        #endregion
 
-                    //5. 构建byte消息数据包
-                    var body = System.Text.Encoding.UTF8.GetBytes(msg);
+                        #region rabbitmq 自己的客户端库
 
-                    //6. 发送数据包
-                    channel.BasicPublish(exchange: "", routingKey: queueNameOfRabbitRaw, basicProperties: null, body: body);
+                        //5. 构建byte消息数据包
+                        var body = System.Text.Encoding.UTF8.GetBytes(msg);
 
-                    #endregion
+                        //6. 发送数据包
+                        channel.BasicPublish(exchange: "", routingKey: queueNameOfRabbitRaw, basicProperties: null, body: body);
+
+                        #endregion
+                    }
+                    Console.WriteLine($"End {DateTime.Now}.");
                 }
             }
         }
