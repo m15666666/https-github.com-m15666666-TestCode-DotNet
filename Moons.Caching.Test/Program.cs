@@ -45,7 +45,7 @@ namespace Moons.Caching.Test
                            build.UseStackExchangeRedis(new Caching.StackExchangeRedis.Abstractions.StackExchangeRedisOption
                            {
                                //Configuration = "127.0.0.1:6379,allowadmin=true",
-                               Configuration = "127.0.0.1:6379,password=#db877350,connectTimeout=1000,connectRetry=1,syncTimeout=1000",
+                               Configuration = "127.0.0.1:6379,password=#db877350,connectTimeout=1000,connectRetry=1,syncTimeout=1000,DefaultDatabase=11",
                                DbProviderName = "redis"
                            });
                        });
