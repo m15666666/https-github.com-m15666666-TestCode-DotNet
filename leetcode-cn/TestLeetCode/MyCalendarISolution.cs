@@ -33,12 +33,15 @@ MyCalendar.book(20, 30); // returns true
 /// <summary>
 /// https://leetcode-cn.com/problems/my-calendar-i/
 /// 729. 我的日程安排表 I
-/// 
+/// https://blog.csdn.net/qq_39618308/article/details/82188501
 /// </summary>
 class MyCalendarISolution
 {
     public void Test()
     {
+        Book(10, 20);
+        Book(15, 25);
+        Book(20, 30);
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -53,6 +56,59 @@ class MyCalendarISolution
 
     public bool Book(int start, int end)
     {
+        if(list.Count == 0)
+        {
+            list.Add(( start, end ));
+            return true;
+        }
 
+        if(end <= list[0].Item1)
+        {
+            list.Insert(0,(start, end));
+            return true;
+        }
+
+        if (list[list.Count-1].Item2 <= start)
+        {
+            list.Add((start, end));
+            return true;
+        }
+
+        if (list.Count == 1) return false;
+
+        int left = 0;
+        int right = list.Count - 1;
+
+        while ( left < right)
+        {
+            int mid = (left + right)/2;
+            var item = list[mid];
+            if (item.Item1 > start) right = mid - 1;
+            else if (item.Item1 < start) left = mid + 1;
+            else return false;
+        }
+
+        if (list.Count <= left) return false;
+        if ( list[left].Item1 > start )
+        {
+            int previous = left - 1;
+            if ( -1 < previous && list[previous].Item2 <= start && list[left].Item1 >= end)
+            {
+                list.Insert(left, (start, end));
+                return true;
+            }
+        }
+        else
+        {
+            int next = left + 1;
+            if (next< list.Count && list[next].Item1 >= end && list[left].Item2 <= start)
+            {
+                list.Insert(left + 1, (start, end));
+                return true;
+            }
+        }
+
+        return false;
     }
+    private List<(int, int)> list = new List<(int, int)>();
 }
