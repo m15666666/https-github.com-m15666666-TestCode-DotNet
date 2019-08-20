@@ -322,5 +322,27 @@ namespace DataSampler
         }
 
         #endregion
+
+        #region 推送固件的方式
+
+        /// <summary>
+        /// 默认值，推送
+        /// </summary>
+        internal static string PushFirmwareFileMode_Push = "Push";
+
+        /// <summary>
+        /// 工作站作为客户端主动获取
+        /// </summary>
+        internal static string PushFirmwareFileMode_Pull = "Pull";
+
+        /// <summary>
+        /// Push：默认值，推送，Pull：工作站作为客户端主动获取
+        /// </summary>
+        internal static string PushFirmwareFileMode
+        {
+            get { return DatasamplerConfigDto.PushFirmwareFileMode ?? PushFirmwareFileMode_Push; }
+        }
+
+        #endregion
     }
 }

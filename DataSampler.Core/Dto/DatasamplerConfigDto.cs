@@ -38,5 +38,10 @@ namespace DataSampler.Core.Dto
         /// 正常采集时，队列中对象数量的最大值
         /// </summary>
         public int MaxQueueLength_NormalSample { get; set; } = 1000;
+
+        /// <summary>
+        /// Push：默认值，推送，Pull：工作站作为客户端主动获取
+        /// </summary>
+        public string PushFirmwareFileMode { get; set; } = "Push";
     }
 }

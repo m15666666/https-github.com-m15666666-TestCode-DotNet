@@ -507,52 +507,65 @@ namespace DataSampler.Helper
         {
             try
             {
-                // 由于下位机缓存的限制，纪秀范提出每次发出的文件字节数长度为16K。
-                const int PackageSize = 32768;
-
                 Action<PackageSendReceive> handler = sendReceive =>
                 {
-                    var fileBytes = data.FirmwareFileBytes;
-                    var fileLength = fileBytes.Length;
-                    var restFileLength = fileLength;
-                    var segmentIndex = 0;
-                    var segmentOffset = 0;
-
-                    while( 0 < restFileLength )
+                    Action<byte[]> sendHandler = bytes =>
                     {
-                        var segmentLength = PackageSize < restFileLength ? PackageSize : restFileLength;
-                        var segmentData = ArrayUtils.Slice( fileBytes, segmentOffset, segmentLength );
+                        sendReceive.SendPackage(bytes);
+                        ReceiveCommand(sendReceive);
+                    };
 
-                        var sendCommand = new CommandMessage
-                        {
-                            CommandID = CommandID.PushFileBytes,
-                            StructTypeID = StructTypeID.FileSegmentData,
-                            Data = new FileSegmentData
-                            {
-                                Parameters = data.FirmwareFileName,
-                                FileLength = fileLength,
-                                SegmentIndex = segmentIndex,
-                                SegmentOffset = segmentOffset,
-                                SegmentData = segmentData
-                            }
-                        };
+                    PushFirmwareFileBytes(data, sendHandler);
+                };
 
-                        segmentIndex++;
-                        segmentOffset += segmentLength;
-                        restFileLength -= segmentLength;
+                HandlePackageSendReceive(handler);
+            }
+            catch (Exception ex)
+            {
+                TraceUtils.Error("Push firmware file bytes error.", ex);
+                throw;
+            }
+        }
 
-                        sendReceive.SendPackage( ToFromBytesUtils.ToBytes( sendCommand ) );
+        /// <summary>
+        ///     推送(固件)文件的字节数组
+        /// </summary>
+        /// <param name="data">FirmwareFileInfoData</param>
+        public static void PushFirmwareFileBytes(FirmwareFileInfoData data, Action<byte[]> sendHandler)
+        {
+            // 由于下位机缓存的限制，纪秀范提出每次发出的文件字节数长度为16K。
+            const int PackageSize = 32768;
 
-                        ReceiveCommand( sendReceive );
+            var fileBytes = data.FirmwareFileBytes;
+            var fileLength = fileBytes.Length;
+            var restFileLength = fileLength;
+            var segmentIndex = 0;
+            var segmentOffset = 0;
+
+            while (0 < restFileLength)
+            {
+                var segmentLength = PackageSize < restFileLength ? PackageSize : restFileLength;
+                var segmentData = ArrayUtils.Slice(fileBytes, segmentOffset, segmentLength);
+
+                var sendCommand = new CommandMessage
+                {
+                    CommandID = CommandID.PushFileBytes,
+                    StructTypeID = StructTypeID.FileSegmentData,
+                    Data = new FileSegmentData
+                    {
+                        Parameters = data.FirmwareFileName,
+                        FileLength = fileLength,
+                        SegmentIndex = segmentIndex,
+                        SegmentOffset = segmentOffset,
+                        SegmentData = segmentData
                     }
                 };
 
-                HandlePackageSendReceive( handler );
-            }
-            catch( Exception ex )
-            {
-                TraceUtils.Error( "Push firmware file bytes error.", ex );
-                throw;
+                segmentIndex++;
+                segmentOffset += segmentLength;
+                restFileLength -= segmentLength;
+
+                sendHandler(ToFromBytesUtils.ToBytes(sendCommand));
             }
         }
 

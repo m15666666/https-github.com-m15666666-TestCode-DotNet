@@ -26,7 +26,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/monotone-increasing-digits/
 /// 738. 单调递增的数字
-/// 
+/// https://www.cnblogs.com/tangweijqxx/p/10689863.html
 /// </summary>
 class MonotoneIncreasingDigitsSolution
 {
@@ -41,6 +41,33 @@ class MonotoneIncreasingDigitsSolution
 
     public int MonotoneIncreasingDigits(int N)
     {
+        var s = N.ToString();
+        if (s.Length == 1) return N;
 
+        List<int> nums = new List<int>(s.Length);
+        foreach ( var c in s)
+        {
+            nums.Add(c - '0');
+        }
+
+        int position = nums.Count;
+        for ( int i = nums.Count - 1; 0 < i; i--)
+        {
+            if (nums[i] < nums[i - 1])
+            {
+                nums[i - 1]--;
+
+                position = i;
+            }
+        }
+        for (int j = position; j < nums.Count; j++)
+            nums[j] = 9;
+
+        int ret = 0;
+        foreach (var n in nums)
+        {
+            ret = ret * 10 + n;
+        }
+        return ret;
     }
 }

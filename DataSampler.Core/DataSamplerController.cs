@@ -486,25 +486,26 @@ namespace DataSampler
                                     version,
                                     targetVersion, sampleStationIp, sampleStationPort));
 
-                                var sampleStationProxy = new SampleStationProxy
+                                bool isPushFirmwareFile = Config.PushFirmwareFileMode == Config.PushFirmwareFileMode_Push;
+                                if (isPushFirmwareFile)
                                 {
-                                    SampleStationData =
-                                        new SampleStationData
-                                        {
-                                            SampleStationIP = sampleStationIp,
-                                            SampleStationPort = sampleStationPort
-                                        }
-                                };
+                                    var sampleStationProxy = new SampleStationProxy
+                                    {
+                                        SampleStationData =
+                                            new SampleStationData
+                                            {
+                                                SampleStationIP = sampleStationIp,
+                                                SampleStationPort = sampleStationPort
+                                            }
+                                    };
 
-                                TraceUtils.LogDebugInfo(string.Format("PushFirmwareFileBytes to {0}...",
-                                    sampleStationProxy.IPAddress));
+                                    sampleStationProxy.PushFirmwareFileBytes(firmwareFileInfoData);
 
-                                sampleStationProxy.PushFirmwareFileBytes(firmwareFileInfoData);
-
-                                TraceUtils.Info(string.Format("{3}:{4} Upgrade firmware ({0}, {1} => {2}) succeed.",
-                                    firmFileName,
-                                    version,
-                                    targetVersion, sampleStationIp, sampleStationPort));
+                                    TraceUtils.Info(string.Format("{3}:{4} Upgrade firmware ({0}, {1} => {2}) succeed.",
+                                        firmFileName,
+                                        version,
+                                        targetVersion, sampleStationIp, sampleStationPort));
+                                }
 
                                 // 返回表示需要升级的包
                                 sendHandler(ToFromBytesUtils.ToBytes(new CommandMessage
@@ -516,6 +517,11 @@ namespace DataSampler
                                         ErrorCode = SampleStationErrorCode.InfoCode_NeedUpgradeFireware
                                     }
                                 }));
+
+                                if (!isPushFirmwareFile)
+                                {
+                                    SampleStationProxy.PushFirmwareFileBytes(firmwareFileInfoData, sendHandler);
+                                }
                                 return;
                             }
                         }
