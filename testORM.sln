@@ -67,7 +67,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Log4net", "Moons.Log4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.DataSample.Shared", "Moons.DataSample.Shared\Moons.DataSample.Shared.csproj", "{2CAB1343-6AB2-4F58-BA1D-078F0FAAD983}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleServer.Core", "SampleServer.Core\SampleServer.Core.csproj", "{6D24575D-3643-4EB3-B6C6-A41EE827BB09}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleServer.Core", "SampleServer.Core\SampleServer.Core.csproj", "{6D24575D-3643-4EB3-B6C6-A41EE827BB09}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cache", "Cache", "{55CBD08B-A99F-4626-A40C-9254577B2CD1}"
 EndProject
@@ -81,7 +81,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.InMemory", "C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.StackExchangeRedis", "Cache\Moons.Caching.StackExchangeRedis\Moons.Caching.StackExchangeRedis.csproj", "{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Caching.Test", "Moons.Caching.Test\Moons.Caching.Test.csproj", "{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.Test", "Moons.Caching.Test\Moons.Caching.Test.csproj", "{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsBrowser", "WindowsFormsBrowser\WindowsFormsBrowser.csproj", "{62D19A54-9911-4C17-82A7-CBBB30A1112B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,6 +247,10 @@ Global
 		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62D19A54-9911-4C17-82A7-CBBB30A1112B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62D19A54-9911-4C17-82A7-CBBB30A1112B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62D19A54-9911-4C17-82A7-CBBB30A1112B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62D19A54-9911-4C17-82A7-CBBB30A1112B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
