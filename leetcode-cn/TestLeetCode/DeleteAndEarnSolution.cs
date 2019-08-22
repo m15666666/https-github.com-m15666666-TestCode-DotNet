@@ -34,7 +34,7 @@ nums的长度最大为20000。
 /// <summary>
 /// https://leetcode-cn.com/problems/delete-and-earn/
 /// 740. 删除与获得点数
-/// 
+/// https://blog.csdn.net/OneDeveloper/article/details/80001202
 /// </summary>
 class DeleteAndEarnSolution
 {
@@ -49,6 +49,29 @@ class DeleteAndEarnSolution
 
     public int DeleteAndEarn(int[] nums)
     {
+        if (nums == null || nums.Length == 0) return 0;
+        
+        ushort[] numCount = new ushort[10001];
+        int max = 0;
+        int l = nums.Length;
+        for (int i = 0; i < l; i++)
+        {
+            var v = nums[i];
+            numCount[v]++;
+            if (max < v) max = v;
+        }
 
+        int t1 = 0;
+        int t2 = numCount[1];
+        for (int i = 2; i <= max; i++)
+        {
+            //var tI = Math.Max(t2, numCount[i] * i + t1);
+            //t1 = t2;
+            //t2 = tI;
+
+            (t2,t1) = (Math.Max(t2, numCount[i] * i + t1),t2);
+        }
+
+        return t2;
     }
 }
