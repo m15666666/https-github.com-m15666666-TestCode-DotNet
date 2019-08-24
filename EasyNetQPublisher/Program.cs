@@ -39,7 +39,7 @@ namespace EasyNetQPublisher
                 #endregion
 
                 var input = "";
-                int count = 10000;
+                int count = 1;
                 while ((input = Console.ReadLine()) != "Quit")
                 {
                     Console.WriteLine($"Begin {DateTime.Now}.");

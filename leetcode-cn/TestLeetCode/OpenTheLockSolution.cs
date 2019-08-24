@@ -50,6 +50,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/open-the-lock/
 /// 752. 打开转盘锁
+/// https://blog.csdn.net/koukehui0292/article/details/84145706
 /// </summary>
 class OpenTheLockSolution
 {
@@ -64,6 +65,176 @@ class OpenTheLockSolution
 
     public int OpenLock(string[] deadends, string target)
     {
+        HashSet<int> deads = new HashSet<int>(deadends.Length);
+        foreach (var d in deadends) deads.Add(GetHashCode(d));
 
+        int targetHash = GetHashCode(target);
+
+        int startHash = GetHashCode("0000");
+        Queue<int> queue = new Queue<int>();
+        queue.Enqueue(startHash);
+
+        HashSet<int> visited = new HashSet<int>();
+        visited.Add(startHash);
+
+        int steps = 0;
+        while (0 < queue.Count)
+        {
+            for( int i = queue.Count; 0 < i; i--)
+            {
+                var code = queue.Dequeue();
+                if (deads.Contains(code)) continue;
+
+                if (code == targetHash) return steps;
+
+                int divisor = 1;
+                for ( int j = 0; j < 4; j++)
+                {
+                    var (left,right) = ChangeHashCode(code,divisor);
+
+                    if(!visited.Contains(left) && !deads.Contains(left))
+                    {
+                        visited.Add(left);
+                        queue.Enqueue(left);
+                    }
+                    if (!visited.Contains(right) && !deads.Contains(right))
+                    {
+                        visited.Add(right);
+                        queue.Enqueue(right);
+                    }
+
+                    divisor *= 10;
+                }
+            }
+            steps++;
+        }
+        return -1;
+    }
+
+    private static int GetHashCode( string code )
+    {
+        const char Zero = '0';
+        return (code[0] - Zero) * 1000 + (code[1] - Zero) * 100 + (code[2] - Zero) * 10 + (code[3] - Zero);
+    }
+
+    private static (int,int) ChangeHashCode(int code, int lowThreshold)
+    {
+        int upThreshold = lowThreshold * 10;
+        int remain0 = code % upThreshold;
+        int upRemain = code - remain0;
+        int digit = remain0 / lowThreshold;
+        int lowRemain = remain0 % lowThreshold;
+
+        int temp1, temp2;
+        if (digit == 0) {
+            temp1 = 9;
+            temp2 = 1;
+        }
+        else if (digit == 9) {
+            temp1 = 8;
+            temp2 = 0;
+        }
+        else {
+            temp1 = digit - 1;
+            temp2 = digit + 1;
+        }
+
+        return (upRemain + temp1 * lowThreshold + lowRemain, upRemain + temp2 * lowThreshold + lowRemain);
     }
 }
+/*
+public class Solution {
+    public int OpenLock(string[] deadends, string target) {
+        
+        Dictionary<int, bool> deadDic = new Dictionary<int, bool>();
+        for (int i = 0; i < deadends.Length; i ++) {
+            int temp = int.Parse(deadends[i]);
+            deadDic[temp] = true;
+        }
+        
+        int tgt = int.Parse(target);
+        
+        Dictionary<int, bool> hisDic = new Dictionary<int, bool>();
+        
+        Queue<int> queue = new Queue<int>();
+        queue.Enqueue(0);
+        
+        int count = 0;
+        while(queue.Count() > 0) {
+            int size = queue.Count();
+            for (int i = 0; i < size; i ++) {
+                int temp = queue.Dequeue();
+                if (hisDic.ContainsKey(temp) || deadDic.ContainsKey(temp)) {
+                    
+                } else {
+                    if (temp == tgt) {
+                        return count;
+                    }
+                    
+                    hisDic[temp] = true;
+                    
+                    { // 各位
+                        int val = temp % 10;
+                        if (val == 9) {
+                            queue.Enqueue((temp - 1 + 10000)%10000);
+                            queue.Enqueue((temp - 9 + 10000)%10000);
+                        } else if (val == 0) {
+                            queue.Enqueue((temp + 1 + 10000)%10000);
+                            queue.Enqueue((temp + 9 + 10000)%10000);
+                        } else {
+                            queue.Enqueue((temp + 1 + 10000)%10000);
+                            queue.Enqueue((temp - 1 + 10000)%10000);
+                        }
+                    }
+                    
+                    {   // 十位
+                        int val = temp / 10 % 10;
+                        if (val == 9) {
+                            queue.Enqueue((temp - 10 + 10000)%10000);
+                            queue.Enqueue((temp - 90 + 10000)%10000);
+                        } else if (val == 0) {
+                            queue.Enqueue((temp + 10 + 10000)%10000);
+                            queue.Enqueue((temp + 90 + 10000)%10000);
+                        } else {
+                            queue.Enqueue((temp + 10 + 10000)%10000);
+                            queue.Enqueue((temp - 10 + 10000)%10000);
+                        }
+                    }
+                    
+                    {   // 百位
+                        int val = temp / 100 % 10;
+                        if (val == 9) {
+                            queue.Enqueue((temp - 100 + 10000)%10000);
+                            queue.Enqueue((temp - 900 + 10000)%10000);
+                        } else if (val == 0) {
+                            queue.Enqueue((temp + 100 + 10000)%10000);
+                            queue.Enqueue((temp + 900 + 10000)%10000);
+                        } else {
+                            queue.Enqueue((temp + 100 + 10000)%10000);
+                            queue.Enqueue((temp - 100 + 10000)%10000);
+                        }
+                    }
+                    
+                     {   // 百位
+                        int val = temp / 1000 % 10;
+                        if (val == 9) {
+                            queue.Enqueue((temp - 1000 + 10000)%10000);
+                            queue.Enqueue((temp - 9000 + 10000)%10000);
+                        } else if (val == 0) {
+                            queue.Enqueue((temp + 1000 + 10000)%10000);
+                            queue.Enqueue((temp + 9000 + 10000)%10000);
+                        } else {
+                            queue.Enqueue((temp + 1000 + 10000)%10000);
+                            queue.Enqueue((temp - 1000 + 10000)%10000);
+                        }
+                    }
+                }
+            }
+            
+            count ++;
+        } 
+        
+        return -1;
+    }
+} 
+*/
