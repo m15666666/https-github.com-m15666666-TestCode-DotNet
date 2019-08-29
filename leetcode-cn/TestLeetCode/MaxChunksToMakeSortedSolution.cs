@@ -31,13 +31,14 @@ arr[i]是 [0, 1, ..., arr.length - 1]的一种排列。
 /// <summary>
 /// https://leetcode-cn.com/problems/max-chunks-to-make-sorted/
 /// 769. 最多能完成排序的块
-/// 
+/// https://blog.csdn.net/pengchengliu/article/details/90757822
 /// </summary>
 class MaxChunksToMakeSortedSolution
 {
     public void Test()
     {
-        //int[] nums = new int[] {3, 2, 4};
+        int[] nums = new int[] {1,0,2,3,4};
+        var ret = MaxChunksToSorted(nums);
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
 
@@ -46,6 +47,51 @@ class MaxChunksToMakeSortedSolution
 
     public int MaxChunksToSorted(int[] arr)
     {
+        if (arr == null || arr.Length == 0) return 0;
+        if (arr.Length == 1) return 1;
 
+        int ret = 0;
+        int max = -1;
+        for( int i = 0; i < arr.Length; i++)
+        {
+            var v = arr[i];
+            if (max < v) max = v;
+
+            if (i == max) ret++;
+        }
+        return ret;
     }
 }
+/*
+public class Solution {
+    public int MaxChunksToSorted(int[] arr) {
+       int len = arr.Length;
+        int count = 1;
+
+        int leftMax = arr[0];
+        int[] rightMin = new int[len];
+        rightMin[len - 1] = arr[len - 1];
+
+        for (int i = len - 2; i >= 0; i--)
+        {
+            rightMin[i] = Math.Min(arr[i], rightMin[i + 1]);
+        }
+
+        for (int i = 1; i < len; i++)
+        {
+            if (rightMin[i] >= leftMax)
+            {
+                count++;
+                leftMax = arr[i];
+            }
+            else
+            {
+                leftMax = Math.Max(arr[i], leftMax);
+            }
+        }
+
+
+        return count;
+    }
+} 
+*/

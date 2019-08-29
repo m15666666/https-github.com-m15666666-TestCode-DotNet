@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new ReorganizeStringSolution().Test();
+            new MaxChunksToMakeSortedSolution().Test();
+            //new ReorganizeStringSolution().Test();
             //new LargestPlusSignSolution().Test();
             //new PyramidTransitionMatrixSolution().Test();
             //new MyCalendarISolution().Test();
