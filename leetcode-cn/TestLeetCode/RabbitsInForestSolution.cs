@@ -32,7 +32,7 @@ answers[i] 是在 [0, 999] 范围内的整数。
 /// <summary>
 /// https://leetcode-cn.com/problems/rabbits-in-forest/
 /// 781. 森林中的兔子
-/// 
+/// https://blog.csdn.net/qq_41822647/article/details/88251366
 /// </summary>
 class RabbitsInForestSolution
 {
@@ -47,6 +47,16 @@ class RabbitsInForestSolution
 
     public int NumRabbits(int[] answers)
     {
-
+        int[] counts = new int[1000]; //记录种类相同的个数
+        int ret = 0;
+        foreach (int n in answers)
+        {
+            if (counts[n] % (n + 1) == 0) // 每n + 1个，取模还变为零
+            {
+                ret += n + 1; //n+1,加上自己一共有n+1个
+            }
+            counts[n]++;
+        }
+        return ret;
     }
 }
