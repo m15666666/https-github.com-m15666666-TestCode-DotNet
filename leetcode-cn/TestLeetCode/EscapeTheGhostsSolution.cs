@@ -57,6 +57,35 @@ class EscapeTheGhostsSolution
 
     public bool EscapeGhosts(int[][] ghosts, int[] target)
     {
+        int x = target[0], y = target[1];
+        int ghostDistance = int.MaxValue;
+        foreach( var g in ghosts)
+        {
+            int d = Math.Abs(g[0] - x) + Math.Abs(g[1] - y);
+            if (d < ghostDistance) ghostDistance = d;
+        }
 
+        int distance = Math.Abs(x) + Math.Abs(y);
+        return distance < ghostDistance;
     }
 }
+/*
+public class Solution {
+    public bool EscapeGhosts(int[][] ghosts, int[] target) {
+        int a = 0;
+        int b = 0;
+        int c = target[0] > 0 ? target[0] : -target[0];
+        int d = target[1] > 0 ? target[1] : -target[1];
+        int e = c + d;
+        foreach(var item in ghosts)
+        {
+            a = item[0] - target[0];
+            b = item[1] - target[1];
+            if(a < 0) a = -a;
+            if(b < 0) b = -b;
+            if(a + b < e) return false;
+        }
+         return true;
+    }
+} 
+*/
