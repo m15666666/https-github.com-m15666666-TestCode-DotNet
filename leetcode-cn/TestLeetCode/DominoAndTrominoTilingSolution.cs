@@ -29,12 +29,14 @@ N  的范围是 [1, 1000]
 /// <summary>
 /// https://leetcode-cn.com/problems/domino-and-tromino-tiling/
 /// 790. 多米诺和托米诺平铺
-/// 
+/// https://blog.csdn.net/qiang_____0712/article/details/85066880
+/// https://blog.csdn.net/scylhy/article/details/98613654
 /// </summary>
 class DominoAndTrominoTilingSolution
 {
     public void Test()
     {
+        var ret = NumTilings(30);
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -44,6 +46,34 @@ class DominoAndTrominoTilingSolution
 
     public int NumTilings(int N)
     {
+        if (N < 1) return 0;
 
+        switch (N)
+        {
+            case 1:
+                return 1;
+            case 2:
+                return 2;
+            case 3:
+                return 5;
+        }
+
+        List<long> evens = new List<long>(3) {1,2,5};
+        List<long> odds = new List<long>(3) { 2,4,8};
+
+        const long C = 1000000000 + 7;
+        for (int i = 4; i <= N; i++)
+        {
+            var even = (evens[2] + evens[1] + 2 * evens[0] + odds[0]) % C;
+            var odd = (odds[2] + 2 * evens[2]) % C;
+
+            evens.RemoveAt(0);
+            odds.RemoveAt(0);
+
+            evens.Add(even);
+            odds.Add(odd);
+        }
+
+        return (int)evens[2];
     }
 }

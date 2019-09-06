@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new CheapestFlightsWithinKStopsSolution().Test();
+            new DominoAndTrominoTilingSolution().Test();
+            //new CheapestFlightsWithinKStopsSolution().Test();
             //new MaxChunksToMakeSortedSolution().Test();
             //new ReorganizeStringSolution().Test();
             //new LargestPlusSignSolution().Test();
