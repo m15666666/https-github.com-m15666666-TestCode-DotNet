@@ -28,7 +28,7 @@ S和T只包含小写字符。
 /// <summary>
 /// https://leetcode-cn.com/problems/custom-sort-string/
 /// 791. 自定义字符串排序
-/// 
+/// https://blog.csdn.net/start_lie/article/details/89486506
 /// </summary>
 class CustomSortStringSolution
 {
@@ -43,6 +43,72 @@ class CustomSortStringSolution
 
     public string CustomSortString(string S, string T)
     {
+        byte[] charIndex = new byte['z' + 1];
+        Array.Fill<byte>(charIndex, 0);
+        for (byte i = 1; i <= S.Length; i++)
+        {
+            charIndex[S[i-1]] = i;
+        }
 
+        char[] ret = new char[T.Length];
+        int extraCharIndex = ret.Length - 1;
+        byte[] charCounts = new byte[S.Length + 1];
+        Array.Fill<byte>(charCounts, 0);
+
+        for (int i = 0; i < ret.Length; i++)
+        {
+            var c = T[i];
+            int index = charIndex[c];
+            if (index == 0)
+            {
+                ret[extraCharIndex--] = c;
+                continue;
+            }
+            charCounts[index]++;
+        }
+
+        for (int i = 1, x = 0; i < charCounts.Length; i++)
+        {
+            int count = charCounts[i];
+            if (0 == count) break;
+
+            var c = S[i - 1];
+            while ( 0 < count-- )
+            {
+                ret[x++] = c;
+            }
+        }
+        return new string(ret);
     }
 }
+/*
+public class Solution {
+    public string CustomSortString(string S, string T) {
+        
+        int m = S.Length,n = T.Length;
+        int[] map = new int[26];      //记录T中的字符个数
+        int[] map1 = new int[26];   //记录S是否包含某个字符
+        for(int i = 0;i < m;i++){
+            char c = S[i];
+            map1[c-'a']++;
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i < n;i++){
+            char c = T[i];
+            int t = c -'a';
+            map[t]++;
+            if(map1[t] == 0) sb.Append(c);            //如果S中不包含该字符，直接加上
+        } 
+       //按照S中的顺序，包含几次加几次
+        for(int i = 0;i < m;i++){
+            char c = S[i];
+            int cnt = map[c-'a'];
+            if(cnt > 0){
+                for(int k = 0;k < cnt;k++)
+                    sb.Append(c);
+            }
+        }
+        return sb.ToString();
+    }
+} 
+*/
