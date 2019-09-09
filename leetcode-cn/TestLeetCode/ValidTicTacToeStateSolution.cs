@@ -42,7 +42,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/valid-tic-tac-toe-state/
 /// 794. 有效的井字游戏
-/// 
+/// https://blog.csdn.net/lcvcl/article/details/88722068
 /// </summary>
 class ValidTicTacToeStateSolution
 {
@@ -57,6 +57,139 @@ class ValidTicTacToeStateSolution
 
     public bool ValidTicTacToe(string[] board)
     {
+        const char X = 'X';
+        const char O = 'O';
+        int xCount = 0;
+        int oCount = 0;
+        foreach (var s in board)
+            foreach (var c in s)
+                switch(c)
+                {
+                    case O:
+                        oCount++;
+                        break;
 
+                    case X:
+                        xCount++;
+                        break;
+                }
+
+        if (xCount - oCount == 1)
+        {
+            var oSuccess = IsWinner(board, O);
+            return !oSuccess;
+        }
+        if (xCount == oCount)
+        {
+            var xSuccess = IsWinner(board, X);
+            return !xSuccess;
+        }
+        return false;
+    }
+
+    private static bool IsWinner(string[] board, char c)
+    {
+        const int Length = 3;
+        for (int i = 0; i < Length; i++) {
+            if (IsWinner(c, board[0][i],board[1][i],board[2][i])) return true;
+            if (IsWinner(c,board[i][0],board[i][1],board[i][2])) return true;
+        }
+
+        if (IsWinner(c,board[1][1], board[0][0],board[2][2])) return true;
+        if (IsWinner(c, board[1][1],board[0][2],board[2][0])) return true;
+
+        return false;
+    }
+    private static bool IsWinner(char c, params char[] chars )
+    {
+        return (chars[0] == c && chars[1] == c && chars[2] == c);
     }
 }
+/*
+public class Solution {
+public bool ValidTicTacToe(string[] board)
+        {
+            if (board == null || board.Length == 0)
+            {
+                return false;
+            }
+
+            int[] row = new int[3];
+            int[] column = new int[3];
+            int diagonal = 0;
+            int antiDiagnal = 0;
+            int turns = 0;
+
+            for (int i = 0; i < board.Length; i++)
+            {
+                for (int j = 0; j < board[0].Length; j++)
+                {
+                    if (board[i][j] == 'X')
+                    {
+                        turns++;
+                        row[i]++;
+                        column[j]++;
+                        if (i == j)
+                        {
+                            diagonal++;
+                        }
+
+                        if (j + i == 2)
+                        {
+                            antiDiagnal++;
+                        }
+                    } else if (board[i][j] == 'O')
+                    {
+                        turns--;
+                        row[i]--;
+                        column[j]--;
+                        if (i == j)
+                        {
+                            diagonal--;
+                        }
+
+                        if (j + i == 2)
+                        {
+                            antiDiagnal--;
+                        }
+                    }
+                }
+            }
+
+            bool xWins = false;
+            bool oWins = false;
+
+
+            for (int index = 0; index < 3; index++)
+            {
+                if (row[index] == 3)
+                {
+                    xWins = true;
+                }
+                else if (row[index] == -3)
+                {
+                    oWins = true;
+                }
+
+                if (column[index] == 3)
+                {
+                    xWins = true;
+                }
+                else if(column[index] == -3)
+                {
+                    oWins = true;
+                }
+            }
+
+            xWins = xWins || diagonal == 3 || antiDiagnal == 3;
+            oWins = oWins || diagonal == -3 || antiDiagnal == -3;
+            if ((xWins && turns == 0) || (oWins && turns == 1))
+            {
+                return false;
+            }
+
+            return (turns == 0 || turns == 1) && (!oWins || !xWins);
+        }
+}
+
+*/
