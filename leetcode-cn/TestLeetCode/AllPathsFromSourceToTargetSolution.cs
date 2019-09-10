@@ -26,7 +26,7 @@ v    v
 /// <summary>
 /// https://leetcode-cn.com/problems/all-paths-from-source-to-target/
 /// 797. 所有可能的路径
-/// 
+/// https://blog.csdn.net/qq_38612955/article/details/83119739
 /// </summary>
 class AllPathsFromSourceToTargetSolution
 {
@@ -41,6 +41,108 @@ class AllPathsFromSourceToTargetSolution
 
     public IList<IList<int>> AllPathsSourceTarget(int[][] graph)
     {
+        List<IList<int>> ret = new List<IList<int>>();
+        Stack<int> stack = new Stack<int>();
+        stack.Push(0);
+        Dfs(graph, 0, ret, stack);
 
+        return ret;
+    }
+
+    private static void Dfs(int[][] graph, int startIndex, List<IList<int>> ret, Stack<int> stack)
+    {
+        if(startIndex == graph.Length - 1)
+        {
+            ret.Add(stack.Reverse().ToArray());
+            return;
+        }
+
+        foreach( var i in graph[startIndex])
+        {
+            stack.Push(i);
+            Dfs(graph, i, ret, stack);
+            stack.Pop();
+        }
     }
 }
+/*
+public class Solution {
+    public IList<IList<int>> AllPathsSourceTarget(int[][] graph) {
+        IList<IList<int>> r= new 
+            List<IList<int>>();
+        for(int i=0;i<graph[0].Length;
+            ++i)
+        {
+            IList<int> l=
+                new List<int>();
+            l.Add(0);
+            l.Add(graph[0][i]);
+            r.Add(l);
+        }
+        for(int i=1;i<graph.Length;++i)
+        {
+            for(int j=0;j<r.Count;++j)
+            {
+                if(r[j][r[j].Count-1]
+                  !=i)
+                    continue;
+            for(int k=1;
+                k<graph[i].Length;++k)
+            {
+                IList<int> l=new 
+                    List<int>(r[j]);
+                l.Add(graph[i][k]);
+                r.Add(l);
+            }
+            if(graph[i].Length>0)
+                r[j].Add(graph[i][0]);
+            }
+        }
+        for(int i=0;i<r.Count;)
+        {
+            if(r[i][r[i].Count-1]
+              !=graph.Length-1)
+            {    
+                r.RemoveAt(i);
+            }
+            else
+                ++i;
+        }
+        return r;
+    }
+}
+public class Solution {
+    public IList<IList<int>> AllPathsSourceTarget(int[][] graph) {
+        
+        int n = graph.Length;
+        
+        IList<IList<int>> res = new List<IList<int>>();
+        
+        IList<int> tempList = new List<int>();
+        tempList.Add(0);
+        
+        Queue<IList<int>> queue = new Queue<IList<int>>();
+        
+        queue.Enqueue(tempList);
+        
+        while(queue.Count() > 0) {
+            int size = queue.Count();
+            for (int i = 0; i < size; i ++) {
+                IList<int> list = queue.Dequeue();
+                int lastNum = list[list.Count() - 1];
+                if (lastNum == n - 1) {
+                    res.Add(list);
+                } else {
+                    for (int j = 0; j < graph[lastNum].Length; j ++) {
+                        List<int> newList = new List<int>(list);
+                        newList.Add(graph[lastNum][j]);
+                        queue.Enqueue(newList);
+                    }
+                }
+            }
+        }
+        
+        return res;
+    }
+}
+*/
