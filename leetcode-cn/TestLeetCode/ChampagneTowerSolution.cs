@@ -15,8 +15,6 @@ using System.Text;
 
 现在当倾倒了非负整数杯香槟后，返回第 i 行 j 个玻璃杯所盛放的香槟占玻璃杯容积的比例（i 和 j都从0开始）。
 
- 
-
 示例 1:
 输入: poured(倾倒香槟总杯数) = 1, query_glass(杯子的位置数) = 1, query_row(行数) = 1
 输出: 0.0
@@ -34,12 +32,13 @@ query_glass 和query_row 的范围 [0, 99]。
 /// <summary>
 /// https://leetcode-cn.com/problems/champagne-tower/
 /// 799. 香槟塔
-/// 
+/// https://blog.csdn.net/torch_man/article/details/80638799
 /// </summary>
 class ChampagneTowerSolution
 {
     public void Test()
     {
+        var ret = ChampagneTower(2, 0, 0);
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -49,6 +48,42 @@ class ChampagneTowerSolution
 
     public double ChampagneTower(int poured, int query_row, int query_glass)
     {
+        int N = query_row + 1;
+        int Length = (1 + N) * N / 2; 
 
+        float[] capacity = new float[Length];
+        Array.Fill(capacity, 0);
+        capacity[0] = poured;
+
+        for (int i = 0; i < query_row; i++)
+        {
+            int preN = i - 1 + 1; // 上一行的N
+            int preLen = (1 + preN) * preN / 2;
+
+            int currentN = i + 1; // 当前行的N
+            int currentLen = preLen + currentN;
+
+            bool anyWine = false;
+            for (int j = 0; j <= i; j++)
+            {
+                int index = preLen + j;
+                var remainHalf = (capacity[index] - 1.0f) / 2f;
+                if (0 < remainHalf)
+                {
+                    int nextIndex = currentLen + j; // 下一行对应的下标
+                    capacity[nextIndex] += remainHalf;
+                    capacity[nextIndex + 1] += remainHalf;
+
+                    anyWine = true;
+                }
+            }
+            if (!anyWine) break;
+        }
+
+        {
+            int preN = query_row - 1 + 1; // 上一行的N
+            int preLen = (1 + preN) * preN / 2;
+            return Math.Min(capacity[preLen + query_glass], 1.0);
+        }
     }
 }
