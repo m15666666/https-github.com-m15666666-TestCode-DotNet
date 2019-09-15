@@ -28,7 +28,7 @@ A[i], B[i] 均为 [0, 2000]区间内的整数。
 /// <summary>
 /// https://leetcode-cn.com/problems/minimum-swaps-to-make-sequences-increasing/
 /// 801. 使序列递增的最小交换次数
-/// 
+/// https://blog.csdn.net/laputafallen/article/details/79968593
 /// </summary>
 class MinimumSwapsToMakeSequencesIncreasingSolution
 {
@@ -43,6 +43,24 @@ class MinimumSwapsToMakeSequencesIncreasingSolution
 
     public int MinSwap(int[] A, int[] B)
     {
+        int n0 = 0, s0 = 1;
+        for (int i = 1; i < A.Length; i++)
+        {
+            int n1 = int.MaxValue, s1 = int.MaxValue;
+            if (A[i - 1] < A[i] && B[i - 1] < B[i])
+            {
+                n1 = Math.Min(n0, n1);
+                s1 = Math.Min(s0 + 1, s1);
+            }
+            if (A[i - 1] < B[i] && B[i - 1] < A[i])
+            {
+                n1 = Math.Min(s0, n1);
+                s1 = Math.Min(n0 + 1, s1);
+            }
+            n0 = n1;
+            s0 = s1;
+        }
 
+        return Math.Min(n0, s0);
     }
 }
