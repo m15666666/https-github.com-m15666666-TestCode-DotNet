@@ -36,12 +36,13 @@ S 和所有在 words 中的单词都只由小写字母组成。
 /// <summary>
 /// https://leetcode-cn.com/problems/expressive-words/
 /// 809. 情感丰富的文字
-/// 
+/// https://www.jianshu.com/p/99aa7759b7f5
 /// </summary>
 class ExpressiveWordsSolution
 {
     public void Test()
     {
+        var ret = ExpressiveWords("heeellooo", new string[] { "hello", "hi", "helo" });
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -51,6 +52,23 @@ class ExpressiveWordsSolution
 
     public int ExpressiveWords(string S, string[] words)
     {
+        if (string.IsNullOrEmpty(S)) return 0;
 
+        int ret = 0;
+        var sLen = S.Length;
+        foreach (var w in words)
+        {
+            if (string.IsNullOrEmpty(w) || sLen < w.Length) continue;
+            int wLen = w.Length;
+            int i = 0, j = 0;
+            for (; j < sLen; j++)
+            {
+                if (i < w.Length && w[i] == S[j]) i++;
+                else if (0 < j && S[j] == S[j - 1] && (i == wLen || w[i] != S[j]) && (j + 1 < sLen && S[j] == S[j + 1] || -1 < j - 2 && S[j] == S[j - 2] )) continue;
+                else break;
+            }
+            if (i == w.Length && j == sLen) ret++;
+        }
+        return ret;
     }
 }
