@@ -35,7 +35,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/binary-tree-pruning/
 /// 814. 二叉树剪枝
-/// 
+/// https://www.cnblogs.com/xiagnming/p/9541554.html
 /// </summary>
 class BinaryTreePruningSolution
 {
@@ -50,6 +50,68 @@ class BinaryTreePruningSolution
 
     public TreeNode PruneTree(TreeNode root)
     {
-
+        if (root == null) { return null; }
+        root.left = PruneTree(root.left);
+        root.right = PruneTree(root.right);
+        if (root.left == null && root.right == null && root.val == 0) { return null; }
+        return root;
     }
 }
+/*
+public class Solution {
+    public TreeNode PruneTree(TreeNode root) 
+    {
+        Travelsal(root);
+        Travelsal2(root);
+        return root;
+    }
+    
+    public int Travelsal(TreeNode node)
+    {
+        if (node == null)
+        {
+            return 0;
+        }
+        int i1 = Travelsal(node.left);
+        int i2 = Travelsal(node.right);
+        node.val += i1 + i2;
+        if (i1 == 0)
+        {
+            node.left = null;
+        }
+        if (i2 == 0)
+        {
+            node.right = null;
+        }
+        return node.val;
+    }
+    
+    public void Travelsal2(TreeNode node)
+    {
+        if (node == null)
+        {
+            return;
+        }
+        int childValue = 0;
+        if (node.left != null)
+        {
+            childValue += node.left.val;
+        }
+        if (node.right != null)
+        {
+            childValue += node.right.val;
+        }
+        if(node.val == childValue)
+        {
+            node.val = 0;
+        }
+        else
+        {
+            node.val = 1;
+        }
+        Travelsal2(node.left);
+        Travelsal2(node.right);
+    }
+}
+
+*/

@@ -85,7 +85,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Caching.Test", "Moons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsBrowser", "WindowsFormsBrowser\WindowsFormsBrowser.csproj", "{62D19A54-9911-4C17-82A7-CBBB30A1112B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MQTTBroker", "MQTTBroker\MQTTBroker.csproj", "{FA6C3725-0144-45EE-9D4C-42F9EE315934}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTBroker", "MQTTBroker\MQTTBroker.csproj", "{FA6C3725-0144-45EE-9D4C-42F9EE315934}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Common20.Test", "Moons.Common20.Test\Moons.Common20.Test.csproj", "{8AE65099-6754-44CA-BB31-98C625186B6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -257,6 +259,10 @@ Global
 		{FA6C3725-0144-45EE-9D4C-42F9EE315934}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA6C3725-0144-45EE-9D4C-42F9EE315934}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA6C3725-0144-45EE-9D4C-42F9EE315934}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AE65099-6754-44CA-BB31-98C625186B6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AE65099-6754-44CA-BB31-98C625186B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AE65099-6754-44CA-BB31-98C625186B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AE65099-6754-44CA-BB31-98C625186B6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
