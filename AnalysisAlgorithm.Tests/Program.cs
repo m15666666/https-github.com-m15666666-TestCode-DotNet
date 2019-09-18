@@ -6,6 +6,7 @@ namespace AnalysisAlgorithm.Tests
     {
         private static void Main( string[] args )
         {
+            new CurveFitTests().LMS_CurveFit();
             new FftTests().Fft();
             new FftTests().IFft();
             new FftTests().FftAndIFft();
