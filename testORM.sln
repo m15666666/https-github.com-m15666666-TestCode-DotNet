@@ -89,6 +89,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTBroker", "MQTTBroker\MQ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Common20.Test", "Moons.Common20.Test\Moons.Common20.Test.csproj", "{8AE65099-6754-44CA-BB31-98C625186B6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.SingletonProcessInstance.Test", "Moons.SingletonProcessInstance.Test\Moons.SingletonProcessInstance.Test.csproj", "{077580FC-7087-4AEF-9BF1-072DDE383EE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -263,6 +265,10 @@ Global
 		{8AE65099-6754-44CA-BB31-98C625186B6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AE65099-6754-44CA-BB31-98C625186B6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AE65099-6754-44CA-BB31-98C625186B6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{077580FC-7087-4AEF-9BF1-072DDE383EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{077580FC-7087-4AEF-9BF1-072DDE383EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{077580FC-7087-4AEF-9BF1-072DDE383EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{077580FC-7087-4AEF-9BF1-072DDE383EE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

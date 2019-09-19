@@ -4,25 +4,24 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 
-namespace Moons.Common20.Test
+namespace Moons.SingletonProcessInstance.Test
 {
     class Program
     {
         static void Main(string[] args)
         {
-            
             var assembly = Assembly.GetExecutingAssembly();
             Console.WriteLine(assembly.Location);
             Console.WriteLine(assembly.CodeBase);
             FileStream fs = null;
             string name = typeof(Program).FullName;
-            string path = Path.Combine(Path.GetDirectoryName(assembly.Location),name);
+            string path = Path.Combine(Path.GetDirectoryName(assembly.Location), name);
             Console.WriteLine(path);
             try
             {
                 fs = File.OpenWrite(path);
             }
-            catch( Exception ex )
+            catch (Exception ex)
             {
                 Console.WriteLine($"ex: {ex}");
                 return;
@@ -30,7 +29,7 @@ namespace Moons.Common20.Test
 
             using (fs)
             {
-                
+
                 //Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
                 Console.WriteLine($"typeof(Program).FullName: {name}");
                 foreach (var arg in args)
@@ -43,7 +42,7 @@ namespace Moons.Common20.Test
                 //Mutex mutex = new Mutex(false, name, out existed);
                 //Console.WriteLine($"{name} existed: {!existed}");
 
-                Console.WriteLine("Hello World Singleton instance.");
+                Console.WriteLine("Hello World Singleton process instance.");
                 Console.ReadLine();
                 //mutex.Dispose();
                 //eventWaitHandle.Dispose();
