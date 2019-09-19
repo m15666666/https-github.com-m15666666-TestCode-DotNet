@@ -91,6 +91,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Common20.Test", "Moon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.SingletonProcessInstance.Test", "Moons.SingletonProcessInstance.Test\Moons.SingletonProcessInstance.Test.csproj", "{077580FC-7087-4AEF-9BF1-072DDE383EE3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.EquipmentDiagnosis.Core", "Moons.EquipmentDiagnosis.Core\Moons.EquipmentDiagnosis.Core.csproj", "{5E12E20C-D53B-4602-9B7C-8E7397CA0263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.CurveFit", "Demo.CurveFit\Demo.CurveFit.csproj", "{AD28DF54-416E-44BD-AC9C-2C02F34193B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -269,6 +273,14 @@ Global
 		{077580FC-7087-4AEF-9BF1-072DDE383EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{077580FC-7087-4AEF-9BF1-072DDE383EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{077580FC-7087-4AEF-9BF1-072DDE383EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E12E20C-D53B-4602-9B7C-8E7397CA0263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E12E20C-D53B-4602-9B7C-8E7397CA0263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E12E20C-D53B-4602-9B7C-8E7397CA0263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E12E20C-D53B-4602-9B7C-8E7397CA0263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD28DF54-416E-44BD-AC9C-2C02F34193B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD28DF54-416E-44BD-AC9C-2C02F34193B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD28DF54-416E-44BD-AC9C-2C02F34193B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD28DF54-416E-44BD-AC9C-2C02F34193B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

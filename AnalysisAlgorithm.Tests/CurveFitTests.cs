@@ -48,10 +48,10 @@ namespace AnalysisAlgorithm.Tests
             CurveFit.LMS_CurveFit(polynomialOrder, X, Y, coef2, dT2);
             var polyCoef = MathNet.Numerics.Fit.Polynomial(X, Y, 2);
             var polyY = polyCoef[0] + polyCoef[1] * x + polyCoef[2] * x * x;
-            //Assert.AreEqual(a == lineCoef.Item1);
-            //Assert.AreEqual(b == lineCoef.Item2);
-            //Assert.AreEqual(lineY == y);
-            //Assert.AreEqual(polyY == y);
+            Assert.AreEqual(a, lineCoef.Item1);
+            Assert.AreEqual(b, lineCoef.Item2);
+            Assert.AreEqual(lineY, y);
+            Assert.AreEqual(polyY, y);
 
             //OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-Fft.txt", OutputDir);
         }
