@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Moons.EquipmentDiagnosis.Core.Dto
 {
-    class TrendDiagnosisOutputDto
+    public class TrendDiagnosisOutputDto
     {
+        /// <summary>
+        /// 报警事件集合
+        /// </summary>
+        public List<AlarmEvent> AlarmEvents { get; set; } = new List<AlarmEvent>();
     }
 }
