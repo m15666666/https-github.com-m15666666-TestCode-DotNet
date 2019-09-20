@@ -2,6 +2,7 @@
 using Moons.EquipmentDiagnosis.Core.Utils;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace Moons.EquipmentDiagnosis.Core.Implementations
@@ -13,6 +14,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
     {
         public TrendDiagnosisOutputDto MakeDiagnosis(TrendDiagnosisInputDto input)
         {
+            Debug.WriteLine("MakeDiagnosis");
             switch (input.SignalTypeId)
             {
                 case SignalTypeIdEnum.Vel:
@@ -27,6 +29,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 
         private TrendDiagnosisOutputDto MakeDiagnosis_Vel(TrendDiagnosisInputDto input)
         {
+            Debug.WriteLine("MakeDiagnosis_Vel");
             TrendDiagnosisOutputDto output = new TrendDiagnosisOutputDto();
             CalcAlarm(SignalTypeIdEnum.Vel, AlarmTypeIdEnum.Alm_Trend_30Day, input.TrendData_30Day, TrendAlarmSetting.TrendAlarmSetting_Vel_30Day, output);
             CalcAlarm(SignalTypeIdEnum.Vel, AlarmTypeIdEnum.Alm_Trend_10Day, input.TrendData_10Day, TrendAlarmSetting.TrendAlarmSetting_Vel_10Day,output);
@@ -67,9 +70,15 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         /// <param name="output"></param>
         private void CalcAlarm(SignalTypeIdEnum signalTypeId, AlarmTypeIdEnum alarmTypeId, double[] yData, TrendAlarmSetting alarmSetting,TrendDiagnosisOutputDto output )
         {
-            if (yData == null || yData.Length == 0) return;
+            Debug.WriteLine($"signalTypeId:{signalTypeId}");
+            if (yData == null || yData.Length == 0)
+            {
+                Debug.WriteLine("yData == null || yData.Length == 0");
+                return;
+            }
 
             var lineFit = LineFitUtils.CreateByYData(yData); // 生成直线拟合
+            Debug.WriteLine($"lineFit:{lineFit.LineCoef.Item1},{lineFit.LineCoef.Item2}");
             double first = lineFit.CalcY(lineFit.X[0]);
             if (first == 0) return;
 
