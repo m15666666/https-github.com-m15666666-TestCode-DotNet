@@ -35,7 +35,7 @@ G 是链表中所有结点的值的一个子集.*/
 /// <summary>
 /// https://leetcode-cn.com/problems/linked-list-components/
 /// 817. 链表组件
-/// 
+/// https://blog.csdn.net/laputafallen/article/details/79951781
 /// </summary>
 class LinkedListComponentsSolution
 {
@@ -50,6 +50,14 @@ class LinkedListComponentsSolution
 
     public int NumComponents(ListNode head, int[] G)
     {
-
+        HashSet<int> setG = new HashSet<int>(G);
+        int ret = 0;
+        while (head != null)
+        {
+            var next = head.next;
+            if (setG.Contains(head.val) && (next == null || !setG.Contains(next.val))) ret++;
+            head = next;
+        }
+        return ret;
     }
 }
