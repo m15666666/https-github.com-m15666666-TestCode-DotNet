@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new AmbiguousCoordinatesSolution().Test();
+            new ShortEncodingOfWordsSolution().Test();
+            //new AmbiguousCoordinatesSolution().Test();
             //new ExpressiveWordsSolution().Test();
             //new ChampagneTowerSolution().Test();
             //new NumberOfSubarraysWithBoundedMaximumSolution().Test();
