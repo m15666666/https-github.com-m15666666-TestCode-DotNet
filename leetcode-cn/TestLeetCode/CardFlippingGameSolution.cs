@@ -49,6 +49,20 @@ class CardFlippingGameSolution
 
     public int Flipgame(int[] fronts, int[] backs)
     {
+        var set = new HashSet<int>();
+        for (int i = 0; i < fronts.Length; i++)
+            if (fronts[i] == backs[i]) //如果正面和背面的数字相等 一定不会是想要的数字
+                set.Add(fronts[i]);
 
+        int ret = int.MaxValue;
+        //在剩下的数字中找到最小值
+        foreach (int front in fronts)
+            if (!set.Contains(front))
+                ret = Math.Min(ret, front);
+
+        foreach (int back in backs)
+            if (!set.Contains(back))
+                ret = Math.Min(ret, back);
+        return ret == int.MaxValue ? 0 : ret;
     }
 }
