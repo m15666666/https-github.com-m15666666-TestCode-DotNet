@@ -18,8 +18,6 @@ age[B] > 100 && age[A] < 100
 
 求总共会发出多少份好友请求?
 
- 
-
 示例 1:
 
 输入: [16,16]
@@ -35,7 +33,6 @@ age[B] > 100 && age[A] < 100
 输入: [20,30,100,110,120]
 输出: 3
 解释: 好友请求可产生于 110 -> 100, 120 -> 110, 120 -> 100.
- 
 
 说明:
 
@@ -45,7 +42,7 @@ age[B] > 100 && age[A] < 100
 /// <summary>
 /// https://leetcode-cn.com/problems/friends-of-appropriate-ages/
 /// 825. 适龄的朋友
-/// 
+/// https://blog.csdn.net/start_lie/article/details/88580829
 /// </summary>
 class FriendsOfAppropriateAgesSolution
 {
@@ -60,6 +57,32 @@ class FriendsOfAppropriateAgesSolution
 
     public int NumFriendRequests(int[] ages)
     {
+        const int MaxAge = 121; // 1 <= ages[i] <= 120.
+        int[] ageCounts = new int[MaxAge];
+        Array.Fill(ageCounts, 0);
+        int max = 0, min = MaxAge;
+        foreach (int age in ages)
+        {
+            ageCounts[age]++;
+            if (max < age) max = age;
+            if (age < min) min = age;
+        }
 
+        int ret = 0;
+        const int StartAge = 15; // 满足条件：age[B] > 0.5 * age[A] + 7
+        for (int i = Math.Max(StartAge, min); i <= max; i++)
+        {
+            int currentAgeCount = ageCounts[i];
+            if (currentAgeCount == 0) continue;
+
+            int lowThhreshold = (i >> 1) + 7; // 0.5 * age[A] + 7
+            int lessEqualCount = 0;
+            for (int j = Math.Max(lowThhreshold + 1, min); j <= i; j++) // age[B] > 0.5 * age[A] + 7 && age[B] < age[A]
+            {
+                lessEqualCount += ageCounts[j];
+            }
+            ret += (lessEqualCount * currentAgeCount - currentAgeCount); // 减掉发给自己的请求数
+        }
+        return ret;
     }
 }
