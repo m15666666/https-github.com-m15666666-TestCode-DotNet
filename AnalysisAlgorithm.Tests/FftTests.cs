@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using MathNet.Filtering.DataSources;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,6 +20,86 @@ namespace AnalysisAlgorithm.Tests
         /// 输出目录
         /// </summary>
         private static string OutputDir = @"D:\temp2";
+
+        /// <summary>
+        ///     测试 初始相位 与 fft 计算的相位的差别 程序
+        ///     思路：与scilab对比测试，scilab 命令：fft, atan(- 5.6568542,5.6568542) / %pi * 180, atan(imag(fa(3)),real(fa(3))) / %pi * 180
+        ///     测试下来：初始相位0度，算出来-90度，初始相位45度，算出来-45度，即都减去90度。即计算是参照余弦波算的，正弦波比余弦波落后90度。
+        /// </summary>
+        [Test]
+        public void InitAngleTest()
+        {
+            /*
+
+                        scilab:
+                        --> a
+                     a  = 
+
+                       0.7071068
+                       1.
+                       0.7071068
+                       1.225D-16
+                      -0.7071068
+                      -1.
+                      -0.7071068
+                      -2.449D-16
+                       0.7071068
+                       1.
+                       0.7071068
+                       3.674D-16
+                      -0.7071068
+                      -1.
+                      -0.7071068
+                      -4.899D-16
+
+                        --> fa = fft(a)
+                         fa  = 
+
+                          -2.449D-16  
+                           6.792D-16 - 8.666D-16i
+                           5.6568542 - 5.6568542i
+                           1.132D-15 + 6.792D-16i
+                          -2.449D-16i 
+                           8.666D-16 - 1.319D-15i
+                           4.441D-16 + 1.332D-15i
+                           1.319D-15 + 1.132D-15i
+                           2.449D-16  
+                           1.319D-15 - 1.132D-15i
+                           4.441D-16 - 1.332D-15i
+                           8.666D-16 + 1.319D-15i
+                           2.449D-16i 
+                           1.132D-15 - 6.792D-16i
+                           5.6568542 + 5.6568542i
+                           6.792D-16 + 8.666D-16i
+
+            */
+
+            int dataLength = 16;
+            double samplerate = 8;
+            double initPhase = 45; // 度
+
+            // 两种生成正弦波算法一致，只是初始角度的地方需要换算一下
+            double[] sinWave1 = SignalGenerator.Sine(samplerate, 1, initPhase / 180f * Math.PI, 1, dataLength);
+
+            //double[] sinWave1 =
+            //    AnalysisAlgorithm.Helper.SignalGenerator.CreateSin(new AnalysisAlgorithm.Helper.CreateSinParameter
+            //    {
+            //        DataLength = dataLength,
+            //        F0 = 1,
+            //        Fs = samplerate,
+            //        InitPhaseInDegree = initPhase
+            //    });
+
+            double[] ampSpectrum = null;
+            double[] phaseSpectrum = null;
+            DSPBasic.BiAmpPhaseSpectrum(sinWave1, out ampSpectrum, out phaseSpectrum);
+
+            double[] ampSpectrum2 = null;
+            double[] phaseSpectrum2 = null;
+            DSPBasic.AmpPhaseSpectrum(sinWave1, out ampSpectrum2, out phaseSpectrum2);
+
+            OutputUtils.ToTxtFile(sinWave1, "initPhase-sinwave.txt", OutputDir);
+        }
 
         /// <summary>
         ///     测试“fft”程序

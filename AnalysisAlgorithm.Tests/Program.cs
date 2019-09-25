@@ -6,6 +6,7 @@ namespace AnalysisAlgorithm.Tests
     {
         private static void Main( string[] args )
         {
+            new FftTests().InitAngleTest();
             new FilterTests().BandPassTest();
             new CurveFitTests().LMS_CurveFit();
             new FftTests().Fft();
