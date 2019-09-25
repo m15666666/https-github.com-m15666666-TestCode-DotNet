@@ -29,6 +29,7 @@ difficulty[i], profit[i], worker[i]  的范围是 [1, 10^5]
 /// <summary>
 /// https://leetcode-cn.com/problems/most-profit-assigning-work/
 /// 826. 安排工作以达到最大收益
+/// 
 /// </summary>
 class MostProfitAssigningWorkSolution
 {
@@ -43,6 +44,22 @@ class MostProfitAssigningWorkSolution
 
     public int MaxProfitAssignment(int[] difficulty, int[] profit, int[] worker)
     {
+        Array.Sort(difficulty, profit);
+        Array.Sort(worker);
 
+        int len = difficulty.Length;
+        int ret = 0, difficultyIndex = 0, bestProfixOfLessDifficulty = 0;
+        foreach (int skill in worker)
+        {
+            while (difficultyIndex < len && difficulty[difficultyIndex] <= skill)
+            {
+                var p = profit[difficultyIndex++];
+                if (bestProfixOfLessDifficulty < p) bestProfixOfLessDifficulty = p;
+            }
+
+            ret += bestProfixOfLessDifficulty;
+        }
+
+        return ret;
     }
 }
