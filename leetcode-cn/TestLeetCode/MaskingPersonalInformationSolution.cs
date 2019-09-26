@@ -78,7 +78,8 @@ S.length <= 40。
 /// <summary>
 /// https://leetcode-cn.com/problems/masking-personal-information/
 /// 831. 隐藏个人信息
-/// 
+/// https://blog.csdn.net/kongqingxin12/article/details/83212854
+/// https://juejin.im/post/5b6bd8bee51d45190869bf87
 /// </summary>
 class MaskingPersonalInformationSolution
 {
@@ -91,8 +92,106 @@ class MaskingPersonalInformationSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
+    /// <summary>
+    /// 
+    /// C# 正则表达式: https://www.runoob.com/csharp/csharp-regular-expressions.html
+    /// </summary>
+    /// <param name="S"></param>
+    /// <returns></returns>
     public string MaskPII(string S)
     {
+        if (string.IsNullOrEmpty(S)) return S;
 
+        int atIndex = S.IndexOf('@');
+        if ( -1 < atIndex ) // email
+        {
+            var lower = S.ToLower();
+            return $"{lower[0]}*****{lower.Substring(atIndex - 1)}";
+        }
+
+        var numbers = System.Text.RegularExpressions.Regex.Replace(S, "[^0-9]", string.Empty); //去掉非数字字符
+        int n = numbers.Length;
+        return $"{prefix[n - 10]}***-***-{numbers.Substring(n - 4)}";
     }
+
+    private static readonly string[] prefix = new string[] { "", "+*-", "+**-", "+***-" }; // 电话的前缀
 }
+/*
+public class Solution {
+    public string MaskPII(string S) {
+        
+        int n = S.Length;
+        
+        bool containAt = false;
+        int indexAt = 0;
+        
+        for (int i = 0; i < n; i ++) {
+            if (S[i] == '@') {
+                containAt = true;
+                indexAt = i;
+            }
+        }
+        
+        if (containAt) {
+            // 邮箱
+            string name = S.Substring(0, indexAt);
+            
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Lower(name[0]));
+            sb.Append("*****");
+            sb.Append(Lower(name[name.Length-1]));
+            
+            string rest = S.Substring(indexAt, n - indexAt);
+            for (int i = 0; i < rest.Length; i ++) {
+                sb.Append(Lower(rest[i]));
+            }
+            
+            return sb.ToString();
+            
+        } else { 
+            // 号码
+            List<int> nums = new List<int>();
+            
+            for (int i = 0; i < n; i ++) {
+                if (S[i] >= '0' && S[i] <= '9') {
+                    nums.Add(S[i] - '0');
+                }
+            }
+            
+            int len = nums.Count();
+            
+            StringBuilder sb = new StringBuilder();
+            if (len > 10) {
+                // 外地
+                if (len == 13) {
+                    sb.Append("+***-***-***-");
+                } else if (len == 12) {
+                    sb.Append("+**-***-***-");
+                } else {
+                    sb.Append("+*-***-***-");
+                }
+                
+            } else {
+                // 本地
+                sb.Append("***-***-");
+            }
+            
+            for (int i = len - 4; i < len; i ++) {
+                sb.Append(nums[i]);
+            }
+            
+            return sb.ToString();
+        }
+        
+        return "";
+    }
+    
+    char Lower(char c) {
+        if (c >= 'A' && c <= 'Z') {
+            return (char)('a' + c - 'A');
+        }
+        return c;
+    }
+} 
+     
+*/
