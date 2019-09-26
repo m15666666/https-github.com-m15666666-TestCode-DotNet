@@ -11,13 +11,18 @@ namespace AnalysisAlgorithm.Tests
     public static class OutputUtils
     {
         /// <summary>
+        /// 输出文件目录
+        /// </summary>
+        public static string OutputDir { get; set; } = @"C:\";
+
+        /// <summary>
         ///     将复数数据数组输出到文本文件
         /// </summary>
         /// <param name="reArray">复数实部数据</param>
         /// <param name="imArray">复数虚部数据</param>
         /// <param name="filename">文本文件名</param>
         /// <param name="dir">输出目录</param>
-        public static void ComplexToTxtFile(double[] reArray, double[] imArray, string filename, string dir = @"E:\temp")
+        public static void ComplexToTxtFile(double[] reArray, double[] imArray, string filename, string dir = null)
         {
             Action<StreamWriter> handler = writer => {
                 for (int i = 0; i < reArray.Length; i++)
@@ -32,8 +37,9 @@ namespace AnalysisAlgorithm.Tests
         /// <param name="data">数据</param>
         /// <param name="filename">文本文件名</param>
         /// <param name="dir">输出目录</param>
-        public static void ToTxtFile(IEnumerable<double> data, string filename, string dir = @"E:\temp")
+        public static void ToTxtFile(IEnumerable<double> data, string filename, string dir = null)
         {
+            dir = dir ?? OutputDir;
             using (StreamWriter writer = File.CreateText(Path.Combine(dir, filename)))
             {
                 foreach (double v in data)
@@ -50,8 +56,9 @@ namespace AnalysisAlgorithm.Tests
         /// <param name="data">数据</param>
         /// <param name="filename">文本文件名</param>
         /// <param name="dir">输出目录</param>
-        public static void ToTxtFile( Action<StreamWriter> handler, string filename, string dir = @"E:\temp")
+        public static void ToTxtFile( Action<StreamWriter> handler, string filename, string dir = null)
         {
+            dir = dir ?? OutputDir;
             using (StreamWriter writer = File.CreateText(Path.Combine(dir, filename)))
             {
                 handler(writer);

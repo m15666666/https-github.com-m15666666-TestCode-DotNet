@@ -17,11 +17,6 @@ namespace AnalysisAlgorithm.Tests
     public class FftTests
     {
         /// <summary>
-        /// 输出目录
-        /// </summary>
-        private static string OutputDir = @"D:\temp2";
-
-        /// <summary>
         ///     测试 初始相位 与 fft 计算的相位的差别 程序
         ///     思路：与scilab对比测试，scilab 命令：fft, atan(- 5.6568542,5.6568542) / %pi * 180, atan(imag(fa(3)),real(fa(3))) / %pi * 180
         ///     测试下来：初始相位0度，算出来-90度，初始相位45度，算出来-45度，即都减去90度。即计算是参照余弦波算的，正弦波比余弦波落后90度。
@@ -98,7 +93,7 @@ namespace AnalysisAlgorithm.Tests
             double[] phaseSpectrum2 = null;
             DSPBasic.AmpPhaseSpectrum(sinWave1, out ampSpectrum2, out phaseSpectrum2);
 
-            OutputUtils.ToTxtFile(sinWave1, "initPhase-sinwave.txt", OutputDir);
+            OutputUtils.ToTxtFile(sinWave1, "initPhase-sinwave.txt");
         }
 
         /// <summary>
@@ -148,7 +143,7 @@ namespace AnalysisAlgorithm.Tests
                 imArray[i] *= scale;
             }
 
-            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-Fft.txt", OutputDir);
+            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-Fft.txt");
         }
 
         /// <summary>
@@ -187,7 +182,7 @@ namespace AnalysisAlgorithm.Tests
             double[] imArray = OutputUtils.CreateArray<double>(reArray.Length, 0);
             DSPBasic.CxInvFFT( reArray, imArray );
 
-            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-iFft.txt", OutputDir);
+            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-iFft.txt");
         }
 
         /// <summary>
@@ -202,7 +197,7 @@ namespace AnalysisAlgorithm.Tests
             DSPBasic.CxFFT(reArray, imArray);
             DSPBasic.CxInvFFT(reArray, imArray);
 
-            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-FftAndIFft.txt", OutputDir);
+            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-FftAndIFft.txt");
         }
 
         /// <summary>
@@ -256,7 +251,7 @@ namespace AnalysisAlgorithm.Tests
                 //imArray[i] *= scale;
             }
 
-            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-HilbertT.txt", OutputDir);
+            OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-HilbertT.txt");
         }
     }
 }

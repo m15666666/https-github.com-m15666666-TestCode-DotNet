@@ -53,7 +53,7 @@ namespace AnalysisAlgorithm.Tests
             Assert.AreEqual(lineY, y);
             Assert.AreEqual(polyY, y);
 
-            //OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-Fft.txt", OutputDir);
+            //OutputUtils.ComplexToTxtFile(reArray, imArray, "FftTests-Fft.txt");
         }
     }
 }

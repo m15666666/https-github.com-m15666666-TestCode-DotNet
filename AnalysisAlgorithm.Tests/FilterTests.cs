@@ -31,11 +31,11 @@ namespace AnalysisAlgorithm.Tests
                 sinWave[i] = sinWave1[i] + sinWave2[i];
 
             // 使用scilab 的变量浏览器直接粘贴多行数据
-            OutputUtils.ToTxtFile(sinWave, "sinwave.txt", @"D:\temp2");
+            OutputUtils.ToTxtFile(sinWave, "sinwave.txt");
 
             var filter = MathNet.Filtering.OnlineFilter.CreateBandpass(MathNet.Filtering.ImpulseResponse.Finite, samplerate, 90, 120);
 
-            OutputUtils.ToTxtFile(filter.ProcessSamples(sinWave), "sinwave-filter.txt", @"D:\temp2");
+            OutputUtils.ToTxtFile(filter.ProcessSamples(sinWave), "sinwave-filter.txt");
         }
     }
 }

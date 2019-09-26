@@ -6,8 +6,12 @@ namespace AnalysisAlgorithm.Tests
     {
         private static void Main( string[] args )
         {
-            new FftTests().InitAngleTest();
+            OutputUtils.OutputDir = @"D:\temp2";
+
             new FilterTests().BandPassTest();
+
+            new FftTests().InitAngleTest();
+            
             new CurveFitTests().LMS_CurveFit();
             new FftTests().Fft();
             new FftTests().IFft();
