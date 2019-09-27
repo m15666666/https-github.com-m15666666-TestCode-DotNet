@@ -35,8 +35,8 @@ using System.Text;
 
 提示：
 
-0 <= indexes.length = sources.length = targets.length <= 100
-0 < indexes[i] < S.length <= 1000
+0 <= indexes.Length = sources.Length = targets.Length <= 100
+0 < indexes[i] < S.Length <= 1000
 给定输入中的所有字符都是小写字母。
 */
 /// <summary>
@@ -57,6 +57,97 @@ class FindAndReplaceInStringSolution
 
     public string FindReplaceString(string S, int[] indexes, string[] sources, string[] targets)
     {
+        int len = S.Length;
+        int[] match = new int[len];
+        Array.Fill(match, -1);
 
+        for (int i = 0; i < indexes.Length; ++i)
+        {
+            var source = sources[i];
+            if (string.IsNullOrEmpty(source)) continue;
+
+            int index = indexes[i];
+            int count = sources[i].Length;
+            if (len < index + count) continue;
+
+            if( string.Compare(S, index, source, 0, count) == 0)
+            {
+                match[index] = i;
+            }
+
+            //bool isMatch = true;
+            //int sourceIndex = 0;
+            //while(sourceIndex < count)
+            //{
+            //    if(S[index+ sourceIndex] != source[sourceIndex])
+            //    {
+            //        isMatch = false;
+            //        break;
+            //    }
+            //    sourceIndex++;
+            //}
+            //if(isMatch) match[index] = i;
+        }
+
+        StringBuilder ret = new StringBuilder(2*len);
+        for( int i = 0; i < len; )
+        {
+            var index = match[i];
+            if ( -1 < index)
+            {
+                ret.Append(targets[index]);
+                i += sources[index].Length;
+                continue;
+            }
+            ret.Append(S[i++]);
+        }
+        return ret.ToString();
     }
 }
+/*
+public class Solution {
+    
+    class Item {
+        public int index;
+        public string source;
+        public string target;
+    }
+    
+    public string FindReplaceString(string S, int[] indexes, string[] sources, string[] targets) {
+        Dictionary<int, Item> dic = new Dictionary<int, Item>();
+        int n = indexes.Length;
+        
+        for (int i = 0; i < n; i ++) {
+            bool flag = true;
+            for (int j = 0; j < sources[i].Length; j ++) {
+                if (S[indexes[i]+j] != sources[i][j]) {
+                    flag = false;
+                    break;
+                }
+            }
+            
+            if (flag == true) {
+                Item item = new Item();
+                item.index = indexes[i];
+                item.source = sources[i];
+                item.target = targets[i];
+                
+                dic[item.index] = item;
+            }
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < S.Length; i ++) {
+            if (dic.ContainsKey(i)) {
+                sb.Append(dic[i].target);
+                i += dic[i].source.Length - 1;
+            } else {
+                sb.Append(S[i]);
+            }
+        }
+        
+        return sb.ToString();
+    }
+}
+
+*/
