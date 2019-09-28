@@ -25,7 +25,7 @@ using System.Text;
 解释: 将 A 向右移动一个单位，然后向下移动一个单位。
 注意: 
 
-1 <= A.length = A[0].length = B.length = B[0].length <= 30
+1 <= A.Length = A[0].Length = B.Length = B[0].Length <= 30
 0 <= A[i][j], B[i][j] <= 1
 */
 /// <summary>
@@ -46,6 +46,28 @@ class ImageOverlapSolution
 
     public int LargestOverlap(int[][] A, int[][] B)
     {
-
+        int ret = 0;
+        for (int i = 0; i < A.Length; i++)
+        {
+            for (int j = 0; j < A.Length; j++)
+            {
+                int x = Check(A, B, i, j);
+                int y = Check(B, A, i, j);
+                ret = Math.Max(ret, Math.Max(x, y));
+            }
+        }
+        return ret;
+    }
+    private static int Check(int[][] a, int[][] b, int r, int c)
+    {
+        int x = 0;
+        for (int i1 = r, i2 = 0; i1 < a.Length && i2 < b.Length; i1++, i2++)
+        {
+            for (int j1 = c, j2 = 0; j1 < a.Length && i2 < b.Length; j1++, j2++)
+            {
+                x += (a[i1][j1] & b[i2][j2]);
+            }
+        }
+        return x;
     }
 }
