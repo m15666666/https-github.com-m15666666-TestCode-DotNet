@@ -37,7 +37,7 @@ using System.Text;
 /// <summary>
 /// https://leetcode-cn.com/problems/new-21-game/
 /// 837. 新21点
-/// 
+/// https://www.jianshu.com/p/7b052db9c217
 /// </summary>
 class New21GameSolution
 {
@@ -53,6 +53,70 @@ class New21GameSolution
 
     public double New21Game(int N, int K, int W)
     {
+        if (K == 0) return 1;
 
+        //我们拿3 2 3举例，可以得到下面的规律
+        //假设开始我们的分数为K-1=1，我们可以拿1 2 3，得到的分数为2 3 4，为什么要假设分数为K-1呢，因为这时候没有递归的情况出现，因为肯定都>=K了
+        //1-W每个选择的概率
+        double everOne = 1f / W;
+
+        //其中满足<=N的数量是
+        int lessNCount = N - K + 1;
+
+        //我们记录算出来的所有开始分数的概率
+        double[] dp = new double[K];
+
+        // >=k 时，概率是固定值 1/W
+        dp[K - 1] = lessNCount * everOne;
+
+        // 从K-1向前计算概率。probability[i]概率定义为：如果i节点之前概率为1时，得到满足题目条件的概率。
+        // 当开始分数为K-2时，我们得到的是1 2 3，
+        // 这时候就有两部分了，一部分是>=K的2和3，另一部分是<k的1
+        for (int currK = K - 2; -1 < currK; currK--)
+        {
+            double preValue = dp[currK + 1]; // 取前一个点的概率
+
+            // currK 为向后W个几点的概率，每个概率都乘 1/W，然后取和。
+            // 在其他条件不变的情况下，后一个点比前一个点增加概率 1/W
+            double currValue = (everOne + 1) * preValue;
+
+            int lastIndex = currK + W; // 最后一个节点，边缘节点
+
+            // 当currK + W< N时，条件发生了变化，i-1节点不再拥有i节点的所有下一阶段概率节点，所以要减去不再拥有的节点。
+            // 被减去的节点就是：currK + W + 1
+            if ( lastIndex < N )
+            {
+                int removeIndex = lastIndex + 1;
+                // <k 时，概率是后期计算得到的
+                if (removeIndex < K) currValue -= everOne * dp[removeIndex];
+                // >=k 时，概率是固定值 1/W
+                else currValue -= everOne;
+            }
+            dp[currK] = currValue;
+        }
+        return dp[0]; // 下标为0时，之前的概率为1，下标为 1 ~ W 时，之前的概率为 1/W。
     }
 }
+/*
+class Solution {
+    public double new21Game(int N, int K, int W) {
+        double[] dp = new double[N + W + 1];
+        // dp[x] = the answer when Alice has x points
+        for (int k = K; k <= N; ++k)
+            dp[k] = 1.0;
+
+        double S = Math.min(N - K + 1, W);
+        // S = dp[k+1] + dp[k+2] + ... + dp[k+W]
+        for (int k = K - 1; k >= 0; --k) {
+            dp[k] = S / W;
+            S += dp[k] - dp[k + W];
+        }
+        return dp[0];
+    }
+}
+
+作者：LeetCode
+链接：https://leetcode-cn.com/problems/new-21-game/solution/xin-21dian-by-leetcode/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。 
+*/
