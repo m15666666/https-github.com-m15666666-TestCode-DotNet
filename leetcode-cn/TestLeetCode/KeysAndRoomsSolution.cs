@@ -54,6 +54,26 @@ class KeysAndRoomsSolution
 
     public bool CanVisitAllRooms(IList<IList<int>> rooms)
     {
+        const int FirstRoom = 0;
+        
+        var visited = new bool[rooms.Count];
+        Array.Fill(visited, false);
 
+        visited[FirstRoom] = true;
+        var stack = new Stack<int>();
+        stack.Push(FirstRoom);
+
+        while (0 < stack.Count)
+        {
+            int room = stack.Pop();
+            foreach (int key in rooms[room])
+                if (!visited[key])
+                {
+                    visited[key] = true; // mark that we've entered the room
+                    stack.Push(key); // add the key to the todo list
+                }
+        }
+
+        return visited.All(item => item);
     }
 }
