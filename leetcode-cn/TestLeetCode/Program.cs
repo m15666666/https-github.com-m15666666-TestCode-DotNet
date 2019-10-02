@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new BinaryTreesWithFactorsSolution().Test();
+            new SplitArrayIntoFibonacciSequenceSolution().Test();
+            //new BinaryTreesWithFactorsSolution().Test();
             //new ShortEncodingOfWordsSolution().Test();
             //new AmbiguousCoordinatesSolution().Test();
             //new ExpressiveWordsSolution().Test();

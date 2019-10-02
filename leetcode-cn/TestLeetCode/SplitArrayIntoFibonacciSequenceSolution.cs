@@ -53,6 +53,7 @@ class SplitArrayIntoFibonacciSequenceSolution
 {
     public void Test()
     {
+        var ret = SplitIntoFibonacci("0000");
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -60,8 +61,123 @@ class SplitArrayIntoFibonacciSequenceSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
+    /// <summary>
+    /// 第一个和第二个数确定后，整个备选序列已经确定，不需要使用dfs在剩余序列中试探第三个数是否存在，
+    /// 直接相加找出第三个数是否存在即可；
+    /// 剪枝：第一个数不能大于整个序列长度的一半，第三个数的长度不能小于第一个数和第二个数的长度最大者，
+    /// 数字的开头为0但长度大于1者不留下。
+    /// </summary>
+    /// <param name="S"></param>
+    /// <returns></returns>
     public IList<int> SplitIntoFibonacci(string S)
     {
+        const char Zero = '0';
+        var ret = new List<int>();
+        if (string.IsNullOrEmpty(S)) return ret;
 
+        int len = S.Length;
+        int halfLen = len / 2;
+        long tmp1, tmp2;
+        Stack<char> stack = new Stack<char>(16);
+        for (int i = 1; i <= halfLen; i++)
+        {
+            if (S[0] == Zero && i > 1) break;
+            tmp1 = long.Parse(S.Substring(0, i));
+            if (int.MaxValue < tmp1) break;
+
+            ret.Add((int)tmp1);
+            for (int j = 1; Math.Max(i, j) <= len - i - j; j++)
+            {
+                if (S[i] == Zero && j > 1) break;
+                tmp2 = long.Parse(S.Substring(i, j));
+                if (tmp2 > int.MaxValue) break;
+                int num1 = (int)tmp1;
+                int num2 = (int)tmp2;
+                ret.Add(num2);
+                int start;
+                int sumLen;
+                for (start = i + j; start < len; start += sumLen)
+                {
+                    (num1, num2) = (num2,num1+num2);
+
+                    stack.Clear();
+                    int s = num2;
+                    if (0 < s)
+                    {
+                        while (0 < s)
+                        {
+                            stack.Push((char)(s % 10 + Zero));
+                            s = s / 10;
+                        }
+                    }
+                    else stack.Push(Zero);
+
+                    sumLen = stack.Count;
+                    bool match = true;
+                    for (int i2 = start; 0 < stack.Count && i2 < len; i2++)
+                    {
+                        if(stack.Pop() != S[i2])
+                        {
+                            match = false;
+                            break;
+                        }
+                    }
+                    if (!match)
+                    {
+                        break;
+                    }
+                    ret.Add(num2);
+                }
+                if (len == start) return ret;
+                ret.RemoveRange(1, ret.Count - 1);
+            }
+            ret.Clear();
+        }
+
+        return ret;
     }
 }
+/*
+public class Solution {
+    public IList<int> SplitIntoFibonacci(string S) {
+        if(S== null || S.Length == 0)
+            return new List<int>();
+        List<int> ans = new List<int>();
+        
+        dfs(0,S,ans);
+        
+        return ans;
+    }
+    
+    public bool dfs(int index, string S, List<int> ans){
+        if(index == S.Length && ans.Count >=3){
+            return true;
+        }
+        
+        for(int i = index;i<S.Length;i++){
+            if(i > index && S[index] == '0')
+                break;
+            
+            long num = Convert.ToInt64(S.Substring(index,i-index+1));
+            
+            if(num > Int32.MaxValue)
+                break;
+            
+            int size = ans.Count;
+            
+            if(size >=2 && num > ans[size-1]+ans[size-2]){
+                break;
+            }
+            
+            if(size <= 1 || num == ans[size-1]+ans[size-2]){
+                ans.Add((int)num);
+                if(dfs(i+1,S,ans))
+                    return true;
+                ans.RemoveAt(ans.Count-1);
+            }
+        }
+        
+        return false;
+    }
+} 
+*/
