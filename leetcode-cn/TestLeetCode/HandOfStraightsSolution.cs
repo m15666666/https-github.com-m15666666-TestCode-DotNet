@@ -27,9 +27,9 @@ using System.Text;
 
 提示：
 
-1 <= hand.length <= 10000
+1 <= hand.Length <= 10000
 0 <= hand[i] <= 10^9
-1 <= W <= hand.length
+1 <= W <= hand.Length
 在真实的面试中遇到过这道题？
 */
 /// <summary>
@@ -41,15 +41,51 @@ class HandOfStraightsSolution
 {
     public void Test()
     {
-        //int[] nums = new int[] {3, 2, 4};
+        int[] nums = new int[] {1, 2, 3, 6, 2, 3, 4, 7, 8};
         //int k = 6;
-        //var ret = LevelOrder((int[]) nums.Clone(), k);
+        var ret = IsNStraightHand(nums,3);
 
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
     public bool IsNStraightHand(int[] hand, int W)
     {
+        if (hand == null || hand.Length == 0 || hand.Length % W != 0) return false;
 
+        var map = new Dictionary<int, int>();
+        foreach (int v in hand)
+            if (map.ContainsKey(v)) map[v]++; 
+            else map.Add(v, 1);
+
+        hand = map.Keys.ToArray();
+        Array.Sort(hand);
+        int index = 0;
+        for(;index < hand.Length;)
+        {
+            int h = hand[index];
+            int count = map[h];
+            int nextIndex = -1;
+
+            // 判断 map 中是否有足够的元素构成顺子
+            for (int j = 1; j < W; j++)
+            {
+                var key = h + j;
+                if (!map.ContainsKey(key)) return false;
+
+                int c = map[key];
+
+                if (c < 1 || c < count) return false;
+                if (c == count) {
+                    map[key] = 0;
+                    continue;
+                }
+
+                map[key] = c - count;
+                if (nextIndex == -1) nextIndex = index + j;
+            }
+            if (nextIndex == -1) nextIndex = index + W;
+            index = nextIndex;
+        }
+        return true;
     }
 }
