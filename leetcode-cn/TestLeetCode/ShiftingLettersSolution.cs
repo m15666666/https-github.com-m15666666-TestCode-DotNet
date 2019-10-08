@@ -38,6 +38,7 @@ class ShiftingLettersSolution
 {
     public void Test()
     {
+        var ret = ShiftingLetters("abc", new int[] { 3, 5, 9 });
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -47,6 +48,29 @@ class ShiftingLettersSolution
 
     public string ShiftingLetters(string S, int[] shifts)
     {
+        if (string.IsNullOrEmpty(S) || shifts == null || shifts.Length == 0) return S;
 
+        const char a = 'a';
+        int sum = 0;
+        char[] ret = new char[S.Length];
+        for (int i = ret.Length - 1; -1 < i; i--)
+        {
+            sum = (sum + shifts[i]) % 26;
+            ret[i] = (char)(((S[i] - a + sum) % 26) + a);
+        }
+        return new string(ret);
+
+        //int[] sums = new int[shifts.Length];
+        
+        //for (int i = sums.Length - 1; -1 < i; i--)
+        //{
+        //    sum = (sum + shifts[i]) % 26;
+        //    sums[i] = sum;
+        //}
+        ////char[] ret = S.ToCharArray();
+        //char[] ret = new char[S.Length];
+        //for (int i = 0; i < ret.Length; i++)
+        //    ret[i] = (char)(((S[i] - a + sums[i]) % 26) + a);
+        //return new string(ret);
     }
 }
