@@ -58,6 +58,42 @@ class LoudAndRichSolution
 
     public int[] LoudAndRich(int[][] richer, int[] quiet)
     {
+        int len = quiet.Length;
+        
+        this.quiets = quiet;
 
+        graph = new List<int>[len];
+        for (int i = 0; i < len; ++i) graph[i] = new List<int>();
+
+        foreach (int[] edge in richer) graph[edge[1]].Add(edge[0]);
+
+        answer = new int[len];
+        Array.Fill(answer, -1);
+
+        for (int i = 0; i < len; ++i) Dfs(i);
+
+        return answer;
     }
+
+    /// <summary>
+    /// 找到并记录最安静的富人
+    /// </summary>
+    /// <param name="parent">父节点（穷人）</param>
+    /// <returns>最安静的富人</returns>
+    private int Dfs(int parent)
+    {
+        if( -1 < answer[parent]) return answer[parent];
+
+        int ret = parent;
+        foreach (int child in graph[parent])
+        {
+            int quietChild = Dfs(child);
+            if (quiets[quietChild] < quiets[ret]) ret = quietChild;
+        }
+        return answer[parent] = ret;
+    }
+
+    private List<int>[] graph;
+    private int[] answer;
+    private int[] quiets;
 }
