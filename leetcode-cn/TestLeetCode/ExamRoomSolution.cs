@@ -49,24 +49,57 @@ class ExamRoomSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
-    
-    public int ClimbStairs(int n)
+    public ExamRoomSolution(int N)
     {
-        Dictionary<int, int> n2PathCount = new Dictionary<int, int>();
-        return ClimbStairs(n, n2PathCount);
+        //SortedDictionary
+        //SortedList
+        this.N = N;
     }
 
-    private int ClimbStairs(int n, Dictionary<int, int> n2PathCount)
+    private int N;
+    private SortedSet<int> students = new SortedSet<int>();
+    public int Seat()
     {
-        if (n <= 1) return 1;
-        if (n == 2) return 2;
+        //Let's determine student, the position of the next
+        //student to sit down.
+        int student = 0;
+        if (0 < students.Count)
+        {
+            //Tenatively, dist is the distance to the closest student,
+            //which is achieved by sitting in the position 'student'.
+            //We start by considering the left-most seat.
+            int dist = students.First();
+            int prev = -1;
+            foreach (var s in students)
+            {
+                if (prev != -1)
+                {
+                    //For each pair of adjacent students in positions (prev, s),
+                    //d is the distance to the closest student;
+                    //achieved at position prev + d.
+                    int d = (s - prev) / 2;
+                    if (dist < d)
+                    {
+                        dist = d;
+                        student = prev + d;
+                    }
+                }
+                prev = s;
+            }
 
-        if (n2PathCount.ContainsKey(n)) return n2PathCount[n];
+            var last = prev;
+            int rightMost = N - 1;
+            //Considering the right-most seat.
+            if (dist < rightMost  - last) student = rightMost;
+        }
 
-        var ret = ClimbStairs(n - 1, n2PathCount) + ClimbStairs(n - 2, n2PathCount);
+        //Add the student to our sorted TreeSet of positions.
+        students.Add(student);
+        return student;
+    }
 
-        if (!n2PathCount.ContainsKey(n)) n2PathCount[n] = ret;
-
-        return ret;
+    public void Leave(int p)
+    {
+        students.Remove(p);
     }
 }
