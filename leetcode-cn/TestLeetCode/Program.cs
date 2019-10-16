@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new ShiftingLettersSolution().Test();
+            new SmallestSubtreeWithAllTheDeepestNodesSolution().Test();
+            //new ShiftingLettersSolution().Test();
             //new HandOfStraightsSolution().Test();
             //new SplitArrayIntoFibonacciSequenceSolution().Test();
             //new BinaryTreesWithFactorsSolution().Test();
