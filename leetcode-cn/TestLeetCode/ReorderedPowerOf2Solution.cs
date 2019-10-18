@@ -55,6 +55,75 @@ class ReorderedPowerOf2Solution
 
     public bool ReorderedPowerOf2(int N)
     {
+        DigitCount(N, digitsN);
 
+        for (int shift = 0; shift < 31; ++shift)
+        {
+            DigitCount(1 << shift, digitsShift);
+            bool match = true;
+            for (int i = 0; i < 10; i++)
+            {
+                if (digitsShift[i] != digitsN[i])
+                {
+                    match = false;
+                    break;
+                }
+            }
+            if (match) return true;
+        }
+        return false;
+    }
+
+    private int[] digitsN = new int[10];
+    private int[] digitsShift = new int[10];
+
+    // Returns the count of digits of N
+    // Eg. N = 112223334, returns [0,2,3,3,1,0,0,0,0,0]
+    private static void DigitCount(int N, int[] count)
+    {
+        Array.Fill(count, 0);
+        while (0 < N)
+        {
+            count[N % 10]++;
+            N /= 10;
+        }
+    }
+
+    //private static readonly HashSet<int> TwoPowers = new HashSet<int> { 
+    //    1, 1 << 1, 1<<2,1<<3,1<<4,1<<5,1<<6,
+    //    1<<7,1<<8,1<<9,1<<10,1<<11,1<<12,1<<13,1<<14,
+    //    1<<15,1<<16,1<<17,1<<18,1<<19,1<<20,1<<21,1<<22,
+    //    1<<23,1<<24,1<<25,1<<26,1<<27,1<<28,1<<29,1<<30,1<<31
+    //};
+}
+/*
+public class Solution {
+    public bool ReorderedPowerOf2(int N)
+    {
+        var target = toOrderedString((uint)N);
+        for (long i = 1; i <= int.MaxValue; i *= 2)
+        {
+            if (target == toOrderedString(i))
+                return true;
+        }
+
+        return false;
+
+        string toOrderedString(long x)
+        {
+            var sb = new StringBuilder();
+            while (x > 0)
+            {
+                var val = x % 10;
+                sb.Append((char)(val + '0'));
+
+                x /= 10;
+            }
+
+            var result = string.Concat(sb.ToString().OrderBy(ch => ch));
+            return result;
+        }
     }
 }
+
+*/
