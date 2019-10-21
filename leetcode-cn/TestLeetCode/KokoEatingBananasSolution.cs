@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
-/*
+﻿/*
 珂珂喜欢吃香蕉。这里有 N 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 H 小时后回来。
 
 珂珂可以决定她吃香蕉的速度 K （单位：根/小时）。每个小时，她将会选择一堆香蕉，从中吃掉 K 根。如果这堆香蕉少于 K 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  
@@ -53,6 +47,61 @@ class KokoEatingBananasSolution
 
     public int MinEatingSpeed(int[] piles, int H)
     {
+        int lowSpeed = 1;
+        int highSpeed = 1000_000_000;
+        while (lowSpeed < highSpeed)
+        {
+            int mid = lowSpeed + (highSpeed - lowSpeed) / 2;
+            if (EatHours(piles, mid) <= H ) highSpeed = mid;
+            else lowSpeed = mid + 1; 
+        }
 
+        return lowSpeed;
+    }
+
+    /// <summary>
+    /// How many hours Koko eat all bananas in with eating speed K?
+    /// </summary>
+    private static int EatHours(int[] piles, int K)
+    {
+        int hours = 0;
+        foreach (int p in piles) hours += ((p - 1) / K + 1);
+        return hours;
     }
 }
+/*
+public class Solution {
+    public int MinEatingSpeed(int[] piles, int H) {
+        var minSpeed = 1;
+            var maxSpedd = piles.Max();
+            var mid = 0;
+            while (minSpeed < maxSpedd)
+            {
+                mid = (minSpeed + maxSpedd) / 2;
+                if (!CanFinish(piles, mid, H))
+                {
+                    minSpeed = mid + 1;
+                }
+                else
+                {
+                    maxSpedd = mid;
+                }
+            }
+            return minSpeed;
+    }
+    
+    private bool CanFinish(int[] piles, int K, int H)
+        {
+            var total = 0;
+            for (var i = 0; i < piles.Length; i++)
+            {
+                if (piles[i] % K != 0)
+                    total++;
+
+                total += piles[i] / K;
+            }
+
+            return total <= H;
+        }
+} 
+*/
