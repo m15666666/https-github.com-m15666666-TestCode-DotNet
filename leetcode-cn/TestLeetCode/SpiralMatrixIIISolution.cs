@@ -60,6 +60,114 @@ class SpiralMatrixIIISolution
 
     public int[][] SpiralMatrixIII(int R, int C, int r0, int c0)
     {
+        int len = R * C;
+        int[][] ret = new int[len][];
+        int count = 0;
 
+        ret[count++] = new int[] { r0, c0 };
+        if (len == 1) return ret;
+
+        int upper1 = 2 * Math.Max(R, C);
+        for (int k = 1; k < upper1; k += 2)
+            for (int i = 0; i < 4; ++i)
+            {  // i: direction index
+                int dk = k + (i / 2);  // number of steps in this direction
+                for (int j = 0; j < dk; ++j)
+                {
+                    r0 += dr[i];
+                    c0 += dc[i];
+                    if (0 <= r0 && r0 < R && 0 <= c0 && c0 < C)
+                    {
+                        ret[count++] = new int[] { r0, c0 };
+                        if (count == len) return ret;
+                    }
+                }
+            }
+
+        throw null;
+    }
+
+    private static readonly int[] dr = new int[] { 0, 1, 0, -1 };
+    private static readonly int[] dc = new int[] { 1, 0, -1, 0 };
+}
+/*
+public class Solution
+{
+    public int[][] SpiralMatrixIII(int R, int C, int r0, int c0)
+    {
+
+        int total = (int)(R * C);
+        int[][] ans = new int[total][];
+        int direction = 0; // 0 - E; 1 - S; 2 - W; 3 - N
+        int[] dr = new int[4] { 0, 1, 0, -1 };
+        int[] dc = new int[4] { 1, 0, -1, 0 };
+
+        int r = r0; // current row index
+        int c = c0; // current columne index
+        int steps = 0;
+
+        ans[0] = new int[2] { r, c };
+
+        for (int i = 1; i < total;)
+        {
+            steps = direction % 2 == 0 ? steps + 1 : steps;
+
+            for (int move = 0; move < steps; move++)
+            {
+                r += dr[direction];
+                c += dc[direction];
+                if (r >= 0 && r < R && c >= 0 && c < C)
+                {
+                    ans[i] = new int[2] { r, c };
+                    i++;
+                }
+            }
+            direction = (direction + 1) % 4;
+        }
+        return ans;
     }
 }
+    
+public class Solution
+{
+    public int[][] SpiralMatrixIII(int R, int C, int r0, int c0)
+    {
+
+        int total = (int)(R * C);
+        int[][] ans = new int[total][];
+        int direction = 0; // 0 - E; 1 - S; 2 - W; 3 - N
+
+        int r = r0; // current row index
+        int c = c0; // current columne index
+        int steps = 0;
+
+        ans[0] = new int[2] { r, c };
+
+        for (int i = 1; i < total;)
+        {
+            steps = direction % 2 == 0 ? steps + 1 : steps;
+
+            for (int move = 0; move < steps; move++)
+            {
+                if (direction == 0) //E
+                    c++;
+                else if (direction == 1)    // S
+                    r++;
+                else if (direction == 2)    // W
+                    c--;
+                else    // N
+                    r--;
+                if (r >= 0 && r < R && c >= 0 && c < C)
+                {
+                    ans[i] = new int[2] { r, c };
+                    i++;
+                }
+            }
+
+            direction = direction == 3 ? 0 : direction + 1;
+        }
+
+        return ans;
+    }
+}
+*/
