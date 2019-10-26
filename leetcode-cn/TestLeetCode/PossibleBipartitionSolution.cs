@@ -55,6 +55,34 @@ class PossibleBipartitionSolution
 
     public bool PossibleBipartition(int N, int[][] dislikes)
     {
+        graph = new List<int>[N + 1];
+        for (int i = 1; i <= N; ++i)
+            graph[i] = new List<int>();
 
+        foreach (int[] edge in dislikes)
+        {
+            graph[edge[0]].Add(edge[1]);
+            graph[edge[1]].Add(edge[0]);
+        }
+
+        for (int node = 1; node <= N; ++node)
+            if (!dislikeStatus.ContainsKey(node) && !Dfs(node, false))
+                return false;
+        return true;
+    }
+
+    private List<int>[] graph;
+    private Dictionary<int, bool> dislikeStatus = new Dictionary<int, bool>();
+
+    private bool Dfs(int node, bool dislike)
+    {
+        if (dislikeStatus.ContainsKey(node)) return dislikeStatus[node] == dislike;
+
+        dislikeStatus.Add(node, dislike);
+
+        foreach (int neighbor in graph[node])
+            if (!Dfs(neighbor, !dislike))
+                return false;
+        return true;
     }
 }
