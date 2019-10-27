@@ -42,6 +42,57 @@ class ConstructBinaryTreeFromPreorderAndPostorderTraversalSolution
 
     public TreeNode ConstructFromPrePost(int[] pre, int[] post)
     {
+        int N = pre.Length;
+        if (N == 0) return null;
+   
+        TreeNode root = new TreeNode(pre[0]);
+        if (N == 1) return root;
 
+        return ConstructFromPrePost(pre.AsSpan(), post.AsSpan());
+    }
+
+    private TreeNode ConstructFromPrePost(Span<int> pre, Span<int> post)
+    {
+        int N = pre.Length;
+        if (N == 0) return null;
+        TreeNode root = new TreeNode(pre[0]);
+        if (N == 1) return root;
+
+        int L = 0;
+        int leftRoot = pre[1];
+        for (int i = 0; i < N; ++i)
+            if (post[i] == leftRoot)
+            {
+                L = i + 1;
+                break;
+            }
+
+        int leftCount = L;
+        root.left = ConstructFromPrePost(pre.Slice(1, leftCount),
+                                         post.Slice(0, leftCount));
+
+        int rightCount = N - L - 1;
+        root.right = ConstructFromPrePost(pre.Slice(L + 1, rightCount),
+                                          post.Slice(L, rightCount));
+        return root;
     }
 }
+/*
+public class Solution {
+    int preIndex=0;
+    int postIndex=0;
+    
+    public TreeNode ConstructFromPrePost(int[] pre, int[] post) {
+        TreeNode root = new TreeNode(pre[preIndex++]);
+        if(root.val!=post[postIndex]){
+            root.left = ConstructFromPrePost(pre,post);
+        }
+        if(root.val!=post[postIndex]){
+            root.right = ConstructFromPrePost(pre,post);
+        }
+        postIndex++;
+        return root;
+    }
+}
+
+*/
