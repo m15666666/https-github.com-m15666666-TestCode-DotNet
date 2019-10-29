@@ -41,6 +41,33 @@ class AllPossibleFullBinaryTreesSolution
 
     public IList<TreeNode> AllPossibleFBT(int N)
     {
+        if (N == 1) return One;
+        if ( N % 2 == 0 ) return Zero;
 
+        if (_cache.ContainsKey(N)) return _cache[N];
+        
+        List<TreeNode> ret = new List<TreeNode>();
+        for (int x = 0; x < N; x++)
+        {
+            int y = N - 1 - x;
+            if (x % 2 == 0 || y % 2 == 0) continue;
+
+            var xSubTree = AllPossibleFBT(x);
+            var ySubTree = AllPossibleFBT(y);
+            foreach (TreeNode left in xSubTree)
+                foreach (TreeNode right in ySubTree)
+                    ret.Add(new TreeNode(0)
+                    {
+                        left = left,
+                        right = right
+                    });
+        }
+
+        _cache.Add(N, ret);
+        return ret;
     }
+
+    private static readonly TreeNode[] Zero = new TreeNode[0];
+    private static readonly TreeNode[] One = new TreeNode[1] { new TreeNode(0) };
+    private readonly Dictionary<int, List<TreeNode>> _cache = new Dictionary<int, List<TreeNode>>();
 }
