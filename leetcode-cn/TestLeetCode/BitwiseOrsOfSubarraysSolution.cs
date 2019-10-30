@@ -59,6 +59,25 @@ class BitwiseOrsOfSubarraysSolution
 
     public int SubarrayBitwiseORs(int[] A)
     {
+        var ret = new HashSet<int>();
+        var current = new HashSet<int>();
+        var current2 = new HashSet<int>();
 
+        foreach ( var v in A)
+        {
+            foreach ( var item in current)
+            {
+                var newV = item | v;
+                if (!current2.Contains(newV)) current2.Add(newV);
+            }
+            if (!current2.Contains(v)) current2.Add(v);
+
+            foreach (var item in current2) if(!ret.Contains(item)) ret.Add(item);
+
+            (current, current2) = (current2,current);
+            current2.Clear();
+        }
+
+        return ret.Count;
     }
 }
