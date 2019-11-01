@@ -54,13 +54,24 @@ class OnlineStockSpanSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
-    public StockSpanner()
+    public OnlineStockSpanSolution()
     {
 
     }
 
+    private readonly Stack<int> _prices = new Stack<int>();
+    private readonly Stack<int> _weights = new Stack<int>();
     public int Next(int price)
     {
+        int w = 1;
+        while ( 0 < _prices.Count && _prices.Peek() <= price )
+        {
+            _prices.Pop();
+            w += _weights.Pop();
+        }
 
+        _prices.Push(price);
+        _weights.Push(w);
+        return w;
     }
 }
