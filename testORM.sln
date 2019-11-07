@@ -87,13 +87,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsFormsBrowser", "Wind
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MQTTBroker", "MQTTBroker\MQTTBroker.csproj", "{FA6C3725-0144-45EE-9D4C-42F9EE315934}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Common20.Test", "Moons.Common20.Test\Moons.Common20.Test.csproj", "{8AE65099-6754-44CA-BB31-98C625186B6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Common20.Test", "Moons.Common20.Test\Moons.Common20.Test.csproj", "{8AE65099-6754-44CA-BB31-98C625186B6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.SingletonProcessInstance.Test", "Moons.SingletonProcessInstance.Test\Moons.SingletonProcessInstance.Test.csproj", "{077580FC-7087-4AEF-9BF1-072DDE383EE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.SingletonProcessInstance.Test", "Moons.SingletonProcessInstance.Test\Moons.SingletonProcessInstance.Test.csproj", "{077580FC-7087-4AEF-9BF1-072DDE383EE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.EquipmentDiagnosis.Core", "Moons.EquipmentDiagnosis.Core\Moons.EquipmentDiagnosis.Core.csproj", "{5E12E20C-D53B-4602-9B7C-8E7397CA0263}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.EquipmentDiagnosis.Core", "Moons.EquipmentDiagnosis.Core\Moons.EquipmentDiagnosis.Core.csproj", "{5E12E20C-D53B-4602-9B7C-8E7397CA0263}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo.CurveFit", "Demo.CurveFit\Demo.CurveFit.csproj", "{AD28DF54-416E-44BD-AC9C-2C02F34193B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demo.CurveFit", "Demo.CurveFit\Demo.CurveFit.csproj", "{AD28DF54-416E-44BD-AC9C-2C02F34193B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ShaSteel.WebAPI.Server", "Test.ShaSteel.WebAPI.Server\Test.ShaSteel.WebAPI.Server.csproj", "{2E3A2DDD-4B5A-4F67-8349-C6DE7846EBA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ShaSteel.WebAPI.Client", "Test.ShaSteel.WebAPI.Client\Test.ShaSteel.WebAPI.Client.csproj", "{7DEAAE17-11F2-48A8-956F-D8B328E2BDA9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ShaSteel.WebAPI.Core", "Test.ShaSteel.WebAPI.Core\Test.ShaSteel.WebAPI.Core.csproj", "{FE927898-AF0A-49F0-99F4-119C7064E949}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -281,6 +287,18 @@ Global
 		{AD28DF54-416E-44BD-AC9C-2C02F34193B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD28DF54-416E-44BD-AC9C-2C02F34193B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD28DF54-416E-44BD-AC9C-2C02F34193B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E3A2DDD-4B5A-4F67-8349-C6DE7846EBA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E3A2DDD-4B5A-4F67-8349-C6DE7846EBA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E3A2DDD-4B5A-4F67-8349-C6DE7846EBA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E3A2DDD-4B5A-4F67-8349-C6DE7846EBA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DEAAE17-11F2-48A8-956F-D8B328E2BDA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DEAAE17-11F2-48A8-956F-D8B328E2BDA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DEAAE17-11F2-48A8-956F-D8B328E2BDA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DEAAE17-11F2-48A8-956F-D8B328E2BDA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE927898-AF0A-49F0-99F4-119C7064E949}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE927898-AF0A-49F0-99F4-119C7064E949}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE927898-AF0A-49F0-99F4-119C7064E949}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE927898-AF0A-49F0-99F4-119C7064E949}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
