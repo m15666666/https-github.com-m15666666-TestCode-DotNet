@@ -8,7 +8,7 @@ using Test.ShaSteel.WebAPI.Core;
 
 namespace Test.ShaSteel.WebAPI.Server.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class VDiagnosisController : ControllerBase
     {
@@ -19,9 +19,9 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/VDiagnosis/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+
+        [HttpPost]
+        public string A1()
         {
             return "value";
         }
@@ -30,13 +30,14 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
         [HttpPost]
         public VibMetaDataOutput VibMetaData([FromBody] VibMetaDataInput value)
         {
-            return new VibMetaDataOutput { 
+            return new VibMetaDataOutput
+            {
                 WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
                 CurrLength = "0",
             };
 
-//            return @"{
-//	'WaveTag': '9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f',
+            //            return @"{
+            //	'WaveTag': '9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f',
 
             //    'CurrLength': 0
 
