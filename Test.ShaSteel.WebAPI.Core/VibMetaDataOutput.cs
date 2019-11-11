@@ -6,6 +6,6 @@ namespace Test.ShaSteel.WebAPI.Core
     {
         public string WaveTag { get; set; }
 
-        public string CurrLength { get; set; }
+        public int CurrLength { get; set; }
     }
 }

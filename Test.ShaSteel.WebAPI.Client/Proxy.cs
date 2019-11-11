@@ -48,9 +48,16 @@ namespace Test.ShaSteel.WebAPI.Client
 
         /// <returns>Success</returns>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<object> VibMetaDataAsync(VibMetaDataInput input)
+        public System.Threading.Tasks.Task<VibMetaDataOutput> VibMetaDataAsync(VibMetaDataInput input)
         {
-            return PostAsync<VibMetaDataInput, object>("/api/VDiagnosis/VibMetaData",input, System.Threading.CancellationToken.None);
+            return PostAsync<VibMetaDataInput, VibMetaDataOutput>("/api/VDiagnosis/VibMetaData",input, System.Threading.CancellationToken.None);
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<VibMetaDataOutput> VibWaveDataAsync(VibWaveDataInput p, byte[] input)
+        {
+            return PostAsync<byte[], VibMetaDataOutput>($"/api/VDiagnosis/VibWaveData?WaveTag={p.WaveTag}&Length={p.Length}&CurrIndex={p.CurrIndex}&BlockSize={p.BlockSize}", input, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>

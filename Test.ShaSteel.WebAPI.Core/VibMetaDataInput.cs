@@ -9,13 +9,13 @@ namespace Test.ShaSteel.WebAPI.Core
         public string FullPath { get; set; }
 
         public string MeasDate { get; set; }
-        public string FloatMeasValue { get; set; }
-        public string WaveLength { get; set; }
-        public string SignalType { get; set; }
-        public string SampleRate { get; set; }
-        public string RPM { get; set; }
+        public float MeasValue { get; set; }
+        public int WaveLength { get; set; }
+        public int SignalType { get; set; }
+        public float SampleRate { get; set; }
+        public float RPM { get; set; }
         public string Unit { get; set; }
-        public string ConvertCoef { get; set; }
-        public string Resolver { get; set; }
+        public float ConvertCoef { get; set; } = 0.39f;
+        public int Resolver { get; set; } = 1;
     }
 }

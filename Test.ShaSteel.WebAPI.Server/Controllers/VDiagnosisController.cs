@@ -33,7 +33,7 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
             return new VibMetaDataOutput
             {
                 WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
-                CurrLength = "0",
+                CurrLength = 0,
             };
 
             //            return @"{
@@ -52,7 +52,7 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
             return new VibMetaDataOutput
             {
                 WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
-                CurrLength = "0"
+                CurrLength = 0
             };
 
             //            return @"{
@@ -66,12 +66,14 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
 
         // POST: api/VDiagnosis/VibWaveData
         [HttpPost]
-        public VibMetaDataOutput VibWaveData([FromBody] short[] value)
+        public VibMetaDataOutput VibWaveData([FromQuery] /*VibWaveDataInput VibMetaDataOutput*/string wavetag, 
+            [FromQuery] string length, [FromQuery] string currIndex, [FromQuery] string blockSize, 
+            [FromBody] byte[] value)
         {
             return new VibMetaDataOutput
             {
-                WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
-                CurrLength = "0"
+                WaveTag = string.Join('-',value),
+                CurrLength = value.Length
             };
 
             //            return @"{
@@ -88,7 +90,7 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
             return new VibMetaDataOutput
             {
                 WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
-                CurrLength = "0"
+                CurrLength = 0
             };
 
             //            return @"{
