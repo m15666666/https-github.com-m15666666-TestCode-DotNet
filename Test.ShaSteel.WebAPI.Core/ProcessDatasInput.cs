@@ -17,6 +17,6 @@ namespace Test.ShaSteel.WebAPI.Core
     {
         public string MeasDate { get; set; }
 
-        public string MeasValue { get; set; }
+        public float MeasValue { get; set; }
     }
 }

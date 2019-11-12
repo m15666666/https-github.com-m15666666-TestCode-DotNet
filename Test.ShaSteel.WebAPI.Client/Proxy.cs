@@ -12,6 +12,7 @@
 
 namespace Test.ShaSteel.WebAPI.Client
 {
+    using Moons.Common20;
     using Test.ShaSteel.WebAPI.Core;
     using System = global::System;
 
@@ -53,11 +54,16 @@ namespace Test.ShaSteel.WebAPI.Client
             return PostAsync<VibMetaDataInput, VibMetaDataOutput>("/api/VDiagnosis/VibMetaData",input, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Success</returns>
-        /// <exception cref="ApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<VibMetaDataOutput> VibWaveDataAsync(VibWaveDataInput p, byte[] input)
         {
             return PostAsync<byte[], VibMetaDataOutput>($"/api/VDiagnosis/VibWaveData?WaveTag={p.WaveTag}&Length={p.Length}&CurrIndex={p.CurrIndex}&BlockSize={p.BlockSize}", input, System.Threading.CancellationToken.None);
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="ApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<object> ProcessDatasAsync(ProcessDatasInput input)
+        {
+            return PostAsync<ProcessDatasInput, object>($"/api/VDiagnosis/ProcessDatas", input, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -133,7 +139,8 @@ namespace Test.ShaSteel.WebAPI.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(input, _settings.Value));
+                    var stringContent = Newtonsoft.Json.JsonConvert.SerializeObject(input, _settings.Value);
+                    var content_ = new System.Net.Http.StringContent(stringContent);
                     content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
@@ -141,6 +148,10 @@ namespace Test.ShaSteel.WebAPI.Client
 
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
+
+                    TraceUtils.Info($"request: {url_}.");
+                    TraceUtils.Info($"body: {stringContent}.");
+
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
 
@@ -157,15 +168,20 @@ namespace Test.ShaSteel.WebAPI.Client
                         ProcessResponse(client_, response_);
 
                         var status_ = ((int)response_.StatusCode).ToString();
+
+                        TraceUtils.Info($"status: {status_}.");
+
                         if (status_ == "200")
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<TOutput>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
-                        else
-                        if (status_ != "200" && status_ != "204")
+                        else if (status_ != "200" && status_ != "204")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                            TraceUtils.Info($"responseData_:{responseData_}.");
+
                             throw new ApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
@@ -202,12 +218,15 @@ namespace Test.ShaSteel.WebAPI.Client
         {
             if (response == null || response.Content == null)
             {
+                TraceUtils.Info($"ReadObjectResponseAsync response empty return.");
                 return new ObjectResponseResult<T>(default(T), string.Empty);
             }
 
             if (ReadResponseAsString)
             {
                 var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                TraceUtils.Info($"ReadResponseAsString, responseText:{responseText}.");
+
                 try
                 {
                     var typedBody = Newtonsoft.Json.JsonConvert.DeserializeObject<T>(responseText, JsonSerializerSettings);
@@ -229,6 +248,11 @@ namespace Test.ShaSteel.WebAPI.Client
                     {
                         var serializer = Newtonsoft.Json.JsonSerializer.Create(JsonSerializerSettings);
                         var typedBody = serializer.Deserialize<T>(jsonTextReader);
+
+                        var receivedJson = Newtonsoft.Json.JsonConvert.SerializeObject(typedBody);
+
+                        TraceUtils.Info($"ReadResponseAsJson, receivedJson:{receivedJson}.");
+
                         return new ObjectResponseResult<T>(typedBody, string.Empty);
                     }
                 }

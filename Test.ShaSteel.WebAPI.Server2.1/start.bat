@@ -1,0 +1,1 @@
+SET ASPNETCORE_URLS=http://*:60611 && dotnet Test.ShaSteel.WebAPI.Server2.1.dll
