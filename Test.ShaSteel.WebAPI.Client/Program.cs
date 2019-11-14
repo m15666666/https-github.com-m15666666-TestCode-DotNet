@@ -43,34 +43,34 @@ namespace Test.ShaSteel.WebAPI.Client
                     {
                         var metaOutput = await client.VibMetaDataAsync(new VibMetaDataInput
                         {
-                            Code = "abcd",
-                            FullPath = "a-b-c-d",
-                            MeasDate = DateTime.Now.ToString(TimePattern),
-                            MeasValue = 1.1f,
-                            WaveLength = 2, // 波形长度，采样点数
-                            SignalType = 0, //信号类型 0-加速度 1-速度 2-位移 
-                            SampleRate = 256,
-                            RPM = 1000,
+                            Code = "01030200061410152",
+                            FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                            MeasDate = "2019-11-12 16:19:22",//DateTime.Now.ToString(TimePattern),
+                            MeasValue = 186.27f,
+                            WaveLength = 1024, // 波形长度，采样点数
+                            SignalType = 1, //信号类型 0-加速度 1-速度 2-位移 
+                            SampleRate = 5120,
+                            RPM = 0,
                             Unit = "mm/s", // 工程单位，速度：mm/s，加速度：m/s²，位移：um
                             ConvertCoef = 0.39f,
                             Resolver = 1,
-                        });
+                        });// ;
 
 
                         //WaveTag=9e3e009a-f138-dcd6-6323-c768dc533b2f&Length=131072&CurrIndex=0&BlockSize=131072
                         VibWaveDataInput waveDataInput = new VibWaveDataInput
                         {
-                            WaveTag = metaOutput.WaveTag,
-                            Length = 4,
+                            WaveTag = metaOutput.Data.WaveTag,
+                            Length = 1024 * 2,
                             CurrIndex = 0,
-                            BlockSize = 4
+                            BlockSize = 1024 * 2
                         };
-                        var waveDataOutput = await client.VibWaveDataAsync(waveDataInput, new byte[] { 1, 0, 1, 0 });
+                        var waveDataOutput = await client.VibWaveDataAsync(waveDataInput, new byte[2048]);
 
                         ProcessDatasInput processDatasInput = new ProcessDatasInput
                         {
-                            Code = "abcd",
-                            FullPath = "a-b-c-d",
+                            Code = "01030200061410152",
+                            FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
                             TSDatas = new TSDataInput[] { 
                                 new TSDataInput{
                                     MeasDate = DateTime.Now.ToString(TimePattern),
@@ -81,7 +81,7 @@ namespace Test.ShaSteel.WebAPI.Client
                         };
 
                         var processDatasOutput = await client.ProcessDatasAsync(processDatasInput);
-                        if(processDatasOutput != null && processDatasOutput.ToString() == "-1")
+                        if(processDatasOutput != null && processDatasOutput.Data != null && processDatasOutput.Data.Code == -1)
                         {
                             // error
                         }

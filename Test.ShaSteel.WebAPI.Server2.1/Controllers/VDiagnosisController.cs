@@ -29,63 +29,54 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
 
         // POST: api/VDiagnosis/VibMetaData
         [HttpPost]
-        public VibMetaDataOutput VibMetaData([FromBody] VibMetaDataInput value)
+        public VibMetaDataOutputDto VibMetaData([FromBody] VibMetaDataInput value)
         {
             var content = Newtonsoft.Json.JsonConvert.SerializeObject(value);
             TraceUtils.Info($"VibMetaData value:{content}");
 
-            return new VibMetaDataOutput
-            {
-                WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
-                CurrLength = 0,
-            };
-
-            //            return @"{
-            //	'WaveTag': '9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f',
-
-            //    'CurrLength': 0
-
-            //    }
-            //";
-        }
-
-        // POST: api/VDiagnosis/VibMetaData
-        [HttpPost]
-        public VibMetaDataOutput VibMetaData2([FromBody] string value)
-        {
-            return new VibMetaDataOutput
-            {
-                WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
-                CurrLength = 0
+            return new VibMetaDataOutputDto {
+                Status = 200,
+                Data = new VibMetaDataOutput
+                {
+                    WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
+                    CurrLength = 0,
+                }
             };
         }
+
 
         // POST: api/VDiagnosis/VibWaveData
         [HttpPost]
-        public VibMetaDataOutput VibWaveData([FromQuery] /*VibWaveDataInput VibMetaDataOutput*/string wavetag, 
+        public VibMetaDataOutputDto VibWaveData([FromQuery] /*VibWaveDataInput VibMetaDataOutput*/string wavetag, 
             [FromQuery] string length, [FromQuery] string currIndex, [FromQuery] string blockSize, 
             [FromBody] byte[] value)
         {
             TraceUtils.Info($"VibWaveData ({wavetag},{length},{currIndex},{blockSize},{string.Join('-', value)})");
 
-            return new VibMetaDataOutput
+            return new VibMetaDataOutputDto
             {
-                WaveTag = string.Join('-',value),
-                CurrLength = value.Length
+                Status = 200,
+                Data = new VibMetaDataOutput
+                {
+                    WaveTag = wavetag,
+                    CurrLength = value.Length,
+                }
             };
         }
         [HttpPost]
-        public object ProcessDatas([FromBody] ProcessDatasInput value)
+        public ProcessDatasOutputDto ProcessDatas([FromBody] ProcessDatasInput value)
         {
-            if(value.Code == "-1") return -1;
-
             var content = Newtonsoft.Json.JsonConvert.SerializeObject(value);
             TraceUtils.Info($"ProcessDatas value:{content}");
 
-            return new VibMetaDataOutput
+            return new ProcessDatasOutputDto
             {
-                WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f",
-                CurrLength = 0
+                Status = 200,
+                Data = new ProcessDatasOutput
+                {
+                    Code = 1,
+                    Success = true
+                }
             };
         }
     }

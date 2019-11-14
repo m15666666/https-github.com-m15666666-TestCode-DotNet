@@ -1,0 +1,752 @@
+2019-11-14 08:24:14,957 INFO  DefaultLogger Starting SampleServer.exe. time stamp: 2019-11-12. main branch. 
+ 
+2019-11-14 08:24:15,089 DEBUG DefaultLogger Start CacheData UpdateData(Moons.PermanentCache.HelpFileUrlMap). 
+ 
+2019-11-14 08:24:15,090 DEBUG DefaultLogger End CacheData UpdateData(Moons.PermanentCache.HelpFileUrlMap). 
+ 
+2019-11-14 08:24:15,102 INFO  DefaultLogger App.config(C:\inetpub\wwwroot\xst190401\Temp\OnlineSample\SampleServer\AppCommon.config) not exist. 
+ 
+2019-11-14 08:24:15,107 INFO  DefaultLogger App.config(C:\inetpub\wwwroot\xst190401\Temp\OnlineSample\SampleServer\AppZX.config) not exist. 
+ 
+2019-11-14 08:25:54,651 DEBUG DefaultLogger Start CacheData UpdateData(Moons.PermanentCache.ZXAlmLevelMapDatas). 
+ 
+2019-11-14 08:25:54,655 DEBUG DefaultLogger End CacheData UpdateData(Moons.PermanentCache.ZXAlmLevelMapDatas). 
+ 
+2019-11-14 08:25:56,072 DEBUG DefaultLogger Start CacheData UpdateData(Moons.PermanentCache.EngUnits). 
+ 
+2019-11-14 08:25:56,080 DEBUG DefaultLogger End CacheData UpdateData(Moons.PermanentCache.EngUnits). 
+ 
+2019-11-14 08:27:14,898 INFO  DefaultLogger ShaSteel ExportDatas begin ... 
+ 
+2019-11-14 08:27:14,901 INFO  DefaultLogger ShaSteelExportDataUrl: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/ 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000167, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000167, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000171, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000171, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000173, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000173, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000174, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000174, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000175, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000175, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000177, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000177, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000178, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000178, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,909 INFO  DefaultLogger ShaSteel ExportData pointID:1000176, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000176, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000179, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000179, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000180, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000180, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000168, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000168, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000170, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000170, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000169, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000169, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000183, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000183, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000182, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000182, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000184, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000184, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000186, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000186, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000185, startTime:20191114082551, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000185, 0, 20191114082551 - 20191114082707, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000172, startTime:20191114082651, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000172, 0, 20191114082651 - 20191114082651, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportData pointID:1000181, startTime:20191114082651, endTime: 20191114082214,now: 20191114082214 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000181, 0, 20191114082651 - 20191114082651, 20191114082214) 
+ 
+2019-11-14 08:27:14,910 INFO  DefaultLogger ShaSteel ExportDatas finish. 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas begin ... 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteelExportDataUrl: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/ 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000167, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000167, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000171, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000171, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000173, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000173, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000174, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000174, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000175, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000175, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000177, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000177, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000178, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000178, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000176, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000176, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000179, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000179, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000180, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000180, 0, 20191114082551 - 20191114083005, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000168, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000168, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000170, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000170, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000169, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000169, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000183, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000183, 0, 20191114082551 - 20191114083005, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000182, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000182, 0, 20191114082551 - 20191114083011, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000184, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000184, 0, 20191114082551 - 20191114083005, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000186, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000186, 0, 20191114082551 - 20191114083005, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000185, startTime:20191114082551, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000185, 0, 20191114082551 - 20191114083005, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000172, startTime:20191114082651, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000172, 0, 20191114082651 - 20191114082855, 20191114082514) 
+ 
+2019-11-14 08:30:14,890 INFO  DefaultLogger ShaSteel ExportData pointID:1000181, startTime:20191114082651, endTime: 20191114082514,now: 20191114082514 
+ 
+2019-11-14 08:30:14,891 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000181, 0, 20191114082651 - 20191114082855, 20191114082514) 
+ 
+2019-11-14 08:30:14,891 INFO  DefaultLogger ShaSteel ExportDatas finish. 
+ 
+2019-11-14 08:33:14,859 INFO  DefaultLogger ShaSteel ExportDatas begin ... 
+ 
+2019-11-14 08:33:14,859 INFO  DefaultLogger ShaSteelExportDataUrl: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/ 
+ 
+2019-11-14 08:33:14,859 INFO  DefaultLogger ShaSteel ExportData pointID:1000167, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:14,862 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000167, return. 
+ 
+2019-11-14 08:33:14,862 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000167, 0, 20191114082551 - 20191114083309, 20191114082814) 
+ 
+2019-11-14 08:33:14,862 INFO  DefaultLogger ShaSteel ExportData pointID:1000171, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:15,096 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:15,096 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:25:51","MeasValue":0.0648,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.519403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:15,555 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:15,635 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"36742b1b-d71e-4d5d-b7ca-948d8fdce233","CurrLength":0}}. 
+ 
+2019-11-14 08:33:15,643 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=36742b1b-d71e-4d5d-b7ca-948d8fdce233&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:15,643 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:15,724 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:15,724 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"36742b1b-d71e-4d5d-b7ca-948d8fdce233","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:15,743 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:15,743 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:25:57","MeasValue":0.0752,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":4.92716435E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:15,805 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:15,806 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"c44dbd44-cebd-4d17-af8f-758150bc2724","CurrLength":0}}. 
+ 
+2019-11-14 08:33:15,806 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=c44dbd44-cebd-4d17-af8f-758150bc2724&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:15,806 INFO  DefaultLogger body: "3/Pf89/z8PnP7d/z8Pnf867hvue+577nz+2+543VnduN1Y3VnduN1b7nruGN1Y3VjdV8z43VnduN1Z3bfM98z67hjdWu4a7hjdWd253bjdWu4Z3bjdWu4b7nz+2u4b7nvued267hz+3f8/D5AAC+577nruF8z67hfM+N1c/tfM+N1Z3bjdWd253bjdWd21vDW8NryVvDruGN1XzPOrdryXzPSr1ryWvJndtbw2vJjdV8z3zPa8lryY3VnduN1Z3bfM98z53bnduN1Y3Vz+2d253bvue+577nnduu4Z3bjdWN1XzPW8Od23zPa8l8z1vDfM9ryWvJfM86t1vDW8Nbw0q9fM9bw0q9W8Nbw3zPOrdKvVvDW8Nbw2vJW8NryVvDSr1ryUq9W8NryWvJW8NryWvJfM+N1Y3VfM+N1XzPjdV8z3zPa8lbw0q9W8Nbwzq3Sr06t0q9Sr1KvTq3Sr06t0q9OrcpsRmrOrcpsTq3KbEpsTq3Orc6t0q9KbEpsWvJSr1KvVvDGatbw1vDfM9bwzq3fM9ryUq9a8lbw43VjdVryWvJW8NryWvJOrcpsTq3Orc6tzq3KbE6tymxOrdbwwilKbE6t0q9CKUIpSmxSr0ZqymxKbEZqymxKbEpsUq9KbEpsTq3KbEpsVvDKbE6t2vJW8NKvVvDSr1KvWvJa8lbw1vDa8lryVvDa8lbw0q9W8N8z0q9KbFKvSmxSr1KvUq9Sr1KvVvDSr1KvRmrSr1bw2vJSr0psSmxKbE6tymxSr1bw0q9Sr1KvVvDKbF8z3zPW8Nbw2vJW8Nbw3zPa8mN1VvDfM+N1Y3VruGd243VnduN1Y3Va8l8z3zPjdVKvWvJjdVryVvDW8Nbw3zPa8lryUq9W8NKvUq9W8Nbw0q9a8lKvWvJa8lbw1vDSr1bw43Va8lryWvJjdVryY3Vndt8z53bndud267hnduN1c/tvue+553bvued253bndud253bfM+u4WvJa8mN1XzPW8N8z43VjdV8z3zPndtbw3zPndud22vJfM+N1WvJjdV8z43VnduN1a7hndu+58/truGu4b7nnduu4a7hruG+577nvueu4d/zruG+553bruG+567hruGN1Z3bnduu4XzPjdWN1WvJjdV8z2vJa8lbw43VfM9ryY3VW8NKvWvJfM9bw1vDW8NryUq9fM9bw1vDa8lbw3zPW8NryXzPfM98z43VfM+N1XzPjdWd23zPndud267hjdWd22vJjdV8z3zPa8lbw3zPW8N8z53bW8Nbw0q9Sr1bw2vJfM98z0q9Sr1bw1vDSr18z2vJa8lKvVvDa8lryWvJjdV8z53ba8mN1Y3Va8mN1Z3bjdWd267hruGu4b7nz+3f88/truHP7b7nvued267hruG+543VjdWN1a7hjdV8z3zPjdWd22vJvued253bndud253bfM+u4Y3Vndt8z53bjdWN1Z3bvueu4c/truGu4a7h3/PP7b7nvuff8/D5z+0QBvD58Pnw+RAGAADw+fD5AAAAAN/zEAbw+QAAz+3f88/t8Pnw+QAAvufP7c/t3/PP7SEMvufP7fD5z+3w+c/t8PkQBgAA8Pnw+fD5AAAhDAAAAAAAABAGUh4AABAGMRIxEiEMMRIhDEIYIQwxEkIYUh5CGEIYQhghDCEMEAYhDBAGAAAxEgAAAAAhDAAAAAAAABAGEAYQBhAGEAYQBvD5EAYAAAAAEAYAAAAA8PkAABAG8PkQBiEMAAAAACEMIQwQBjES8PkhDAAAIQwhDBAGEAYQBjESEAYxEjESEAYAACEM8PkQBhAGEAbw+c/t8Pnf89/zAADP7QAAz+3w+b7n3/PP7fD58Pnf89/zvuff877nz+2u4fD53/PP7c/tz+3w+d/zz+3f8wAA8Pnf89/zz+3P7d/z8PkQBvD5IQzP7fD58Pnf877n3/Ou4c/truGd28/tjdWN1a7hjdV8z53bfM+N1WvJjdWN1Y3VjdWd267hfM98z2vJa8l8z1vDjdWN1VvDjdVbw3zPndtryY3Vndt8z3zPfM98z43VjdV8z43VjdWN1Y3Vndt8z3zPW8NKvVvDOrc6tzq3W8N8z0q9OrdKvUq9Orc6txmrOrcZqzq3GasIpSmxOrf3nimxKbEIpSmxCKUZq0q9OrcZq0q9OrcpsSmxKbFKvTq3OrdryUq9OrdKvTq3Ordbwzq3a8kpsUq9OrcIpQilKbH3nhmrKbH3nveeCKUIpQil55j3nvee957nmAil957nmOeY9573nvee1pLGjAil55gIpfee55gIpeeYCKX3nsaM55jnmNaSGav3ngilCKUZqzq3GaspsSmxGavnmBmr55jnmOeY1pLGjNaS55i1hsaM1pLnmMaMxozWktaS55jWktaSxoznmNaStYalgOeY55jGjNaS957nmMaMCKXGjAil1pL3ngil1pIIpSmx954IpSmx954IpRmrCKUpsRmrCKX3njq3xowpsdaS55j3nsaM1pL3nueY9573ntaS1pLnmNaS9573nueY1pL3nhmr55jWkueY1pL3ngil1pL3nsaMCKX3nueY55j3ngilCKUpsQilCKU6tzq3Gas6tymxW8M6tymxSr0IpSmxKbEpsQilKbEIpRmrGasZqxmrKbEZqwilGasZq/eeSr0IpSmxGatKvTq3CKUpsQilGatbwymxKbE6t1vDW8M6txmrW8Nbw0q9fM9KvVvDW8NryVvDjdU=". 
+ 
+2019-11-14 08:33:15,897 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:15,897 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"c44dbd44-cebd-4d17-af8f-758150bc2724","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:15,922 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:15,922 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:02","MeasValue":0.0634,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.75403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:15,974 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:15,974 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"ae09e274-c7ac-4f1a-9c79-480578873b74","CurrLength":0}}. 
+ 
+2019-11-14 08:33:15,974 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=ae09e274-c7ac-4f1a-9c79-480578873b74&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:15,974 INFO  DefaultLogger body: "FfA02EjINNgq4D7QPtAf6DTYPtAq4DTYFfAq4B/oKuAq4CrgFfAq4CrgH+gq4Av4KuAV8Av4NNg02B/oNNg+0D7QNNg02D7QPtBIyD7QU8A02D7QSMhduD7QPtA02F24U8BIyF24U8BduD7QH+hduF24U8BIyDTYXbhduEjIZ7BIyD7QSMg+0EjISMg02D7QPtA02DTYKuA02D7QNNg02FPAU8BduEjIU8BTwFPAU8BnsF24SMhxqHGoU8BTwGewSMh8oGewZ7B8oF24Z7BduEjIZ7BTwF24XbhduGewXbhIyGewXbhIyGewU8BIyDTYSMhTwEjIU8BTwD7QPtBTwEjISMhTwHGoU8BduFPAZ7BnsHygcahxqGewcah8oHGofKCGmF24kJBxqHygZ7BxqHyghphnsHygZ7B8oIaYhpiGmIaYcah8oF24hphxqHGoU8CGmHGocah8oF24U8BnsF24U8BIyFPAcahduFPAhpiGmF24fKBxqIaYfKBxqJCQhphnsHygcaiGmJCQcah8oIaYfKB8oHygcaiQkIaYfKCQkJCQfKB8oHGocahxqF24XbhduGewfKBduD7QfKBTwF24U8BIyDTYXbhIyFPASMhduGewPtBxqIaYcahxqGewU8BxqHGoXbhxqHGofKCGmHyghphxqHGohpiGmHGokJB8oGewfKClgJCQcah8oIaYZ7BnsFPAcahxqF24XbhnsF24Z7BnsGewSMhTwHGoSMhTwF24XbhnsF24Z7BduFPAcahduHygZ7BnsGewmohxqHGohphxqHygcahnsHygcahIyJCQcahxqHGoZ7B8oGewSMhxqF24XbhduHGoU8BduF24SMhIyD7QXbhnsD7QPtA+0DTYPtA02DTYNNg02EjIPtBIyF24SMhIyFPASMhTwF24XbhTwF24PtBTwGewSMhTwF24Z7BxqF24XbhduFPAcahnsGewPtBIyEjIU8BTwEjIXbhduEjIPtBIyFPASMgq4DTYNNgf6D7QKuAq4D7QKuAq4B/oH+g+0DTYH+g02DTYPtBTwEjIXbhIyDTYPtBIyEjIXbhIyD7QPtA+0D7QXbg+0FPAPtA02D7QKuA+0D7QNNgf6DTYNNgV8CrgFfAf6DTYH+gq4Av4H+gV8BXwH+gV8BXwFfAAABXwKuAV8Av4H+g+0BXwH+hIyB/oSMgq4DTYKuA02DTYPtA02D7QKuAq4DTYPtA02EjIKuAq4EjINNgq4DTYPtAq4B/oKuAf6B/oKuA02AAAFfAq4BXwFfAq4Av4FfAL+B/oH+gV8BXwH+gq4B/oH+gf6Av4KuAq4D7QH+g02DTYNNg02D7QSMg+0D7QNNg+0CrgNNg02D7QKuA02CrgNNgq4BXwNNgf6DTYH+gf6B/oFfAq4B/oH+gV8B/oC/gL+BXwC/gL+Av4AAAL+AAAC/gV8Av4H+gf6B/oNNgq4CrgKuA+0EjINNg+0DTYPtA02D7QPtA+0F24PtAq4D7QSMg+0EjIPtBIyD7QKuBIyD7QPtAq4B/oKuAq4CrgNNg02DTYH+gf6B/oNNgq4B/oFfAq4BXwNNg02CrgKuA02BXwNNg+0D7QXbhIyDTYPtBTwFPAU8A02FPAU8BTwEjISMhIyF24PtBduEjIU8BTwCrgSMhnsDTYH+g+0CrgNNg02DTYPtAq4CrgPtA02CrgSMgf6CrgH+gq4DTYH+g02D7QPtA02D7QSMhIyEjIXbhduFPAXbhduEjIU8BduEjIZ7BnsF24XbhduEjIXbhTwGewU8A02F24cahduGewZ7BTwF24U8BIyFPAXbhnsEjINNhTwD7QSMhIyFPASMg+0DTYSMhduF24Z7BduFPAZ7BnsGewXbh8oGewfKBnsHGohphxqIaYfKBxqHygcaiQkHygZ7BxqHGoZ7CGmHGoXbhnsHygZ7BnsHGocahxqF24Z7BduFPAXbh8oF24U8BduFPAU8BnsF24U8BTwF24U8BxqGewhphxqF24hpiQkHGocahxqIaYkJCQkIaYkJCQkHygcah8oHGomoiGmIaYfKB8oHGocaiGmHGohphnsJCQhphnsHyghphxqGewfKBduF24XbhTwF24XbhnsGewXbhduF24Z7BxqHygZ7B8oGewZ7BxqGewhpiGmHGohphxqIaYfKBnsHygcah8oGewhphxqGewfKBnsHGoZ7BxqF24Z7BxqFPAZ7BduHGoZ7BnsF24XbhTwD7QU8BduDTYSMhTwEjIPtBIyFPASMhTwEjIU8BTwF24Z7BIyHGocahduGewcahduHGocahnsHGoXbhTwF24Z7B8oHGoZ7BduHygU8BnsF24cahIyFPASMhTwF24PtBTwEjIPtBduFPAPtAq4FPAXbgq4D7QNNg+0EjISMhduFPASMhIyFPAPtBTwFPASMhduFPASMhduGewXbhnsF24Z7BnsEjIXbhnsFPASMhnsEjISMg+0D7QSMg02FPAPtBTwDTYPtA02D7QNNg02DTYNNg02DTYH+g+0DTYKuAq4DTYPtBIyFPAPtBTwEjIXbhIyEjIZ7BnsEjIXbhTwGewU8BTwF24Z7BIyGewXbhTwF24XbhnsEjIXbhIyF24SMhduFPANNg+0FPAXbhIyD7QSMhIyD7QU8BIyB/oPtA+0B/oNNgq4D7QPtA+0DTYU8BTwEjISMg02F24U8A+0FPASMhTwHGoU8BTwGewSMhTwF24U8A=". 
+ 
+2019-11-14 08:33:16,043 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,043 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"ae09e274-c7ac-4f1a-9c79-480578873b74","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:16,064 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:16,064 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:08","MeasValue":0.0611,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:16,110 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,110 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"1213115f-33fc-4b87-a5fb-69a5198f12f2","CurrLength":0}}. 
+ 
+2019-11-14 08:33:16,111 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=1213115f-33fc-4b87-a5fb-69a5198f12f2&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:16,111 INFO  DefaultLogger body: "U8BryYTShNJTwJ3bOrdTwJ3bU8C25GvJa8mE0oTSndtryYTShNKE0p3bhNLP7VPAz+2E0p3bz+2d27bkz+3o9p3bz+225Lbka8md27bkhNJryWvJU8BryWvJU8BTwITSU8A6twilOreE0jq3Orc6tzq3Ia46tyGua8k6tzq3hNI6twilIa46tzq3Ia5ryWvJOrdTwFPAU8BryTq3Ia6E0mvJa8lryYTShNKd2zq3ndtTwGvJU8BryTq3Ia46tyGuCKUhrgilIa4IpdaSOrchru+b75vvm++bCKUIpQil1pLWkiGuOrc6t++bIa46t1PA75shrlPAIa4Ipe+bOrdTwITSU8A6t2vJhNIhrlPAa8lTwDq3U8A6t1PAOrchriGuIa46twil1pIIpQilpYAIpQil1pIIpQil75vvm72JpYDvm++bIa4IpdaSCKUhrgil75vWku+bCKUIpe+bIa7Wku+bCKXvmwilCKUhriGuIa4hrjq3Ia5TwFPAU8Ahrjq3Ia46twilCKUIpe+bCKUIpQil1pLvmwil75vvm++bIa7vm9aSCKW9ie+bOrfWktaSCKXvm++b75vvmwilCKXvmyGuCKUIpTq3CKUhriGuU8BryYTSIa625Dq3U8BTwGvJa8khrmvJ75shriGuIa5TwO+bIa7WktaSIa4Ipe+bCKUhrgil1pLvm++b75sIpQil75ulgAil1pIhru+bCKUhrgilIa4Ipe+bCKUIpSGuOrchriGuU8A6tyGuOrdTwFPAOrcIpWvJU8A6twilIa4hrlPA1pIIpSGuCKXvmwilCKXvmzq3Ia4IpSGuCKU6twil75s6tzq3a8nvmwil75sIpQilIa46tyGuCKU6tyGuIa5TwCGuU8A6t2vJa8lryYTSa8lTwITSa8mE0p3bU8CE0iGuhNJryQilOrdTwDq3Orc6tzq3CKU6t1PAOrchrgilU8AhrgilIa4hrjq3hNIIpTq375shrjq3U8A6tzq3OrdTwDq3Orc6t4TShNIhrmvJa8m25ITSnduE0oTSU8CE0oTSnduE0oTStuRTwDq3U8BTwGvJa8lryVPAU8A6tzq3Ia46tzq3U8BTwFPAOrdrySGuU8BTwITSU8BryTq3U8BryWvJU8BryZ3ba8lryYTStuRTwLbkz+2E0p3bz+2d27bkAACd2+j2ndtryc/tnduE0rbkU8CE0oTSOrdryYTSIa5TwFPAU8BryVPAU8BTwDq3a8khrjq3hNJTwDq3a8lTwCGuU8CE0lPAU8BryYTSa8lTwITSa8k6t4TSU8Cd28/ta8md22vJhNKE0rbka8md253ba8m25GvJa8k6t4TSa8k6t1PAOrc6twilU8BTwCGuOrc6tzq3a8k6twilOrc6tzq3OrchrmvJOrc6t2vJCKVryWvJa8md21PAa8mE0p3bhNJryWvJtuSd27bkhNK25Lbkz+3P7YTSndud22vJa8lTwJ3ba8lTwDq3OrcIpWvJU8A6tzq3Orc6tyGuU8BTwFPAa8lTwAilU8A6tzq3a8k6t2vJa8k6tyGundtTwITSz+1TwITShNKE0oTShNKd24TStuSd253b6PZryej2tuSE0oTSa8lryWvJOreE0jq3a8lryVPAU8A6t1PAa8k6t1PAa8lrySGuhNIIpVPAa8lTwFPAa8lTwDq3hNI6t4TSa8k6t2vJU8Cd253bhNI6t4TSU8Cd27bkndu25ITShNK25J3bndu25Lbka8lryWvJhNJTwFPAU8Ahru+bCKUhriGuOrcIpSGuIa46t2vJIa4hrjq3Orc6tzq3OrdTwFPA75shriGuOrdryQilCKVryVPAU8BTwITSU8BryWvJhNJTwITSndud22vJa8lTwFPAOrcIpWvJIa4hrgilOrchriGuOrfWku+b75shrlPA75vvm9aS75s6twilIa7vmwilU8A6twilU8A6twilOrchriGuIa46t1PAOrc6t4TSa8lTwITSa8lryTq3a8md2zq3Ia5TwDq3CKU6t1PA75s6t++bIa4hrgilU8AIpe+bIa7WktaSCKXvm9aSU8A6t9aSvYm9iSGuCKUIpe+bCKUIpQil1pIIpSGuCKU6twilIa46tyGuIa46t1PAOrcIpZ3ba8lTwFPAIa46tzq3U8AhrgilIa7vmyGuCKXvmyGu75vvmyGuCKUhrtaSIa4hriGuIa7vm++bCKUIpQilCKXWkgilCKUIpSGuIa4hrgilU8BryQila8lryVPAU8A6t2vJndtTwITSU8BryWvJOrdTwDq3U8A6tyGu75s6tzq3Orchru+b75shrgil1pIhrtaSCKUIpQil75shrgilIa4hrgilIa4hrjq3Ia7vmzq3Ia46t1PAOrchrlPAOrdTwITSU8BryVPAU8BTwFPAa8md2zq3Orchrjq3Ia5rySGuIa46tyGuOrchriGuIa4hru+b75vvmwilIa7vmyGuOrchriGuCKUIpVPA75s6tzq3Orc6t1PAIa5TwCGuIa46tyGuIa6E0jq3U8CE0mvJhNKd2zq3ndud21PAz+06t1PAU8A6tzq3U8A6t2vJhNI6tyGuOrc6tzq3OrcIpSGuOrc6t2vJa8k6tzq3Orchru+bOrc6tzq375trySGua8lTwFPAIa5TwDq3a8lryYTSU8BTwJ3bhNKE0p3ba8mE0p3bhNJTwJ3bU8CE0mvJOrdryTq3OrdrySGuU8BTwFPAOrc=". 
+ 
+2019-11-14 08:33:16,191 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,192 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"1213115f-33fc-4b87-a5fb-69a5198f12f2","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:16,211 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:16,211 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:13","MeasValue":0.0626,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.75403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:16,257 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,257 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"9c5189cd-4414-41c7-924c-e9e2a2f3e360","CurrLength":0}}. 
+ 
+2019-11-14 08:33:16,257 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=9c5189cd-4414-41c7-924c-e9e2a2f3e360&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:16,257 INFO  DefaultLogger body: "NNg+0EjIU8A+0FPAU8BIyF24U8BTwF24U8B8oHGoXbhnsF24Z7BduGewZ7BxqHygU8BxqHGoU8BduFPAcahxqGewcahnsHGoXbhnsGewZ7A+0HGoXbhduGewU8BduFPASMg+0EjIPtBIyHGoU8BduGewcahnsGewhphxqGewfKCGmHGomoiQkIaYpYCGmJqImoh8oHGokJB8oJCQmoiQkJCQkJCaiHygmoh8oIaYfKB8oIaYfKCGmHGoU8CQkHGoZ7BnsHGoZ7BnsF24U8BnsHGocah8oIaYhpiGmIaYkJCQkJCQkJCGmIaYmoiGmIaYfKCaiJCQfKCQkIaYhpilgIaYhpiQkJqIfKB8oHyghphxqIaYcaiQkF24fKCGmHGoZ7BxqFPAZ7BnsF24Z7BIyEjIXbhduGewU8BTwF24Z7BnsFPAU8BnsHGoU8BxqHGocahnsF24Z7BnsIaYcahduGewcahxqFPAZ7B8oGewU8BduGewcahTwF24U8BxqFPAU8BIyFPASMhTwEjIPtA02DTYU8BIyDTYPtAq4FPANNhIyFPAPtBTwEjIPtBnsEjIKuBTwEjIU8BduEjISMhduD7QU8BIyD7QZ7BIyF24U8BIyFPANNhIyEjISMgq4D7QSMg+0D7QSMhIyB/oH+hIyCrgNNg02BXwNNg02BXwFfAf6DTYKuA02DTYPtA02D7QSMgf6FPASMg+0EjIU8A+0FPASMhduF24SMhIyFPASMhTwFPAU8BTwGewSMhIyDTYSMg02DTYNNhIyFPAPtA+0D7QSMg+0D7QNNg02DTYU8A+0B/oKuAq4B/oNNg+0DTYPtBIyFPAU8BduF24PtBTwF24SMhIyEjIZ7BnsGewXbh8oFPAU8BduGewZ7BIyEjISMhIyFPASMhTwFPASMhIyDTYSMg+0F24SMg+0FPAKuA02EjIH+gq4D7QNNg+0DTYKuBIyDTYPtBTwCrgU8BTwD7QU8BIyF24Z7BduFPAZ7BTwFPAU8BduGewcahIyF24XbhduFPAU8BIyF24KuBnsEjIXbhIyF24U8A+0EjIPtBIyDTYPtBduB/oPtAq4CrgH+g02DTYH+hTwCrgPtA+0EjISMhIyF24Z7BIyF24NNhTwD7QSMg+0FPAPtBTwFPAU8BIyFPAPtA+0D7QPtBTwD7QPtA02D7QNNgf6D7QNNgf6DTYNNg02B/oNNg02CrgH+gf6B/oFfAf6B/oNNg02CrgKuA02DTYPtA+0DTYPtBIyD7QNNhIyD7QXbg+0D7QSMhIyD7QSMg02DTYPtA+0EjIPtA02FPANNg+0EjIPtBTwEjINNg02D7QNNg02DTYNNgV8CrgNNgq4CrgH+gf6Av4KuA02DTYNNgq4CrgU8A+0DTYPtA02EjIXbhIyFPAU8BIyEjIU8BTwF24NNhIyEjIU8BIyEjIPtBduF24PtA+0CrgU8BIyD7QXbgq4DTYKuA+0DTYKuAq4CrgKuAV8CrgNNgV8CrgPtA+0D7QNNg+0F24PtBTwD7QSMhnsD7QU8BnsF24XbhnsGewXbhxqF24SMhxqD7QSMhxqF24U8BduGewXbg+0FPAZ7BxqF24XbhIyFPAXbhIyFPANNg+0FPAU8BIyEjINNhTwEjIPtBduD7QU8BTwFPAZ7BduFPAXbhxqFPAZ7BnsGewcahxqGewcahduHGocah8oGewcahduGewU8BTwHygcahduGewSMhxqFPAU8BduD7QSMhIyEjIXbhTwEjISMg02D7QPtBIyD7QSMg02EjIXbhTwFPAXbhduHGoZ7BIyHygU8BxqHGoZ7BxqGewZ7BnsIaYfKB8oIaYZ7BxqGewfKBxqFPAcahxqHGocahnsF24Z7BnsGewcahTwFPAXbhTwHGoZ7BIyDTYPtBTwEjIPtBIyF24SMhxqFPAXbhTwHGoZ7BnsF24cah8oHGocahnsF24fKBxqF24Z7BxqGewU8BduFPAcahTwFPAZ7BnsGewXbh8oF24U8BxqD7QU8A02D7QPtBTwDTYU8BIyFPANNg02CrgPtA02DTYU8A+0EjISMg+0EjIZ7BTwFPAU8BIyFPAZ7BTwGewZ7BduGewXbhTwIaYZ7BduF24U8BxqF24XbhnsF24SMhduFPAU8BIyEjIU8BTwD7QSMhduDTYSMhIyD7QU8BIyEjIPtA02FPAU8Aq4D7QU8BTwF24SMhnsGewXbhduHGoXbhduFPAXbhduEjIXbhnsF24U8BTwHGoZ7BduF24U8BIyF24Z7BTwGewU8BIyEjIXbg+0EjIU8A02CrgKuBIyEjIPtA+0D7QFfBTwCrgNNg+0D7QSMhIyD7QSMg+0EjIZ7BxqF24XbhduGewSMhduF24U8BTwFPAU8BduF24PtBduF24XbhduFPAU8BIyFPASMhIyF24NNg+0EjIU8BIyEjIPtA+0CrgNNg02CrgNNgf6DTYNNgq4EjIU8A02D7QNNg+0FPASMg+0F24SMhduEjISMhduFPAU8BduFPAU8BduD7QU8A+0DTYXbhIyDTYSMhIyEjIPtBTwCrgNNhIyDTYKuA+0B/oNNgV8B/oH+gV8BXwKuAq4DTYH+gV8CrgKuAf6EjINNg+0DTYNNhIyDTYSMhIyDTYPtA+0CrgKuBTwDTYSMg02EjIPtA02EjIPtA+0EjIKuAf6D7QPtAf6DTYKuAq4CrgKuAV8B/oNNgV8CrgC/gf6B/oH+g=". 
+ 
+2019-11-14 08:33:16,345 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,345 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"9c5189cd-4414-41c7-924c-e9e2a2f3e360","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:16,366 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:16,366 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:18","MeasValue":0.0587,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.519403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:16,415 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,416 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"55a6bad2-96a2-41f2-8be2-c8eae98f76f2","CurrLength":0}}. 
+ 
+2019-11-14 08:33:16,416 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=55a6bad2-96a2-41f2-8be2-c8eae98f76f2&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:16,416 INFO  DefaultLogger body: "jdWN1Y3VCt4K3greCt4K3oP3Be8K3o3VjdUK3o3VCt4K3g/NjdWN1ZHED80PzQ/NkcSN1Y3VkcSN1RS8Ct4PzY3VD82D95HED80PzY3VD80K3o3VBe+I5o3VCt4PzY3ViOaI5ojmg/cF74jmBe8F74jmAAAF74P3AACD9wXvg/eN1QrejdWN1QreiOYPzYjmD82I5g/ND80K3o3VkcQPzQ/NkcQPzZHED82RxA/NCt6RxI3VBe8UvJHECt6RxI3VCt6RxAreCt6N1Y3VD82I5o3VCt6I5o3VCt4F7wXviOYAAAreiOaI5o3ViOaN1Q/NjdWRxJHECt4PzQ/ND82N1ZHEjdUK3g/NkcSN1RS8FLwUvIjmjdUPzZHED80PzY3VkcSN1RS8D82N1QreD82N1QreiOaN1QreBe8F74jmCt4F74jmg/cF74P3iOaN1Y3VCt6N1Y3VD82RxI3VkcSWs5HEkcSRxJHEkcSRxJazkcSRxBmrFLwPzZazlrMUvJHElrMUvJazkcQPzZHEkcQPzRS8D82N1RS8kcQK3o3VD80PzYjmBe8PzYjmCt4K3o3VCt6N1Q/ND80K3hS8FLwK3pHEGasPzRS8kcSRxBS8lrMUvJazD80UvBS8FLyRxJHEGasPzQ/NkcSWsw/NjdUPzQ/NCt4UvI3VCt6RxArejdUK3o3VCt6I5ojmiOYK3ojmCt4K3grejdUPzZHEjdUK3pHEkcSWsxmrFLwUvBS8FLyRxJazlrMUvJazlrOWs5uim6IZq5azlrOWsxS8m6KWsxmrlrMUvBS8GasPzZazFLwUvA/NlrOWsw/NFLyRxJazFLyRxJHEkcSRxI3VD80UvA/NlrMZq5azlrOWs5azGaugkZuiHZqWsx2alrOboqCRlrOWs5azHZoZqxmrGaubopazlrObopuikcQUvBmrGasZq5uiFLybopazGasUvJHEkcSRxBS8kcQUvA/NkcSN1RS8lrMPzZazGasUvJazlrOWsxmrlrObopuilrMZqx2aGaugkaCRm6KbopuiFLwdmpuiHZqgkZuim6KbohS8lrMdmpuiGauWs5azHZqWsxmrGauWs5azFLyRxBS8FLwUvBS8lrMUvBS8FLwUvJHElrMUvBS8FLwUvBmrGasZq5azIombopazm6Idmhmrm6Kbopuim6KWs5uiGasZqxmrGasUvBmrkcQUvJuim6KWsxmrFLwUvJazD82Ws5HEkcQUvA/NjdWRxA/NkcQPzZHElrOWs5HElrOWs5HElrMZq5azGasdmpuiGauboqCRoJEZq5azm6IZq5uiGasdmpuilrMiiRmrm6Kboh2aGauWs5uiGasdmpuiGaubopazlrOboh2alrMZq5HElrMUvBS8kcQUvA/NlrOWs5azFLwUvJHEm6IZqx2alrMZq5uilrMdmpuim6IiiZazHZqbohS8m6KWs5uiGaubopazm6KbopazlrMZq5uilrORxBS8kcQPzRmrFLyRxJazkcSN1Q/NkcQUvI3VjdUK3o3VD80PzRS8D82Ws5HEFLwPzQ/NFLyRxBS8lrOWs5azm6IZqxmrkcQZq5uim6IZqxS8FLwUvJazGasUvBS8lrOWs5azFLyWs5azD80ZqxS8FLwUvI3VjdUPzZHEkcSN1Q/NjdWN1YjmiOaI5pHEkcSN1RS8kcQPzQ/ND80UvJHED80UvJHEFLyWs5HEkcQZqw/ND82RxA/NFLwPzY3VkcQPzZHEjdUUvArejdWN1Q/NjdWN1Y3VkcSN1QreiOYF74jmBe8AAAXvBe8F74jmg/eD94jmg/eD9wXviOaN1QrejdUPzZHED80K3g/NiOaRxI3VFLwUvA/NFLwPzY3VlrON1RS8lrMPzRS8kcSN1ZHEjdUPzQ/ND82RxAreCt6N1Y3VjdUK3o3ViOYK3o3VjdWI5grejdUF7w/NCt4PzQreCt6RxJHEjdWN1Y3VkcQPzY3VD80PzZHED80K3hS8kcQUvJazkcSWsxS8jdUPzRS8D82RxBS8D82RxJHEjdWN1YP3kcSN1QreCt4K3greCt4K3greiOYK3greiOaI5g/ND80K3g/NCt6N1Q/ND82RxJHED82RxBS8FLyRxA/NjdWWs5HED82RxJHEjdUPzRS8FLwPzY3VFLyRxBS8kcQPzY3VD82N1Q/NFLwK3g/NFLwPzQrejdUF7wreCt6I5o3ViOYPzQreCt4K3o3VCt6RxA/NCt6N1QreD82N1Q/ND80UvA/ND82RxA/ND80PzRS8FLwPzRS8kcSN1ZHEkcSRxA/ND82RxJHEjdUPzZazCt6RxI3VD82N1ZHECt4PzQXvCt4PzQXvCt6N1QreCt4K3g/NkcQPzY3VFLyRxBS8lrORxJazFLwUvBmrlrMZq5azlrMdmpuiFLybohS8lrMdmpuiGasZqxmrm6IZqxS8m6KRxJazFLwUvJazGasUvBS8FLwPzZazFLyRxBS8lrMUvJazlrMUvJuilrObopuiFLybohS8GaubohmrGasdmhmrIokZq5uim6IdmhmroJEdmhmrHZqboh2aFLyboh2am6KbohS8m6KbopazGasUvJuiFLyWs5azkcQPzZazD82RxJHED80UvBS8FLwUvJHEGaubopazGasZq5uiGasZq5uiHZoZq5uipYAdmpuim6Idmh2aoJEZq6CRGasdmpuilrOgkZuim6KbopuilrMZq5azm6IZq5uiGas=". 
+ 
+2019-11-14 08:33:16,479 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,480 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"55a6bad2-96a2-41f2-8be2-c8eae98f76f2","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:16,504 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:16,504 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:24","MeasValue":0.063,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.75403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:16,548 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,548 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"f6cd4b76-3426-41cf-a348-7c5a1aef5397","CurrLength":0}}. 
+ 
+2019-11-14 08:33:16,548 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=f6cd4b76-3426-41cf-a348-7c5a1aef5397&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:16,548 INFO  DefaultLogger body: "XbhduEjIXbhTwEjIXbhIyF24U8BTwFPAZ7A+0FPAU8A02EjIXbhIyF24XbhIyGewcahIyGewXbh8oHygXbhxqHGoZ7CQkGewfKCQkHGohph8oFPAcahnsHygZ7BTwIaYcahxqF24XbhxqHGoXbh8oF24XbhTwGewU8BduF24U8BduF24XbhIyFPAXbh8oF24XbhnsHGoXbiGmHyghpiGmIaYZ7CGmIaYhpiaiHGofKCGmJCQhpiQkHGokJCGmIaYfKCGmIaYfKB8oHGohphnsIaYcaiQkF24hph8oGewZ7B8oGewZ7BduF24XbhduF24U8BduHGocahduIaYcahnsIaYZ7BxqJCQcah8oJCQZ7CaiKWAcaiGmHygfKB8oIaYcah8oHGofKBnsF24Z7BxqHygfKBnsFPAcahduHygZ7BduFPASMg02F24U8A+0F24SMhTwEjIU8BxqFPAU8BTwHGoU8BduF24cahxqD7QZ7BxqHygXbhxqGewhphnsHyghphnsJCQcahduIaYhphduHGocahduFPAZ7BTwGewcahduF24PtBTwGewXbhTwGewZ7A+0EjIPtBIyD7QPtBIyEjINNhTwD7QSMhTwEjIZ7BTwF24U8BIyF24U8Aq4F24XbhduGewU8BduFPAPtBduF24SMg+0FPAU8BTwD7QPtA02EjIU8A+0EjIH+g+0DTYPtA+0B/oNNgq4CrgH+gV8DTYH+gf6DTYPtAq4DTYH+hIyFPAPtA02F24PtA+0EjIU8BTwF24U8BTwEjISMhTwD7QSMhIyEjIU8A+0FPASMg+0D7QSMhIyD7QPtA02EjISMgf6CrgNNg+0D7QNNg02DTYH+g02BXwFfAf6CrgKuBIyB/oU8A+0D7QPtBIyDTYNNg+0EjIXbhIyFPAXbg02FPAU8BIyEjIPtA+0FPAPtA+0EjISMhIyEjISMg02D7QNNg+0EjIFfA+0B/oNNg+0BXwKuA02Av4NNgf6BXwH+gf6B/oKuAq4CrgFfAf6DTYSMgq4D7QKuBTwFPASMhnsD7QNNg+0FPAPtBTwEjIPtBduD7QU8BTwF24U8A+0FPAPtBIyEjIPtAq4D7QPtAq4EjINNg02D7QSMgq4D7QKuA02B/oKuAf6DTYPtAq4DTYKuA02D7QSMg+0FPAU8BTwEjIPtBTwF24XbhIyD7QPtA+0EjISMg+0FPAU8A+0D7QU8A02D7QU8A+0D7QSMg02EjIKuAq4DTYSMgq4D7QFfA02CrgKuAq4Av4H+gq4DTYNNgq4DTYNNg02DTYSMg02D7QU8A02GewXbhTwEjIcahIyEjIPtBTwEjIXbhduEjISMhTwF24U8BIyF24U8BTwF24XbhduD7QPtBduEjISMhIyDTYNNg+0D7QU8Af6D7QSMgq4B/oSMhIyEjIU8BTwEjIU8BnsF24U8BxqEjIPtBnsGewXbhTwF24SMhduFPAU8BnsEjIU8BTwD7QSMhIyFPASMhIyEjISMhIyDTYPtA02D7QNNg02CrgPtA02D7QPtA+0CrgKuA+0DTYKuBIyD7QKuA+0D7QPtBnsF24XbhduFPAcahnsD7QU8BnsGewXbhTwF24XbhTwF24Z7BnsHGoZ7BxqFPAcahTwGewSMhTwGewU8BTwEjINNhduD7QSMg+0DTYPtA+0B/oNNg+0DTYPtA+0FPASMhTwEjIU8BIyGewU8BIyFPAXbg+0FPAZ7BnsF24SMhduF24U8BduFPASMhduEjIXbhTwEjIU8BIyD7QPtBIyD7QSMhTwCrgPtA02DTYPtA02B/oNNg02D7QKuA02D7QNNg+0D7QNNhIyD7QPtA+0EjIZ7BnsD7QPtBnsGewXbhduF24SMhduFPAXbhduHygU8BIyHGocahTwDTYZ7BTwGewU8BnsF24U8BTwFPAPtBTwFPANNhTwFPANNhTwD7QFfA02EjIXbhduFPAPtBTwF24U8BnsGewXbhnsF24U8BIyHGocahIyGewcahxqHygXbhduGewfKBIyGewZ7BxqGewU8BTwF24U8BTwF24SMhTwEjIPtBduEjIPtBTwEjISMhIyDTYNNhTwCrgSMgq4EjIPtBduFPAXbhIyF24U8BduGewZ7BduFPAZ7BnsGewcahnsIaYcahnsHGoXbhduEjIcahTwGewcah8oF24SMhnsFPAXbhnsEjIU8A+0FPASMg02D7QSMhIyFPANNhIyF24NNg02FPAU8A+0D7QXbhduEjIU8A+0GewZ7BduF24XbhduEjIfKBnsF24U8BTwF24XbhIyGewXbhTwFPAU8BduEjISMhTwEjISMhIyFPASMg+0D7QKuAq4CrgNNhIyDTYPtA02DTYNNhduD7QSMg02DTYNNhTwEjIXbhduF24U8BTwF24cahTwHGoZ7BnsHGoU8BnsHGoU8BnsEjIZ7BduHGoXbhTwHGoXbhnsEjIU8BTwEjIU8BTwEjIPtBduD7QU8BIyF24SMg+0D7QSMhTwF24PtBduFPAZ7BIyF24PtBIyGewU8BTwHGoZ7BxqGewXbhduF24XbhduHGofKBnsF24cahduGewU8BduFPAXbhIyFPAcahTwGewZ7BIyEjIU8BTwD7QKuBTwFPAH+gq4CrgNNg+0EjIPtBTwF24PtBIyEjIXbhduDTYZ7BduF24SMhxqHygfKBTwHGofKBnsF24cahTwGewZ7BnsFPAU8BTwHGoZ7A=". 
+ 
+2019-11-14 08:33:16,601 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,603 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"f6cd4b76-3426-41cf-a348-7c5a1aef5397","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:16,623 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:16,623 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:29","MeasValue":0.0632,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.988657E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:16,669 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,673 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"64778936-005c-4f52-b8ad-28c242c49d51","CurrLength":0}}. 
+ 
+2019-11-14 08:33:16,674 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=64778936-005c-4f52-b8ad-28c242c49d51&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:16,674 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:16,727 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,727 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"64778936-005c-4f52-b8ad-28c242c49d51","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:16,745 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:16,745 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:35","MeasValue":0.0599,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:16,791 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,791 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"ade5c493-078f-4722-a271-07d1ad6bd11e","CurrLength":0}}. 
+ 
+2019-11-14 08:33:16,791 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=ade5c493-078f-4722-a271-07d1ad6bd11e&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:16,791 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:16,858 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,860 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"ade5c493-078f-4722-a271-07d1ad6bd11e","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:16,878 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:16,878 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:40","MeasValue":0.062,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.75403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:16,932 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:16,932 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"5ef25394-e418-4fdc-88c3-cab2f38d1140","CurrLength":0}}. 
+ 
+2019-11-14 08:33:16,933 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=5ef25394-e418-4fdc-88c3-cab2f38d1140&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:16,933 INFO  DefaultLogger body: "U8BTwGewSMg+0GewPtBnsFPAXbhnsEjIXbhduFPAZ7BnsEjIU8BduGewU8BduEjIZ7BIyFPAU8A+0D7QSMhIyFPANNg+0EjINNg+0DTYNNgq4DTYPtBIyEjIKuBTwEjIcahxqEjIcahduFPAZ7BxqIaYXbhxqHGocahTwGewZ7BduGewU8BnsHGohph8oHygU8B8oHygU8BduGewU8BIyEjIPtBTwFPAPtBduDTYU8BTwCrgPtBIyDTYPtA+0FPAZ7A02HGoU8BIyF24U8BTwHGoZ7BnsF24XbhnsGewU8BnsF24XbhTwF24U8BIyF24XbhTwFPAZ7BduDTYU8A+0FPAU8BTwDTYPtAf6EjIKuAf6D7QKuAV8DTYKuA+0D7QH+gf6DTYNNhTwDTYNNg02D7QSMhTwFPAU8BTwFPAZ7BnsD7QPtBTwEjISMhTwEjIXbhIyF24Z7BTwEjISMg+0EjISMhduF24PtBIyF24NNg+0EjIKuA+0DTYPtBIyCrgKuAf6B/oNNg+0DTYPtBduDTYNNg02D7QNNhTwFPAPtA02FPAPtA+0EjISMg02EjISMhIyEjINNhTwEjINNhIyD7QNNg+0DTYH+gV8EjINNg02DTYFfAf6CrgFfAq4B/oH+gf6BXwH+gAAB/oC/gV8CrgKuAL+D7QPtAq4D7QKuBTwD7QPtBTwD7QNNg+0EjINNhIyFPAU8A+0EjIU8BIyF24PtBIyFPAXbhduD7QSMhTwEjIU8A02EjISMhTwD7QKuA+0D7QPtA02CrgH+gq4EjIH+g02D7QNNg+0D7QNNhIyEjINNhTwDTYSMhIyEjIU8A+0FPAPtAf6D7QPtBTwEjIU8BTwFPAPtBIyEjIPtAq4EjINNhIyDTYKuA02EjIH+gq4B/oH+g+0DTYH+gf6Av4H+gV8BXwH+gq4DTYPtA+0D7QSMg+0FPAPtBIyEjIZ7A+0EjIXbhduFPAXbhTwFPAU8BnsF24SMhnsGewcahTwHGoZ7BnsF24XbhxqFPAZ7BduFPAXbhTwFPASMhIyFPAXbhIyF24U8A02GewPtBIyF24SMhnsF24SMh8oFPAU8BnsHGoZ7BxqIaYcahnsGewfKB8oHGocah8oHGohphxqGewcahTwHygcahduEjIcahduHygZ7BduHGoXbhTwF24SMhnsHGoU8BnsF24U8BTwEjIXbhduEjIXbhduEjIZ7BnsHygfKB8oHGohphnsKWAkJCQkIaYhpiGmHygkJCGmIaYkJCQkJqIfKB8oHyghpiQkHygmoiQkGewfKCGmF24fKB8oGewhphxqHGoXbh8oHGoZ7BxqF24cahxqF24fKBxqHygZ7BnsGewkJBxqHGoZ7B8oF24Z7B8oHGohpiGmHyghph8oHGohphxqIaYhphnsHGoZ7CQkHGofKB8oGewZ7BxqGewZ7BnsFPAXbhTwEjIXbhduEjIU8A+0GewNNhIyFPAPtBTwGewXbhTwF24XbhxqF24XbiGmHGoZ7BxqIaYfKBnsHGohphduHygXbhduF24cahduGewfKBnsHGofKB8oF24Z7BduGewZ7BIyFPASMhTwGewZ7BduD7QU8A+0EjISMhIyD7QSMhduEjISMhduF24U8BduEjIXbhIyEjIZ7BTwF24XbhduF24Z7BduF24Z7BduFPAU8A02GewPtBTwFPASMhIyEjIPtA+0DTYSMg+0DTYNNg+0B/oKuAf6DTYFfAq4EjINNgq4DTYH+g02FPANNg+0D7QNNg+0EjINNgq4FPAU8A+0HGoSMhTwD7QSMg02D7QU8BIyD7QU8BIyEjINNg+0D7QSMhTwEjIPtBduD7QSMgV8DTYPtBIyCrgPtA+0CrgH+gq4B/oH+g+0B/oNNg+0DTYKuAf6B/oSMg02CrgSMg02CrgPtAq4DTYNNgq4F24NNg02EjIFfAq4B/oNNg02BXwKuAq4B/oC/gf6B/oH+gf6B/oFfAf6Av4AAAAAAAAC/gV8Av4H+gV8AAAC/gAAAv49QcL+B/oFfAV8Av4NNgV8CrgNNgq4DTYH+hIyCrgH+g+0EjIKuBIyD7QKuAq4D7QKuA02DTYH+g+0Av4H+gq4DTYKuA+0CrgNNgq4CrgKuAq4B/oKuAq4B/oH+gL+B/o9QcV8B/oFfA02CrgH+gq4CrgKuAf6CrgNNg+0D7QPtAq4B/oPtBTwD7QPtAq4FPANNg+0DTYNNg02DTYNNg02DTYPtAf6CrgPtAq4D7QH+gf6CrgH+gq4BXwNNg02B/oFfAf6CrgH+gf6B/oNNg+0B/oPtBIyD7QSMhIyFPAU8BTwFPAZ7BIyEjISMg+0F24XbhnsFPAXbhduGewXbhIyF24cahxqHGoXbhxqGewZ7BnsF24U8BnsFPAU8BnsEjIU8BduEjISMgf6EjIXbhTwD7QZ7BduGewfKBnsGewZ7BTwGewfKBxqHygcahxqHygXbh8oHygfKBxqIaYhphnsFPAfKBxqGewZ7BxqHygZ7BxqHGocahxqFPAZ7BnsF24Z7BIyFPAU8BnsFPASMhTwD7QU8BIyFPASMhduGewU8BTwF24XbiGmGewhpiGmIaYfKCGmGewhpiGmIaYhph8oHygfKB8oHygfKBduHygfKBxqIaYfKB8oHyghphnsGewZ7B8oHGoU8BduHGoZ7BnsGewXbhduGewZ7BduFPAXbhduEjIZ7BnsHygfKBnsHGofKA=". 
+ 
+2019-11-14 08:33:17,023 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,024 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"5ef25394-e418-4fdc-88c3-cab2f38d1140","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,044 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,044 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:45","MeasValue":0.0602,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.519403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:17,093 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,093 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"0d7dce81-251e-46dc-8551-d35e941f7b96","CurrLength":0}}. 
+ 
+2019-11-14 08:33:17,093 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=0d7dce81-251e-46dc-8551-d35e941f7b96&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:17,093 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:17,158 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,160 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"0d7dce81-251e-46dc-8551-d35e941f7b96","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,208 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,208 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:51","MeasValue":0.0603,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.75403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:17,258 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,259 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"a3a63cf9-bb3b-4738-aa4f-885bb19f83c3","CurrLength":0}}. 
+ 
+2019-11-14 08:33:17,259 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=a3a63cf9-bb3b-4738-aa4f-885bb19f83c3&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:17,259 INFO  DefaultLogger body: "PtBIyHGofKB8oF24cahxqHGohphxqIaYhpiQkJCQkJB8oJqIhpiQkJqIkJCQkIaYpYCQkJCQhpiGmJqIhpiGmHygmoiGmJCQhpiGmJCQkJB8oIaYZ7BxqHygcahxqHGofKBnsF24Z7BxqHGoZ7BnsIaYXbiGmHyghpiGmHGocah8oGewcah8oHyghpiaiIaYfKBxqHGofKBnsHGofKB8oHGoXbhduGewcahduHGoU8BduHygXbhTwD7QPtBIyD7QPtA02B/oNNhIyDTYSMhIyDTYPtBduD7QU8BduF24U8BIyGewU8BxqGewU8BnsF24cahduHGoZ7BTwF24XbhnsGewZ7BTwGewU8BnsF24XbhnsF24U8BIyD7QSMhTwD7QSMhIyCrgSMg02DTYKuAq4B/oNNgf6CrgPtA+0DTYH+hIyFPAKuBIyFPAKuBIyD7QSMg+0FPANNgq4EjISMg+0DTYPtBIyD7QKuA+0BXwNNg02DTYSMgL+D7QH+gV8BXwFfAq4B/oH+gq4B/oH+gf6BXwC/gAADTYAAAV8BXwC/gV8B/oH+g02CrgKuBIyBXwPtA02CrgSMg+0CrgKuAf6DTYKuAq4D7QNNgq4D7QSMg02D7QU8Aq4D7QPtA02DTYKuAV8CrgH+gf6CrgKuAq4CrgH+g02BXwC/gf6BXwKuAL+BXwNNgL+CrgNNgq4EjIPtAf6D7QNNg+0CrgU8A02DTYNNg+0B/oH+gq4D7QKuA02D7QH+g02BXwKuBIyAv4H+gf6B/oH+gAAB/oFfAV8B/oH+gV8AAAC/gAAAv4AAAAABXwFfAAAAAAH+gq4BXwC/gq4CrgKuA+0FPANNhIyD7QNNhTwDTYU8BnsEjINNhduBXwPtA02D7QU8A02FPASMhIyDTYSMg02D7QPtA02FPASMg+0EjISMhIyEjINNg+0EjIKuAf6D7QFfBIyDTYNNg+0D7QNNhduEjISMhIyF24Z7A+0F24U8BnsFPAPtBTwF24XbhduF24cahnsEjIZ7BTwGewU8BTwFPAU8BIyGewSMhduEjISMhIyEjIU8BTwEjISMhTwEjIPtA02D7QPtAf6EjIPtBIyDTYXbg02FPAcahTwHGoU8BnsGewU8BnsGewhphnsHGocahTwF24Z7BxqHGofKBxqFPAZ7BxqGewZ7B8oGewhphxqHGoU8BduF24U8BduF24XbhIyFPAPtBduFPAPtBIyEjIPtBduGewSMh8oGewU8BnsFPAZ7BnsGewZ7BxqGewXbhduGewZ7BxqHGoZ7BduHGoZ7BTwHGoSMhduF24XbhTwD7QXbg+0HGoU8A+0EjIKuA+0CrgPtBduDTYSMg02D7QKuAq4B/oNNg02CrgPtBnsFPAU8BTwHGoU8BduGewcahxqHGocahnsHGoZ7BxqGewcahxqHGoXbhnsHyghph8oIaYXbhduGewfKB8oGewfKBxqF24cahnsFPAU8BduD7QU8BTwFPAXbg02HGoXbhduF24XbhnsF24cahnsHGoXbhnsJqIZ7BxqHGohphTwHGocah8oGewcahxqGewfKBduF24cahduHGoZ7BnsF24Z7BIyHGocahduGewU8BIyFPAU8BIyEjIPtA02D7QPtBIyFPAU8BTwEjIU8BTwGewZ7CGmGewcahduGewhph8oHyghpiaiIaYcaiGmIaYcaiQkHygcah8oGewZ7B8oGewcah8oIaYcaiGmHygfKBnsHGoZ7BduF24Xbh8oFPAcahxqGewPtBIyEjIZ7BduGewfKBIyF24Z7BduGewZ7B8oHGofKBduHGoZ7BduHGoXbhduHygcahxqHygZ7BnsHGoSMhnsEjIXbhnsEjIXbhnsEjIU8A+0FPANNhIyDTYXbhIyD7QPtAV8B/oSMgq4EjIKuA+0D7QSMhIyEjIPtBTwF24U8BTwF24SMhduF24U8BduGewU8BxqEjIXbhduFPAZ7BIyEjIZ7A+0F24XbhTwD7QXbhIyF24U8A+0FPASMhIyD7QKuAq4D7QKuA02DTYH+g02B/oNNg02DTYPtA+0D7QSMhTwDTYU8A+0F24U8BTwFPASMgq4FPAXbhTwFPAPtBIyFPANNhIyEjISMhIyEjISMhduFPAKuA+0EjINNg+0D7QNNg02B/oH+gV8B/oFfAV8BXwH+gV8B/oFfAV8DTYKuAV8CrgNNhIyD7QSMg02EjINNhIyD7QSMhIyEjINNhIyDTYNNg+0D7QNNg+0DTYPtBIyD7QPtA+0DTYSMg02DTYSMhIyAv4PtAV8BXwH+gf6BXwNNgAACrgFfA02B/oH+gf6BXwFfAV8CrgKuAq4DTYKuA02DTYNNg+0CrgNNgq4CrgNNg02DTYKuAf6DTYH+gL+B/oKuAL+B/oH+gV8CrgFfAf6Av4C/gV8Av4H+gAACrgFfAAAAv4C/gf6Av4C/gV8PUHFfAAAAv4AAAf6BXwKuAV8CrgH+g02CrgSMgq4FPANNg+0DTYNNg+0DTYNNgq4DTYNNhIyF24SMhIyD7QSMg+0FPASMg+0EjISMg+0CrgNNg+0F24PtA02D7QSMg02DTYNNgq4DTYPtA02B/oPtBIyD7QPtBIyEjIPtA+0FPAU8BIyFPASMhTwFPAPtBTwGewcahTwEjIZ7BIyFPAXbhTwEjIXbhduFPAXbg+0D7QU8A02EjIXbg+0D7QU8A02D7QH+g+0CrgNNg02CrgSMg=". 
+ 
+2019-11-14 08:33:17,348 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,348 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"a3a63cf9-bb3b-4738-aa4f-885bb19f83c3","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,370 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,370 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:26:56","MeasValue":0.0596,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.05014942E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:17,415 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,415 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"6da19ec0-cf9b-4efd-b9a7-f2cf580d9208","CurrLength":0}}. 
+ 
+2019-11-14 08:33:17,415 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=6da19ec0-cf9b-4efd-b9a7-f2cf580d9208&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:17,415 INFO  DefaultLogger body: "cYrVpwmeCZ4JnqGxPZSlgHGK1acJntWnPZQJngmeCZ49lAmeobE9lAmeCZ6hsW271ac9lNWnCZ6hsW27CZ6hsaGxobE5xdWn1aehsQme1acJnqGxPZQJngmePZQ9lKWACZ6lgHGKCZ6lgKWACZ49lHGKPZSlgHGK1adxigme1aehsXGKPZQJngmePZShsdWn1afVpz2U1aehsaGxCZ6hsdWnobE5xTnFbbsJnm27OcU5xQmeobHVp6Gxbbs9lD2UPZQ9lD2UCZ4JnqWACZ49lD2UPZQ9lKWAPZQ9lHGKpYAJnj2UCZ49lD2UPZQ9lNWn1afVpz2UCZ7Vp9WnbbsJntWnobEJnm27obHVpznFOcWhsW27bbs9lNWnobGhsaGxPZQ5xaGx1afVp6GxPZQJngme1adtuz2UCZ7Vp6Gx1afVpwme1afVp6Gx1afVp6Gxbbttu227bbvVpwXPbbvR2G27Bc85xdHY0djR2NHYbbvR2AXP0dg5xdHY0dhtuznFBc8FzwXPBc85xaGxbbuhsaGxobGhsdWn1aehsTnF1adtuznF1afVpwXPobFtuznFbbttuznF1acFz227bbttuwXPbbvR2AXPBc85xQXP0dhtuwXPaexp7DnFBc8Fz9HYneLR2DnFobEFzwXPbbttu227OcXVpwXPobEFz6Gxbbs5xQmeBc85xQXPobFtu227obHR2DnFOcUFzznFBc9tuznFBc8Fz9HYBc8Fz2270dg19mnsaewFz53i0dgFz53iNfad4p3ineKd4p3iNfad4gXP0dgFzwXPOcUFzwXPbbttuznFOcU5xTnFOcWhsTnFBc9tuwXPOcVtu227bbttuwXPbbvVp53iOcUFz9HYOcUFzznFOcVp7AXPneKd4gXP0did4tHYneKd4tHYaezR2DnFaezR2NHY0dg5xQXPBc+hsTnFOcWhsaGxBc+hsTnFOcVtuwXP1ac5xdWnbbsFz9WnOcWd4gXPneJtuwXPOcXR2DnFbbs5xTnF0dg5xdHYaew5xWnsneLR2DX2Bc/R2AAABc8Fz53i0dg5xdHYBc+hsTnFobFtu6GxobFtu6Gx1acJnm27obFtu6GxobGhsdWnCZ5tu9WnobHVp6Gxbbttu6GxobHVp2271adtu2271afVp6Gxbbs5xW27bbs5xTnF1afR2DnFBc85xaGxOcXVp9WnobGhsaGxbbsJntWnobEJnj2UbbvVp6Gx1adtuwmeobGhsT2U1acJntWnbbvVp6GxCZ6hsW27obE5xaGxPZRtuwXPobEFz227obGhsTnFbbvVp6GxneKd4m27Bc9tuznFbbs5xQXPbbsJnm27obEJntWn1ac9lNWnCZ5tu6Gx1aehsT2UobEJngmePZQJntWnobEJnqGxobGhsT2U1afVpwme1afVp6GxbbsJntWnobGhsQXPbbuhsTnFobE5xQXPbbttu227obGhsdWncYrVpwmePZQJnj2UpYClgNWnpYDVpwmePZRxij2U1aelgAmeCZ5xij2UCZ4Jngme1acJnqGxCZ4JntWnCZ7VpwmeCZ45xTnFbbttuwme1aehsW27bbttuznFobE5xTnFbbuhsdWn1acJngmebbs9lAmePZTVpz2UPZRxitWnPZQJnnGKpYA9lKWAcYoJnj2UcYoJnnGKcYo9lAmePZRtu9WnobGhsdWn1aehsaGxbbvVp6GxOcUJnqGxbbttu6GxOcU5xQXPobGhsaGxbbvVp9WnPZQJnqGxCZ4JngmeCZ7Vp3GKCZ5tu6GxPZTVpz2UPZQJnqGxbbsJntWnCZ49lKGxbbuhsdWnobGhsTnF1adtu9HYbbttuznFbbs5xdHY0dhtu9HYOcWhsW27OcU5xQXPbbs5xW27bbuhsdWnCZ7Vpz2UCZ4JnqGxCZ7Vp227obHVpwmePZShsW271ac9lNWnbbvVp227CZ7Vp6GxobHVpwme1afVp6GxobFtuznFOcWhsW27OcUFzwXPOcU5xTnFobE5xW27OcWhsdWnobEJnm27obHVpwmeobGhsaGxCZ7VpwmePZTVp6GxobHVp9Wnbbs5xdWnobE5xaGxobFtu227CZ5tu6GxOcXR2G27Bc8FzznFneIFzwXP0dgFzwXPBc85xZ3iBc/R2DnFbbuhsQXPobEFz227obE5xaGx1acFz227obGhsdWnCZ7Vp9WnOcXVp9Wn1afVp9Wn1adtuznFbbttu6GxbbuhsQXP0dihsTnFOcU5xTnFBc/R2AXPBc+d4tHY0did4jnFOcXR2DnFOcWd4qGxbbuhsQmebbuhsaGxOcU5xaGxbbvVpznFobEJnjnFobGhsW27OcVtu227OcU5xTnFbbsFzznF1afR2AXPOcUFz2270djR2J3i0dhtu9HYneLR2Gnsaexp7NHYneLR2AXPOcU5xZ3iOcWhsTnFobE5xQXPBc9tu6Gxbbs5xW27CZ45xW27CZ5tu6Gx1ac5xaGxobE5xdWn1aehsW27OcWhsQXPOcVtuznFBc/VpwXPBc85xQXPBc/R2GnsbbsFz9HY0did4jnFobE5xTnFOcU5xaGx1ac5xW27bbsFz9WnobE5xdWnobHVp6Gx1ac9lKGxbbuhsTnFbbttu6GxOcU5xTnF0djR2NHYOcU5xdHYOcWd4gXPbbtp7NHYOcWd4tHY0did4tHYOcUFz227Bc/VpwmeBc+hsW27PZRtuwme1afVp227CZ4=". 
+ 
+2019-11-14 08:33:17,475 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,476 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"6da19ec0-cf9b-4efd-b9a7-f2cf580d9208","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,496 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,496 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:02","MeasValue":0.0603,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:17,542 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,545 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"1c6ad69b-aca9-4c0c-a49c-2f341f9ab5a9","CurrLength":0}}. 
+ 
+2019-11-14 08:33:17,546 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=1c6ad69b-aca9-4c0c-a49c-2f341f9ab5a9&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:17,546 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:17,624 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,625 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"1c6ad69b-aca9-4c0c-a49c-2f341f9ab5a9","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,642 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,642 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:07","MeasValue":0.0627,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.519403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:17,687 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,687 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"3ef23e64-e4fc-4f1a-b876-cd56d69a8d8b","CurrLength":0}}. 
+ 
+2019-11-14 08:33:17,687 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=3ef23e64-e4fc-4f1a-b876-cd56d69a8d8b&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:17,687 INFO  DefaultLogger body: "kcQK3o3VjdWN1ZHED80UvBS8D80UvJazFLyWs5azkcSbopHEFLwZq5azlrMUvBS8FLwUvBS8FLyRxBS8lrORxJazlrMPzRmrFLyRxI3VD80PzZHEjdWN1Q/NkcQUvJHECt6N1QreCt4K3g/NCt6RxIjmjdUPzQrekcSN1ZHEkcSRxA/NFLyWs5azlrORxBS8lrMUvBS8FLwUvBS8lrMZqxS8FLwUvA/NjdWbohmrD82RxA/ND80PzY3VkcQK3pHED82N1Y3ViOaN1YjmCt6I5grejdWI5greD82N1ZHEkcQPzZHEkcSRxJHEFLyRxJazFLwPzRS8D80UvBS8D82RxBS8FLyWswreD82RxI3VCt4PzY3VjdWN1Y3VkcSN1Y3VjdWN1QreBe+D94jmBe+D9wXvBe+I5greg/cK3greBe+N1Q/NCt6RxI3VD82N1ZHED82N1Y3VD82RxA/NjdWN1QrekcQUvIjmkcSN1ZazD82N1ZHEjdUPzQ/NjdUUvI3VjdWRxA/ND80PzQ/ND82I5ojmiOYPzYjmiOYK3oP3iOaI5ojmjdWN1YP3Ct4PzZHEjdWI5o3VkcSN1Y3VD80K3pHEkcSN1Q/ND80PzQ/NjdWRxA/NiOYUvJHEjdUPzZHED80PzQreCt6I5o3VjdUK3ojmiOYK3ojmjdUF7wreBe+I5greBe+I5ojmjdWI5o3ViOYPzQrekcSN1Q/NkcSRxI3VFLyRxJHED82RxJHED80PzRS8kcQPzY3VD80PzZazkcSN1Y3VD80PzQ/NkcSN1ZHEjdWN1Y3VCt4K3pHEjdWRxAreCt4PzY3VCt6N1QrejdUPzZHEkcQZq5HEkcQUvBS8GauRxJazFLwUvBS8kcQUvBS8lrMUvBmrGasUvJHEFLwPzZazkcQZq5azkcQUvJHED82Ws5HElrON1ZazkcQUvJHED82Ws5HEjdUPzZHEkcQPzQ/NFLyRxBS8kcQUvBmrGasUvJazHZqWs5uilrMdmpazoJEdmh2aGasdmh2aHZoiiZuioJEdmpuiHZqboh2aHZoiiR2aIokdmpuioJGWs6CRGasZqxmroJGWs5azlrOWsxmrFLyWsx2aGasdmh2alrMZq6CRm6KgkR2am6IdmqCRHZoiiaCRIomgkSKJIomgkSKJGasiiR2aIomgkaCRpYCboiKJm6KgkaCRlrObohmrGauWs6CRHZqboh2akcSWs5azHZqWsxS8FLybohmrGasdmhS8GasZq5uim6KgkaCRGaugkSKJHZodmqCRHZqbopazm6IZqxmrm6IdmqCRm6KboqCRm6KgkaCRGasZq5uiHZqbopazm6IZqxS8lrMUvJHEGaugkRS8FLyWs5HElrON1Q/NlrMUvBmrHZoZqxmrm6KWs5azGasdmhmrlrMdmhmrm6IdmpuilrOWs5uiHZqbohmrm6KbohmrFLyWsxmrlrMUvJHElrMPzZuiFLwPzQ/ND80PzZHED82RxI3VjdWRxI3VD80K3g/NCt4UvA/NlrORxBS8kcQZq5HEkcQZqw/NFLybohmrlrMUvA/ND82RxBmrFLwUvBS8FLyWsxmrGasUvJazkcQUvJHEkcQPzZHEjdUUvA/NjdWN1Q/NjdUPzQrejdWD9w/NCt4K3gXvjdWRxIjmjdWRxJHEkcQPzY3VkcSRxA/NlrON1Y3VjdUK3hS8kcQPzQ/NCt6N1Q/NCt6N1QrejdWI5gXviOaN1QreiOaN1QXvBe+N1YP3Be+I5gXviOYF74jmg/eD930Ig/cAAAAAAACD9wreCt6D9wreBe8K3o3ViOaN1YjmiOaI5greCt6I5o3VjdWN1QXvCt6N1YjmCt6N1YP3iOYF74jmCt4F74jmCt6I5oP3iOaI5gXvBe+D94jmiOaD94P3AACD9wXvAAAAAAXviOaN1Qreg/eI5gXvCt4K3o3VjdWN1YjmD80K3o3VD82I5o3VD82N1Y3VkcSN1Y3VjdWI5grejdUPzQ/NiOYK3greCt6D94jmCt6I5ojmCt6N1QreiOaI5oP3g/eI5gXvBe+N1QXvCt4K3greFLyI5g/ND82N1Q/ND80PzQ/ND80PzRS8D80UvBS8lrON1ZHEkcQUvJazlrMUvJHEFLyRxJHED82Ws5HEGauRxJHEFLwPzZHEkcQPzQ/NkcQUvA/NlrON1ZHEFLwPzQ/NkcSRxJHElrOWsxS8m6KbopazFLybopazHZqbohmrGasZq5azHZoZqxmrHZoUvJuiGasdmh2aoJGWs5azm6IZqxmrHZodmpazlrMUvJuiGauWsxS8GauWs5HEFLwUvJHEkcQZq5HEFLwZq5azlrMZq5azHZqbopazlrMdmh2am6IZqx2aoJEdmh2aIokdmh2am6KgkaCRGaugkaCRHZqboqCRm6Idmh2aGauWsxmrHZqbohmrm6KbopuilrOWs5azlrORxBmrm6IPzQ/NlrOWsx2aGauWs6CRlrMZqx2aoJEZqx2aGaugkR2aoJGgkSKJoJEiiaCRIokiiZuioJGboh2aHZqboh2am6IdmpazHZqboh2aGaubohmrGauWsw/Nm6IZqxmrkcSWs5azlrMUvJazlrMUvBmrGaugkR2aGasZq5uiGaugkZuioJGgkZuiHZoiiR2aoJEiiaCRoJEiiaCRHZoiiaCRHZqgkaCRIokZq6CRHZoZqx2am6KgkZuiGaubohS8lrObohmrFLyWsxS8FLw=". 
+ 
+2019-11-14 08:33:17,736 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,737 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"3ef23e64-e4fc-4f1a-b876-cd56d69a8d8b","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,756 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,756 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:12","MeasValue":0.0652,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.988657E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:17,802 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,802 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"fb4724aa-409c-437e-ba43-8136f83c237d","CurrLength":0}}. 
+ 
+2019-11-14 08:33:17,802 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=fb4724aa-409c-437e-ba43-8136f83c237d&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:17,802 INFO  DefaultLogger body: "lLwRxJitDdMWtQ3TlLyUvBHEFrUWtRHEDdOUvBHEj8uPy5S8lLyL2o/LEcSPyxHEj8uL2ovaj8uPy4fpi9qPyw3Ti9oN0xHEEcQRxI/LFrURxBa1FrUapha1lLyYrRa1lLwapha1FrUWtZitlLyUvJitGqaUvJitFrUWtZitmK0RxBa1mK0WtY/LFrWUvJitj8uUvI/LEcSPyxHElLwN0xHElLwRxI/LlLwRxIvalLwWtQ3TEcSPyw3TlLyPy5S8mK0RxJS8EcSPy5S8EcSUvBHEEcSUvBHElLwRxI/LFrWPyxHEEcSPy4/LEcQN04vaEcQRxA3TDdOL2ovai9qL2g3TCeKL2ovah+kJ4gniBfEJ4ovai9oN04/LDdMN05S8EcSUvBHEj8uPyxHEDdMRxJS8lLwRxI/LlLwRxJS8EcQWtRHEEcQRxI/LEcQRxBHElLyPy5S8i9oN05S8lLyPyxHElLyUvI/LDdMN05S8i9qPyw3TCeKPyw3TDdMRxI/LlLyUvA3TlLyPy4vaFrUWtY/LlLyPyxHEFrURxBHEmK0RxI/Lj8sRxBHElLwRxI/LEcQRxBHEj8sRxBHEDdMRxBHEi9qL2gnij8sN04/LDdOPywnij8sJ4gniCeKPy4/LCeKL2hHEEcSL2pS8EcSPyxa1FrWUvBa1mK0RxJS8mK2YrZitlLwWtRa1lLycnpS8nJ4WtZitFrUWtZS8mK0aphHEGqYapo/LmK0WtY/LFrURxJS8EcQRxI/LEcQRxJS8lLwRxJS8EcQRxBa1j8sWtRHEEcQWtZitnJ4WtZitFrUappS8nJ6YrRHEnJ6YrRa1FrUWtZS8GqaYrRa1FrWUvBa1lLwRxA3TlLyUvJS8EcQRxJS8EcSPyw3TlLyL2ovai9oN0xHEi9oN05S8DdMRxI/LlLyUvI/LFrUWtRa1GqYWtRa1FrWUvBa1lLyPy5itFrUWtZitnJ6cnhqmmK0WtZS8lLyYrZitEcSUvJitlLwapha1EcQWtRHElLwRxI/LlLwWtY/LDdMRxI/LDdOL2o/LDdOPyxHEEcQWtZS8mK0N05S8mK2Py5itEcSYrZS8lLwRxBqmFrUapha1mK2YrZS8FrWYrZS8EcQRxJS8j8sRxJitlLyPyxHElLyPy5S8j8uL2o/LDdMN0xHEg/iL2ovai9oJ4ovah+mPyw3Ti9qPyw3Tj8uPy4/LEcQRxBHEEcSPyxHEDdMWtRHElLyYrZS8lLyPyxHEEcSPy5S8EcQN0xHEEcQN04/LDdOL2hHEDdOUvI/Li9qPy4vaCeIJ4ofpCeIJ4ofph+kN04vaDdMJ4ofpi9oN04vai9qL2ovaDdMJ4o/LCeKH6Yvah+kF8YvaCeKL2ovai9oJ4ovaCeKL2g3TCeIN04fph+kF8QXxh+mH6QXxh+kF8QAABfGD+AAAg/gAAAAA+w4AAAXxg/h9BwAAAACD+AXxg/gJ4gXxBfGL2ofph+kN0wnih+mL2ofpi9qL2ovah+kJ4g3TCeIJ4gnij8uPy4fpDdOL2g3Ti9qH6Qnii9oJ4o/LCeKH6QniCeKH6Yfpg/gJ4gnig/gJ4gXxg/iD+AniBfGL2gXxh+kJ4ofpDdMN04vai9oJ4gnii9oJ4gnii9qL2ovaj8sJ4g3TDdMF8YvaCeKL2o/Li9oJ4ofpDdMJ4g3TCeIF8Yfph+kJ4gnih+kF8QniBfEJ4ofpi9oF8QXxAAAF8YP4g/gF8Yvag/iH6Yvaj8uL2ovai9oJ4o/Li9oWtY/LCeKL2o/Li9qPy4/LDdMRxI/Lj8uUvJS8DdOUvBHEi9qUvJS8lLyPy4/Lj8uUvI/Lj8sRxI/LDdOL2hHEEcQN0xHEi9oJ4g3Ti9qUvI/Lj8uUvJitlLyUvBa1EcQRxBHElLwWtY/LmK2UvBHEFrUWtZS8GqYWtRqmlLwWtRa1lLyYrRHEFrURxJitmK2UvBHEFrUN0xa1lLyPy5S8j8sN0xa1CeKUvI/Lj8uPyxHEj8sN0w3TFrUWtRa1FrUappitmK2YrZyenJ4WtRqmHpcaphqmFrWcnh6XHpeYrZyeGqacnpyeFrWcnh6XHpciiJyenJ6cnpitGqYWtZitFrUappitGqaYrZitmK2YrRa1FrUWtZS8lLwappS8GqacnpitnJ4WtRa1nJ6gjx6XHpcelx6XGqagjx6XHpecnqCPnJ6gj5yenJ6cnqCPnJ4el5yenJ4elxqmGqaYrRa1FrUaphqmFrWUvJyenJ6UvBqmj8sWtZS8FrUWtRa1EcSYrZitj8ucnh6XnJ4el5yeGqacnpitnJ6lgBqmHpcel5yenJ6gjx6XmK0el6CPoI+gj5yeIoicnqCPIoicnpyeIoicniKIGqacnhqmmK0aph6XFrUWtRqmnJ6cnha1GqaUvBa1FrUappS8mK0WtRqmGqYWtRa1mK2YrZyeFrWcnpitnJ6cnpitmK0apha1GqacnpitlLyYrZitmK2UvBa1EcQWtRHEFrUWtY/LEcQRxI/LEcSL2hHEEcSL2o/Lj8uPy4valLyL2ovaCeKL2g3Th+kN0w3TlLwRxJS8lLwRxI/LEcSUvJS8EcSUvBHElLyUvJS8lLyPy4/LlLyUvBHEEcQRxA3TEcQRxA3TEcQN04/LEcSL2g3Tj8uPyw3TCeKPyw3Tj8sN04vai9oN04fpg/iL2o/Li9qL2g3TEcSL2gniDdMRxIvai9qPy5S8i9qL2o/Li9o=". 
+ 
+2019-11-14 08:33:17,852 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,852 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"fb4724aa-409c-437e-ba43-8136f83c237d","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,869 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,869 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:18","MeasValue":0.0625,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.75403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:17,913 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,914 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"04ff2d11-0cdc-4807-b489-f70247794415","CurrLength":0}}. 
+ 
+2019-11-14 08:33:17,914 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=04ff2d11-0cdc-4807-b489-f70247794415&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:17,914 INFO  DefaultLogger body: "NNgq4DTYPtA02B/oKuAq4B/oNNgV8CrgPtA+0DTYH+g02FPASMhIyGewSMhIyGewXbhduF24PtBnsF24U8BnsFPAcahduGewU8BxqFPAcahnsF24Xbg+0FPAXbhIyD7QU8A+0EjISMgq4DTYU8A02DTYPtBTwDTYNNgq4D7QSMhIyD7QNNg02D7QU8BTwEjIPtA+0F24SMhIyEjISMhTwD7QXbhTwEjISMgq4EjINNg02EjIXbgq4DTYSMg+0DTYFfA+0CrgNNg+0CrgNNgf6CrgFfAV8BXwKuAV8B/oC/gq4BXwC/gL+CrgNNhIyD7QSMgq4DTYSMg02EjIU8BIyDTYU8A02FPAPtBTwF24U8BTwEjIKuBduGewSMgq4D7QKuA+0FPAXbg+0D7QKuA02DTYU8A02DTYNNg+0D7QU8Aq4B/oKuA02DTYKuAf6D7QNNgf6DTYH+g+0EjIPtBIyFPASMhTwFPASMg+0DTYSMhduEjIPtBTwFPAPtBduFPASMhIyEjINNgq4DTYNNhIyD7QSMg02EjINNgf6D7QPtA02DTYKuAq4DTYH+gV8DTYC/hIyEjIKuA+0EjINNg+0D7QU8BIyD7QU8BIyEjIXbhTwFPASMhTwF24Z7BIyGewXbhTwF24U8BTwFPAPtBTwGewPtBIyF24SMg+0F24PtBduEjINNhIyEjIPtA02DTYNNgq4B/oSMg02EjISMg+0EjIU8A+0EjIU8BduFPAXbhduFPASMhTwHGoZ7BduHGoSMhxqGewXbhnsEjISMg+0FPAZ7BnsF24U8A+0D7QU8A02FPAPtAq4FPASMg02EjIU8BIyD7QNNgq4DTYNNhduDTYSMhduGewU8A+0FPAU8BTwGewSMhnsGewZ7BnsFPAZ7BnsFPAZ7BduGewXbhduHGocahduGewfKBduFPAcahnsGewZ7BTwFPASMhnsFPAU8A+0F24PtA+0FPAU8A+0F24XbhduD7QZ7BnsFPAXbhnsHGoSMhnsFPAZ7BTwGewXbhduF24XbhduHGocahduHGoU8BxqHGoU8BduHGoXbhTwGewU8BnsFPAU8BduEjIPtBIyD7QXbhIyD7QSMg+0D7QZ7BIyDTYPtBTwFPASMhTwFPAcahTwGewcahnsFPAfKCGmGewXbh8oGewU8CGmIaYZ7BnsHGoXbhxqHGokJBduHGohphnsGewfKBxqHyghphduGewZ7BduF24XbhduFPAcag+0GewU8BIyF24U8BTwFPAPtBTwFPAZ7BxqF24U8BduF24U8BxqF24Z7BnsHGofKBxqHGoXbhnsHGocahduHygcahnsFPAXbhduFPAXbhduFPAXbhTwD7QPtBIyEjINNg02DTYKuA+0D7QNNg02D7QNNg+0D7QSMg+0D7QXbhduEjISMhduF24XbhTwF24Z7BduGewcahxqHygXbhduF24Z7BnsGewcaiGmHGoU8BnsGewZ7BnsEjIZ7BIyFPAPtBxqFPAPtBIyD7QU8BIyD7QU8A02D7QSMhTwEjISMhduEjIXbhduHGoNNhduF24XbhnsGewXbhduF24Xbg+0EjIPtBTwFPAU8BduEjISMhIyD7QSMhIyF24PtA+0EjIXbg+0DTYSMgq4EjINNgf6DTYKuAq4DTYNNgf6CrgC/gf6BXwKuA+0B/oNNg02CrgNNhIyB/oSMhIyDTYXbg02EjISMg+0EjIU8BIyEjIPtA+0FPASMgf6EjISMg02DTYNNg+0DTYNNg02D7QNNgq4DTYH+g02Av4KuAf6Av4FfAq4AAAFfAV8BXwKuAf6CrgNNgf6Av4KuAq4CrgKuAq4B/oPtAf6DTYKuAf6D7QH+g02B/oH+g02CrgKuA02CrgFfAf6BXwNNg02BXwH+gq4AAAAAAf6BXwH+gAABXwC/gL+PUHAAAAABXwC/gAAAAAFfAAABXwC/gf6DTYKuA02CrgH+g02CrgNNg02D7QPtAq4D7QSMhTwBXwPtAq4B/oNNhIyCrgH+hIyDTYU8A02EjISMg02D7QNNgf6D7QNNhTwD7QH+gq4D7QFfAf6B/oKuAf6B/oKuA02B/oPtA02CrgPtA02D7QPtBIyD7QXbg+0EjIU8A+0F24SMg+0FPAU8A+0FPAPtBTwDTYKuA+0D7QSMhIyCrgPtA02D7QPtBIyD7QKuAf6DTYKuA+0B/oKuAf6CrgNNgf6DTYPtA02EjIPtA+0FPAZ7BIyHGoXbhduF24cahnsGewXbhduGewSMhxqHGocah8oHygcahxqGewhphnsGewfKBnsHGoZ7BnsGewhphTwHGocahTwFPAXbhduEjIXbhduFPAXbhduHGoSMhduHGocaiGmFPAfKB8oHGofKCQkHGohph8oHygkJCGmGewcaiGmGewkJCGmHygfKBxqIaYcaiQkHGocahxqHygZ7CGmFPAZ7CGmGewXbhnsHGoU8BnsF24XbhnsHygXbhIyF24XbhxqF24caiGmHyghphnsIaYfKCGmIaYmoiGmKWAkJCaiJCQkJClgKWAmoiaiJqImoh8oJqIkJClgIaYkJCaiHGomoiGmJCQpYB8oHGofKBxqHygcaiGmHyghphxqF24fKBTwHGohphxqHGoU8CGmIaYfKCGmHyghpiQkHygfKB8oJqIfKCaiHygkJCaiHyghpiGmHygcaiGmHygfKBnsHygfKBduGewXbhduHGoXbhTwFPAXbg=". 
+ 
+2019-11-14 08:33:17,973 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:17,974 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"04ff2d11-0cdc-4807-b489-f70247794415","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:17,994 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:17,994 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:23","MeasValue":0.061,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,040 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,041 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"f8392643-de22-42fb-bc32-a0232b5370b5","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,041 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=f8392643-de22-42fb-bc32-a0232b5370b5&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,041 INFO  DefaultLogger body: "a8lryWvJa8lTwCGua8k6tzq3a8khrjq3U8A6twila8lryVPAa8lTwFPAU8BryVPA75shrmvJa8lryVPAOrc6t1PAOrdTwDq3U8BryTq3hNJryYTSnduE0lPAU8A6tzq3a8lTwFPACKU6tyGuOrchrjq3Ia4IpTq3U8A6t1PACKUhrgilCKU6twilCKVTwAilOrdTwDq3Ia46t1PAhNJryVPAU8BTwGvJa8lryWvJOrc6t53bhNJryYTSa8nP7bbka8lryWvJU8BryTq3Ia46tzq3Ia4hrgil1pIhriGuIa4hrtaSIa4Ipe+bCKU6twilIa4Ipe+bvYnvmwilOrc6t++b75shrjq3Ia7vm1PACKU6tyGuOrchriGuCKU6tyGuIa5TwFPAOrdTwCGuCKU6t++bIa7vm++b1pLvmwilIa7vm72JIa7vm72J1pK9iQilCKW9idaS1pLWktaS1pLvmwil75shrgilIa4IpdaSIa46tyGu75shriGuOrdTwCGuOrdryVPAOrc6t2vJOrchriGuOrc6tyGuOrfvmyGu75vWku+bvYnvm6WACKXvmwilvYnWkgilvYnvm9aSvYm9ib2J75sIpb2JCKXvm72J75vWktaS1pLWkgilCKUhriGuIa46t1PAOrchrgilCKVTwDq3OrcIpTq375shrgilCKUhrgilCKUIpe+bIa4IpQilIa4IpQilIa4IpSGuOrfvmyGuOrcIpTq3CKUhrmvJOrchrmvJa8k6tzq3OrdTwITSOrc6tzq3hNKE0oTShNKd21PAndu25LbkhNJTwJ3bndtryWvJOrdTwGvJhNJTwDq3OrdryVPAOrchrjq3CKU6t2vJhNJTwFPAIa6E0lPAIa46tzq3hNJryWvJa8lTwGvJa8k6tyGundtryVPAndu25ITStuRryYTSz+1rybbka8md27bkndud27bkhNKE0lPAU8Cd22vJhNLP7YTShNKE0oTSU8A6t7bka8lryWvJhNJTwJ3bz+2E0oTShNKd22vJhNKE0oTSnduE0s/ttuSd27bkndu25Oj26PbP7ej2z+3P7bbktuQYCc/tndud253bndu25LbkU8BryYTShNJryVPAU8BryVPAU8BTwGvJU8A6t2vJOrdTwFPAU8AhrlPAU8BTwFPAhNI6tzq3hNKd21PAa8lryWvJa8md21PAOreE0mvJhNKE0oTStuSd24TSnduE0mvJU8BryVPAa8k6t2vJIa4hrmvJOrdryTq3OrdTwCGuOrdryTq3CKVryVPAU8BryVPAa8lTwFPAa8mE0iGua8mE0jq3ndtryZ3btuSE0jq3hNKd253btuTo9s/thNKE0p3bU8BryYTSa8m25GvJU8BryTq3Orc6tyGuU8AhriGuOrchrgilOrchrgilCKUIpVPAIa4IpSGuOrc6tyGuCKUhrjq3Ia4IpSGuIa4hrlPACKVTwCGuU8BryVPACKVryTq3a8lTwITSndsIpVPAOrcIpQilCKUhrtaSOrchriGuOrchrtaS1pIIpe+bIa7WkgilvYkIpe+b75vWkgil75s6tyGuCKUIpQilCKUhriGu75s6tyGuU8Ahrjq3Ia7vm2vJa8lTwDq3ndtTwFPAOrcIpWvJIa4Ipe+b75vvm++bvYkIpe+bCKXvm++b1pKlgAil1pIIpe+b1pLWktaS75sIpb2JCKUIpe+bCKUhru+bCKXvmwilOrfvmzq3CKUIpSGuOrchriGuIa46t1PAa8khrlPAIa46tyGuCKUhru+bIa4hrgilCKUIpSGuOrcIpdaSIa4IpdaSIa4IpSGuCKUhru+bOrcIpSGu75vvm2vJOrcIpVPAa8lTwDq3Ia6d22vJU8Cd21PAhNKd24TShNKd253btuSd253bhNKd22vJhNKd22vJOrdTwFPAa8lTwDq3CKUhrlPAIa4IpVPAOrdTwDq3U8A6t1PAOrdTwGvJIa46tzq3OrdryTq3a8lTwCGua8khrjq3nduE0oTShNJryYTShNKE0s/tndvP7Z3btuSE0p3bndtryVPAhNJryVPAOreE0p3bIa46t1PAIa5TwFPAa8k6t2vJa8lTwCGuU8A6t2vJU8AhroTSa8lryZ3bhNJTwLbkU8CE0s/ta8mE0p3bndvP7YTShNK25M/ta8nP7bbkhNKd21PAU8A6t1PAU8A6tzq3OrchriGuU8Ahrjq3Orc6tyGuIa4hrlPAU8DWkjq375s6tzq3Ia5rySGuIa4hriGuIa4hrlPAOreE0jq3U8BTwFPAndshroTSnds6t1PAhNJrybbkIa46t1PAIa46tyGuOrchrmvJIa4hrgilOrdryQilCKUhrgilCKUhriGuCKXvmzq3Orc6tyGuCKXvm1PAOrdryVPAa8lTwDq3U8BryWvJCKVTwITShNI6t4TShNKE0oTSa8lryWvJU8CE0mvJOrdrySGuCKUhrjq3a8lTwDq3OrdTwAilOrc6tyGuCKUIpQilOrchrtaSU8AIpTq3Ia4hrmvJIa46tzq375shrjq3Ia4hrjq3U8BTwCGuU8CE0jq3U8BryVPAU8CE0mvJU8BryWvJhNJTwCGuhNIIpTq3U8Ahrjq3CKXvmwilCKVTwO+bOrfvmyGuIa4hriGu75shriGuOrc6t1PAIa6d2zq3U8A6tzq3hNJryTq3a8lryYTSU8Cd24TSndud27bktuSE0rbkhNJryWvJOrdryVPAIa4=". 
+ 
+2019-11-14 08:33:18,095 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,096 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"f8392643-de22-42fb-bc32-a0232b5370b5","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:18,114 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:18,114 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:29","MeasValue":0.0596,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.05014942E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,159 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,163 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"34575832-834e-4524-ac25-824e640f801c","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,164 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=34575832-834e-4524-ac25-824e640f801c&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,164 INFO  DefaultLogger body: "OcVtuznFOcVtu6Gxbbs5xaGxOcWhsW27obHR2NHY1adtuwXPBc85xQXPBc9p7GnsneKd4p3iaezR2G27OcU5xQXPobFtuznF1aehsTnFBc8FzznFobFtu9WnobHR2KGxbbttu6GxOcUFz227OcU5xdHYOcXR2G27neJtuwXPneIFz9HYneJp7AXPneI5xTX20did4mnsneKd4jX20dhp7NHYOcVtu9HYbbsFz227bbvR2DnFOcXVp227Bc9tu9WnOcXVp6Gx1afVp6GxbbuhsaGxbbttu2271aehsQXP1ac5xQXPobEFz227OcVtu6GxBc9tuwXPbbsFzznFbbsFzznFobEFzznFbbvVpwme1aehsTnFOcVtu9WnbbvVpznF1afVp9WnobHVpz2U1afVp6GxobGhsQmeobFtu227obE5xaGx1ac5xQmeOcUFz227OcVtu227OcU5xaGxBc8Fz227obEFzwXP0dhtuwXPOcVtuznF1adtu6GxCZ49lAme1acJngmeCZ5tu6GxPZShsQmeobGhsQme1ac9lHGKCZ4JntWnobE9lAmePZQJngmeCZ4JntWnCZ4JnjnF1acJnm271afVpznFOcU5xaGxbbvVp9Wn1adtuwme1ac9lAme1afVp9WnCZ6lgD2U1acJnj2UcYo9lHGKcYo9lHGKPZQ9lAme1acJntWn1acJntWn1ac9lKGx1afVp9WnobE5xW27OcUFz227obFtu6GxOcU5xTnFBc85xdWnbbs9lAmeCZ4JnqGx1afVpwmecYoJntWnCZ49lAmeCZ6lgNWn1acJnj2UcYqhsQmePZQJngmeCZ7Vpz2UCZ7Vpz2UobHVpz2UPZShsdWnobGhsdWnbbs5xdWn1ac5xTnF1ac5xW27obHVp6GxobHVp6GxCZ5tu9Wn1adtuwmeobE9lAme1acJnm271aehsdWn1aehsQmeobHVp9WnCZ6hsTnFbbvVp6Gx1afVpznFbbs5xQXPbbs5xaGxbbsFzwXPOcUFzznFbbud4m27OcWhsTnFCZ6hsQme1aehsT2U1ac9lNWn1acJntWnCZ4JngmeobEJntWn1acJngmecYoJngme1acJnj2UobGhsdWnCZ45xdWnobE5xQmebbttu2271aehsaGxobEFz227bbttuwXPobFtuznFobFtu6GxbbuhsW27CZ6hsdWnobGhsdWnobE5xdWnobFtu9Wn1aehsW27OcU5xQmeobFtuznFBc85xTnFbbttu53i0dg5xQXPOcU5xdHYBc+d4jX2neJp7NHYneIAAJ3iBc8FzwXPOcU5xQXPBc+hsaGxbbs5xaGxbbttu6GxbbsJntWnOcUJntWnOcXVp227CZ6hsW27obGhsaGxobFtuznFOcVtu6GxOcWhsW27obHR2AXPOcUFzznFbbsFzwXPBc/R2G27Bc9tuznFbbttu6GxbbuhsQXPBc8Jnm271aehsW27obGhsW271acJntWn1adtu6GxbbuhsW27bbvR2AXPOcWhsdHYOcXR2DnFbbs5xZ3i0did4tHYAACd4p3iaexp7J3iBc9p7GnsBc85xdHYBc/R2AXPbbsFz6GxobFtu227bbttu6GxobE5xdWnbbuhsW27bbs5xaGxbbvVp2270dg5xdHYbbuhsdHYOcVtuwXPbbvVp2270djR2G27OcU5xTnFOcXR2AXPBc/R2NHYbbvR2AXPOcU5xTnFbbttu6GxbbuhsTnFbbuhsQmeobHVp227obGhsaGxbbvVp6GxOcVtu227obHVpznFbbs5xTnFbbs5xTnFbbs5xTnF0dgFzznFBc8FzznFBc/R2AXPaezR2NHY0did4gXPbbuhsW27obGhsQXPobGhsdWnCZ4JntWnOcVtuz2UobGhsTnFobFtu9Wn1acJnj2UbbsJnqGxobE9lG27obHVp6GxbbuhsW27Bc9tu227bbttu53iOcU5xQXPBc/R2DnFbbttuznFOcU5xTnFbbuhsW27CZ4FzznFobEJntWnbbuhsdWnobFtu6Gxbbs5xTnFobFtu6GxbbttuznF1aehsW270dihsW27obE5xW27OcXR2AXPBc8FzwXPBc/R2NHYneJp7NHYneI5xW27bbuhsaGxbbttuznFbbsJntWnobGhsdWnobGhsaGxCZ49lAmeCZ7VpwmeCZ5tuwme1acJntWnPZTVp227CZ5tu9Wn1aehsW27bbvVp9WnOcVtu6Gxbbs5xW27OcWhsaGxOcVtuznFbbvVp6Gxbbttu227CZ5xitWnCZ5tuz2UCZ7Vp6GxPZQ9lD2UcYqhsdWnCZ4Jngmebbs9lD2UCZ7Vpz2UbbvVp6Gx1acJnm271aehsdHYOcXVp227bbud4gXPobFtuwXP1ac5xdWn1adtu9Wn1aehsT2UPZTVpz2UbbtxiqWACZ5xiqWAobE9lD2UCZ5xij2UCZ49lAmecYpxij2UCZ49lAmePZQJngmePZTVpwmePZQ5xaGxCZ6hsaGxobFtu6Gxbbttu227bbttu9WnobE5xdWnobHVpz2UobE9lAme1ac9lAmeCZ7VpwmePZQ9lAmepYAJntWnPZShsXGKPZQJnqGxCZ5tu6GxbbvVp9WnOcU5xW27OcU5xW27bbs5xTnFOcVtuwXP0dg5xQXPBc+hsQXPOcVtu6GxbbuhsQmebbttu6GxobEJnm27obHVp6GxPZShsaGxBc8Jnm271ac=". 
+ 
+2019-11-14 08:33:18,242 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,242 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"34575832-834e-4524-ac25-824e640f801c","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:18,269 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:18,269 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:34","MeasValue":0.0605,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,315 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,319 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"24c7d504-8bd7-463a-9f77-bd0d3560903a","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,319 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=24c7d504-8bd7-463a-9f77-bd0d3560903a&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,319 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:18,400 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,400 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"24c7d504-8bd7-463a-9f77-bd0d3560903a","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:18,419 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:18,419 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:39","MeasValue":0.0582,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,462 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,463 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"3d64e84b-b397-4ecc-ae52-5161ea75e7e5","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,463 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=3d64e84b-b397-4ecc-ae52-5161ea75e7e5&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,463 INFO  DefaultLogger body: "a8mE0oTSndtTwFPAtuRryYTShNKd21PAIa5ryWvJa8k6t1PAU8BTwITSIa6E0iGuIa5TwGvJIa5TwFPAU8Cd21PAhNKE0oTSnduE0p3bhNK25FPAz+1ryc/ttuTP7c/tz+3P7c/tAAC25AAAtuTo9gAAAADo9p3bAAC25M/ttuTP7bbkndud27bktuS25ITShNKE0oTSnduE0p3btuRTwGvJnduE0rbktuSE0mvJnduE0s/thNKd253bndu25M/ttuSd253bhNK25J3bz+3o9s/tz+0AALbkz+0AAM/tAADP7ej2AACd24TStuSE0p3btuSE0mvJhNKE0mvJnduE0s/thNJrybbk6PZryWvJa8mE0p3bhNJTwGvJtuQAALbktuS25GvJndu25Oj26PbP7bbkGAmd253bz+225Lbk6PbP7ej26PaE0s/ttuTo9rbkhNI6t4TSa8mE0oTSU8BryWvJU8CE0mvJU8BryVPA75uE0oTSIa5ryVPAnduE0gilndtTwGvJhNJTwITShNKd24TSa8k6t53bnduE0rbka8mE0s/ttuS25ITSa8lryVPAU8CE0jq3U8CE0lPAIa4IpTq3Orc6tzq3Ia46tyGua8lTwCGuOrcIpQilU8BTwCGuCKVTwFPA75shrgilU8BTwCGuU8BryQila8lryTq3OrdTwCGua8mE0mvJa8lryWvJU8BTwDq3Ia4hrgilOrfWkgil1pIhriGuIa7vmzq31pIIpQil1pLvm++b1pIhrgil75u9ie+bIa7vmwil1pIIpe+bCKXvmyGuCKUIpSGuU8AIpQilIa46tyGuU8AhriGuU8BTwGvJCKUIpSGuCKW9ie+bCKUIpTq375sIpaWA75shru+b1pIIpe+bCKUIpb2JCKU6t9aS75vvm6WA1pIhrgil75vvm++bIa4IpQilCKUhriGuCKUhrlPAIa4hrgil75shriGuU8AIpSGuCKU6twilCKU6tzq375sIpSGu75vvmwil1pIIpaWACKWlgL2J1pK9ib2J75u9ie+b1pLWku+bpYDvm++bvYnWkgilCKUIpdaSCKXvm9aSCKUhru+bCKUhrjq3CKVTwFPAIa4IpVPAU8A6tyGuU8AhriGuOrc6t72JOrcIpe+bCKUIpSGu75vvm++b75shru+bCKU6tzq3OrdTwAilCKVTwCGuOrdTwAilU8AhrmvJndtTwFPAndtTwGvJhNJryZ3bU8CE0oTSndud24TShNJryWvJU8AhrlPAU8Cd21PAIa5ryVPA75s6t2vJIa5ryTq3U8A6t2vJU8A6t2vJOrc6twilhNI6t1PAOrc6t2vJU8A6t2vJU8BTwDq3hNKd22vJa8lryWvJhNKE0lPAhNJrybbkndtryYTShNJTwFPAOrc6t1PAU8CE0p3bhNJTwITShNJTwDq3a8lTwJ3bU8BryVPAhNJryVPAU8BryVPAhNKE0mvJOre25ITSndvo9rbktuSd24TSz+3P7bbktuSd253bAAC25Lbk6Pad27bkhNKE0rbkhNJryZ3bU8BTwGvJU8BryTq3U8BTwFPAU8BrySGuOrdrySGuOrc6t2vJOrc6t1PAOrdTwDq3hNI6t1PAhNJTwFPAa8lTwFPAOrc6t4TStuQ6t53bU8Brybbkndu25GvJU8CE0mvJOrc6tyGuU8BryWvJIa5TwCGuIa5TwCGuOrc6twilOrdTwO+bOrc6tyGuU8AhrmvJOrcIpYTSOrchrjq3OreE0oTSU8A6t1PAOred22vJa8m25ITSU8C25ITSa8mE0mvJhNI6tyGuOrdTwAilOrdTwCGuOrc6tyGu75vWkjq3Ia7vmzq31pIIpe+ba8nvmwilCKXvmyGuIa46tyGuCKVTwCGuCKU6twilOrchriGuIa4hrjq3hNI6t1PAa8md21PAhNIhrlPAa8k6tyGua8nvmyGuIa4hru+b75shriGu1pLvmyGuIa5TwO+bU8A6t++bIa4IpSGuU8AhrgilOrchrlPACKUhrjq3a8lryVPAa8lryZ3bIa5TwDq3ndtTwJ3bndtTwITSU8CE0jq3hNKE0u+ba8k6t72JOrchrgila8nvm++bIa4IpQilCKUIpe+b75sIpQil75vvm++b75vWkiGuIa69ie+bOrc6tzq3CKUIpQilCKVTwAilU8A6tyGuU8AhrlPAU8CE0jq3U8BrySGuOrdTwDq3Ia4IpWvJIa4IpQilIa5TwAilCKXWkjq375vWkgilCKUIpdaSCKUhrgil1pI6tyGuOrc6t++bCKU6tyGua8khrlPAhNIhrjq3hNJTwFPAa8mE0lPAOred2+j2a8md21PAhNKE0lPAU8BTwDq3Ia5ryVPAOrc6t1PAIa4hrgilCKXvmwilIa4hriGuIa7Wku+bOrc6tzq3OrchrgilIa4hrlPAU8AhrmvJIa5TwFPAa8lryVPAa8lTwITSU8CE0p3ba8mE0p3ba8md22vJU8C25GvJa8lTwDq3OrchrlPAU8BTwFPAU8A6tyGua8lTwGvJOrdTwDq3U8BTwFPAa8lTwDq3a8md24TSndud24TSnduE0rbkndvP7YTStuTP7c/tz+2E0p3bndud28/ta8nP7c/thNKE0lPAhNIhroTSIa46tzq3hNIhriGuIa46tyGuIa46tyGuOrc6tzq3Ia4hrjq3a8khrgilU8A6t1PAOrc6tyGuOrdTwGvJU8BryWvJIa4=". 
+ 
+2019-11-14 08:33:18,534 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,534 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"3d64e84b-b397-4ecc-ae52-5161ea75e7e5","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:18,555 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:18,555 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:45","MeasValue":0.0621,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.519403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,599 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,600 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"b82b6c32-eb4e-4233-a130-b42a410530fc","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,600 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=b82b6c32-eb4e-4233-a130-b42a410530fc&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,600 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:18,669 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,669 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"b82b6c32-eb4e-4233-a130-b42a410530fc","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:18,688 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:18,688 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:50","MeasValue":0.0644,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.988657E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,732 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,732 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"c1affc54-0aa3-4d37-8f6c-ed24028e2bb1","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,732 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=c1affc54-0aa3-4d37-8f6c-ed24028e2bb1&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,732 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:18,795 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,797 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"c1affc54-0aa3-4d37-8f6c-ed24028e2bb1","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:18,817 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:18,817 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:27:56","MeasValue":0.0592,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,866 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,866 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"c711b307-62b8-4322-ad80-bd3d09f552da","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,866 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=c711b307-62b8-4322-ad80-bd3d09f552da&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,866 INFO  DefaultLogger body: "6Pad24TShNKd253bhNJTwITSIa5ryVPAa8khriGuIa46tyGuCKVTwDq3a8lryVPAa8k6t1PAhNI6t2vJhNJTwDq3hNJTwFPAhNJTwGvJnduE0p3ba8mE0p3btuSd27bkndvo9rbkhNLP7YTSndud24TSU8DP7YTSU8Cd21PAndshrlPAIa4hroTSndtrySGua8lryWvJIa4IpWvJa8lryWvJU8AIpVPAa8k6t2vJOrdTwITShNKd21PAhNJryZ3bnduE0rbktuS25ITS6PbP7bbk6Pad27bka8mE0lPAa8lTwJ3ba8lryYTSU8Brybbka8mE0mvJOreE0lPAU8BryWvJa8mE0lPAU8CE0oTStuRTwLbkndud24TSndud27bkndu25ITS6PbP7c/tz+3o9p3btuTP7ej26Pad27bkndud24TSa8mE0oTShNKE0gila8md24TSa8lTwDq3hNJryVPAU8BTwFPAa8khrlPAOrdryWvJndtTwITSOrdryYTSa8md27bkhNKE0rbkhNK25J3bndud22vJhNK25ITShNK25GvJtuRrye+bhNI6t2vJa8k6tzq3hNIhrlPAU8BTwFPAOrchroTSOrc6t2vJOrdTwITSa8lryVPAU8Cd24TSOreE0p3bhNJTwGvJhNKd22vJhNKd24TSndtTwITSndtTwJ3bhNKd22vJU8A6t1PAOrdTwCGuU8DWkmvJCKUhrjq3CKVTwNaSCKUIpdaS1pIIpe+bvYkIpdaSCKUIpe+bIa4IpQilIa4hrgilCKUhrtaSIa4hrjq3Orc6tzq3Ia46tzq3U8AhrlPAIa4Ipe+b75s6t72J1pIhrgilCKVTwCGu1pLvm++b1pLvm6WA75sIpb2J1pKlgL2J75vvm9aS1pLWku+b1pLWkiGu75sIpVPACKUIpe+bCKVryTq3CKWE0lPACKVTwDq3Ia46tyGua8k6twilOrcIpQilOrcIpQilCKUIpe+bCKXWku+bvYm9idaSvYkIpSGuCKXvm9aS75sIpe+b1pLvm9aS1pIIpe+b75vWkiGu1pIIpVPAU8Ahrjq3CKUIpTq3a8k6t1PAOrc6tyGua8k6t1PAU8Ahrjq3CKXvmwilCKXvmwil75vvmwil1pIIpb2J75sIpdaS1pIhriGuCKXvmwilIa7WkiGuOrfvmwilCKUhriGuIa4IpVPAhNI6t2vJU8A6t2vJa8lryVPAOrdTwGvJa8mE0oTSa8lTwITSOrchriGuOrchrgilIa7vm72JCKUIpSGuIa7vmwilCKUhriGuIa4hrmvJIa4IpVPAOrdTwO+bOrchrjq3Orc6twilOrdryWvJa8md253bU8C25J3ba8mE0oTStuRTwFPAtuRryWvJhNJryWvJIa5TwITSU8BryVPAIa4hrlPAIa5rySGuU8BTwFPAIa5TwDq3U8CE0oTSU8CE0oTShNKd24TSnds6t1PA6PZTwITShNJryWvJndvP7c/tz+2d253b6PaE0uj2tuRryc/ta8mE0lPAa8mE0mvJU8CE0oTSU8BTwGvJOreE0mvJOrdryVPAa8lTwGvJU8A6t4TSa8k6t2vJa8lryZ3bhNJryWvJnduE0oTSa8mE0p3bnduE0rbkz+225Oj2tuTP7Z3btuS25J3bhNJryVPAhNKE0lPAa8k6t1PACKVryTq3CKVryYTSOrdryZ3bU8BTwGvJhNJryYTSU8CE0p3bU8C25ITShNKE0p3ba8mE0rbka8m25LbktuTP7YTSAACE0p3bz+225ITShNKE0oTSa8lTwJ3bOrcIpWvJOreE0lPAU8A6tzq3U8AhriGuIa5TwDq3Ia46tyGuCKU6tyGuCKVTwCGuU8AhrtaSa8lTwCGua8mE0lPAIa46t7bka8lTwLbkhNIhroTShNI6t53ba8lryVPAOrdrySGuIa46tzq3Orc6tzq3Ia4IpTq3OrdTwO+bCKUIpSGuCKUIpSGuCKXWkiGu75shrgila8lTwITSOrcIpSGuOrdryVPAa8lryWvJU8CE0s/ta8mE0mvJU8BTwFPAa8k6t1PAa8k6twilIa4IpSGuOrfWku+b75vWkiGu1pLvmyGuCKXvmzq31pLvm++bIa7vmzq375tTwAilvYkhrjq375vvmwilCKUIpTq3Ia4hrjq3U8Ahrjq3a8lryWvJU8BryWvJOrdryTq3CKXvmzq3Ia7WkiGuCKXvm++bIa4IpdaS75vvmwil1pLvm++bCKUIpdaS1pLvmwilCKW9ie+bIa7vmyGuCKUIpTq3OrcIpVPAU8AhriGuOrc6t2vJU8C25GvJOreE0iGuOrdTwDq3CKVTwFPAIa5TwAilU8Ahru+b75vvm9aSCKUIpSGu75vvm++bIa7vmyGuCKXvm++b75u9iTq3CKUIpQilCKU6tzq375shrjq3Ia6E0lPAU8A6t1PAU8BryVPAOrdryTq3a8lryVPAU8A6twilCKVTwDq3OrcIpWvJCKUhrjq3U8A6t4TSCKU6twilCKVTwDq3Ia5ryTq3OrdryTq3a8lryVPAU8BryVPAa8lTwITSa8md24TShNKE0oTStuSE0p3bhNKd253bU8BTwJ3bOreE0mvJhNJTwDq3CKWE0iGuOrchriGuCKU6t1PAhNI6twilCKVTwCGua8lTwFPAOrc6twilU8BTwFPAOrdryWvJU8AhrmvJU8Cd22vJU8BryYTSndtryZ3ba8k=". 
+ 
+2019-11-14 08:33:18,917 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,919 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"c711b307-62b8-4322-ad80-bd3d09f552da","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:18,936 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:18,936 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:28:01","MeasValue":0.0598,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.519403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:18,983 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:18,983 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"7cc64842-d2b7-4c8d-86f8-530cd2e9b5ad","CurrLength":0}}. 
+ 
+2019-11-14 08:33:18,983 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=7cc64842-d2b7-4c8d-86f8-530cd2e9b5ad&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:18,983 INFO  DefaultLogger body: "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". 
+ 
+2019-11-14 08:33:19,062 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:19,062 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"7cc64842-d2b7-4c8d-86f8-530cd2e9b5ad","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:19,084 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:19,084 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:28:06","MeasValue":0.0581,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.28477631E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:19,128 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:19,128 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"e85a1e0a-bf1a-4ce9-a79f-5a68aca72bd0","CurrLength":0}}. 
+ 
+2019-11-14 08:33:19,129 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=e85a1e0a-bf1a-4ce9-a79f-5a68aca72bd0&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:19,129 INFO  DefaultLogger body: "AADo9hgJAACE0s/tndtrybbkhNKE0rbktuSE0oTSa8m25LbkU8CE0p3bhNLP7WvJtuSE0p3btuSd253btuSd253bz+2E0p3btuS25Oj2z+1ryc/ttuS25Oj2AAC25BgJ6PYxErbk6PYAAOj2AADo9uj2z+225J3bhNK25ITSndud22vJhNJTwGvJa8lryYTSa8lryVPAa8lryYTSU8A6t4TSa8lryWvJhNKd22vJIa5ryWvJa8md253bOreE0mvJU8Cd24TShNK25ITStuSE0oTSndtryZ3bz+1TwGvJhNKE0lPAhNJTwGvJU8A6t2vJa8khrlPAa8lTwFPAOrdTwFPAIa5TwDq3OrchrmvJtuSE0mvJhNKd21PAndtTwFPAtuRryYTStuSE0mvJhNKd24TShNKE0oTShNJryVPAU8BryVPAOreE0iGuOrdTwCGuIa5TwCGuIa4hrgilIa46twilIa4hru+bIa4IpSGuCKUIpSGuCKU6t++bOrcIpQilIa4hrgilCKVTwDq3U8A6t1PAa8lTwFPAOrdryTq3Ia4hrjq3Ia46t1PAIa7vm9aSIa7WktaS75vvm++bCKXWku+b75sIpe+b75vvmyGuvYnvmyGuCKW9iQil75s6twilCKUhrtaSIa46tzq375s6tyGuIa4hrjq3a8khrlPAOrdTwDq3Ia4IpVPAU8AIpSGu75sIpQilpYAIpQil1pLvm++b1pLWkgilIa69ie+b1pLWku+b1pLWkr2JvYkIpdaS1pIhru+bCKXWkiGuCKXvm++bOrchriGuCKU6twilCKUhrlPAOrchrlPACKU6t1PAIa4IpQilCKUIpSGuCKUIpdaSOrfWku+b1pIIpe+b1pLvm9aSCKUhru+b75vvm72JCKVTwDq3Ia7vm1PACKUIpWvJCKVTwFPACKUhrlPAU8A6tzq3U8BTwITSa8md2zq3a8mE0jq3Orc6t1PAIa46twilOrc6twil75vvmyGu1pLWkgilCKW9ie+b75vvmwilCKXWkgil75sIpe+b75sIpSGuIa4IpQilCKUhrgilOrdTwDq3U8A6twilIa46tyGua8k6t1PAU8BrySGuIa5TwGvJOrc6tzq3Orfvm1PAhNI6twilvYlTwCGuIa5ryVPACKUhrjq3CKVTwCGuOrfvmzq3OrdryWvJIa5TwDq3U8BTwGvJhNJryZ3bhNK25ITStuSd22vJtuSd253bndud24TShNKE0jq3a8lTwFPAU8A6t1PAIa46tzq3OrchrlPAOrchrgilOrchrjq3U8AIpSGuOrchrjq3U8AhrlPAIa4hrlPAa8khrmvJa8lTwDq3a8khrlPAOrdryYTShNK25ITSa8lTwJ3ba8lryVPAa8k6tzq3a8lTwCGuCKU6tzq3U8AhrlPAIa5TwDq3Ia46tzq3Ia4hrjq3U8A6tyGuCKVryVPAOrc6t4TSOrdTwDq3hNJTwFPAU8CE0mvJa8lTwFPAhNJrybbktuSE0oTSU8BTwITSU8AhriGuU8BTwDq3Ia4hrjq375tTwNaS75shriGuCKXvm++bIa7vm9aS75shrgilOrcIpQila8khrgil75sIpVPAIa46t1PAOrdTwDq3Ia5TwITSU8BTwGvJa8lTwCGuOrdTwDq3Ia4hriGuOrc6twilOrchrgilU8AhriGuOrfvm9aSCKUIpVPAa8m9iTq3Ia46t1PAOrdTwFPAOrc6tzq3Ia5ryVPAU8CE0lPAa8md21PAnduE0oTS6PaE0p3bndud24TShNKE0oTSndud22vJhNIhrlPAU8A6t2vJOrc6t2vJU8CE0lPAa8k6tzq3OrdryTq3a8lryTq3U8BTwDq3a8lTwGvJhNKE0mvJhNJryVPAU8Cd21PAtuRTwLbka8md24TStuSd28/ta8mE0lPAa8lryYTSU8BryWvJU8Cd21PAU8BTwFPACKXvmwilU8AhriGua8lryWvJCKU6t2vJa8lTwGvJU8CE0mvJhNJryYTShNKE0oTShNK25ITShNK25FPAhNKE0s/tz+2d24TShNKE0lPAU8CE0jq3hNJryVPAOrc6tzq3OrdTwDq3U8AIpVPA75s6tyGua8lryWvJ75shriGuIa5ryWvJOrdTwGvJIa5TwCGuU8BryTq3a8lTwFPAhNJTwDq3ndu25ITSU8Cd253ba8lryWvJhNJryWvJOrdTwGvJU8BTwGvJIa5TwCGuCKU6tyGuU8AhroTSOreE0jq3Orc6twilU8Cd2zq3U8CE0iGua8md22vJndtTwGvJndu25ITSndtryZ3bndud27bktuSd27bkz+2d22vJa8lryVPAa8k6t1PAa8mE0jq3a8mE0jq3U8BTwDq3Ia46t1PAU8BryTq3a8khrmvJU8Ahrjq3Ia6E0mvJU8A6t1PAa8mE0jq3a8lryZ3bhNKE0oTSa8md28/tndud253btuRryVPAndu25GvJa8lryTq3U8BryTq3Ia46t1PAU8AIpSGua8khriGuOrdryQilCKVTwFPAOrdTwFPAU8A6t4TSa8k6t1PAU8BryVPAndud24TSU8BryWvJa8lryZ3btuSE0s/thNJryVPAOrc6t1PAOrdryQilIa46t1PAIa5ryQilIa46tyGuCKU6t1PAU8Dvmzq3CKU6tyGuCKUIpQilIa69iSGuOrdTwFPAIa46t2vJOrdTwGvJOreE0lPAIa6E0mvJU8A=". 
+ 
+2019-11-14 08:33:19,187 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:19,188 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"e85a1e0a-bf1a-4ce9-a79f-5a68aca72bd0","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:19,207 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibMetaData. 
+ 
+2019-11-14 08:33:19,207 INFO  DefaultLogger body: {"Code":"01030200061410152","FullPath":"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)","MeasDate":"2019-11-14 08:28:12","MeasValue":0.0633,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.75403E-06,"Resolver":1}. 
+ 
+2019-11-14 08:33:19,255 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:19,255 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"ca0e842e-6983-477e-9ea6-dbce7f938c01","CurrLength":0}}. 
+ 
+2019-11-14 08:33:19,255 INFO  DefaultLogger request: http://sgts.ronds.com:6480/api/services/app/VDiagnosis/VibWaveData?WaveTag=ca0e842e-6983-477e-9ea6-dbce7f938c01&Length=2048&CurrIndex=0&BlockSize=2048. 
+ 
+2019-11-14 08:33:19,255 INFO  DefaultLogger body: "PtAq4FPAPtA+0DTYNNg+0D7QNNgq4DTYSMg02D7QSMhTwFPASMhTwDTYU8BnsD7QU8BTwD7QXbhTwFPAXbg+0F24Z7BIyEjISMg+0FPAU8A02D7QNNhIyD7QNNhIyDTYNNhIyDTYNNg+0D7QNNg+0DTYFfA02DTYKuA02EjIPtA02D7QU8A02EjISMhduFPAPtBIyEjIXbg02F24U8BTwHGoU8BIyGewSMg+0F24U8BduFPAZ7BTwF24SMhTwEjIKuBduD7QPtBduDTYNNg+0D7QNNg02D7QPtAf6DTYKuA02CrgPtBIyEjIPtBIyF24SMhIyFPAPtBTwGewU8BnsF24Z7BTwD7QU8BTwFPAPtBnsF24XbhduF24Xbg+0FPAU8A+0EjIPtA+0D7QPtA+0EjIPtA02CrgKuBIyDTYKuA02CrgH+g02CrgKuBduCrgPtBTwFPAU8BduEjIU8BIyD7QZ7BTwF24Xbg02GewcahIyFPAU8BnsFPAU8BTwD7QPtBTwEjIPtBIyFPAPtBTwEjINNhIyD7QSMhTwB/oPtA02CrgKuAq4CrgNNg02DTYPtA02D7QPtA+0D7QU8BTwDTYNNhIyFPAXbg+0D7QPtBTwF24SMhIyEjINNhIyEjISMhduDTYKuBIyCrgNNgq4B/oKuA02D7QNNg02CrgKuA02BXwKuAf6BXwH+gV8BXwFfAV8DTYFfA02CrgNNg+0EjINNhIyDTYKuA+0EjINNhduEjISMhTwD7QSMhIyD7QXbhTwEjISMhIyFPAU8A+0EjIU8A+0EjISMhIyD7QNNg+0EjINNgq4DTYH+hIyFPAKuAq4BXwFfBTwBXwSMhTwD7QSMhIyEjIU8BduF24XbhIyGewU8A+0F24XbhTwGewfKBnsGewcahduHGoZ7BnsF24XbhIyFPASMhduEjISMhTwFPAU8BIyEjIPtBTwD7QKuA+0CrgSMg02DTYNNgq4D7QU8BIyFPAU8A+0D7QXbhTwGewXbhduHGoXbhnsGewU8B8oIaYXbiGmGewZ7B8oHyghphxqHygfKBnsF24fKBduFPAcahTwFPAZ7BduFPAZ7BduGewZ7A02FPAPtA02EjISMhTwDTYU8BduFPAXbhnsFPAZ7BduGewZ7BxqF24Z7BxqF24cahnsHGoXbhxqFPAfKBduHygcahnsGewXbhnsF24Z7B8oGewXbhTwFPASMhTwEjISMhTwF24PtA02DTYPtA02DTYNNg02CrgNNhIyDTYXbhIyD7QXbhIyEjISMhTwGewZ7A+0F24XbhnsHGoXbhnsF24U8BnsFPASMhduFPAXbhnsFPAXbhduD7QXbhduD7QNNhTwD7QH+gf6DTYPtA+0CrgH+gq4DTYKuAV8EjIPtAf6D7QH+g+0DTYSMhTwEjIPtBduGewU8A02EjIU8BIyDTYSMhIyEjIU8BTwEjIPtBIyDTYSMhIyCrgXbg02EjISMgq4BXwNNgq4DTYKuAf6B/oFfAf6D7QNNg02DTYH+gV8B/oFfAf6DTYH+g02DTYPtA+0CrgSMhTwF24SMhIyEjINNg02DTYSMhIyDTYU8BnsEjINNg02DTYSMg+0FPAPtBIyFPANNg+0F24NNg02D7QU8Aq4DTYKuAq4Av4H+gf6Av4PtAq4B/oH+gf6CrgKuAf6D7QXbg02EjIPtA+0EjINNhTwEjINNhnsGewPtBTwD7QSMhIyD7QNNhTwCrgSMhIyDTYSMgq4D7QNNgf6DTYNNgf6CrgH+gq4DTYPtAq4BXwNNgq4CrgNNgq4B/oH+gq4D7QH+g02D7QKuBIyEjINNhIyD7QPtBTwD7QSMhTwEjIZ7BduFPAU8BIyF24Z7BTwFPAZ7BIyEjIU8A+0F24PtBTwEjIZ7A+0D7QPtA+0EjINNg+0EjISMg+0D7QNNg+0D7QPtBduD7QSMhIyFPAcahduGewZ7BduD7QU8BduGewcahnsHygcahduHGocahxqIaYXbhnsHGoU8BxqGewXbhnsFPAXbhTwF24U8BduF24Z7BduFPAU8BxqEjIXbhTwFPAZ7BTwFPAXbhIyF24Z7B8oF24Z7BIyF24fKBduHGoXbh8oHGoXbhnsGewZ7BnsHGohpiGmHGoZ7CQkGewfKBnsHGofKB8oHGoZ7BxqHGohph8oHygXbhxqF24fKBTwHygU8BnsGewPtBnsF24PtBduF24fKCGmGewXbhduHGoXbhxqHGohph8oHGohpiGmIaYfKB8oHygfKB8oHyghphxqHyghphxqHygZ7B8oGewXbh8oHGocahnsHygXbhnsF24cahnsHGoZ7BduD7QcahnsF24Z7B8oEjIXbhnsIaYZ7CGmHyghpiGmIaYcaiQkJqIkJCGmHygmoiQkJCQkJCGmKWAfKCQkJCQkJCQkIaYfKCGmHyghpilgHyghph8oGewcahxqHGokJB8oIaYZ7BnsGewXbhxqHGohphduGewfKB8oHygcahxqHyghpiGmIaYcaiaiIaYfKCaiHyghph8oIaYkJCQkHyghph8oHGofKCGmGewhphxqHGoZ7BxqFPAcahTwFPAZ7BnsF24Z7BduFPAXbhTwFPASMhIyFPAPtBIyEjIU8BxqDTYXbhTwF24Z7BduFPAXbhxqGewZ7BxqF24fKBduGewZ7BduF24cahduFPAU8BTwF24U8BxqGewSMhIyFPAPtBIyF24PtBIyD7QSMg=". 
+ 
+2019-11-14 08:33:19,309 INFO  DefaultLogger status: 200. 
+ 
+2019-11-14 08:33:19,310 INFO  DefaultLogger ReadResponseAsJson, receivedJson:{"Status":200,"Data":{"WaveTag":"ca0e842e-6983-477e-9ea6-dbce7f938c01","CurrLength":2048}}. 
+ 
+2019-11-14 08:33:19,310 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000171, 27, 20191114082813 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,310 INFO  DefaultLogger ShaSteel ExportData pointID:1000171, startTime:20191114082813, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,321 INFO  DefaultLogger ShaSteel ExportData summaryList.Count == 0, pointID:1000171, startTime:20191114082813, endTime: 20191114082814 
+ 
+2019-11-14 08:33:19,321 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000171, 0, 20191114082815 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,321 INFO  DefaultLogger ShaSteel ExportData pointID:1000173, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,324 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000173, return. 
+ 
+2019-11-14 08:33:19,324 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000173, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,324 INFO  DefaultLogger ShaSteel ExportData pointID:1000174, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,327 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000174, return. 
+ 
+2019-11-14 08:33:19,327 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000174, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,327 INFO  DefaultLogger ShaSteel ExportData pointID:1000175, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,330 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000175, return. 
+ 
+2019-11-14 08:33:19,330 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000175, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,330 INFO  DefaultLogger ShaSteel ExportData pointID:1000177, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,333 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000177, return. 
+ 
+2019-11-14 08:33:19,333 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000177, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,333 INFO  DefaultLogger ShaSteel ExportData pointID:1000178, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,336 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000178, return. 
+ 
+2019-11-14 08:33:19,336 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000178, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,336 INFO  DefaultLogger ShaSteel ExportData pointID:1000176, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,339 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000176, return. 
+ 
+2019-11-14 08:33:19,339 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000176, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,340 INFO  DefaultLogger ShaSteel ExportData pointID:1000179, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,345 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000179, return. 
+ 
+2019-11-14 08:33:19,346 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000179, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,346 INFO  DefaultLogger ShaSteel ExportData pointID:1000180, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,348 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000180, return. 
+ 
+2019-11-14 08:33:19,348 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000180, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,348 INFO  DefaultLogger ShaSteel ExportData pointID:1000168, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,351 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000168, return. 
+ 
+2019-11-14 08:33:19,351 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000168, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,351 INFO  DefaultLogger ShaSteel ExportData pointID:1000170, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,354 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000170, return. 
+ 
+2019-11-14 08:33:19,354 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000170, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,354 INFO  DefaultLogger ShaSteel ExportData pointID:1000169, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,357 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000169, return. 
+ 
+2019-11-14 08:33:19,357 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000169, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,357 INFO  DefaultLogger ShaSteel ExportData pointID:1000183, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,359 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000183, return. 
+ 
+2019-11-14 08:33:19,359 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000183, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,359 INFO  DefaultLogger ShaSteel ExportData pointID:1000182, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,362 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000182, return. 
+ 
+2019-11-14 08:33:19,363 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000182, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,363 INFO  DefaultLogger ShaSteel ExportData pointID:1000184, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,365 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000184, return. 
+ 
+2019-11-14 08:33:19,365 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000184, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,365 INFO  DefaultLogger ShaSteel ExportData pointID:1000186, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,368 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000186, return. 
+ 
+2019-11-14 08:33:19,368 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000186, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,368 INFO  DefaultLogger ShaSteel ExportData pointID:1000185, startTime:20191114082551, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,371 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000185, return. 
+ 
+2019-11-14 08:33:19,371 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000185, 0, 20191114082551 - 20191114083314, 20191114082814) 
+ 
+2019-11-14 08:33:19,371 INFO  DefaultLogger ShaSteel ExportData pointID:1000172, startTime:20191114082651, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,374 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000172, return. 
+ 
+2019-11-14 08:33:19,374 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000172, 0, 20191114082651 - 20191114083303, 20191114082814) 
+ 
+2019-11-14 08:33:19,374 INFO  DefaultLogger ShaSteel ExportData pointID:1000181, startTime:20191114082651, endTime: 20191114082814,now: 20191114082814 
+ 
+2019-11-14 08:33:19,377 INFO  DefaultLogger ShaSteel ExportData Desc_TX:1000181, return. 
+ 
+2019-11-14 08:33:19,377 INFO  DefaultLogger ShaSteel ExportDatas After ExportData (1000181, 0, 20191114082651 - 20191114083303, 20191114082814) 
+ 
+2019-11-14 08:33:19,377 INFO  DefaultLogger ShaSteel ExportDatas finish. 
+ 
