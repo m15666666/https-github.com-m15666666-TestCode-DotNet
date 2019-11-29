@@ -94,6 +94,13 @@ namespace AnalysisAlgorithm.Tests
             DSPBasic.AmpPhaseSpectrum(sinWave1, out ampSpectrum2, out phaseSpectrum2);
 
             OutputUtils.ToTxtFile(sinWave1, "initPhase-sinwave.txt");
+
+            // 生成64K的正弦波和对应的频谱
+            //dataLength = 64 * 1024;
+            //double[] sinWave64k = SignalGenerator.Sine(samplerate, 1, initPhase / 180f * Math.PI, 1, dataLength);
+            //DSPBasic.AmpPhaseSpectrum(sinWave64k, out ampSpectrum2, out phaseSpectrum2);
+            //OutputUtils.ToTxtFile(sinWave64k, "sinWave64k.txt");
+            //OutputUtils.ToTxtFile(ampSpectrum2, "ampSpectrum64k.txt");
         }
 
         /// <summary>

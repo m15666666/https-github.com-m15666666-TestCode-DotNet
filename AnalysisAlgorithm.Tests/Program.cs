@@ -8,6 +8,9 @@ namespace AnalysisAlgorithm.Tests
         {
             OutputUtils.OutputDir = @"D:\temp2";
 
+            //new FftTests().InitAngleTest();
+            //return;
+
             new FilterTests().BandPassTest();
 
             new FftTests().InitAngleTest();
