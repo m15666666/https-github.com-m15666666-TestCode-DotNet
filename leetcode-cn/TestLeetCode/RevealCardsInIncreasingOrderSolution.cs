@@ -61,6 +61,50 @@ class RevealCardsInIncreasingOrderSolution
 
     public int[] DeckRevealedIncreasing(int[] deck)
     {
+        int len = deck.Length;
 
+        var index = new Queue<int>(Enumerable.Range(0,len));
+
+        int[] ret = new int[len];
+        Array.Sort(deck);
+        foreach (int card in deck)
+        {
+            ret[index.Dequeue()] = card;
+            if ( 1 < index.Count ) index.Enqueue(index.Dequeue());
+        }
+
+        return ret;
     }
 }
+/*
+方法一： 模拟法
+思路和算法
+
+直接模拟从牌组中取牌的过程就可以了。举个例子，如果从牌组中以 [0, 2, 4, ...] 的顺序取牌，我们只需要把最小的牌放在下标为 0 的地方，第二小的牌放在下标为 2 的地方，第三小的牌放在下标为 4 的地方，依次类推即可。
+
+JavaPython
+class Solution {
+    public int[] deckRevealedIncreasing(int[] deck) {
+        int N = deck.length;
+        Deque<Integer> index = new LinkedList();
+        for (int i = 0; i < N; ++i)
+            index.add(i);
+
+        int[] ans = new int[N];
+        Arrays.sort(deck);
+        for (int card: deck) {
+            ans[index.pollFirst()] = card;
+            if (!index.isEmpty())
+                index.add(index.pollFirst());
+        }
+
+        return ans;
+    }
+}
+复杂度分析
+
+时间复杂度： O(N \log N)O(NlogN)，其中 NN 是牌组的大小。
+
+空间复杂度： O(N)O(N)。
+ 
+*/
