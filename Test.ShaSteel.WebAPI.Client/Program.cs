@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Test.ShaSteel.WebAPI.Core;
 using System.Diagnostics;
+using System.Threading;
 
 namespace Test.ShaSteel.WebAPI.Client
 {
@@ -37,7 +38,14 @@ namespace Test.ShaSteel.WebAPI.Client
             int WaveLength = 4096;
             int ByteWaveLength = WaveLength*2;
             Stopwatch watch = new Stopwatch();
-            using (System.Net.Http.HttpClient httpClient = new System.Net.Http.HttpClient())
+
+            // 并行
+            //int httpClientCount = 40;
+            //Client[] clients = new Client[httpClientCount];
+            //for( int i = 0; i < clients.Length; i++)
+            //    clients[i] = new Client(url, new HttpClient());
+
+            using (HttpClient httpClient = new HttpClient())
             {
                 var client = new Client(url, httpClient);
                 while (true)
@@ -69,15 +77,31 @@ namespace Test.ShaSteel.WebAPI.Client
                     }
 
                     TraceUtils.Info($"CallWebApi start. callCount: {callCount}");
+                    int count = 0;
+                    Action recordTime = () => {
+                        watch.Stop();
+                        TraceUtils.Info($"CallWebApi stop. callCount: {callCount}, ElapsedMilliseconds: {watch.ElapsedMilliseconds},{watch.Elapsed}");
+                    };
                     watch.Restart();
 
-                    for( int i = 0; i < callCount; i++)
+                    // 并行
+                    //Parallel.For(0, callCount, async p =>
+                    //    {
+                    //        await CallWebApi(clients[p % clients.Length], WaveLength);
+
+                    //        Interlocked.Increment(ref count);
+                    //        if (callCount == count) recordTime();
+                    //    }
+                    //);
+
+                    // 异步串行
+                    for (int i = 0; i < callCount; i++)
                     {
                         await CallWebApi(client, WaveLength);
                     }
+                    recordTime();
 
-                    watch.Stop();
-                    TraceUtils.Info($"CallWebApi stop. callCount: {callCount}, ElapsedMilliseconds: {watch.ElapsedMilliseconds},{watch.Elapsed}");
+
 
                     Console.WriteLine($"WaveLength: {WaveLength},ByteWaveLength:{ByteWaveLength}.");
                 }
