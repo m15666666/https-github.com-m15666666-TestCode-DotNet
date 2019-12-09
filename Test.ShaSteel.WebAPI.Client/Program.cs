@@ -13,12 +13,16 @@ using System.Net.Http;
 using Test.ShaSteel.WebAPI.Core;
 using System.Diagnostics;
 using System.Threading;
+using Refit;
+using Test.ShaSteel.WebAPI.Client.refit_proxy;
 
 namespace Test.ShaSteel.WebAPI.Client
 {
     class Program
     {
         const string TimePattern = "yyyy-MM-dd HH:mm:ss";
+
+        private static bool UseRefit = true;
 
         static async Task Main(string[] args)
         {
@@ -39,6 +43,8 @@ namespace Test.ShaSteel.WebAPI.Client
             int ByteWaveLength = WaveLength*2;
             Stopwatch watch = new Stopwatch();
 
+            var refitProxy = RestService.For<IRefitProxy>(url);
+
             // 并行
             //int httpClientCount = 40;
             //Client[] clients = new Client[httpClientCount];
@@ -47,7 +53,7 @@ namespace Test.ShaSteel.WebAPI.Client
 
             using (HttpClient httpClient = new HttpClient())
             {
-                var client = new Client(url, httpClient);
+                var swaggerProxy = new Client(url, httpClient);
                 while (true)
                 {
                     Console.WriteLine("Enter q to quit.");
@@ -97,7 +103,8 @@ namespace Test.ShaSteel.WebAPI.Client
                     // 异步串行
                     for (int i = 0; i < callCount; i++)
                     {
-                        await CallWebApi(client, WaveLength);
+                        if( UseRefit ) await CallWebApi(refitProxy, WaveLength);
+                        else await CallWebApi(swaggerProxy, WaveLength);
                     }
                     recordTime();
 
@@ -107,6 +114,73 @@ namespace Test.ShaSteel.WebAPI.Client
                 }
 
                 httpClient.Dispose();
+            }
+        }
+
+        private static async Task CallWebApi(IRefitProxy client, int WaveLength)
+        {
+            int ByteWaveLength = WaveLength * 2;
+            try
+            {
+                VibMetaDataOutputDto metaOutput = null;
+                metaOutput = await client.VibMetaDataAsync(new VibMetaDataInput
+                {
+                    Code = "01030200061410152",
+                    FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                    MeasDate = "2019-11-12 16:19:22",//DateTime.Now.ToString(TimePattern),
+                    MeasValue = 186.27f,
+                    WaveLength = WaveLength, // 波形长度，采样点数
+                    SignalType = 1, //信号类型 0-加速度 1-速度 2-位移 
+                    SampleRate = 5120,
+                    RPM = 0,
+                    Unit = "mm/s", // 工程单位，速度：mm/s，加速度：m/s²，位移：um
+                    ConvertCoef = 0.39f,
+                    Resolver = 1,
+                });// ;
+
+                if (metaOutput == null)
+                {
+                    metaOutput = new VibMetaDataOutputDto { Data = new VibMetaDataOutput { WaveTag = "9e3e009a - f138 - dcd6 - 6323 - c768dc533b2f" } };
+                }
+
+                //WaveTag=9e3e009a-f138-dcd6-6323-c768dc533b2f&Length=131072&CurrIndex=0&BlockSize=131072
+                VibWaveDataInput waveDataInput = new VibWaveDataInput
+                {
+                    WaveTag = metaOutput.Data.WaveTag,
+                    Length = ByteWaveLength,
+                    CurrIndex = 0,
+                    BlockSize = ByteWaveLength
+                };
+                var bytes = new byte[ByteWaveLength];
+                for (int i = 0; i < bytes.Length; i++) bytes[i] = 0;
+
+                TraceUtils.Info("VibWaveDataAsync");
+                var waveDataOutput = await client.VibWaveDataAsync(waveDataInput, bytes);
+
+                TraceUtils.Info("ProcessDatasAsync");
+
+                ProcessDatasInput processDatasInput = new ProcessDatasInput
+                {
+                    Code = "01030200061410152",
+                    FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                    TSDatas = new TSDataInput[] {
+                                new TSDataInput{
+                                    MeasDate = DateTime.Now.ToString(TimePattern),
+                                    MeasValue = 1.1f,
+                                }
+                            },
+                    Unit = "℃",//工程单位，转速：rpm，温度：℃
+                };
+
+                var processDatasOutput = await client.ProcessDatasAsync(processDatasInput);
+                if (processDatasOutput != null && processDatasOutput.Data != null && processDatasOutput.Data.Code == -1)
+                {
+                    // error
+                }
+            }
+            catch (Exception ex)
+            {
+                TraceUtils.Info(ex.ToString());
             }
         }
 
