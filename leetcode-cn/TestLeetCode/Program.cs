@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new PrisonCellsAfterNDaysSolution().Test();
+            new MaximumWidthRampSolution().Test();
+            //new PrisonCellsAfterNDaysSolution().Test();
             //new SmallestSubtreeWithAllTheDeepestNodesSolution().Test();
             //new ShiftingLettersSolution().Test();
             //new HandOfStraightsSolution().Test();
