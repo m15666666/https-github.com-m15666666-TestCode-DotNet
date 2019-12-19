@@ -101,7 +101,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ShaSteel.WebAPI.Client
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.ShaSteel.WebAPI.Core", "Test.ShaSteel.WebAPI.Core\Test.ShaSteel.WebAPI.Core.csproj", "{FE927898-AF0A-49F0-99F4-119C7064E949}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.ShaSteel.WebAPI.Server2.1", "Test.ShaSteel.WebAPI.Server2.1\Test.ShaSteel.WebAPI.Server2.1.csproj", "{0CA924BC-E935-4FAB-A674-7B459D642443}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.ShaSteel.WebAPI.Server2.1", "Test.ShaSteel.WebAPI.Server2.1\Test.ShaSteel.WebAPI.Server2.1.csproj", "{0CA924BC-E935-4FAB-A674-7B459D642443}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.ExportData2Center.Client", "Moons.ExportData2Center.Client\Moons.ExportData2Center.Client.csproj", "{C2E7D022-F1D3-4CAE-9C8F-D84EFBA4081E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -305,6 +307,10 @@ Global
 		{0CA924BC-E935-4FAB-A674-7B459D642443}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CA924BC-E935-4FAB-A674-7B459D642443}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CA924BC-E935-4FAB-A674-7B459D642443}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2E7D022-F1D3-4CAE-9C8F-D84EFBA4081E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2E7D022-F1D3-4CAE-9C8F-D84EFBA4081E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2E7D022-F1D3-4CAE-9C8F-D84EFBA4081E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2E7D022-F1D3-4CAE-9C8F-D84EFBA4081E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
