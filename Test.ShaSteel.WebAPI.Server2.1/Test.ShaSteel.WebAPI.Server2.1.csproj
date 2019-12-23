@@ -5,6 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="logfile\**" />
+    <Content Remove="logfile\**" />
+    <EmbeddedResource Remove="logfile\**" />
+    <None Remove="logfile\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="log-file.log" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

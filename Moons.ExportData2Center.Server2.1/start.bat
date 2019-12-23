@@ -1,0 +1,1 @@
+SET ASPNETCORE_URLS=http://*:60611 && dotnet Moons.ExportData2Center.Server2.1.dll
