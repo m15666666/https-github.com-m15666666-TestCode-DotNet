@@ -13,9 +13,13 @@ using Moons.ExportData2Center.Core;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
 
 namespace Moons.ExportData2Center.Client
 {
+    /// <summary>
+    /// 配置文件参考：https://blog.csdn.net/yenange/article/details/82457761
+    /// </summary>
     class Program
     {
         static async Task Main(string[] args)
@@ -29,9 +33,14 @@ namespace Moons.ExportData2Center.Client
             EnvironmentUtils.Logger = new Log4netWrapper(log);
             TraceUtils.Info("Starting Moons.ExportData2Center.Client. time stamp: 2019-12-20.");
 
-            Config.Instance.Init("http://localhost:60611/api/ExportData/");
+            var builder = new ConfigurationBuilder().AddJsonFile("appsettings.json");
+            var configuration = builder.Build();
 
-            string conn = "server=.;database=jg2642empty;uid=sa;pwd=#db877350;";
+            var url = configuration["AppSettings:WebApiUrl"];//http://localhost:60611/api/ExportData/
+            Config.Instance.Init(url);
+
+            //string conn = "server=.;database=jg2642empty;uid=sa;pwd=#db877350;";
+            string conn = configuration["ConnectionStrings:Default"];
             //string sql = "SELECT TOP 10 * FROM Pnt_Point where Point_ID > 1000399 order by Point_ID;";
             using (IDbConnection connection = new SqlConnection(conn))
             {
