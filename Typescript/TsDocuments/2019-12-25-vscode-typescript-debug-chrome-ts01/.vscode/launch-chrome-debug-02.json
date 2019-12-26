@@ -1,0 +1,21 @@
+{
+    // 
+    // 
+    // https://www.cnblogs.com/yasepix/p/9294491.html
+    // 需要安装并启动http-server
+    // npm install -g http-server
+    // 这样http服务就装好了，万能的npm有没有？
+    // 如何启动？输入：http-server 回车就行了，http://localhost:8080/
+    // 如何关闭？快捷键：ctrl+c
+
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}

@@ -105,9 +105,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.ShaSteel.WebAPI.Server
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.ExportData2Center.Client", "Moons.ExportData2Center.Client\Moons.ExportData2Center.Client.csproj", "{C2E7D022-F1D3-4CAE-9C8F-D84EFBA4081E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.ExportData2Center.Core", "Moons.ExportData2Center.Core\Moons.ExportData2Center.Core.csproj", "{CB1DADB3-AF67-4CD2-9781-CADFDE56E8CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.ExportData2Center.Core", "Moons.ExportData2Center.Core\Moons.ExportData2Center.Core.csproj", "{CB1DADB3-AF67-4CD2-9781-CADFDE56E8CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.ExportData2Center.Server2.1", "Moons.ExportData2Center.Server2.1\Moons.ExportData2Center.Server2.1.csproj", "{4E5DF7FB-F7D7-4064-8B57-79324B316ABA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.ExportData2Center.Server2.1", "Moons.ExportData2Center.Server2.1\Moons.ExportData2Center.Server2.1.csproj", "{4E5DF7FB-F7D7-4064-8B57-79324B316ABA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ts", "ts", "{C5631108-3F50-4771-B8CF-C76CFDDDDE55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsDocuments", "Typescript\TsDocuments\TsDocuments.csproj", "{F24234AD-BDCA-4931-BE3C-C38ED09A352E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -323,6 +327,10 @@ Global
 		{4E5DF7FB-F7D7-4064-8B57-79324B316ABA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E5DF7FB-F7D7-4064-8B57-79324B316ABA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E5DF7FB-F7D7-4064-8B57-79324B316ABA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F24234AD-BDCA-4931-BE3C-C38ED09A352E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F24234AD-BDCA-4931-BE3C-C38ED09A352E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F24234AD-BDCA-4931-BE3C-C38ED09A352E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F24234AD-BDCA-4931-BE3C-C38ED09A352E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -334,6 +342,7 @@ Global
 		{E7036583-5FE5-4D72-B92F-8EB2280B02BD} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
 		{8CFB21F6-B407-4E2C-9FFF-17EEDCD11D22} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
 		{AC3DE4CE-16D0-43BB-A0D2-CC519BB7E7CF} = {55CBD08B-A99F-4626-A40C-9254577B2CD1}
+		{F24234AD-BDCA-4931-BE3C-C38ED09A352E} = {C5631108-3F50-4771-B8CF-C76CFDDDDE55}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DC060E9-C762-46B9-AA23-B34AFA45B59E}
