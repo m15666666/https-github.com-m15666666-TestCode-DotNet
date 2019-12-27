@@ -62,16 +62,128 @@ class TimeBasedKeyValueStoreSolution
 
     public TimeBasedKeyValueStoreSolution()
     {
-
     }
 
+    
     public void Set(string key, string value, int timestamp)
     {
-
+        if (!_map.ContainsKey(key)) _map[key] = new List<Tuple<string, int>>();
+        _map[key].Add(new Tuple<string, int>(value, timestamp));
     }
 
+    private readonly Dictionary<string, List<Tuple<string, int>>> _map = new Dictionary<string, List<Tuple<string, int>>>();
     public string Get(string key, int timestamp)
     {
+        if (!_map.ContainsKey(key)) return "";
 
+        var list = _map[key];
+        if(list.Count == 0) return "";
+
+        var first = list[0];
+        if (timestamp < first.Item2) return "";
+
+        var last = list[list.Count - 1];
+        if (last.Item2 <= timestamp) return last.Item1;
+
+        int left = 0;
+        int right = list.Count - 1;
+        do
+        {
+            int mid = (left + right) / 2;
+            var m = list[mid];
+            if (timestamp < m.Item2)
+            {
+                right = mid - 1;
+            }
+            else if (m.Item2 <= timestamp)
+            {
+                left = mid + 1;
+            }
+        } while (left <= right);
+        return list[left - 1].Item1;
     }
 }
+/*
+基于时间的键值存储
+力扣 (LeetCode)
+发布于 1 年前
+1.5k 阅读
+方法一：HashMap + 二分查找
+思路与算法
+
+对于每一个键值 key 的两种操作，我们只关注键值的时间戳与值信息。我们可以将这些信息存储在一个 HashMap 中。
+
+对于每一个键值 key，我们可以在已经按照时间戳排序好的序列中进行二分检索，从而找到对应 key 相关的 value。
+
+import javafx.util.Pair;
+
+class TimeMap {
+    Map<String, List<Pair<Integer, String>>> M;
+
+    public TimeMap() {
+        M = new HashMap();
+    }
+
+    public void set(String key, String value, int timestamp) {
+        if (!M.containsKey(key))
+            M.put(key, new ArrayList<Pair<Integer, String>>());
+
+        M.get(key).add(new Pair(timestamp, value));
+    }
+
+    public String get(String key, int timestamp) {
+        if (!M.containsKey(key)) return "";
+
+        List<Pair<Integer, String>> A = M.get(key);
+        int i = Collections.binarySearch(A, new Pair<Integer, String>(timestamp, "{"),
+                (a, b) -> Integer.compare(a.getKey(), b.getKey()));
+
+        if (i >= 0)
+            return A.get(i).getValue();
+        else if (i == -1)
+            return "";
+        else
+            return A.get(-i-2).getValue();
+    }
+}
+复杂度分析
+
+时间复杂度：对于 set 操作，O(1)O(1) 。对于 get 操作，O(\log N)O(logN)。 其中，NN 是 TimeMap 中元素的数量。
+
+空间复杂度：O(N)O(N)。
+
+方法二：TreeMap
+思路与算法
+
+对于 Java 语言，我们可以使用 TreeMap.floorKey(timestamp) 来找到小于等于给定时间戳 timestamp 的最大时间戳。
+
+我们使用与 方法一 相同的方法构建解法，仅仅替换这部分的功能。
+
+class TimeMap {
+    Map<String, TreeMap<Integer, String>> M;
+
+    public TimeMap() {
+        M = new HashMap();
+    }
+
+    public void set(String key, String value, int timestamp) {
+        if (!M.containsKey(key))
+            M.put(key, new TreeMap());
+
+        M.get(key).put(timestamp, value);
+    }
+
+    public String get(String key, int timestamp) {
+        if (!M.containsKey(key)) return "";
+
+        TreeMap<Integer, String> tree = M.get(key);
+        Integer t = tree.floorKey(timestamp);
+        return t != null ? tree.get(t) : "";
+    }
+}
+复杂度分析
+
+时间复杂度：对于 set 操作，O(1)O(1)。对于 get 操作，O(\log N)O(logN)。其中，N​N​ 是 TimeMap 中元素的数量。
+
+空间复杂度：O(N)O(N)。 
+*/
