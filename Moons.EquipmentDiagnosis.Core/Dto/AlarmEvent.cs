@@ -10,5 +10,7 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
     public class AlarmEvent
     {
         public AlarmTypeIdEnum AlarmTypeId { get; set; }
+
+        public string Description { get; set; }
     }
 }

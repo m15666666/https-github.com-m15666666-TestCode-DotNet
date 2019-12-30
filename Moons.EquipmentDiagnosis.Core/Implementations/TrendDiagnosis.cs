@@ -86,7 +86,48 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             double k = last / first;
 
             List<AlarmEvent> list = new List<AlarmEvent>();
-            if(signalTypeId == SignalTypeIdEnum.Temperature) // 处理温度
+            if(alarmTypeId == AlarmTypeIdEnum.Alm_Trend_Impulse) // 单次突变
+            {
+                if (signalTypeId == SignalTypeIdEnum.Vel)
+                {
+                    if (first <= alarmSetting.Threshold1) {
+                        if (alarmSetting.KThreshold1 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Vel_Impulse });
+                    }
+                    else if (first <= alarmSetting.Threshold2)
+                    {
+                        if (alarmSetting.KThreshold2 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Vel_Impulse });
+                    }
+                    else if (first <= alarmSetting.Threshold3)
+                    {
+                        if (alarmSetting.KThreshold3 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Vel_Impulse });
+                    }
+                    else if (alarmSetting.KThreshold4 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Vel_Impulse });
+                }
+                else if (signalTypeId == SignalTypeIdEnum.Acc)
+                {
+                    if (first <= alarmSetting.Threshold1) {
+                        if (alarmSetting.KThreshold1 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Acc_Impulse });
+                    }
+                    else if (first <= alarmSetting.Threshold2)
+                    {
+                        if (alarmSetting.KThreshold2 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Acc_Impulse });
+                    }
+                    else if (alarmSetting.KThreshold3 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Acc_Impulse });
+                } 
+                else if (signalTypeId == SignalTypeIdEnum.Temperature) // 处理温度
+                {
+                    if (first < alarmSetting.Threshold1)
+                    {
+                        if (alarmSetting.KThreshold1 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Temperature_Impulse });
+                    }
+                    else if (alarmSetting.KThreshold2 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId, Description = TrendAlarmDescription.Alm_Temperature_Impulse });
+                }
+
+                if (0 < list.Count) output.AlarmEvents.AddRange( list );
+                return;
+            }
+
+            if (signalTypeId == SignalTypeIdEnum.Temperature) // 处理温度
             {
                 if (first < alarmSetting.Threshold1)
                 {
@@ -98,37 +139,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 return;
             }
 
-            if(alarmTypeId == AlarmTypeIdEnum.Alm_Trend_Impulse) // 单次突变
-            {
-                if (signalTypeId == SignalTypeIdEnum.Vel)
-                {
-                    if (first <= alarmSetting.Threshold1) return;
-
-                    if (first <= alarmSetting.Threshold2)
-                    {
-                        if (alarmSetting.KThreshold1 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId });
-                    }
-                    else if (first <= alarmSetting.Threshold3)
-                    {
-                        if (alarmSetting.KThreshold2 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId });
-                    }
-                    else if (alarmSetting.KThreshold3 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId });
-                }
-                else if (signalTypeId == SignalTypeIdEnum.Acc)
-                {
-                    if (first <= alarmSetting.Threshold1) return;
-
-                    if (first <= alarmSetting.Threshold2)
-                    {
-                        if (alarmSetting.KThreshold1 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId });
-                    }
-                    else if (alarmSetting.KThreshold2 < k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId });
-                }
-                if (0 < list.Count) output.AlarmEvents.AddRange( list );
-                return;
-            }
-
-            if(first <= alarmSetting.Threshold1)
+            if (first <= alarmSetting.Threshold1)
             {
                 if (alarmSetting.KThreshold1 <= k) list.Add(new AlarmEvent { AlarmTypeId = alarmTypeId });
             }

@@ -16,6 +16,7 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public double KThreshold1 { get; set; }
         public double KThreshold2 { get; set; }
         public double KThreshold3 { get; set; }
+        public double KThreshold4 { get; set; }
 
         public static TrendAlarmSetting TrendAlarmSetting_Vel_30Day = new TrendAlarmSetting
         {
@@ -106,18 +107,20 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public static TrendAlarmSetting TrendAlarmSetting_Vel_Impulse = new TrendAlarmSetting
         {
             Threshold1 = 1,
-            KThreshold1 = 2,
+            KThreshold1 = 3,
             Threshold2 = 3,
-            KThreshold2 = 1.7,
+            KThreshold2 = 2,
             Threshold3 = 5,
-            KThreshold3 = 1.5
+            KThreshold3 = 1.7,
+            KThreshold4 = 1.5,
         };
         public static TrendAlarmSetting TrendAlarmSetting_Acc_Impulse = new TrendAlarmSetting
         {
             Threshold1 = 10,
-            KThreshold1 = 3,
+            KThreshold1 = 4,
             Threshold2 = 30,
-            KThreshold2 = 2,
+            KThreshold2 = 3,
+            KThreshold3 = 2,
         };
         public static TrendAlarmSetting TrendAlarmSetting_Temperature_Impulse = new TrendAlarmSetting
         {
