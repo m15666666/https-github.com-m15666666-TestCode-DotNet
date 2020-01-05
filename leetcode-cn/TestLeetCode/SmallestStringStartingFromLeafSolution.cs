@@ -57,6 +57,94 @@ class SmallestStringStartingFromLeafSolution
 
     public string SmallestFromLeaf(TreeNode root)
     {
+        Dfs(root, new StringBuilder());
+        return _ret;
+    }
 
+    public void Dfs(TreeNode node, StringBuilder sb)
+    {
+        if (node == null) return;
+        
+        const int a = 'a';
+        sb.Insert(0, (char)(a + node.val));
+
+        if (node.left == null && node.right == null)
+        {
+            var compare = Compare(_ret, sb);
+            if( 0 < compare)
+            {
+                _ret = sb.ToString();
+                sb.Remove(0, 1);
+                return;
+            }
+        }
+
+        Dfs(node.left, sb);
+        Dfs(node.right, sb);
+        sb.Remove(0, 1);
+    }
+
+    private static int Compare(string s, StringBuilder sb)
+    {
+        int len1 = s.Length;
+        int len2 = sb.Length;
+        for (int i = 0; i < len1 && i < len2; i++)
+        {
+            var c1 = s[i];
+            var c2 = sb[i];
+            if (c2 < c1) return 1;
+            if (c1 < c2) return -1;
+        }
+        if (len1 == len2) return 0;
+        return len1 < len2 ? -1 : 1;
+    }
+
+    private string _ret = "~";
+}
+/*
+从叶结点开始的最小字符串
+力扣 (LeetCode)
+发布于 1 年前
+1.6k 阅读
+方法：暴力法
+思路
+
+让我们创建出所有可能的字符串，然后逐一比较，输出字典序最小的那个。
+
+算法
+
+在我们深度优先搜索的过程中，我们不断调整 sb（或者 Python 代码中的 A），即根到这个节点的路径上的字符串内容。
+
+当我们到达一个叶子节点的时候，我们翻转路径的字符串内容来创建一个候选答案。如果候选答案比当前答案要优秀，那么我们更新答案。
+
+class Solution {
+    String ans = "~";
+    public String smallestFromLeaf(TreeNode root) {
+        dfs(root, new StringBuilder());
+        return ans;
+    }
+
+    public void dfs(TreeNode node, StringBuilder sb) {
+        if (node == null) return;
+        sb.append((char)('a' + node.val));
+
+        if (node.left == null && node.right == null) {
+            sb.reverse();
+            String S = sb.toString();
+            sb.reverse();
+
+            if (S.compareTo(ans) < 0)
+                ans = S;
+        }
+
+        dfs(node.left, sb);
+        dfs(node.right, sb);
+        sb.deleteCharAt(sb.length() - 1);
     }
 }
+复杂度分析
+
+时间复杂度：我们用 O(N)O(N) 遍历这棵树，然后调整字符串内容 A [Python] 或者 sb。然后，翻转与比较的时间复杂度为 O(L)O(L)，其中 LL 是到达叶节点时候得到字符串的长度。例如，对于完全平衡的树，L = \log NL=logN 且时间复杂度为 O(N \log N)O(NlogN)。
+
+空间复杂度：O(N)O(N)。 
+*/
