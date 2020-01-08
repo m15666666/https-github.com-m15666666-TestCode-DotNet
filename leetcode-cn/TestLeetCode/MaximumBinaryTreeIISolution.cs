@@ -67,6 +67,45 @@ class MaximumBinaryTreeIISolution
 
     public TreeNode InsertIntoMaxTree(TreeNode root, int val)
     {
-
+        TreeNode dummy = new TreeNode(0)
+        {
+            right = root
+        };
+        
+        TreeNode prev = dummy;
+        TreeNode curr = root;
+        while (curr != null && val < curr.val )
+        {
+            prev = curr;
+            curr = curr.right;
+        }
+        
+        TreeNode node = new TreeNode(val)
+        {
+            left = curr
+        };
+        prev.right = node;
+        
+        return dummy.right;
     }
 }
+/*
+class Solution {
+public:
+    TreeNode* insertIntoMaxTree(TreeNode* root, int val) {
+        TreeNode* dummy = new TreeNode(0);
+        dummy->right = root;
+        TreeNode* prev= dummy;
+        TreeNode* curr = root;
+        while (curr != NULL && curr->val > val) {
+            prev = curr;
+            curr = curr->right;
+        }
+        TreeNode* node = new TreeNode(val);
+        node->left = curr;
+        prev->right = node;
+        return dummy->right;
+    }
+};
+ 
+*/
