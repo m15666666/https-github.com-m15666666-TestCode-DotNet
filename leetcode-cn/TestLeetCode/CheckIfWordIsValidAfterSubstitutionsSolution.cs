@@ -62,6 +62,78 @@ class CheckIfWordIsValidAfterSubstitutionsSolution
 
     public bool IsValid(string S)
     {
-
+        Stack<char> stack = new Stack<char>();
+        foreach (char c in S)
+        {
+            if (c != 'c')
+            {
+                stack.Push(c);
+            }
+            else
+            {
+                if (stack.Count == 0 || stack.Peek() != 'b') return false;
+                stack.Pop();
+                if (stack.Count == 0 || stack.Peek() != 'a') return false;
+                stack.Pop();
+            }
+        }
+        return stack.Count == 0;
     }
 }
+/*
+C++ 使用 stack 解决
+Crossing
+发布于 2 个月前
+205 阅读
+Talk is cheap. Show me the code.
+
+class Solution {
+public:
+    bool isValid(string S) {
+        stack<char> stk;
+        for (char c : S) {
+            if (c != 'c') {
+                stk.push(c);
+            } else {
+                if (stk.empty() || stk.top() != 'b') return false;
+                stk.pop();
+                if (stk.empty() || stk.top() != 'a') return false;
+                stk.pop();
+            }
+        }
+        return stk.empty();
+    }
+};
+1107.png
+
+下一篇：Java 反复删除“abc”，简单易懂
+
+public class Solution {
+    public bool IsValid(string S) {
+            List<char> stack = new List<char>();
+            if (S.Length%3 != 0 || S.Length == 0 || S[0] == 'b' || S[0] == 'c' || S[1] == 'c')
+                return false;
+            foreach (char c in S)
+            {
+                if (c == 'a')
+                    stack.Add(c);
+                else if (c == 'b')
+                {
+                    if (stack.Count < 1 || stack[stack.Count - 1] != 'a')
+                        return false;
+                    stack.Add(c);
+                }
+                else
+                {
+                    if (stack.Count < 2 || stack[stack.Count - 1] != 'b')
+                        return false;
+                    stack.RemoveAt(stack.Count - 1);
+                    stack.RemoveAt(stack.Count - 1);
+                }
+            }
+            return stack.Count == 0;
+    }
+}
+
+ 
+*/
