@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new PancakeSortingSolution().Test();
+            new MinimumDominoRotationsForEqualRowSolution().Test();
+            //new PancakeSortingSolution().Test();
             //new MaximumWidthRampSolution().Test();
             //new PrisonCellsAfterNDaysSolution().Test();
             //new SmallestSubtreeWithAllTheDeepestNodesSolution().Test();
