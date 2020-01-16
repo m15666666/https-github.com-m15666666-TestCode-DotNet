@@ -7,7 +7,8 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            new MinimumDominoRotationsForEqualRowSolution().Test();
+            new CapacityToShipPackagesWithinDDaysSolution().Test();
+            //new MinimumDominoRotationsForEqualRowSolution().Test();
             //new PancakeSortingSolution().Test();
             //new MaximumWidthRampSolution().Test();
             //new PrisonCellsAfterNDaysSolution().Test();
