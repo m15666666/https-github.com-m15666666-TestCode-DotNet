@@ -42,6 +42,52 @@ class BinaryStringWithSubstringsRepresenting1ToNSolution
 
     public bool QueryString(string S, int N)
     {
-
+        for (int i = 1; i <= N; i++)
+        {
+            if (!S.Contains(Convert.ToString(i, 2))) return false;
+        }
+        return true;
     }
 }
+/*
+class Solution {
+public: 
+    int bitLen(int n) {
+        int res = 0;
+        while (n > 0) {
+            ++res;
+            n >>= 1;
+        }
+        return max(res, 1);
+    }
+    bool queryString(string S, int N) {
+        if (N == 0) return true;
+        int k = bitLen(N);
+        if (k > S.size()) return false;
+        long h = 0;
+        for (int i = 0; i < k; ++i) {
+            h <<= 1;
+            h |= S[i] - '0';
+        }
+        if (h == N) return queryString(S, N - 1);
+        for (int i = k; i < S.size(); ++i) {
+            h <<= 1;
+            h |= S[i] - '0';
+            h &= ~((S[i - k] - '0') << k);
+            if (h == N) return queryString(S, N - 1);
+        }
+        return false;
+    }
+};
+
+class Solution {
+    public boolean queryString(String S, int N) {
+        for(int i=1;i<=N;i++) {
+        	if(!S.contains(Integer.toBinaryString(i)))
+        		return false;
+        }
+        return true;
+    }
+}
+ 
+*/
