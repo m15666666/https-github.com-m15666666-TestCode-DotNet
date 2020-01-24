@@ -59,6 +59,74 @@ class CamelcaseMatchingSolution
 
     public IList<bool> CamelMatch(string[] queries, string pattern)
     {
+        string GetOtherChars(string query)
+        {
+            int index = 0;
+            int count;
+            var builder = new StringBuilder("a"); // 避免两个串相等时返回""
+            foreach (var t in pattern)
+            {
+                int index2 = query.IndexOf(t, index);
+                if (index2 < 0) return "";
 
+                count = index2 - index;
+                if (0 < count) builder.Append(query, index, count);
+
+                index = index2 + 1;
+            }
+
+            builder.Append(query.Substring(index));
+            return builder.ToString();
+        }
+
+        var ret = new List<bool>(queries.Length);
+        foreach (var query in queries)
+        {
+            var others = GetOtherChars(query);
+            if (string.IsNullOrEmpty( others )) ret.Add(false);
+            else ret.Add(others.ToLower().Equals(others));
+        }
+        return ret;
     }
 }
+/*
+从原串中去掉模式串，如果剩余的都是小写字母则为true
+刷题er
+61 阅读
+解题思路
+此处撰写解题思路
+
+代码
+class Solution {
+    public List<Boolean> camelMatch(String[] queries, String pattern) {
+        List<Boolean> res = new ArrayList<>(queries.length);
+        for (String query : queries) {
+            String other = getOther(query, pattern);
+            if (other.equals("")) {
+                res.add(false);
+            } else {
+                res.add(other.toLowerCase().equals(other));
+            }
+        }
+        return res;
+    }
+
+    private static String getOther(String query, String pattern) {
+        int index = 0;
+        StringBuilder sb = new StringBuilder("a"); // 避免两个串相等时返回""
+        for (int i = 0; i < pattern.length(); i++) {
+            char t = pattern.charAt(i);
+            int index2 = query.indexOf(t, index);
+            if (index2 < 0) {
+                return "";
+            }
+            sb.append(query, index, index2);
+            index = index2 + 1;
+        }
+        sb.append(query.substring(index));
+        return sb.toString();
+    }
+}
+下一篇：驼峰式匹配
+ 
+*/
