@@ -49,6 +49,84 @@ class MaximumDifferenceBetweenNodeAndAncestorSolution
 
     public int MaxAncestorDiff(TreeNode root)
     {
+        Dfs(root);
+        return _ret;
+    }
 
+    private void Dfs(TreeNode node)
+    {
+        if (node == null) return;
+
+        int preMax = _max;
+        int preMin = _min;
+
+        var v = node.val;
+        if (_max < v) _max = v;
+        if (v < _min) _min = v;
+        
+        if (node.left == null && node.right == null)
+        {
+            var diff = _max - _min;
+            if (_ret < diff) _ret = diff;
+        }
+        if (node.left != null) Dfs(node.left);
+        if (node.right != null) Dfs(node.right);
+
+        _max = preMax;
+        _min = preMin;
+    }
+
+    private int _ret = 0;
+    private int _max = int.MinValue;
+    private int _min = int.MaxValue;
+}
+/*
+通用树形DFS
+斩空
+126 阅读
+class Solution {
+    private int ans = 0;
+    private int tmpMax = Integer.MIN_VALUE;
+    private int tmpMin = Integer.MAX_VALUE;
+
+    public int maxAncestorDiff(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+
+    private void dfs(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        int preMax = tmpMax, preMin = tmpMin;
+        tmpMax = Math.max(tmpMax, node.val);
+        tmpMin = Math.min(tmpMin, node.val);
+        if (node.left == null && node.right == null) {
+            ans = Math.max(ans, tmpMax - tmpMin);
+        }
+        if (node.left != null) {
+            dfs(node.left);
+        }
+        if (node.right != null) {
+            dfs(node.right);
+        }
+        tmpMax = preMax;
+        tmpMin = preMin;
     }
 }
+
+public class Solution {
+    int ans;
+    private void Dfs(TreeNode node, int max, int min) {
+        if (node == null) { return; }
+        ans = Math.Max(Math.Max(Math.Abs(max - node.val), Math.Abs(min - node.val)), ans);
+        Dfs(node.left, Math.Max(max, node.val), Math.Min(min, node.val));
+        Dfs(node.right, Math.Max(max, node.val), Math.Min(min, node.val));
+    }
+    public int MaxAncestorDiff(TreeNode root) {
+        ans = 0;
+        Dfs(root, root.val, root.val);
+        return ans;
+    }
+} 
+*/
