@@ -56,6 +56,7 @@ class ColoringABorderSolution
 
     public int[][] ColorBorder(int[][] grid, int r0, int c0, int color)
     {
-
+        // todo 未做
+        throw new NotSupportedException();
     }
 }
