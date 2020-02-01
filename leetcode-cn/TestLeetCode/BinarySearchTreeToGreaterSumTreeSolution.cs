@@ -5,7 +5,8 @@ using System.Text;
 
 
 /*
-给出二叉搜索树的根节点，该二叉树的节点值各不相同，修改二叉树，使每个节点 node 的新值等于原树中大于或等于 node.val 的值之和。
+给出二叉搜索树的根节点，该二叉树的节点值各不相同，修改二叉树，
+使每个节点 node 的新值等于原树中大于或等于 node.val 的值之和。
 
 提醒一下，二叉搜索树满足下列约束条件：
 
@@ -46,6 +47,114 @@ class BinarySearchTreeToGreaterSumTreeSolution
 
     public TreeNode BstToGst(TreeNode root)
     {
+        if (root != null)
+        {
+            BstToGst(root.right);
+            _rightTreeValueSum += root.val;
+            root.val = _rightTreeValueSum;
+            BstToGst(root.left);
+        }
+        return root;
+    }
 
+    private int _rightTreeValueSum = 0;
+}
+/*
+g解题思路
+一个节点需要加上比自己大的所有数
+大于自己的  都在右子树
+越往右的 比他大的就越少
+比如
+    4
+1       6
+    5     7
+比7大的没有
+比6大的是7
+比5大的是6 7
+能总结出规律  定义val = 0 我们只要从大到小 遍历二叉树 并让val+当前节点的值 并赋给当前节点
+遍历顺序  右中左
+代码
+class Solution{
+public:
+    int val = 0;
+    TreeNode* bstToGst(TreeNode* root) {
+        if (root) {
+            bstToGst(root->right);
+            val += root->val;
+            root->val = val;
+            bstToGst(root->left);
+        }
+        return root;
+    }
+};
+
+
+public class Solution {
+    public TreeNode BstToGst(TreeNode root) {
+        TreeNode btnRoot = root;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+                if (root == null)
+                {
+                    return root;
+                }
+                while (root.right != null)
+                {
+                    stack.Push(root);
+                    root = root.right;
+                }
+                int sum = 0;
+                stack.Push(root);
+                while(stack.Count() > 0)
+                {
+                    root = stack.Pop();
+                    sum += root.val;
+                    root.val = sum;
+                    if (root.left != null)
+                    {
+                        root = root.left;
+                        while (root.right != null)
+							{
+                            stack.Push(root);
+                            root = root.right;
+                        }
+                        stack.Push(root);
+                    }
+                }
+                return btnRoot;
     }
 }
+
+public class Solution {
+    public TreeNode BstToGst(TreeNode root) {
+            var stack = new Stack<TreeNode>();
+            
+            var n = root;
+            while (n.right != null)
+            {
+                stack.Push(n);
+                n = n.right;
+            }
+            stack.Push(n);
+
+            var sum = 0;
+            while (stack.Count > 0)
+            {
+                n = stack.Pop();
+                sum += n.val;
+                n.val = sum;
+
+                if(n.left !=null)
+                {
+                    n = n.left;
+                    while (n.right != null)
+                    {
+                        stack.Push(n);
+                        n = n.right;
+                    }
+                    stack.Push(n);
+                }
+            }
+            return root;
+    }
+} 
+*/
