@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Moons.Common20;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace TestLeetCode
 {
@@ -7,6 +9,9 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
+            var classname = $"{StringUtils.Capitalize("partition-array-for-maximum-sum", "-")}Solution";
+            Debug.WriteLine(classname);
+
             new CapacityToShipPackagesWithinDDaysSolution().Test();
             //new MinimumDominoRotationsForEqualRowSolution().Test();
             //new PancakeSortingSolution().Test();

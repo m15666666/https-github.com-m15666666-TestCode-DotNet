@@ -1051,5 +1051,37 @@ namespace Moons.Common20
         }
 
         #endregion
+
+        # region 格式化
+
+        /// <summary>
+        /// 字符串首字母大写
+        /// </summary>
+        /// <param name="text">字符串</param>
+        /// <param name="delimiter">分隔符</param>
+        /// <returns>处理后的字符串</returns>
+        public static string Capitalize(string text, string delimiter )
+        {
+            var parts = Split(text, delimiter);
+            StringBuilder builder = new StringBuilder();
+            foreach( var part in parts)
+            {
+                var firstC = part[0];
+                if (char.IsUpper(firstC))
+                {
+                    builder.Append(part);
+                    continue;
+                }
+
+                var firstUpper = char.ToUpper(firstC);
+                builder.Append(firstUpper);
+                int len = part.Length;
+                if(len == 1) continue;
+
+                builder.Append(part.Substring(1));
+            }
+            return builder.ToString();
+        }
+        #endregion
     }
 }
