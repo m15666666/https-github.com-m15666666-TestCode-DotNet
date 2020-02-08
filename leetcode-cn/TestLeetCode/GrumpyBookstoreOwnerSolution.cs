@@ -47,6 +47,71 @@ class GrumpyBookstoreOwnerSolution
 
     public int MaxSatisfied(int[] customers, int[] grumpy, int X)
     {
-        return 0;
+        int sumOfNoAngry = 0;
+        for (int i = 0; i < grumpy.Length; i++)
+            if (grumpy[i] == 0)
+            {
+    			sumOfNoAngry += customers[i];
+                customers[i] = 0;
+            }
+
+        int max = 0;
+        int sumOfWindow = 0;
+        int leftIndex = 0;
+        int windowLength = 0;
+        foreach (var c in customers )
+        {
+            sumOfWindow += c;
+            if (X <= windowLength) sumOfWindow -= customers[leftIndex++];
+            else windowLength++;
+
+            if (max < sumOfWindow) max = sumOfWindow;
+        }
+
+        return sumOfNoAngry + max;
     }
 }
+/*
+滑动窗口计算连续X个数之和,时间复杂度O(N)
+Zhang20191031
+77 阅读
+2020011901.PNG
+
+解题思路
+//先遍历一遍数组grumpy,当grumpy[i]的值为0时,out加上customers[i]的值,并将该customers[i]重新置为0;
+//再遍历一遍数组customers,用滑动窗口来计算customers数组中的连续X个数之和(记为sum),并且用max记录当前出现的最大的sum;
+//最后返回(out+max)
+
+代码
+class Solution {
+    public int maxSatisfied(int[] customers, int[] grumpy, int X) {
+        //解1：耗时3ms
+    	int out = 0;
+    	int max = 0;
+    	int sum = 0;
+    	for(int i =0;i<grumpy.length;i++) {
+    		if(grumpy[i]==0) {
+    			out += customers[i];
+    			customers[i] = 0;
+    		}
+    	}
+    	int i=0;
+    	int cnt = -1;
+    	while(i<customers.length) {
+    		sum += customers[i];
+    		if(i>=X-1) {
+        		if(sum >= max) {
+        			max = sum;
+        		}
+        		cnt++;
+        		if(cnt>=0) {
+        			sum -= customers[cnt];//窗口长度为X,窗口在向前滑动一位之前,需要将窗口中的最左边的一位数减掉
+        		}
+    		}
+    		i++;
+    	}
+    	out += max;
+        return out;
+    }
+} 
+*/
