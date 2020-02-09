@@ -9,7 +9,7 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            var classname = $"{StringUtils.Capitalize("previous-permutation-with-one-swap", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("distant-barcodes", "-")}Solution";
             Debug.WriteLine(classname);
 
             new CapacityToShipPackagesWithinDDaysSolution().Test();
