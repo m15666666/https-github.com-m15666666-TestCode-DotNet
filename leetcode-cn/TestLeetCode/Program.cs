@@ -9,7 +9,7 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            var classname = $"{StringUtils.Capitalize("distant-barcodes", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("flip-columns-for-maximum-number-of-equal-rows", "-")}Solution";
             Debug.WriteLine(classname);
 
             new CapacityToShipPackagesWithinDDaysSolution().Test();
