@@ -5,10 +5,10 @@ using System.Text;
 
 
 /*
-给定由若干 0 和 1 组成的矩阵 matrix，从中选出任意数量的列并翻转其上的 每个 单元格。翻转后，单元格的值从 0 变成 1，或者从 1 变为 0 。
+给定由若干 0 和 1 组成的矩阵 matrix，从中选出任意数量的列并翻转其上的 每个 单元格。
+翻转后，单元格的值从 0 变成 1，或者从 1 变为 0 。
 
 返回经过一些翻转后，行上所有值都相等的最大行数。
-
  
 
 示例 1：
@@ -53,6 +53,52 @@ class FlipColumnsForMaximumNumberOfEqualRowsSolution
 
     public int MaxEqualRowsAfterFlips(int[][] matrix)
     {
-        return 0;
+        int column = matrix[0].Length;
+        byte[] buffer = new byte[column / 8 + 1];
+        var bitArray = new System.Collections.BitArray(column);
+        var bits2Count = new Dictionary<string, int>();
+        foreach( var row in matrix)
+        {
+            int index = 0;
+            bool reverse = row[0] == 0;
+            if (reverse)
+                foreach( var bit in row)
+                    bitArray.Set(index++, bit == 0);
+            else
+                foreach (var bit in row)
+                    bitArray.Set(index++, bit == 1);
+
+            bitArray.CopyTo(buffer, 0);
+            var bitString = BitConverter.ToString(buffer);
+            if (!bits2Count.ContainsKey(bitString)) bits2Count.Add(bitString, 1);
+            else bits2Count[bitString]++;
+        }
+        return bits2Count.Values.Max();
     }
 }
+/*
+C++ 简单题解
+大力王
+发布于 3 个月前
+270 阅读
+行转成字符串，转的时候，如果行以0开头，则将行中所有数取反，如果是1开头，保持不变
+然后看有多少个相同的字符串，选择其中个数最大的
+
+class Solution {
+public:
+    int maxEqualRowsAfterFlips(vector<vector<int>>& matrix) {
+        unordered_map<string, int> m;
+        int res = 0;
+        for (auto& r : matrix) {
+            string s;
+            int d = 1 ^ r[0];
+            for (auto x : r) {
+                s += (d ^ x) + '0';
+            }
+            ++m[s];
+            res = max(res, m[s]);
+        }
+        return res;
+    }
+}; 
+*/

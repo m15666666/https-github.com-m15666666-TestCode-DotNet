@@ -9,9 +9,10 @@ namespace TestLeetCode
     {
         static void Main(string[] args)
         {
-            var classname = $"{StringUtils.Capitalize("flip-columns-for-maximum-number-of-equal-rows", "-")}Solution";
+            // Test.CSharpClass.Bitset.Test();
+            var classname = $"{StringUtils.Capitalize("adding-two-negabinary-numbers", "-")}Solution";
             Debug.WriteLine(classname);
-
+            
             new CapacityToShipPackagesWithinDDaysSolution().Test();
             //new MinimumDominoRotationsForEqualRowSolution().Test();
             //new PancakeSortingSolution().Test();

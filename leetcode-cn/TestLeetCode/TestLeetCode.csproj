@@ -6,6 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Test.CSharpClass.Bitset.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Test.CSharpClass\Test.CSharpClass.Bitset.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Moons.Common20\Moons.Common20.csproj" />
   </ItemGroup>
 
