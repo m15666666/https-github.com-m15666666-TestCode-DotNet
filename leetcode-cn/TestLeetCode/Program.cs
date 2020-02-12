@@ -10,10 +10,11 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("adding-two-negabinary-numbers", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("letter-tile-possibilities", "-")}Solution";
             Debug.WriteLine(classname);
-            
-            new CapacityToShipPackagesWithinDDaysSolution().Test();
+
+            new AddingTwoNegabinaryNumbersSolution().Test();
+            //new CapacityToShipPackagesWithinDDaysSolution().Test();
             //new MinimumDominoRotationsForEqualRowSolution().Test();
             //new PancakeSortingSolution().Test();
             //new MaximumWidthRampSolution().Test();
