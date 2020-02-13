@@ -10,9 +10,10 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("letter-tile-possibilities", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("insufficient-nodes-in-root-to-leaf-paths", "-")}Solution";
             Debug.WriteLine(classname);
 
+            //new LetterTilePossibilitiesSolution().Test();
             new AddingTwoNegabinaryNumbersSolution().Test();
             //new CapacityToShipPackagesWithinDDaysSolution().Test();
             //new MinimumDominoRotationsForEqualRowSolution().Test();
