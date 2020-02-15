@@ -10,7 +10,7 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("insufficient-nodes-in-root-to-leaf-paths", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("smallest-subsequence-of-distinct-characters", "-")}Solution";
             Debug.WriteLine(classname);
 
             //new LetterTilePossibilitiesSolution().Test();
