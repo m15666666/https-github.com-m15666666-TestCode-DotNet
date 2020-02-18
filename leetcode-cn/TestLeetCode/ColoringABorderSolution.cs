@@ -33,7 +33,7 @@ using System.Text;
 
 1 <= grid.length <= 50
 1 <= grid[0].length <= 50
-1 <= grid[i][j] <= 1000
+1 <= grid[i,j] <= 1000
 0 <= r0 < grid.length
 0 <= c0 < grid[0].length
 1 <= color <= 1000
@@ -54,7 +54,7 @@ class ColoringABorderSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
-    public int[][] ColorBorder(int[][] grid, int r0, int c0, int color)
+    public int[,] ColorBorder(int[,] grid, int r0, int c0, int color)
     {
         // todo 未做
         throw new NotSupportedException();
