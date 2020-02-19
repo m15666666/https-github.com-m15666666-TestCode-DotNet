@@ -50,6 +50,119 @@ class StatisticsFromALargeSampleSolution
 
     public double[] SampleStats(int[] count)
     {
-        return default;
+        double[] ret = new double[5];
+
+        long sum = 0, countOfSum = 0;
+        int min = -1, max = -1;
+        int maxCount = 0;
+        for (int i = 0; i < count.Length; i++)
+        {
+            int cnt = count[i];
+            if (cnt == 0) continue;
+
+            if (min == -1) min = i;
+
+            max = i;
+            sum += cnt * i;
+            countOfSum += cnt;
+
+            if (maxCount < cnt)
+            {
+                maxCount = cnt;
+                ret[4] = i;
+            }
+        }
+
+        ret[0] = min;
+        ret[1] = max;
+
+        ret[2] = sum * 1.0 / countOfSum;
+
+        int currentCount = 0;
+        long halfCount = countOfSum / 2;
+        int a = -1, b = -1;
+        for (int i = 0; i < count.Length; i++)
+        {
+            currentCount += count[i];
+            if (a == -1 && halfCount <= currentCount) a = i;
+            if (b == -1 && halfCount < currentCount)
+            {
+                b = i;
+                break;
+            }
+        }
+        ret[3] = (countOfSum % 2) == 0 ? (a + b) / 2.0 : b;
+
+        return ret;
     }
 }
+/*
+正常解法 然后就双100% 了 挺懵逼的。。。
+azyl99
+发布于 7 个月前
+610 阅读
+执行用时 :
+1 ms
+, 在所有 Java 提交中击败了
+100.00%
+的用户
+内存消耗 :
+37.3 MB
+, 在所有 Java 提交中击败了
+100.00%
+的用户
+
+class Solution {
+    public double[] sampleStats(int[] count) {
+        double[] result = new double[5];
+
+        long sum = 0, csum = 0;
+        int min = -1, max = -1;
+        int maxCount = 0;
+        for (int i = 0; i < count.length; i++) {
+            int cnt = count[i];
+            if (cnt == 0) {
+                continue;
+            }
+            if (min == -1) {
+                min = i;
+            }
+            max = i;
+            sum += cnt * i;
+            csum += cnt;
+
+            if (maxCount < cnt) {
+                maxCount = cnt;
+                result[4] = i;
+            }
+        }
+
+        result[2] = sum * 1.0 / csum;
+
+        int curCount = 0;
+        int a = -1, b = -1;
+        for (int i = 0; i < count.length; i++) {
+            int cnt = count[i];
+            curCount += cnt;
+            if (a == -1 && curCount >= csum / 2) {
+                a = i;
+            }
+            if (b == -1 && curCount >= csum / 2 + 1) {
+                b = i;
+            }
+        }
+        if ((csum & 1) == 1) {
+            result[3] = b;
+        } else {
+            result[3] = (a + b) / 2.0;
+        }
+
+        result[0] = min;
+        result[1] = max;
+
+        return result;
+    }
+}
+下一篇：重点在于中位数
+ 
+*/
