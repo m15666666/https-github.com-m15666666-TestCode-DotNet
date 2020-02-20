@@ -10,7 +10,7 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("statistics-from-a-large-sample", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("path-in-zigzag-labelled-binary-tree", "-")}Solution";
             Debug.WriteLine(classname);
 
             // new ShortestPathInBinaryMatrixSolution().Test();
