@@ -43,7 +43,7 @@ using System.Text;
 /// 1105. 填充书架
 /// 
 /// </summary>
-class ClimbStairsSolution
+class FillingBookcaseShelvesSolution
 {
     public void Test()
     {
@@ -56,6 +56,6 @@ class ClimbStairsSolution
 
     public int MinHeightShelves(int[][] books, int shelf_width)
     {
-
+        return default;
     }
 }
