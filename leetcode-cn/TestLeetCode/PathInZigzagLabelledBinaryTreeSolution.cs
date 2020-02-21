@@ -49,6 +49,110 @@ class PathInZigzagLabelledBinaryTreeSolution
 
     public IList<int> PathInZigZagTree(int label)
     {
-        return default;
+        List<int> ret = new List<int>();
+        label = GetBefore(label);
+        while (0 < label)
+        {
+            ret.Add(label);
+            label /= 2;
+        }
+
+        ret.Reverse();
+        for (int i = 0; i < ret.Count; i++)
+            ret[i] = GetBefore(ret[i]);
+        return ret;
+
+    }
+    private static int GetBefore(int label)
+    {
+        int powCount = 1;
+        long p = 1;
+        while (p <= label)
+        {
+            p *= 2;
+            powCount++;
+        }
+        powCount--;
+        if (powCount % 2 == 1) return label;
+
+        int start = (int)(p / 2);
+        return (int)(p - 1 - label + start);
     }
 }
+/*
+label转换函数与寻根 双百算法
+满天都是小欣欣
+发布于 2 个月前
+263 阅读
+首做先，假设我们数是正常得满二叉树编码方式，根节点index是1，那假设父节点index是n，那左子树节点是2 * n， 右子树 2 * n + 1
+在这个数组上找根节点的路径非常简单。
+
+写一个转换函数，可以把正常上述的idnex 转换成题目中的index， 反之也可以将题目中的index转换成正常得index。
+
+算法流程
+1 首先将label转换成正常索引下的label
+2 寻找在正常索引下的label到根的路径
+3 反转路径
+4 对路径中的每个索引转换成题目中的索引方法。
+
+class Solution {
+public:
+    vector<int> pathInZigZagTree(int label) {
+        vector<int> res;
+        cout << label;
+        label = getBefore(label);
+        // 寻找根节点路径
+        while(label >= 1){
+            res.push_back(label);
+            label /= 2;
+        }
+        reverse(res.begin(), res.end());
+        for(int i = 0; i < res.size(); i ++){
+            res[i] = getBefore(res[i]);
+        }
+        return res;
+        
+    }
+    int getBefore(int label){
+        int cnt = 1;
+        while(pow(2, cnt - 1) <= label)
+            cnt++;
+        cnt --;
+        if(cnt % 2 == 1)
+            return label;
+        else{
+            int start = pow(2, cnt - 1);
+            return pow(2, cnt) - 1 - label + start;
+        }
+    }
+};
+下一篇：简单递归，从最后一步开始向后退
+
+public class Solution {
+    public IList<int> PathInZigZagTree(int label) {
+        int rank = (int)Math.Log(label, 2) + 1;
+            int normalLabel = TransformLabel(rank, label);
+            List<int> path = new List<int>();
+            while(normalLabel != 0)
+            {
+                path.Add(TransformLabel(rank, normalLabel));
+                normalLabel /= 2;
+                rank--;
+            }
+            path.Reverse();
+            return path;
+    }
+
+    public int TransformLabel(int rank,int n)
+        {
+            if (rank % 2 == 0)
+                return n;
+            else
+            {
+                int temp =(int)Math.Pow(2, rank - 1);
+                return temp*3-n-1;
+            }
+                
+        }
+} 
+*/
