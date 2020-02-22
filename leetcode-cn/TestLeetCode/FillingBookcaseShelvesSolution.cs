@@ -19,18 +19,13 @@ using System.Text;
 
 以这种方式布置书架，返回书架整体可能的最小高度。
 
- 
-
 示例：
-
-
 
 输入：books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelf_width = 4
 输出：6
 解释：
 3 层书架的高度和为 1 + 3 + 2 = 6 。
 第 2 本书不必放在第一层书架上。
- 
 
 提示：
 
@@ -47,6 +42,7 @@ class FillingBookcaseShelvesSolution
 {
     public void Test()
     {
+        var ret = MinHeightShelves(new int[][] { new int[] { 1, 1 },new int[] { 2, 3 },new int[] { 2, 3 },new int[] { 1, 1 },new int[] { 1, 1 },new int[] { 1, 1 },new int[] { 1, 2 } },4);
         //int[] nums = new int[] {3, 2, 4};
         //int k = 6;
         //var ret = LevelOrder((int[]) nums.Clone(), k);
@@ -56,6 +52,59 @@ class FillingBookcaseShelvesSolution
 
     public int MinHeightShelves(int[][] books, int shelf_width)
     {
-        return default;
+        int n = books.Length;
+        int[] dp = new int[n + 1];
+        Array.Fill(dp, 1000000);
+        dp[0] = 0;
+        for (int i = 1; i <= n; i++) {
+            int width = 0;
+            int j = i;
+            int maxHeight = 0;
+            while (0 < j) {
+                var book = books[j - 1];
+                width += book[0];
+                if (shelf_width < width) break;
+
+                if (maxHeight < book[1]) maxHeight = book[1];
+
+                int nextHeight = dp[j - 1] + maxHeight;
+                if (nextHeight < dp[i]) dp[i] = nextHeight;
+                j--;
+            }
+        }
+        return dp[n];
     }
 }
+/*
+动态规划 Python3
+刘岳
+发布于 8 个月前
+3.7k 阅读
+思路：
+动态规划，用 dp[i] 表示放置前 i 本书所需要的书架最小高度，初始值 dp[0] = 0，其他为最大值 1000*1000。遍历每一本书，把当前这本书作为书架最后一层的最后一本书，将这本书之前的书向后调整，看看是否可以减少之前的书架高度。状态转移方程为 dp[i] = min(dp[i] , dp[j - 1] + h)，其中 j 表示最后一层所能容下书籍的索引，h 表示最后一层最大高度。
+
+图解：
+样例输入：books = [[1,1],[2,3],[2,3],[1,1],[1,1],[1,1],[1,2]], shelf_width = 4
+最后求 dp[7]，省略了遍历步骤，直接给出结果。
+
+
+
+代码：
+class Solution:
+    def minHeightShelves(self, books: List[List[int]], shelf_width: int) -> int:
+        n = len(books)
+        dp = [1000000] * (n + 1)
+        dp[0] = 0
+        for i in range(1, n + 1):
+            tmp_width, j, h = 0, i, 0
+            while j > 0:
+                tmp_width += books[j - 1][0]
+                if tmp_width > shelf_width:
+                    break
+                h = max(h, books[j - 1][1])
+                dp[i] = min(dp[i], dp[j - 1] + h)
+                j -= 1
+        return dp[-1]
+下一篇：1105. 填充书架-[c++][动态规划]
+ 
+*/
