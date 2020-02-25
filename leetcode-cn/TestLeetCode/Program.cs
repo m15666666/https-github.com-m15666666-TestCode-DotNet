@@ -10,7 +10,7 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("delete-nodes-and-return-forest", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("maximum-nesting-depth-of-two-valid-parentheses-strings", "-")}Solution";
             Debug.WriteLine(classname);
 
             new FillingBookcaseShelvesSolution().Test();
