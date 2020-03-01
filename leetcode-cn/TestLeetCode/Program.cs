@@ -10,7 +10,7 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("lowest-common-ancestor-of-deepest-leaves", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("longest-well-performing-interval", "-")}Solution";
             Debug.WriteLine(classname);
 
             new FillingBookcaseShelvesSolution().Test();
