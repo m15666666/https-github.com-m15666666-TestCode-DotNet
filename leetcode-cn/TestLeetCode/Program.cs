@@ -10,7 +10,7 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("shortest-path-with-alternating-colors", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("median-of-two-sorted-arrays", "-")}Solution";
             Debug.WriteLine(classname);
 
             new FillingBookcaseShelvesSolution().Test();
