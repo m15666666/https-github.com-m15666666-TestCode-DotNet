@@ -140,6 +140,9 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
         [HttpPost]
         public SampleStationCmdOutputDto<bool> StopSample([FromBody] SampleStationCmdInputDto value)
         {
+            var content = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            TraceUtils.Info($"StopSample value:{content}");
+
             void Cmd()
             {
                 SampleStationProxy sampleStation = StationConfig2Proxy(value);
