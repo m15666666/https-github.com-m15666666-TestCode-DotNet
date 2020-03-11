@@ -4,6 +4,9 @@ using System.Linq;
 using AnalysisData.Constants;
 using AnalysisData.SampleData;
 using Moons.Common20;
+using Moons.DataSample.Shared.Dto;
+using TrendData = Moons.DataSample.Shared.Dto.TrendDataDto;
+using TimeWaveData_1D = Moons.DataSample.Shared.Dto.TimeWaveDataDto;
 
 namespace SampleServer.Upload2DB
 {
@@ -96,7 +99,7 @@ namespace SampleServer.Upload2DB
         /// 上传报警事件对象
         /// </summary>
         /// <param name="datas">List[AlmEventData]</param>
-        public void UploadAlm( List<AlmEventData> datas )
+        public void UploadAlm( List<AlmEventDataDto> datas )
         {
             if( datas.Count == 0 )
             {
@@ -106,7 +109,7 @@ namespace SampleServer.Upload2DB
             try
             {
                 var sampleServerContext = Config.SampleServerContext;
-                foreach ( AlmEventData almData in datas )
+                foreach ( var almData in datas )
                 {
                     // 纪秀范可能把测点ID为零的报警事件传上来，这种报警事件需要过滤，抛弃掉。
                     if( almData.PointID == 0 )

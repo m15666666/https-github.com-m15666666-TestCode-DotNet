@@ -1,8 +1,10 @@
 ﻿using AnalysisData.SampleData;
+using Moons.DataSample.Shared.Dto;
 using SampleServer.Core.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TrendData = Moons.DataSample.Shared.Dto.TrendDataDto;
 
 namespace SampleServer.Core.Implementations
 {
@@ -33,15 +35,15 @@ namespace SampleServer.Core.Implementations
             return 0;
         }
 
-        public void SendAlmEvent(AlmEventData almData)
+        public void SendAlmEvent(object almData)
         {
         }
 
-        public void SendMonitorData(TrendData data)
+        public void SendMonitorData(object data)
         {
         }
 
-        public void SendSave2DBData(TrendData data)
+        public void SendSave2DBData(object data)
         {
         }
     }

@@ -7,10 +7,8 @@ namespace Moons.DataSample.Shared.Dto
     /// <summary>
     ///     波形数据
     /// </summary>
-    public class TimeWaveDataDto
+    public class TimeWaveDataDto : TrendDataDto
     {
-        public TrendDataDto TrendDataDto { get; set; }
-
         /// <summary>
         /// 时间波形
         /// </summary>

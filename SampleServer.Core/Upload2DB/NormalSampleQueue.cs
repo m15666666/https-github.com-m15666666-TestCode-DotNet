@@ -10,8 +10,10 @@ using AnalysisData.SampleData;
 using Moons.Common20;
 using SocketLib;
 using CollectionUtils = Moons.Common20.CollectionUtils;
-using TrendData = AnalysisData.SampleData.TrendData;
+using TrendData = Moons.DataSample.Shared.Dto.TrendDataDto;
+using TimeWaveData_1D = Moons.DataSample.Shared.Dto.TimeWaveDataDto;
 using AnalysisData.Helper;
+using Moons.DataSample.Shared.Dto;
 
 namespace SampleServer.Upload2DB
 {
@@ -32,7 +34,7 @@ namespace SampleServer.Upload2DB
         /// <summary>
         /// 报警事件缓存
         /// </summary>
-        private readonly LockQueue<List<AlmEventData>> _almBuffer = new LockQueue<List<AlmEventData>>();
+        private readonly LockQueue<List<AlmEventDataDto>> _almBuffer = new LockQueue<List<AlmEventDataDto>>();
 
         /// <summary>
         /// 字节数组缓存
@@ -140,7 +142,7 @@ namespace SampleServer.Upload2DB
         {
             int maxNormalSampleQueue = Config.MaxNormalSampleQueue;
 
-            var alms = data as List<AlmEventData>;
+            var alms = data as List<AlmEventDataDto>;
             if( alms != null )
             {
                 int almCount = _almBuffer.Count;
@@ -256,7 +258,7 @@ namespace SampleServer.Upload2DB
 
             #region 计算报警
 
-            List<AlmEventData> alms = null;
+            List<AlmEventDataDto> alms = null;
             foreach( var distanceTrendData in distanceTrendDatas )
             {
                 var pp = distanceTrendData.MeasurementValue;
@@ -277,10 +279,10 @@ namespace SampleServer.Upload2DB
                 {
                     if ( alms == null )
                     {
-                        alms = new List<AlmEventData>();
+                        alms = new List<AlmEventDataDto>();
                     }
 
-                    alms.Add( new AlmEventData
+                    alms.Add( new AlmEventDataDto
                     {
                         AlmID = 0,// 外部程序赋值
                         PointID = distanceTrendData.PointID,
@@ -313,7 +315,7 @@ namespace SampleServer.Upload2DB
             {
                 // 连续报警次数10次
                 const int ContinualAlarmCount = 3;
-                var alarms = new List<AlmEventData>();
+                var alarms = new List<AlmEventDataDto>();
                 foreach( var alm in alms )
                 {
                     var pointId = alm.PointID;
@@ -354,7 +356,7 @@ namespace SampleServer.Upload2DB
         /// <param name="trendDatas">传给SampleServer的数据</param>
         private void AddAlmEventOfOpcDatas( List<TrendData> trendDatas)
         {
-            List<AlmEventData> alms = null;
+            List<AlmEventDataDto> alms = null;
             foreach (var trendData in trendDatas)
             {
                 if( trendData.DataUsageID == DataUsageID.Monitor || string.IsNullOrEmpty( trendData.VariantName ) )
@@ -380,10 +382,10 @@ namespace SampleServer.Upload2DB
                 {
                     if (alms == null)
                     {
-                        alms = new List<AlmEventData>();
+                        alms = new List<AlmEventDataDto>();
                     }
 
-                    alms.Add(new AlmEventData
+                    alms.Add(new AlmEventDataDto
                     {
                         AlmID = 0, // 外部程序赋值
                         PointID = pointId,
@@ -459,7 +461,7 @@ namespace SampleServer.Upload2DB
                 }
 
                 var trendDatas = new List<TrendData>();
-                var almEventDatas = new List<AlmEventData>();
+                var almEventDatas = new List<AlmEventDataDto>();
 
                 var datas = _bytesBuffer.PopAll();
                 foreach( var bytes in datas )
@@ -491,7 +493,7 @@ namespace SampleServer.Upload2DB
                             continue;
                         }
 
-                        var almEventData = obj as AlmEventData;
+                        var almEventData = obj as AlmEventDataDto;
                         if( almEventData != null )
                         {
                             string almEventUniqueID = almEventData.AlmEventUniqueID;
@@ -594,7 +596,7 @@ namespace SampleServer.Upload2DB
                 }
 
                 // 每次处理10个
-                List<AlmEventData>[] datas = _almBuffer.Pop( 10 );
+                List<AlmEventDataDto>[] datas = _almBuffer.Pop( 10 );
 
                 DateTime uploadBegin = DateTime.Now;
                 foreach( var almEventDatas in datas )

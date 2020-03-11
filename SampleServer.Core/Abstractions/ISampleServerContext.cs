@@ -1,7 +1,9 @@
 ﻿using AnalysisData.SampleData;
+using Moons.DataSample.Shared.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using TrendData = Moons.DataSample.Shared.Dto.TrendDataDto;
 
 namespace SampleServer.Core.Abstractions
 {
@@ -51,18 +53,18 @@ namespace SampleServer.Core.Abstractions
         /// </summary>
         /// <param name="almData">报警事件</param>
 
-        void SendAlmEvent(AlmEventData almData);
+        void SendAlmEvent(object almData);
 
         /// <summary>
         /// 发送实时监测数据
         /// </summary>
         /// <param name="data">实时监测数据</param>
-        void SendMonitorData(TrendData data);
+        void SendMonitorData(object data);
 
         /// <summary>
         /// 发送入库数据
         /// </summary>
         /// <param name="data">实时监测数据</param>
-        void SendSave2DBData(TrendData data);
+        void SendSave2DBData(object data);
     }
 }

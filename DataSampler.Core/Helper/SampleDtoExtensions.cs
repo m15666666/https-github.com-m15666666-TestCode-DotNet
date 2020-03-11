@@ -13,7 +13,12 @@ namespace DataSampler.Core.Helper
     {
         public static TrendDataDto ToTrendDataDto(this TrendData d)
         {
-            return new TrendDataDto
+            return d.ToTrendDataDto<TrendDataDto>();
+        }
+
+        private static T ToTrendDataDto<T>(this TrendData d) where T : TrendDataDto, new()
+        {
+            return new T
             {
                 SyncUniqueID = d.SyncUniqueID,
                 SyncID = d.SyncID,
@@ -39,11 +44,9 @@ namespace DataSampler.Core.Helper
 
         public static TimeWaveDataDto ToTimeWaveDataDto(this TimeWaveData_1D d)
         {
-            return new TimeWaveDataDto
-            {
-                TrendDataDto = d.ToTrendDataDto(),
-                Wave = d.Wave
-            };
+            var ret = d.ToTrendDataDto<TimeWaveDataDto>();
+            ret.Wave = d.Wave;
+            return ret;
         }
 
         public static AlmEventDataDto ToAlmEventDataDto(this AlmEventData d)
