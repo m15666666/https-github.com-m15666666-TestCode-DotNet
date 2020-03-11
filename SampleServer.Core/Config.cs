@@ -114,7 +114,7 @@ namespace SampleServer
 
         #region 获取数据库信息
 
-        private static ISampleServerContext _sampleServerContext;
+        private volatile static ISampleServerContext _sampleServerContext;
         internal static ISampleServerContext SampleServerContext => _sampleServerContext ??
             (_sampleServerContext = IocUtils.Instance.GetRequiredService<ISampleServerContext>());
 
@@ -124,7 +124,7 @@ namespace SampleServer
         internal static SampleServerConfigDto SampleServerConfigDto => _sampleServerConfigDto ?? 
             (_sampleServerConfigDto = IocUtils.Instance.GetRequiredService<IOptions<SampleServerConfigDto>>().Value);
 
-        private static SampleServerConfigDto _sampleServerConfigDto;
+        private volatile static SampleServerConfigDto _sampleServerConfigDto;
 
         public static AlmStand_CommonSettingData GetAlmStand_CommonSettingDataByID( int pointID, int featureValueId )
         {
