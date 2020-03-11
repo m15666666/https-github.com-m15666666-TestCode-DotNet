@@ -95,6 +95,21 @@ namespace SampleServer
             //return ret;
         }
 
+        /// <summary>
+        /// 根据当前的报警等级ID获得引用的报警等级ID
+        /// </summary>
+        /// <param name="almLevelID">当前的报警等级ID</param>
+        /// <returns>引用的报警等级ID</returns>
+        public static int GetRefAlmLevelIDByAlmLevelID( int almLevelID )
+        {
+            switch(almLevelID)
+            {
+                case 0: return 0;
+                case 1: return 2;
+                case 4: return 4;
+            }
+            return almLevelID;
+        }
         #endregion
 
         #region 获取数据库信息

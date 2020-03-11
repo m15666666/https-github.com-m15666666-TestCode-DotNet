@@ -46,8 +46,7 @@ namespace SampleServer.Upload2DB
             foreach ( TrendData trendData in trendDatas )
             {
                 //// 将报警等级ID统一
-                //trendData.AlmLevelID =
-                //    CacheManager.ZXAlmLevelMapDatas.GetRefAlmLevelIDByAlmLevelID( trendData.AlmLevelID );
+                trendData.AlmLevelID = Config.GetRefAlmLevelIDByAlmLevelID( trendData.AlmLevelID );
 
                 // 缓存监测数据
                 if( trendData.DataUsageID == DataUsageID.Monitor )
@@ -115,9 +114,10 @@ namespace SampleServer.Upload2DB
                         continue;
                     }
 
+                    // 将报警等级ID统一
+                    almData.AlmLevel = Config.GetRefAlmLevelIDByAlmLevelID( almData.AlmLevel );
+
                     sampleServerContext.SendAlmEvent(almData);
-                    //// 将报警等级ID统一
-                    //almData.AlmLevel = CacheManager.ZXAlmLevelMapDatas.GetRefAlmLevelIDByAlmLevelID( almData.AlmLevel );
 
                     //int pointID = almData.PointID;
                     //int almSourceID = almData.AlmSourceID;

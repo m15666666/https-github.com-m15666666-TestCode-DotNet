@@ -132,11 +132,7 @@ namespace AnalysisData.SampleData
             get { return MeasurementValues != null ? MeasurementValues[0] : 0; }
             set
             {
-                if( MeasurementValues == null )
-                {
-                    MeasurementValues = new float[1];
-                }
-
+                if( MeasurementValues == null ) MeasurementValues = new float[1];
                 MeasurementValues[0] = value;
             }
         }
@@ -146,8 +142,11 @@ namespace AnalysisData.SampleData
         /// </summary>
         public float MeasurementValue2
         {
-            get { return MeasurementValues[1]; }
-            set { MeasurementValues[1] = value; }
+            get { return MeasurementValues != null && 1 < MeasurementValues.Length ? MeasurementValues[1] : 0; }
+            set {
+                if (MeasurementValues == null) MeasurementValues = new float[2];
+                MeasurementValues[1] = value; 
+            }
         }
 
         /// <summary>
