@@ -14,7 +14,7 @@ namespace SampleServer
         /// <summary>
         /// 正常采集的队列，用于将正常采集时传递的对象串行化
         /// </summary>
-        private readonly NormalSampleQueue _normalSampleQueue = new NormalSampleQueue();
+        private readonly NormalSampleQueue _normalSampleQueue;
 
         #endregion
 
@@ -27,6 +27,8 @@ namespace SampleServer
 
         private SampleServerController()
         {
+            Config.Init();
+            _normalSampleQueue = new NormalSampleQueue();
         }
 
         /// <summary>

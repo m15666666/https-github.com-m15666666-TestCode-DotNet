@@ -34,6 +34,8 @@ namespace SampleServer
         /// </summary>
         public static void Init()
         {
+            var warmupSampleServerContext = SampleServerContext;
+            var warmupSampleServerConfigDto = SampleServerConfigDto;
         }
 
         #endregion
