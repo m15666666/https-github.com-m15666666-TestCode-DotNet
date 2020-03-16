@@ -4,9 +4,9 @@ using System.Linq;
 using AnalysisData.Constants;
 using AnalysisData.SampleData;
 using Moons.Common20;
-using Moons.DataSample.Shared.Dto;
-using TrendData = Moons.DataSample.Shared.Dto.TrendDataDto;
-using TimeWaveData_1D = Moons.DataSample.Shared.Dto.TimeWaveDataDto;
+using AnalysisData.Dto;
+using TrendData = AnalysisData.Dto.TrendDataDto;
+using TimeWaveData_1D = AnalysisData.Dto.TimeWaveDataDto;
 
 namespace SampleServer.Upload2DB
 {

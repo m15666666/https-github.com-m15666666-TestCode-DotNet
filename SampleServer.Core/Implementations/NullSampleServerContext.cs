@@ -1,10 +1,5 @@
 ﻿using AnalysisData.SampleData;
-using Moons.DataSample.Shared.Dto;
 using SampleServer.Core.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using TrendData = Moons.DataSample.Shared.Dto.TrendDataDto;
 
 namespace SampleServer.Core.Implementations
 {

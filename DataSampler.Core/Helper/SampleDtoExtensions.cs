@@ -1,5 +1,5 @@
 ﻿using AnalysisData.SampleData;
-using Moons.DataSample.Shared.Dto;
+using AnalysisData.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -1,19 +1,17 @@
-﻿using System;
+﻿using AnalysisAlgorithm;
+using AnalysisData.Constants;
+using AnalysisData.Dto;
+using AnalysisData.Helper;
+using Moons.Common20;
+using SocketLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
-using AnalysisAlgorithm;
-using AnalysisData;
-using AnalysisData.Constants;
-using AnalysisData.SampleData;
-using Moons.Common20;
-using SocketLib;
 using CollectionUtils = Moons.Common20.CollectionUtils;
-using TrendData = Moons.DataSample.Shared.Dto.TrendDataDto;
-using TimeWaveData_1D = Moons.DataSample.Shared.Dto.TimeWaveDataDto;
-using AnalysisData.Helper;
-using Moons.DataSample.Shared.Dto;
+using TimeWaveData_1D = AnalysisData.Dto.TimeWaveDataDto;
+using TrendData = AnalysisData.Dto.TrendDataDto;
 
 namespace SampleServer.Upload2DB
 {
