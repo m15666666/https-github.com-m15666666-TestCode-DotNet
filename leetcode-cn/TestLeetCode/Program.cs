@@ -13,7 +13,8 @@ namespace TestLeetCode
             var classname = $"{StringUtils.Capitalize("median-of-two-sorted-arrays", "-")}Solution";
             Debug.WriteLine(classname);
 
-            new FillingBookcaseShelvesSolution().Test();
+            new ThreeSumClosestSolution().Test();
+            //new FillingBookcaseShelvesSolution().Test();
             // new ShortestPathInBinaryMatrixSolution().Test();
             // new LetterTilePossibilitiesSolution().Test();
             // new AddingTwoNegabinaryNumbersSolution().Test();
