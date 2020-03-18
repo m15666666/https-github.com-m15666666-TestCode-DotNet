@@ -71,6 +71,7 @@ class ThreeSumClosestSolution
     }
 }
 /*
+
 画解算法：16. 最接近的三数之和
 灵魂画手
 发布于 9 个月前
@@ -163,5 +164,28 @@ class Solution:
         return target + min_dis
 下一篇：对双指针法进行一点优化，达到2ms，击败100%
 
- 
+public class Solution {
+    public int ThreeSumClosest(int[] nums, int target) {
+            System.Array.Sort(nums);
+            int minimumSum = 9999;
+            int returnInt = 9999;
+            for(int i = 0; i < nums.Length - 2; i++) {
+                if(i > 0 && nums[i] == nums[i - 1]) continue;
+                int L = i + 1;
+                int R = nums.Length - 1;
+                while(L < R) {
+                    int sum = nums[i] + nums[L] + nums[R];
+                    if(System.Math.Abs(sum - target) < minimumSum) {
+                        minimumSum = System.Math.Abs(sum - target);
+                        returnInt = sum;
+                    }
+                    if(sum == target) return target;
+                    else if(sum > target) R--;
+                    else if(sum < target) L++;
+                }
+            }
+
+            return returnInt;
+        }
+} 
 */
