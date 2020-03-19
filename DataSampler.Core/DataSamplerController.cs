@@ -545,7 +545,7 @@ namespace DataSampler
         ///     将数据放到上传队列中
         /// </summary>
         /// <param name="data">数据</param>
-        internal void Upload2DB( object data )
+        public void Upload2DB( object data )
         {
             if( data is TrendData )
             {
@@ -798,7 +798,7 @@ namespace DataSampler
                 //    _sampleItems = sampleItems;
                 //}
 
-                //_taskSender.StartSend();
+                _taskSender.StartSend();
 
                 State = DataSamplerState.NormalSample;
                 if( Config.Probe.StartSampleSuccessCount < int.MaxValue )
