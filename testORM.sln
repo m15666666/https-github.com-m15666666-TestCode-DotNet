@@ -111,7 +111,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.ExportData2Center.Ser
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ts", "ts", "{C5631108-3F50-4771-B8CF-C76CFDDDDE55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TsDocuments", "Typescript\TsDocuments\TsDocuments.csproj", "{F24234AD-BDCA-4931-BE3C-C38ED09A352E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TsDocuments", "Typescript\TsDocuments\TsDocuments.csproj", "{F24234AD-BDCA-4931-BE3C-C38ED09A352E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.TcpClient", "Test.TcpClient\Test.TcpClient.csproj", "{28E0AB0C-8A5E-4147-9560-1B10B768122D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -331,6 +333,10 @@ Global
 		{F24234AD-BDCA-4931-BE3C-C38ED09A352E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F24234AD-BDCA-4931-BE3C-C38ED09A352E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F24234AD-BDCA-4931-BE3C-C38ED09A352E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28E0AB0C-8A5E-4147-9560-1B10B768122D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28E0AB0C-8A5E-4147-9560-1B10B768122D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28E0AB0C-8A5E-4147-9560-1B10B768122D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28E0AB0C-8A5E-4147-9560-1B10B768122D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
