@@ -10,7 +10,7 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("median-of-two-sorted-arrays", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("remove-nth-node-from-end-of-list", "-")}Solution";
             Debug.WriteLine(classname);
 
             new ThreeSumClosestSolution().Test();
