@@ -13,7 +13,8 @@ namespace TestLeetCode
             var classname = $"{StringUtils.Capitalize("remove-nth-node-from-end-of-list", "-")}Solution";
             Debug.WriteLine(classname);
 
-            new ThreeSumClosestSolution().Test();
+            new ValidParenthesesSolution().Test();
+            //new ThreeSumClosestSolution().Test();
             //new FillingBookcaseShelvesSolution().Test();
             // new ShortestPathInBinaryMatrixSolution().Test();
             // new LetterTilePossibilitiesSolution().Test();

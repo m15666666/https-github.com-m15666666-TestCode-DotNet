@@ -184,8 +184,8 @@ namespace AnalysisData.SampleData
         /// </summary>
         public float AxisOffsetValue
         {
-            get { return AxisOffsetValues != null ? AxisOffsetValues[0] : 0; }
-            set { if(AxisOffsetValues != null ) AxisOffsetValues[0] = value; }
+            get { return HasAxisOffsetValue ? AxisOffsetValues[0] : 0; }
+            set { if(HasAxisOffsetValue) AxisOffsetValues[0] = value; }
         }
 
         /// <summary>
