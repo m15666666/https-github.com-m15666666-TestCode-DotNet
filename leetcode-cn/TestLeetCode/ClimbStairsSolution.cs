@@ -22,20 +22,20 @@ class ClimbStairsSolution
     public int ClimbStairs(int n)
     {
         Dictionary<int, int> n2PathCount = new Dictionary<int, int>();
-        return ClimbStairs(n, n2PathCount);
-    }
+        return Climb(n);
 
-    private int ClimbStairs(int n, Dictionary<int, int> n2PathCount)
-    {
-        if (n <= 1) return 1;
-        if (n == 2) return 2;
+        int Climb(int number)
+        {
+            if (number <= 1) return 1;
+            if (number == 2) return 2;
 
-        if (n2PathCount.ContainsKey(n)) return n2PathCount[n];
+            if (n2PathCount.ContainsKey(number)) return n2PathCount[number];
 
-        var ret = ClimbStairs(n - 1, n2PathCount) + ClimbStairs(n - 2, n2PathCount);
+            var ret = Climb(number - 1) + Climb(number - 2);
 
-        if (!n2PathCount.ContainsKey(n)) n2PathCount[n] = ret;
+            if (!n2PathCount.ContainsKey(number)) n2PathCount[number] = ret;
 
-        return ret;
+            return ret;
+        }
     }
 }
