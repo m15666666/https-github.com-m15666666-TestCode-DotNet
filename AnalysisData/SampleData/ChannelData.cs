@@ -18,7 +18,7 @@ namespace AnalysisData.SampleData
         /// 获得IValueWrapper接口的集合
         /// </summary>
         [XmlIgnore]
-        public IValueWrapper[] ValueWrappers
+        IValueWrapper[] IValueWrappersContainer.ValueWrappers
         {
             get
             {
@@ -48,15 +48,11 @@ namespace AnalysisData.SampleData
         /// <summary>
         /// 连续报警次数
         /// </summary>
-        private readonly AlmCountDataCollection _almCountDatas = new AlmCountDataCollection();
 
         /// <summary>
         /// 连续报警次数
         /// </summary>
-        public AlmCountDataCollection AlmCountDatas
-        {
-            get { return _almCountDatas; }
-        }
+        public AlmCountDataCollection AlmCountDatas { get; } = new AlmCountDataCollection();
 
         #endregion
 

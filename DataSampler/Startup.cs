@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moons.Common20;
+using Moons.Common20.Serialization.Json;
 using Moons.Log4net;
 using OnlineSampleCommon.SendTask;
 
@@ -36,6 +37,7 @@ namespace DataSampler
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+            services.AddSingleton<IJsonSerializer, JsonSerializer>();
             services.AddSingleton<ITaskSender, NullTaskSender>();
             services.AddHostedService<DataSamplerHostedService>();
             services.Configure<DatasamplerConfigDto>(Configuration.GetSection("DatasamplerConfigDto"));

@@ -14,15 +14,9 @@ namespace AnalysisData.SampleData
     {
         #region 变量和属性
 
-        /// <summary>
-        /// 通道数据集合
-        /// </summary>
-        private readonly ChannelDataCollection _channelDatas = new ChannelDataCollection();
+        public string Name { get; } = "SampleStationConfigData";
 
-        /// <summary>
-        /// 测点数据集合
-        /// </summary>
-        private readonly PointDataCollection _pointDatas = new PointDataCollection();
+        public string Version { get; } = "1.0.0";
 
         /// <summary>
         /// 数据采集器的端口号（例如：“1181”）
@@ -94,20 +88,14 @@ namespace AnalysisData.SampleData
         /// <summary>
         /// 测点数据集合
         /// </summary>
-        [XmlElement( ElementName = "PointData" )]
-        public PointDataCollection PointDatas
-        {
-            get { return _pointDatas; }
-        }
+        [XmlElement(ElementName = "PointData")]
+        public PointDataCollection PointDatas { get; } = new PointDataCollection();
 
         /// <summary>
         /// 通道数据集合
         /// </summary>
-        [XmlElement( ElementName = "ChannelData" )]
-        public ChannelDataCollection ChannelDatas
-        {
-            get { return _channelDatas; }
-        }
+        [XmlElement(ElementName = "ChannelData")]
+        public ChannelDataCollection ChannelDatas { get; } = new ChannelDataCollection();
 
         #endregion
 
@@ -117,7 +105,7 @@ namespace AnalysisData.SampleData
         /// 获得IValueWrapper接口的集合
         /// </summary>
         [XmlIgnore]
-        public IValueWrapper[] ValueWrappers
+        IValueWrapper[] IValueWrappersContainer.ValueWrappers
         {
             get
             {

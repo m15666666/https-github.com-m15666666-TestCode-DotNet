@@ -50,6 +50,31 @@ namespace DataSampler
             }
         }
 
+        public string TestJson()
+        {
+            var jsonSerializer = Config.JsonSerializer;
+            SampleStationData sampleStationData = new SampleStationData {
+                DataSamplerIP = "10.3.2.123",
+                DataSamplerPort = 1283,
+                
+            };
+
+            var p = new PointData
+            {
+
+            };
+            p.AlmStand_CommonSettingDatas.Add(new AlmStand_CommonSettingData { });
+            sampleStationData.PointDatas.Add( p );
+
+            sampleStationData.ChannelDatas.Add(new ChannelData
+            {
+
+            });
+
+
+            return jsonSerializer.SerializeObject(sampleStationData);
+        }
+
         #endregion
 
         #region 变量和属性

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using Moons.Common20;
 using Moons.Common20.IOC;
 using Moons.Common20.Serialization;
+using Moons.Common20.Serialization.Json;
 using OnlineSampleCommon.SendTask;
 using SocketLib;
 
@@ -162,6 +163,18 @@ namespace DataSampler
             (_sampleDataSender = IocUtils.Instance.GetRequiredService<ITaskSender>());
 
         private static ITaskSender _sampleDataSender;
+
+        #endregion
+
+        #region json 序列化接口
+
+        /// <summary>
+        /// json 序列化接口对象
+        /// </summary>
+        internal static IJsonSerializer JsonSerializer => _jsonSerializer ??
+            (_jsonSerializer = IocUtils.Instance.GetRequiredService<IJsonSerializer>());
+
+        private static IJsonSerializer _jsonSerializer;
 
         #endregion
 

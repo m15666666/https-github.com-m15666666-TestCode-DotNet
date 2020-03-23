@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AnalysisAlgorithm\AnalysisAlgorithm.csproj" />
     <ProjectReference Include="..\Moons.Common20\Moons.Common20.csproj" />
   </ItemGroup>

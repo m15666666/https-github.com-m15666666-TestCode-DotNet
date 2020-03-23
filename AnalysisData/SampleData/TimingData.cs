@@ -26,7 +26,7 @@ namespace AnalysisData.SampleData
         /// <summary>
         /// 获得IValueWrapper接口的集合
         /// </summary>
-        public IValueWrapper[] ValueWrappers
+        IValueWrapper[] IValueWrappersContainer.ValueWrappers
         {
             get { return new IValueWrapper[] { _now }; }
         }

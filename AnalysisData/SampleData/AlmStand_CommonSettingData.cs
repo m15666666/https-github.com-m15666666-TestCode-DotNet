@@ -78,7 +78,7 @@ namespace AnalysisData.SampleData
         /// 获得IValueWrapper接口的集合
         /// </summary>
         [XmlIgnore]
-        public IValueWrapper[] ValueWrappers
+        IValueWrapper[] IValueWrappersContainer.ValueWrappers
         {
             get
             {
@@ -138,7 +138,7 @@ namespace AnalysisData.SampleData
         /// 获得IValueWrapper接口的集合
         /// </summary>
         [XmlIgnore]
-        public IValueWrapper[] ValueWrappers
+        IValueWrapper[] IValueWrappersContainer.ValueWrappers
         {
             get { return new IValueWrapper[] {_almSourceID, _almCount}; }
         }

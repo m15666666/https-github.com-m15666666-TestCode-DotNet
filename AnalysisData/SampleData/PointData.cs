@@ -70,6 +70,7 @@ namespace AnalysisData.SampleData
         /// 测点编号字符串
         /// </summary>
         [XmlIgnore]
+        [Newtonsoft.Json.JsonIgnore]
         public string PointIDString
         {
             get { return PointID.ToString(); }
@@ -108,6 +109,7 @@ namespace AnalysisData.SampleData
         /// 通道1的CD
         /// </summary>
         [XmlIgnore]
+        [Newtonsoft.Json.JsonIgnore]
         public string ChannelCD_1
         {
             get { return ChannelCDs[0]; }
@@ -117,6 +119,7 @@ namespace AnalysisData.SampleData
         /// 通道2的CD
         /// </summary>
         [XmlIgnore]
+        [Newtonsoft.Json.JsonIgnore]
         public string ChannelCD_2
         {
             get { return 1 < ChannelCDs.Length ? ChannelCDs[1] : null; }
@@ -128,7 +131,7 @@ namespace AnalysisData.SampleData
         /// 获得IValueWrapper接口的集合
         /// </summary>
         [XmlIgnore]
-        public IValueWrapper[] ValueWrappers
+        IValueWrapper[] IValueWrappersContainer.ValueWrappers
         {
             get
             {
@@ -144,16 +147,11 @@ namespace AnalysisData.SampleData
         /// <summary>
         /// 普通报警门限集合
         /// </summary>
-        private readonly AlmStand_CommonSettingDataCollection _almStand_CommonSettingDatas =
-            new AlmStand_CommonSettingDataCollection();
 
         /// <summary>
         /// 普通报警门限集合
         /// </summary>
-        public AlmStand_CommonSettingDataCollection AlmStand_CommonSettingDatas
-        {
-            get { return _almStand_CommonSettingDatas; }
-        }
+        public AlmStand_CommonSettingDataCollection AlmStand_CommonSettingDatas { get; } = new AlmStand_CommonSettingDataCollection();
 
         #endregion
     }

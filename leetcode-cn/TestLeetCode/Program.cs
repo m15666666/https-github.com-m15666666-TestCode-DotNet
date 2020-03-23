@@ -13,7 +13,8 @@ namespace TestLeetCode
             var classname = $"{StringUtils.Capitalize("merge-two-sorted-lists", "-")}Solution";
             Debug.WriteLine(classname);
 
-            new ValidParenthesesSolution().Test();
+            new GenerateParenthesisSolution().Test();
+            //new ValidParenthesesSolution().Test();
             //new ThreeSumClosestSolution().Test();
             //new FillingBookcaseShelvesSolution().Test();
             // new ShortestPathInBinaryMatrixSolution().Test();
