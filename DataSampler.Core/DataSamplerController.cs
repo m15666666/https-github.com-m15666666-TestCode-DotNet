@@ -61,7 +61,7 @@ namespace DataSampler
 
             var p = new PointData
             {
-
+                ChannelCDs = new string[] { "cd1",}
             };
             p.AlmStand_CommonSettingDatas.Add(new AlmStand_CommonSettingData { });
             sampleStationData.PointDatas.Add( p );
