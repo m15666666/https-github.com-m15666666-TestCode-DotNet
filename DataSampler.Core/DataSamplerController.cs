@@ -56,23 +56,72 @@ namespace DataSampler
             SampleStationData sampleStationData = new SampleStationData {
                 DataSamplerIP = "10.3.2.123",
                 DataSamplerPort = 1283,
-                
+                SampleStationIP = "10.3.2.123",
+                SampleStationPort = 1283,
+                QueryIntervalInSecond = 120,
+                UploadDBWaveIntervalInSecond = 120,
+                UploadDBStaticIntervalInSecond = 120,
             };
 
             var p = new PointData
             {
-                ChannelCDs = new string[] { "cd1",}
+                PointID = 27,
+                MeasValueTypeID = 101,
+                Dimension = 1,
+                PointName = "point1",
+                EngUnitID = 78,
+                EngUnit = "mm/s",
+                ChannelCDs = new string[] { "1_1",}
             };
-            p.AlmStand_CommonSettingDatas.Add(new AlmStand_CommonSettingData { });
+            p.AlmStand_CommonSettingDatas.Add(new AlmStand_CommonSettingData {
+                AlmSource_ID = 13,
+                AlmType_ID = 0,
+                LowLimit1_NR = null,
+                LowLimit2_NR = null,
+                HighLimit1_NR = 1.1,
+                HighLimit2_NR = 2.2,
+            });
             sampleStationData.PointDatas.Add( p );
 
-            sampleStationData.ChannelDatas.Add(new ChannelData
+            var channel = new ChannelData
             {
-
+                ChannelIdentifier = "123",
+                ChannelCD = "1_1",
+                RevChannelCD = string.Empty,
+                KeyPhaserRevChannelCD = string.Empty,
+                SwitchChannelCD = string.Empty,
+                //SwitchTriggerStatus =,
+                //SwitchTriggerMethod = ,
+                ChannelTypeID = 1,
+                ChannelNumber = 1,
+                SignalTypeID = 101,
+                SampleFreq = 2560,
+                MultiFreq = 0,
+                DataLength = 1024,
+                AverageCount = 1,
+                RevLowThreshold = 1000,
+                RevHighThreshold = 5000,
+                ReferenceRev = 1500,
+                //RevTypeID = ,
+                RevRatio = 1,
+                ScaleFactor = 1,
+                VoltageOffset = 0,
+                ScaleFactorEngUnitID = 78,
+                CenterPositionVoltage = 0,
+                CenterPositionVoltageEngUnitID = 78,
+                CenterPosition = 0,
+                CenterPositionEngUnitID = 78,
+                LinearRangeMin = 0.1f,
+                LinearRangeMax = 1.1f,
+                LinearRangeEngUnitID = 78,
+            };
+            channel.AlmCountDatas.Add(new AlmCountData {
+                AlmSource_ID = 13,
+                AlmCount = 1,
             });
+            sampleStationData.ChannelDatas.Add(channel);
 
-
-            return jsonSerializer.SerializeObject(sampleStationData);
+            return jsonSerializer.SerializeObject(sampleStationData.ToSampleStationDataDto());
         }
 
         #endregion

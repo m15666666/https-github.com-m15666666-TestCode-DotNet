@@ -14,10 +14,6 @@ namespace AnalysisData.SampleData
     {
         #region 变量和属性
 
-        public string Name { get; } = "SampleStationConfigData";
-
-        public string Version { get; } = "1.0.0";
-
         /// <summary>
         /// 数据采集器的端口号（例如：“1181”）
         /// </summary>

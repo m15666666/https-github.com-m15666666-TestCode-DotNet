@@ -63,5 +63,103 @@ namespace DataSampler.Core.Helper
                 AlmValue = d.AlmValue,
             };
         }
+
+        public static SampleStationDataDto ToSampleStationDataDto(this SampleStationData d)
+        {
+            var ret = new SampleStationDataDto {
+                DataSamplerIP = d.DataSamplerIP,
+                DataSamplerPort = d.DataSamplerPort,
+                SampleStationIP = d.SampleStationIP,
+                SampleStationPort = d.SampleStationPort,
+                QueryIntervalInSecond = d.QueryIntervalInSecond,
+                UploadDBWaveIntervalInSecond = d.UploadDBWaveIntervalInSecond,
+                UploadDBStaticIntervalInSecond = d.UploadDBStaticIntervalInSecond,
+            };
+            foreach (var data in d.PointDatas)
+                ret.PointDatas.Add(data.ToPointDataDto());
+            foreach (var data in d.ChannelDatas)
+                ret.ChannelDatas.Add(data.ToChannelDataDto());
+            return ret;
+        }
+
+        public static PointDataDto ToPointDataDto(this PointData d)
+        {
+            var ret = new PointDataDto
+            {
+                PointID = d.PointID,
+                MeasValueTypeID = d.MeasValueTypeID,
+                Dimension = d.Dimension,
+                PointName = d.PointName,
+                EngUnitID = d.EngUnitID,
+                EngUnit = d.EngUnit,
+                ChannelCDs = d.ChannelCDs,
+            };
+            foreach (var data in d.AlmStand_CommonSettingDatas)
+                ret.AlmStand_CommonSettingDatas.Add(data.ToAlmStand_CommonSettingDataDto());
+            return ret;
+        }
+
+        public static AlmStand_CommonSettingDataDto ToAlmStand_CommonSettingDataDto(this AlmStand_CommonSettingData d)
+        {
+            var ret = new AlmStand_CommonSettingDataDto
+            {
+                AlmSource_ID = d.AlmSource_ID,
+                AlmType_ID = d.AlmType_ID,
+                LowLimit1_NR = d.LowLimit1_NR,
+                LowLimit2_NR = d.LowLimit2_NR,
+                HighLimit1_NR = d.HighLimit1_NR,
+                HighLimit2_NR = d.HighLimit2_NR,
+            };
+            return ret;
+        }
+
+        public static ChannelDataDto ToChannelDataDto(this ChannelData d)
+        {
+            var ret = new ChannelDataDto
+            {
+                ChannelIdentifier = d.ChannelIdentifier,
+                ChannelCD = d.ChannelCD,
+                RevChannelCD = d.RevChannelCD,
+                KeyPhaserRevChannelCD = d.KeyPhaserRevChannelCD,
+                SwitchChannelCD = d.SwitchChannelCD,
+                SwitchTriggerStatus = d.SwitchTriggerStatus,
+                SwitchTriggerMethod = d.SwitchTriggerMethod,
+                ChannelTypeID = d.ChannelTypeID,
+                ChannelNumber = d.ChannelNumber,
+                SignalTypeID = d.SignalTypeID,
+                SampleFreq = d.SampleFreq,
+                MultiFreq = d.MultiFreq,
+                DataLength = d.DataLength,
+                AverageCount = d.AverageCount,
+                RevLowThreshold = d.RevLowThreshold,
+                RevHighThreshold = d.RevHighThreshold,
+                ReferenceRev = d.ReferenceRev,
+                RevTypeID = d.RevTypeID,
+                RevRatio = d.RevRatio,
+                ScaleFactor = d.ScaleFactor,
+                VoltageOffset = d.VoltageOffset,
+                ScaleFactorEngUnitID = d.ScaleFactorEngUnitID,
+                CenterPositionVoltage = d.CenterPositionVoltage,
+                CenterPositionVoltageEngUnitID = d.CenterPositionVoltageEngUnitID,
+                CenterPosition = d.CenterPosition,
+                CenterPositionEngUnitID = d.CenterPositionEngUnitID,
+                LinearRangeMin = d.LinearRangeMin,
+                LinearRangeMax = d.LinearRangeMax,
+                LinearRangeEngUnitID = d.LinearRangeEngUnitID,
+            };
+            foreach( var data in d.AlmCountDatas)
+                ret.AlmCountDatas.Add(data.ToAlmCountDataDto());
+            return ret;
+        }
+
+        public static AlmCountDataDto ToAlmCountDataDto(this AlmCountData d)
+        {
+            var ret = new AlmCountDataDto
+            {
+                AlmSource_ID = d.AlmSource_ID,
+                AlmCount = d.AlmCount,
+            };
+            return ret;
+        }
     }
 }
