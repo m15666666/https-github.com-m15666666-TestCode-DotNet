@@ -32,6 +32,9 @@ namespace DataSampler
             _changeCallbackdisposable = configuration.GetReloadToken().RegisterChangeCallback(ReloadConfig, configuration);
         }
 
+        #region 动态监测配置文件变化
+
+        private const string DatasamplerConfigKey = "DatasamplerConfigDto";
         private IDisposable _changeCallbackdisposable = null;
         private void ReloadConfig(object o)
         {
@@ -43,9 +46,13 @@ namespace DataSampler
 
             var configuration = o as IConfiguration;
             var config = IocUtils.Instance.ServiceProvider.GetRequiredService<IOptions<DatasamplerConfigDto>>();
-            configuration.GetSection("DatasamplerConfigDto").Bind(config.Value);
+            configuration.GetSection(DatasamplerConfigKey).Bind(config.Value);
+            
             _changeCallbackdisposable = configuration.GetReloadToken().RegisterChangeCallback(ReloadConfig, configuration);
+            EnvironmentUtils.FireExternalConfigChanged();
         }
+
+        #endregion
 
         public IConfiguration Configuration { get; }
 
@@ -57,7 +64,7 @@ namespace DataSampler
             services.AddSingleton<IJsonSerializer, JsonSerializer>();
             services.AddSingleton<ITaskSender, NullTaskSender>();
             services.AddHostedService<DataSamplerHostedService>();
-            services.Configure<DatasamplerConfigDto>(Configuration.GetSection("DatasamplerConfigDto"));
+            services.Configure<DatasamplerConfigDto>(Configuration.GetSection(DatasamplerConfigKey));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

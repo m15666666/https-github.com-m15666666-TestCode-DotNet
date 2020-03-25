@@ -208,6 +208,11 @@ namespace Moons.Common20
             set { _logger.Logger = value; }
         }
 
+        /// <summary>
+        /// ILogNetRepository
+        /// </summary>
+        public static ILogNetRepository LogRepository { get; set; }
+
         #endregion
 
         #region 数据库超时相关
@@ -229,7 +234,15 @@ namespace Moons.Common20
         /// <summary>
         /// 外部配置改变
         /// </summary>
-        public static event Action ExternalConfigChanged;
+        public static event Action20 ExternalConfigChanged;
+
+        /// <summary>
+        /// 触发外部配置改变事件
+        /// </summary>
+        public static void FireExternalConfigChanged()
+        {
+            EventUtils.FireEvent(ExternalConfigChanged);
+        }
 
         #endregion
     }

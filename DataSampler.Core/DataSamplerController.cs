@@ -170,6 +170,10 @@ namespace DataSampler
         /// </summary>
         public void Init()
         {
+            Config.Logger = EnvironmentUtils.Logger;
+            Config.TcpLogger = EnvironmentUtils.LogRepository.GetLogger(Config.TcpLoggerName);
+            ExternalConfigChanged();
+
             TraceUtils.Info("DataSamplerController Init().");
             Config.InitStructReadWriteHandler();
 
@@ -184,7 +188,7 @@ namespace DataSampler
 
         private void ExternalConfigChanged()
         {
-            throw new NotImplementedException();
+            Config.TcpLogger.IsTurnOff = !Config.DatasamplerConfigDto.PrintTcpMessage;
         }
 
         /// <summary>

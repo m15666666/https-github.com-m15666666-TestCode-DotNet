@@ -24,7 +24,7 @@ namespace DataSampler.Core.Helper
         internal void Init()
         {
             var f = new LoggerFactory();
-            f.AddProvider(new LoggerProvider());
+            f.AddProvider(new LoggerProvider(Config.TcpLogger));
             InternalLoggerFactory.DefaultFactory = f;
         }
 

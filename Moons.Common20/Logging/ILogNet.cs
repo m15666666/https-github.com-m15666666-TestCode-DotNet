@@ -5,10 +5,15 @@ using System.Text;
 namespace Moons.Common20
 {
     /// <summary>
-    /// 日志接口，命名为“ILogNet”，避免与ILog名字冲突
+    /// 日志接口，命名为“ILogNet”，避免与log4net ILog名字冲突
     /// </summary>
     public interface ILogNet
     {
+        /// <summary>
+        /// 是否关闭日志输出
+        /// </summary>
+        bool IsTurnOff { get; set; }
+
         bool IsDebug { get;  }
 
         /// <summary>
@@ -52,5 +57,13 @@ namespace Moons.Common20
         /// </summary>
         /// <param name="message"></param>
         void Warn(string message);
+    }
+
+    /// <summary>
+    /// 日志接口，命名为“ILogNet”，避免与ILog名字冲突
+    /// </summary>
+    public interface ILogNetRepository
+    {
+        ILogNet GetLogger(string name);
     }
 }

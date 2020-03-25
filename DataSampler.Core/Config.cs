@@ -36,7 +36,7 @@ namespace DataSampler
             //if (EnvironmentUtils.IsDebug)
             {
                 string info = string.Format( "commandMessage: {0}", commandMessage );
-                TraceUtils.Info( info );
+                Config.TcpLogger.Debug( info );
             }
         }
 
@@ -63,7 +63,7 @@ namespace DataSampler
             if (!DatasamplerConfigDto.PrintTcpMessage) return;
 
             string hex = StringUtils.ToHex(buffer, offset, size);
-            TraceUtils.Info(string.Format("{1} receive data: ({0})", hex, socket.IPPortInfo));
+            Config.TcpLogger.Debug(string.Format("{1} receive data: ({0})", hex, socket.IPPortInfo));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace DataSampler
             if (!DatasamplerConfigDto.PrintTcpMessage) return;
 
             string hex = StringUtils.ToHex(buffer, offset, size);
-            TraceUtils.Info(string.Format("{1} send data: ({0})", hex, socket.IPPortInfo));
+            Config.TcpLogger.Debug(string.Format("{1} send data: ({0})", hex, socket.IPPortInfo));
         }
 
         #endregion
@@ -93,6 +93,21 @@ namespace DataSampler
         {
             get { return _probe; }
         }
+
+        /// <summary>
+        /// Tcp Logger Name
+        /// </summary>
+        public const string TcpLoggerName = "TcpLog";
+
+        /// <summary>
+        /// 记录tcp通讯
+        /// </summary>
+        public static ILogNet TcpLogger { get; set; }
+
+        /// <summary>
+        /// 记录一般日志
+        /// </summary>
+        public static ILogNet Logger { get; set; }
 
         #endregion
 
@@ -233,7 +248,7 @@ namespace DataSampler
                 socketWrapper.DirectConnect( ipAddress.IP, ipAddress.Port );
                 socketWrapper.SendTimeout = socketWrapper.ReceiveTimeout = SendReceiveTimeoutInMs;
 
-                TraceUtils.LogDebugInfo( string.Format( "Config.CreateSocket succeed({0}, {1})", socketWrapper.IPPortInfo,
+                Config.TcpLogger.Debug( string.Format( "Config.CreateSocket succeed({0}, {1})", socketWrapper.IPPortInfo,
                     socketWrapper.SendReceiveTimeoutInfo ) );
 
                 return socketWrapper;

@@ -25,10 +25,12 @@ namespace DataSampler
             ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
             // 默认简单配置，输出至控制台
             //BasicConfigurator.Configure(repository);
-            XmlConfigurator.Configure(repository, new System.IO.FileInfo("log4net.config"));
-            ILog log = LogManager.GetLogger(repository.Name, "Datasampler");
+            //XmlConfigurator.Configure(repository, new System.IO.FileInfo("log4net.config"));
+            XmlConfigurator.ConfigureAndWatch(repository, new System.IO.FileInfo("log4net.config"));
+            //ILog log = LogManager.GetLogger(repository.Name, "Datasampler");
 
-            EnvironmentUtils.Logger = new Log4netWrapper(log);
+            var logRepository = EnvironmentUtils.LogRepository = new Log4netRepositoryWrapper(repository);
+            EnvironmentUtils.Logger = logRepository.GetLogger("Datasampler");
             TraceUtils.Info("Starting Datasampler. time stamp: 2019-08-02.");
 
             try

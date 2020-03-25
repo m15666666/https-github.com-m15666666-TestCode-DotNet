@@ -16,15 +16,20 @@ namespace Moons.Common20
         /// </summary>
         public ILogNet Logger { private get; set; }
 
-        public bool IsDebug => Logger.IsDebug;
+        /// <summary>
+        /// 是否关闭日志输出
+        /// </summary>
+        public bool IsTurnOff { get; set; } = false;
 
-        public bool IsError => Logger.IsError;
+        public bool IsDebug => !IsTurnOff && Logger.IsDebug;
 
-        public bool IsFatal => Logger.IsFatal;
+        public bool IsError => !IsTurnOff && Logger.IsError;
 
-        public bool IsInfo => Logger.IsInfo;
+        public bool IsFatal => !IsTurnOff && Logger.IsFatal;
 
-        public bool IsWarn => Logger.IsWarn;
+        public bool IsInfo => !IsTurnOff && Logger.IsInfo;
+
+        public bool IsWarn => !IsTurnOff && Logger.IsWarn;
 
         #endregion
 
@@ -36,6 +41,7 @@ namespace Moons.Common20
         /// <param name="message"></param>
         public void Debug(string message)
         {
+            if (IsTurnOff) return;
             ILogNet log = Logger;
             if (log != null)
             {
@@ -49,6 +55,7 @@ namespace Moons.Common20
         /// <param name="message"></param>
         public void Error(string message)
         {
+            if (IsTurnOff) return;
             ILogNet log = Logger;
             if (log != null)
             {
@@ -58,6 +65,7 @@ namespace Moons.Common20
 
         public void Error(string message, Exception ex)
         {
+            if (IsTurnOff) return;
             ILogNet log = Logger;
             if (log != null)
             {
@@ -71,6 +79,7 @@ namespace Moons.Common20
         /// <param name="message"></param>
         public void Fatal(string message)
         {
+            if (IsTurnOff) return;
             ILogNet log = Logger;
             if (log != null)
             {
@@ -80,6 +89,7 @@ namespace Moons.Common20
 
         public void Fatal(string message, Exception ex)
         {
+            if (IsTurnOff) return;
             ILogNet log = Logger;
             if (log != null)
             {
@@ -93,6 +103,7 @@ namespace Moons.Common20
         /// <param name="message"></param>
         public void Info(string message)
         {
+            if (IsTurnOff) return;
             ILogNet log = Logger;
             if (log != null)
             {
@@ -106,6 +117,7 @@ namespace Moons.Common20
         /// <param name="message"></param>
         public void Warn(string message)
         {
+            if (IsTurnOff) return;
             ILogNet log = Logger;
             if (log != null)
             {

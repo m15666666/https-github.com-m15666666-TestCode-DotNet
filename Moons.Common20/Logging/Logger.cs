@@ -11,11 +11,13 @@ namespace Moons.Logging
     /// </summary>
     public class Logger : ILogger
     {
-        private readonly string name;
+        private readonly string _name;
+        private readonly ILogNet _logNet;
 
-        public Logger(string name)
+        public Logger(string name, ILogNet logNet = null)
         {
-            this.name = name;
+            _name = name;
+            _logNet = logNet ?? EnvironmentUtils.Logger;
         }
 
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
@@ -23,26 +25,32 @@ namespace Moons.Logging
             switch (logLevel)
             {
                 case LogLevel.Trace:
+                    _logNet.Debug(this._name + formatter(state, exception));
+                    break;
 
-                    TraceUtils.Debug(this.name + formatter(state, exception), exception);
-                    break;
                 case LogLevel.Debug:
-                    TraceUtils.Debug(this.name + formatter(state, exception), exception);
+                    _logNet.Debug(this._name + formatter(state, exception));
                     break;
+
                 case LogLevel.Information:
-                    TraceUtils.Info(this.name + formatter(state, exception), exception);
+                    _logNet.Info(this._name + formatter(state, exception));
                     break;
+
                 case LogLevel.Warning:
-                    TraceUtils.Warn(this.name + formatter(state, exception), exception);
+                    _logNet.Warn(this._name + formatter(state, exception));
                     break;
+
                 case LogLevel.Error:
-                    TraceUtils.Error(this.name + formatter(state, exception), exception);
+                    _logNet.Error(this._name + formatter(state, exception), exception);
                     break;
+
                 case LogLevel.Critical:
-                    TraceUtils.Fatal(this.name + formatter(state, exception), exception);
+                    _logNet.Fatal(this._name + formatter(state, exception), exception);
                     break;
+
                 case LogLevel.None:
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, null);
             }
@@ -53,17 +61,17 @@ namespace Moons.Logging
             switch (logLevel)
             {
                 case LogLevel.Trace:
-                    return TraceUtils.Logger.IsDebug;
+                    return _logNet.IsDebug;
                 case LogLevel.Debug:
-                    return TraceUtils.Logger.IsDebug;
+                    return _logNet.IsDebug;
                 case LogLevel.Information:
-                    return TraceUtils.Logger.IsInfo;
+                    return _logNet.IsInfo;
                 case LogLevel.Warning:
-                    return TraceUtils.Logger.IsWarn;
+                    return _logNet.IsWarn;
                 case LogLevel.Error:
-                    return TraceUtils.Logger.IsError;
+                    return _logNet.IsError;
                 case LogLevel.Critical:
-                    return TraceUtils.Logger.IsFatal;
+                    return _logNet.IsFatal;
                 case LogLevel.None:
                     return true;
                 default:

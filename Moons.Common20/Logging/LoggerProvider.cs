@@ -11,10 +11,16 @@ namespace Moons.Common20.Logging
     /// </summary>
     public class LoggerProvider : ILoggerProvider
     {
+        private readonly ILogNet _logNet;
+        public LoggerProvider(ILogNet logNet = null)
+        {
+            _logNet = logNet;
+        }
+
         public void Dispose()
         {
         }
 
-        public ILogger CreateLogger(string categoryName) => new Logger(categoryName);
+        public ILogger CreateLogger(string categoryName) => new Logger(categoryName, _logNet ?? EnvironmentUtils.Logger);
     }
 }

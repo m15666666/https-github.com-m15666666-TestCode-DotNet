@@ -19,48 +19,60 @@ namespace Moons.Log4net
         /// </summary>
         public ILog Logger { private get; set; }
 
-        public bool IsDebug => Logger.IsDebugEnabled;
+        /// <summary>
+        /// 是否关闭日志输出
+        /// </summary>
+        public bool IsTurnOff { get; set; } = false;
 
-        public bool IsError => Logger.IsErrorEnabled;
+        public bool IsDebug => !IsTurnOff && Logger.IsDebugEnabled;
 
-        public bool IsFatal => Logger.IsFatalEnabled;
+        public bool IsError => !IsTurnOff && Logger.IsErrorEnabled;
 
-        public bool IsInfo => Logger.IsInfoEnabled;
+        public bool IsFatal => !IsTurnOff && Logger.IsFatalEnabled;
 
-        public bool IsWarn => Logger.IsWarnEnabled;
+        public bool IsInfo => !IsTurnOff && Logger.IsInfoEnabled;
+
+        public bool IsWarn => !IsTurnOff && Logger.IsWarnEnabled;
 
         public void Debug(string message)
         {
+            if (IsTurnOff) return;
             Logger.Debug(message);
         }
 
         public void Error(string message)
         {
+            if (IsTurnOff) return;
             Logger.Error(message);
         }
 
         public void Error(string message, Exception ex)
         {
+            if (IsTurnOff) return;
             Logger.Error(message, ex);
         }
 
         public void Fatal(string message)
         {
+            if (IsTurnOff) return;
             Logger.Fatal(message);
         }
 
         public void Fatal(string message, Exception ex)
         {
+            if (IsTurnOff) return;
             Logger.Fatal(message,ex);
         }
 
         public void Info(string message)
         {
+            if (IsTurnOff) return;
             Logger.Info(message);
         }
 
         public void Warn(string message)
         {
+            if (IsTurnOff) return;
             Logger.Warn(message);
         }
     }
