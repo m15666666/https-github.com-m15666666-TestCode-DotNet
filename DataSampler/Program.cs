@@ -36,7 +36,7 @@ namespace DataSampler
                 var host = CreateWebHostBuilder(args).Build();
                 IocUtils.Instance.ServiceProvider = host.Services;
 
-                var json = DataSamplerController.Instance.TestJson();
+                 var json = DataSamplerController.Instance.TestJson();
                 //using (var sampler = DataSamplerController.Instance)
                 {
                     //DataSampler.Config.DatasamplerConfigDto.UseNetty = true;

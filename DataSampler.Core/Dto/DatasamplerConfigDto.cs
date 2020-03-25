@@ -20,6 +20,11 @@ namespace DataSampler.Core.Dto
         public bool UseNetty { get; set; }
 
         /// <summary>
+        /// 是否打印tcp信息
+        /// </summary>
+        public bool PrintTcpMessage { get; set; }
+
+        /// <summary>
         /// 本地侦听的端口，用于接受数据，默认1283
         /// </summary>
         public int ListenPortOfData { get; set; } = 1283;

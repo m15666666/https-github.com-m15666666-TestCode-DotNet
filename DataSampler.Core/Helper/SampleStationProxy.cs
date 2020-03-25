@@ -620,6 +620,8 @@ namespace DataSampler.Helper
             {
                 sendReceive.SendPackage( ToFromBytesUtils.ToBytes( sendCommand ) );
 
+                OnSendCommandMessage(sendCommand);
+
                 ret = ReceiveCommand( sendReceive );
             };
             HandlePackageSendReceive( handler );
@@ -708,6 +710,23 @@ namespace DataSampler.Helper
             if( handler != null )
             {
                 handler( commandMessage );
+            }
+        }
+
+        /// <summary>
+        /// 发送CommandMessage调用的函数代理
+        /// </summary>
+        public static Action<CommandMessage> SendCommandMessage { private get; set; }
+
+        /// <summary>
+        /// 收到CommandMessage调用的函数
+        /// </summary>
+        private static void OnSendCommandMessage(CommandMessage commandMessage)
+        {
+            Action<CommandMessage> handler = SendCommandMessage;
+            if (handler != null)
+            {
+                handler(commandMessage);
             }
         }
 

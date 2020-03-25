@@ -226,6 +226,11 @@ namespace Moons.Common20
         /// </summary>
         public static IGetString ExternalParameters { get; set; }
 
+        /// <summary>
+        /// 外部配置改变
+        /// </summary>
+        public static event Action ExternalConfigChanged;
+
         #endregion
     }
 }

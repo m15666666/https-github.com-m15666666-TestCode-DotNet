@@ -178,6 +178,13 @@ namespace DataSampler
             StartListenSocket();
 
             Config.InitDebugHandler();
+
+            EnvironmentUtils.ExternalConfigChanged += ExternalConfigChanged;
+        }
+
+        private void ExternalConfigChanged()
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

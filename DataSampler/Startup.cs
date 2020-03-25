@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moons.Common20;
+using Moons.Common20.IOC;
 using Moons.Common20.Serialization.Json;
 using Moons.Log4net;
 using OnlineSampleCommon.SendTask;
@@ -28,6 +29,22 @@ namespace DataSampler
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            _changeCallbackdisposable = configuration.GetReloadToken().RegisterChangeCallback(ReloadConfig, configuration);
+        }
+
+        private IDisposable _changeCallbackdisposable = null;
+        private void ReloadConfig(object o)
+        {
+            if (_changeCallbackdisposable != null)
+            {
+                _changeCallbackdisposable.Dispose();
+                _changeCallbackdisposable = null;
+            }
+
+            var configuration = o as IConfiguration;
+            var config = IocUtils.Instance.ServiceProvider.GetRequiredService<IOptions<DatasamplerConfigDto>>();
+            configuration.GetSection("DatasamplerConfigDto").Bind(config.Value);
+            _changeCallbackdisposable = configuration.GetReloadToken().RegisterChangeCallback(ReloadConfig, configuration);
         }
 
         public IConfiguration Configuration { get; }

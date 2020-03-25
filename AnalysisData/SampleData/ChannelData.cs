@@ -176,26 +176,35 @@ namespace AnalysisData.SampleData
         private ValueWrapper<byte[]> _channelIdentifier = new byte[ChannelIdentifierLength];
 
         /// <summary>
-        /// 通道标识符，用于调试的时候输出
-        /// </summary>
-        private string _channelIdentifierText;
-
-        /// <summary>
         /// 以字符串表示的通道标识符
         /// </summary>
-        public string ChannelIdentifier
+        public string ChannelIdentifier { get; set; }
+
+        /// <summary>
+        /// 设置以整形表示的通道标识符
+        /// </summary>
+        public int ChannelIdentifierOfInt
         {
-            get { return _channelIdentifierText; }
             set
             {
-                byte[] channelIdentifier = StringUtils.HexString2Bytes( value );
-                if( channelIdentifier.Length != ChannelIdentifierLength )
-                {
-                    throw new ArgumentOutOfRangeException( string.Format( "Invalid ChannelIdentifier({0}) length", value ) );
-                }
-                _channelIdentifierText = value;
-                _channelIdentifier = channelIdentifier;
+                ChannelIdentifier = value.ToString();
+                var text = value.ToString("X").PadLeft(12, '0');
+                byte[] channelIdentifier = StringUtils.HexString2Bytes(text);
+                //if (channelIdentifier.Length != ChannelIdentifierLength)
+                //{
+                //    throw new ArgumentOutOfRangeException(string.Format("Invalid ChannelIdentifier({0}) length", value));
+                //}
+                ChannelIdentifierOfBytes = channelIdentifier;
             }
+        }
+
+        /// <summary>
+        /// 以字节表示的通道标识符
+        /// </summary>
+        public byte[] ChannelIdentifierOfBytes
+        {
+            get { return _channelIdentifier; }
+            set { _channelIdentifier = value; }
         }
 
         /// <summary>

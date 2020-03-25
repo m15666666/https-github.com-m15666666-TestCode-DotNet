@@ -879,7 +879,10 @@ namespace Moons.Common20
         /// </summary>
         public static Encoding GB2312
         {
-            get { return Encoding.GetEncoding("GB2312"); }
+            get {
+                return Encoding.ASCII; //.net core不支持Encoding.GetEncoding("GB2312")
+                //return Encoding.GetEncoding("GB2312"); 
+            }
         }
 
         /// <summary>

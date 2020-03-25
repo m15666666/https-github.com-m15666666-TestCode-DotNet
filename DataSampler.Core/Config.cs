@@ -32,7 +32,8 @@ namespace DataSampler
         /// <param name="commandMessage">CommandMessage</param>
         internal static void LogCommandMessage( CommandMessage commandMessage )
         {
-            if(EnvironmentUtils.IsDebug)
+            if (!DatasamplerConfigDto.PrintTcpMessage) return;
+            //if (EnvironmentUtils.IsDebug)
             {
                 string info = string.Format( "commandMessage: {0}", commandMessage );
                 TraceUtils.Info( info );
@@ -44,11 +45,12 @@ namespace DataSampler
         /// </summary>
         public static void InitDebugHandler()
         {
-            if (EnvironmentUtils.IsDebug)
+            //if (EnvironmentUtils.IsDebug)
             {
                 SocketLibConfig.SendBytesEvent += SocketLibConfig_SendBytesEvent;
                 SocketLibConfig.ReceiveBytesEvent += SocketLibConfig_ReceiveBytesEvent;
 
+                SampleStationProxy.SendCommandMessage = Config.LogCommandMessage;
                 SampleStationProxy.ReceiveCommandMessage = Config.LogCommandMessage;
             }
         }
@@ -58,6 +60,8 @@ namespace DataSampler
         /// </summary>
         private static void SocketLibConfig_ReceiveBytesEvent(SocketWrapper socket, byte[] buffer, int offset, int size)
         {
+            if (!DatasamplerConfigDto.PrintTcpMessage) return;
+
             string hex = StringUtils.ToHex(buffer, offset, size);
             TraceUtils.Info(string.Format("{1} receive data: ({0})", hex, socket.IPPortInfo));
         }
@@ -67,6 +71,8 @@ namespace DataSampler
         /// </summary>
         private static void SocketLibConfig_SendBytesEvent(SocketWrapper socket, byte[] buffer, int offset, int size)
         {
+            if (!DatasamplerConfigDto.PrintTcpMessage) return;
+
             string hex = StringUtils.ToHex(buffer, offset, size);
             TraceUtils.Info(string.Format("{1} send data: ({0})", hex, socket.IPPortInfo));
         }
