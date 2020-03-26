@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using AnalysisData.SampleData;
 using AnalysisData.ToFromBytes;
+using DataSampler.Core.Helper;
 using Moons.Common20;
 using Moons.Common20.Serialization;
 using SocketLib;
@@ -146,10 +147,18 @@ namespace DataSampler.Helper
 
             try
             {
+                object data = SampleStationData;
                 // 选择结构体ID
                 int structTypeId;
                 switch( SampleStationData.StationType )
                 {
+                    case SampleStationType.Wg100_2Generation:
+                        structTypeId = StructTypeIDs.VarStringOfJson;
+                        data = Config.JsonSerializer.SerializeObject(
+                            SampleStationData.ToSampleStationDataDto()
+                            );
+                        break;
+
                     case SampleStationType.Ms1000:
                     case SampleStationType.Wg100_780M:
                         structTypeId = StructTypeID.SampleStationConfigData2;
@@ -166,8 +175,8 @@ namespace DataSampler.Helper
                                       {
                                           CommandID = CommandID.DownloadSampleConfig,
                                           StructTypeID = structTypeId,
-                                          Data = SampleStationData
-                                      };
+                                          Data = data
+                };
 
                 CommandMessage receiveCommand = SendReceiveCommand( sendCommand );
                 if( receiveCommand.Data is SampleStationParameterErrorDataCollection )

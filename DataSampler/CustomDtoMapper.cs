@@ -16,6 +16,9 @@ namespace DataSampler
     {
         public static void CreateCustomMappings(this IMapperConfigurationExpression cfg)
         {
+            //cfg.CreateMap<string, long>()
+            //    .ConvertUsing(str => Convert.ToInt64(str));
+            cfg.CreateMap<bool, int>().ConvertUsing( v => v ? 1 : 0);
             cfg.CreateMap<AlmCountData, AlmCountDataDto>();
             cfg.CreateMap<ChannelData, ChannelDataDto>();
             cfg.CreateMap<AlmStand_CommonSettingData, AlmStand_CommonSettingDataDto>();

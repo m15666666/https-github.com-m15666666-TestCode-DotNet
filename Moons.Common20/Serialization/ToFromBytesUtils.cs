@@ -843,6 +843,9 @@ namespace Moons.Common20.Serialization
                         // 变长字符串
                         {StructTypeIDs.VarString, toFromBytesUtils => toFromBytesUtils.ReadVarString()},
 
+                        // 变长字符串包含json
+                        {StructTypeIDs.VarStringOfJson, toFromBytesUtils => new JsonCustomData { Text = toFromBytesUtils.ReadVarString() } },
+
                         // 不带长度标识的字节数组
                         {
                             StructTypeIDs.ByteArray,
@@ -864,6 +867,13 @@ namespace Moons.Common20.Serialization
                         {
                             StructTypeIDs.VarString,
                             ( object data, ToFromBytesUtils toFromBytesUtils ) => 
+                            toFromBytesUtils.WriteVarString(data as string, StringEncodingID.ASCII)
+                        },
+
+                        // 变长字符串包含json
+                        {
+                            StructTypeIDs.VarStringOfJson,
+                            ( object data, ToFromBytesUtils toFromBytesUtils ) =>
                             toFromBytesUtils.WriteVarString(data as string, StringEncodingID.ASCII)
                         },
 

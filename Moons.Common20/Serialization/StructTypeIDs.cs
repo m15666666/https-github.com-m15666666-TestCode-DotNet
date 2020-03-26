@@ -16,6 +16,11 @@
         public const int VarString = 101;
 
         /// <summary>
+        ///     变长字符串包含json
+        /// </summary>
+        public const int VarStringOfJson = 102;
+
+        /// <summary>
         ///     不带长度标识的字节数组
         /// </summary>
         public const int ByteArray = 111;

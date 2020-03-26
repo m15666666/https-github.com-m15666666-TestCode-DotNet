@@ -13,55 +13,31 @@ namespace AnalysisData.Dto
         /// <summary>
         /// 报警来源ID
         /// </summary>
-        public int AlmSource_ID
-        {
-            get;
-            set;
-        }
+        public int AlmSource_ID { get; set; }
 
         /// <summary>
         /// 报警类型编号
         /// </summary>
-        public int AlmType_ID
-        {
-            get;
-            set;
-        }
+        public int AlmType_ID { get; set; }
 
         /// <summary>
         /// 报警级别1的下限值
         /// </summary>
-        public double? LowLimit1_NR
-        {
-            get;
-            set;
-        }
+        public double? LowLimit1_NR { get; set; }
 
         /// <summary>
         /// 报警级别2的下限值
         /// </summary>
-        public double? LowLimit2_NR
-        {
-            get;
-            set;
-        }
+        public double? LowLimit2_NR { get; set; }
 
         /// <summary>
         /// 报警级别1的上限值
         /// </summary>
-        public double? HighLimit1_NR
-        {
-            get;
-            set;
-        }
+        public double? HighLimit1_NR { get; set; }
 
         /// <summary>
         /// 报警级别2的上限值
         /// </summary>
-        public double? HighLimit2_NR
-        {
-            get;
-            set;
-        }
+        public double? HighLimit2_NR { get; set; }
     }
 }

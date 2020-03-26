@@ -70,7 +70,7 @@ namespace DataSampler
             var p = new PointData
             {
                 PointID = 27,
-                MeasValueTypeID = 101,
+                MeasValueTypeID = 13,
                 Dimension = 1,
                 PointName = "point1",
                 EngUnitID = 78,
