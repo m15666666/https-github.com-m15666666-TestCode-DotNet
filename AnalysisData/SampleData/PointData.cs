@@ -70,7 +70,6 @@ namespace AnalysisData.SampleData
         /// 测点编号字符串
         /// </summary>
         [XmlIgnore]
-        [Newtonsoft.Json.JsonIgnore]
         public string PointIDString
         {
             get { return PointID.ToString(); }
@@ -109,7 +108,6 @@ namespace AnalysisData.SampleData
         /// 通道1的CD
         /// </summary>
         [XmlIgnore]
-        [Newtonsoft.Json.JsonIgnore]
         public string ChannelCD_1
         {
             get { return ChannelCDs[0]; }
@@ -119,7 +117,6 @@ namespace AnalysisData.SampleData
         /// 通道2的CD
         /// </summary>
         [XmlIgnore]
-        [Newtonsoft.Json.JsonIgnore]
         public string ChannelCD_2
         {
             get { return 1 < ChannelCDs.Length ? ChannelCDs[1] : null; }

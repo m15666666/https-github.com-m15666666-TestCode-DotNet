@@ -1,5 +1,4 @@
-﻿using Moons.Common20.Serialization.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ namespace DataSampler
     /// <summary>
     /// 使用json字符串序列化、反序列化对象
     /// </summary>
-    public class JsonSerializer : IJsonSerializer
+    public class JsonSerializer : Moons.Common20.Serialization.Json.IJsonSerializer
     {
         public T DeserializeObject<T>(string json)
         {

@@ -21,6 +21,7 @@ using Moons.Common20.IOC;
 using Moons.Common20.Serialization.Json;
 using Moons.Log4net;
 using OnlineSampleCommon.SendTask;
+using IObjectMapper = Moons.Common20.ObjectMapper.IObjectMapper;
 
 namespace DataSampler
 {
@@ -62,6 +63,15 @@ namespace DataSampler
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
             services.AddSingleton<IJsonSerializer, JsonSerializer>();
+            //services.AddSingleton<IObjectMapper, ObjectMapperOfMapster>();
+            services.AddSingleton<IObjectMapper>( 
+                serviceProvider => {
+                    var config = new AutoMapper.MapperConfiguration(
+                        cfg => cfg.CreateCustomMappings()
+                    );
+                    return new Moons.ObjectMapper.ObjectMapperOfAutomapper(config);
+                } 
+            );
             services.AddSingleton<ITaskSender, NullTaskSender>();
             services.AddHostedService<DataSamplerHostedService>();
             services.Configure<DatasamplerConfigDto>(Configuration.GetSection(DatasamplerConfigKey));

@@ -50,6 +50,10 @@ namespace DataSampler
             }
         }
 
+        /// <summary>
+        /// 测试SampleStationData转json
+        /// </summary>
+        /// <returns></returns>
         public string TestJson()
         {
             var jsonSerializer = Config.JsonSerializer;
@@ -122,6 +126,63 @@ namespace DataSampler
             sampleStationData.ChannelDatas.Add(channel);
 
             return jsonSerializer.SerializeObject(sampleStationData.ToSampleStationDataDto());
+        }
+
+        /// <summary>
+        /// 测试转换TrendData
+        /// </summary>
+        public void TestConvertTrendData()
+        {
+            {
+                int dataLength = 1024;
+                var data = new TimeWaveData_1D
+                {
+                    PointID = 1001,
+                    DataLength = dataLength,
+                    DataUsageID = 1,
+                    MeasurementValue = 1.1f,
+                    Rev = 1000,
+                    SampleFreq = 2560,
+                    SampleTime = DateTime.Now,
+                    WirelessSignalIntensity = 98,
+                    BatteryPercent = 97,
+                    Wave = new double[] { 1.1,1.1}
+                };
+
+                var v = data.ToTimeWaveDataDto();
+            }
+
+            {
+                var data = new TrendData
+                {
+                    DataLength = 0,
+                    DataUsageID = 1,
+                    MeasurementValue = 1.1f,
+                    Rev = 1000,
+                    SampleFreq = 0,
+                    SampleTime = DateTime.Now,
+                    WirelessSignalIntensity = 98,
+                    BatteryPercent = 97,
+                    PointID = 1001
+                };
+
+                var v = data.ToTrendDataDto();
+            }
+
+            {
+                var data = new AlmEventData
+                {
+                    PointID = 1001,
+                    AlmCount = 1,
+                    AlmLevel = 1,
+                    AlmSourceID = 13,
+                    AlmTime = DateTime.Now,
+                    AlmValue = 10.1f,
+                    AlmEventUniqueID = "abc"
+                };
+
+                var v = data.ToAlmEventDataDto();
+            }
         }
 
         #endregion

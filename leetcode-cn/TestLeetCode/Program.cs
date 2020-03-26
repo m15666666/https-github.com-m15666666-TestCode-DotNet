@@ -10,7 +10,7 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("merge-k-sorted-lists", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("reverse-nodes-in-k-group", "-")}Solution";
             Debug.WriteLine(classname);
 
             new GenerateParenthesisSolution().Test();

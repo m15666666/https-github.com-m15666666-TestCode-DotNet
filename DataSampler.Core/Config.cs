@@ -7,6 +7,7 @@ using DataSampler.Helper;
 using Microsoft.Extensions.Options;
 using Moons.Common20;
 using Moons.Common20.IOC;
+using Moons.Common20.ObjectMapper;
 using Moons.Common20.Serialization;
 using Moons.Common20.Serialization.Json;
 using OnlineSampleCommon.SendTask;
@@ -19,6 +20,18 @@ namespace DataSampler
     /// </summary>
     public static class Config
     {
+        #region mapper
+
+        /// <summary>
+        /// datasampler 配置数据
+        /// </summary>
+        internal static IObjectMapper ObjectMapper => _objectMapper ??
+            (_objectMapper = IocUtils.Instance.GetRequiredService<IObjectMapper>());
+
+        private static IObjectMapper _objectMapper;
+
+        #endregion
+
         #region 测试参数
 
         /// <summary>
