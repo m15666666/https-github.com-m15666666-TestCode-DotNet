@@ -12,6 +12,8 @@ using SocketLib;
 using System.IO;
 using DataSampler.Core.Helper;
 using Moons.Common20.IOC;
+using Moons.Common20.ObjectMapper;
+using AnalysisData.Dto;
 
 namespace DataSampler
 {
@@ -125,6 +127,10 @@ namespace DataSampler
             });
             sampleStationData.ChannelDatas.Add(channel);
 
+            var v1 = ObjectMapperUtils.MapByReflection<SampleStationData, SampleStationDataDto>(sampleStationData);
+            var v2 = ObjectMapperUtils.MapByExpressTree<SampleStationData, SampleStationDataDto>(sampleStationData);
+            var v3 = ObjectMapperUtils<SampleStationData, SampleStationDataDto>.MapByExpressTree(sampleStationData);
+            //var v4 = Moons.Natasha.ObjectMapper.ObjectMapperUtils<SampleStationData, SampleStationDataDto>.MapByExpressTree(sampleStationData);
             return jsonSerializer.SerializeObject(sampleStationData.ToSampleStationDataDto());
         }
 

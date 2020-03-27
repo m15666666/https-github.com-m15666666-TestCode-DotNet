@@ -30,8 +30,8 @@ namespace Moons.Common20.Reflection
         /// <summary>
         /// 类型对类型的公共属性的映射
         /// </summary>
-        private static readonly HashDictionary<Type, PropertyInfoCollection> _type2PublicProperties =
-            new HashDictionary<Type, PropertyInfoCollection>();
+        private static readonly ConcurrentHashDictionary<Type, PropertyInfoCollection> _type2PublicProperties =
+            new ConcurrentHashDictionary<Type, PropertyInfoCollection>();
 
         /// <summary>
         /// 类型对类型值转换函数的映射

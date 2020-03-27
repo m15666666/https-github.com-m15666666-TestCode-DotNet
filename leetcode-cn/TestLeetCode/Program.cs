@@ -10,10 +10,11 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("reverse-nodes-in-k-group", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("remove-duplicates-from-sorted-array-ii", "-")}Solution";
             Debug.WriteLine(classname);
 
-            new GenerateParenthesisSolution().Test();
+            new RemoveDuplicatesFromSortedArraySolution().Test();
+            //new GenerateParenthesisSolution().Test();
             //new ValidParenthesesSolution().Test();
             //new ThreeSumClosestSolution().Test();
             //new FillingBookcaseShelvesSolution().Test();
