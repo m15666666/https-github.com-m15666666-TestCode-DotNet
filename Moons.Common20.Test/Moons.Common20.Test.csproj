@@ -2,7 +2,27 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="LuaScript\PlugInDemo1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="LuaScript\PlugInDemo1.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.5.0" />
+    <PackageReference Include="NLua" Version="1.4.30" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Moons.Plugin.Contract\Moons.Plugin.Contract.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -76,13 +76,19 @@ namespace Moons.Common20.ObjectMapper
     /// </summary>
     /// <typeparam name="TSource">源对象类型</typeparam>
     /// <typeparam name="TDestination">目标对象类型</typeparam>
-    public static class ObjectMapperUtils<TSource, TDestination>
+    public static class ObjectMapperUtils<TSource, TDestination> where TDestination : new ()
     {
-        private static readonly Func<TSource, TDestination> _instance = GenerateConvertFunction();
+        //private static readonly Func<TSource, TDestination> _createAndCopy = GenerateConvertFunction();
+        private static readonly Action<TSource, TDestination> _copy = GenerateCopyFunction();
+
+        /// <summary>
+        /// 生成对象初始化方式幅值的表达式树
+        /// </summary>
+        /// <returns></returns>
         private static Func<TSource, TDestination> GenerateConvertFunction()
         {
-            ParameterExpression parameterExpression = Expression.Parameter(typeof(TSource), "p");
-            List<MemberBinding> memberBindingList = new List<MemberBinding>();
+            ParameterExpression source = Expression.Parameter(typeof(TSource), "source");
+            List<MemberBinding> memberBindings = new List<MemberBinding>(); // 对象初始化使用的绑定对象
             var sourceProperties = ReflectionUtils.GetPublicCanReadWriteProperties(typeof(TSource));
             foreach (var pD in ReflectionUtils.GetPublicCanReadWriteProperties(typeof(TDestination)))
             {
@@ -91,21 +97,56 @@ namespace Moons.Common20.ObjectMapper
                     if (!pS.Name.Equals(pD.Name, StringComparison.OrdinalIgnoreCase)) continue;
                     if (pS.PropertyType != pD.PropertyType) break;
 
-                    MemberExpression property = Expression.Property(parameterExpression, pS);
-                    MemberBinding memberBinding = Expression.Bind(pD, property);
-                    memberBindingList.Add(memberBinding);
+                    MemberExpression pSource = Expression.Property(source, pS);
+                    MemberBinding memberBinding = Expression.Bind(pD, pSource);
+                    memberBindings.Add(memberBinding);
                     break;
                 }
             }
 
-            MemberInitExpression memberInitExpression = Expression.MemberInit(Expression.New(typeof(TDestination)), memberBindingList.ToArray());
-            Expression<Func<TSource, TDestination>> lambda = Expression.Lambda<Func<TSource, TDestination>>(memberInitExpression, new ParameterExpression[] { parameterExpression });
+            MemberInitExpression memberInit = Expression.MemberInit(Expression.New(typeof(TDestination)), memberBindings.ToArray());
+            Expression<Func<TSource, TDestination>> lambda = Expression.Lambda<Func<TSource, TDestination>>(memberInit, new ParameterExpression[] { source });
             return lambda.Compile();
         }
 
+        /// <summary>
+        /// 生成copy方式赋值的表达式树
+        /// </summary>
+        /// <returns></returns>
+        private static Action<TSource, TDestination> GenerateCopyFunction()
+        {
+            ParameterExpression source = Expression.Parameter(typeof(TSource), "source");
+            ParameterExpression destination = Expression.Parameter(typeof(TDestination), "destination");
+            var assigns = new List<BinaryExpression>(); // 幅值使用的对象
+            var sourceProperties = ReflectionUtils.GetPublicCanReadWriteProperties(typeof(TSource));
+            foreach (var pD in ReflectionUtils.GetPublicCanReadWriteProperties(typeof(TDestination)))
+            {
+                foreach (var pS in sourceProperties)
+                {
+                    if (!pS.Name.Equals(pD.Name, StringComparison.OrdinalIgnoreCase)) continue;
+                    if (pS.PropertyType != pD.PropertyType) break;
+
+                    MemberExpression pSource = Expression.Property(source, pS);
+                    MemberExpression pDest = Expression.Property(destination, pD);
+                    assigns.Add(Expression.Assign(pDest, pSource));
+                    break;
+                }
+            }
+            var block = Expression.Block(assigns); // 把所有幅值语句合并为一个block
+            Expression<Action<TSource, TDestination>> lambda = Expression.Lambda<Action<TSource, TDestination>>(block, new ParameterExpression[] { source, destination });
+            return lambda.Compile();
+        }
+
+        public static void MapByExpressTree(TSource source, TDestination destination)
+        {
+            _copy(source, destination);
+        }
         public static TDestination MapByExpressTree(TSource source)
         {
-            return _instance(source);
+            var ret = new TDestination();
+            _copy(source, ret);
+            return ret;
+            //return _createAndCopy(source);
         }
     }
 }

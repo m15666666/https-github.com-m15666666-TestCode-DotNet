@@ -117,7 +117,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.TcpClient", "Test.TcpC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.ObjectMapper", "Moons.ObjectMapper\Moons.ObjectMapper.csproj", "{CE4F6FC3-20F8-4334-8113-738C57542E43}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Natasha", "Moons.Natasha\Moons.Natasha.csproj", "{F8EBE8CE-55C4-4E06-AC9B-A6AE4605DE72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Moons.Natasha", "Moons.Natasha\Moons.Natasha.csproj", "{F8EBE8CE-55C4-4E06-AC9B-A6AE4605DE72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Moons.Plugin.Contract", "Moons.Plugin.Contract\Moons.Plugin.Contract.csproj", "{42D8D08A-9A29-402A-BCC3-C1E65BFF7371}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -349,6 +351,10 @@ Global
 		{F8EBE8CE-55C4-4E06-AC9B-A6AE4605DE72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8EBE8CE-55C4-4E06-AC9B-A6AE4605DE72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8EBE8CE-55C4-4E06-AC9B-A6AE4605DE72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42D8D08A-9A29-402A-BCC3-C1E65BFF7371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42D8D08A-9A29-402A-BCC3-C1E65BFF7371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42D8D08A-9A29-402A-BCC3-C1E65BFF7371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42D8D08A-9A29-402A-BCC3-C1E65BFF7371}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

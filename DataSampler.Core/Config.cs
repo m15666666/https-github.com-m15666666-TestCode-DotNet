@@ -102,7 +102,7 @@ namespace DataSampler
         /// <summary>
         /// 采集工作站的探针数据对象
         /// </summary>
-        internal static DataSamplerProbeData Probe
+        public static DataSamplerProbeData Probe
         {
             get { return _probe; }
         }

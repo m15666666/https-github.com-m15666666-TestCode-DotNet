@@ -18,10 +18,13 @@ namespace Moons.Common20.Test
         //public void Map2()
         //{
         //    DataA a = new DataA { Id = 1 };
-        //    DataADto b = new DataADto ();
-        //    Expression<Func<DataA, DataADto, DataADto>> expressTree = (x, y) => new DataADto { Id = y.Id = x.Id };
+        //    DataADto b = new DataADto();
+        //    //Expression<Func<DataA, DataADto, DataADto>> expressTree = (x, y) => new DataADto { Id = y.Id = x.Id };
+
+        //    Expression.
+        //    Expression<Action<DataA, DataADto>> expressTree = (x, y) => y.Id = x.Id;
         //    var handler = expressTree.Compile();
-        //    handler(a,b);
+        //    handler(a, b);
         //}
     }
 
