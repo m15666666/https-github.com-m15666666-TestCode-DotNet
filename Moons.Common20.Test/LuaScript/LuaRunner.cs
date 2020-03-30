@@ -45,6 +45,7 @@ namespace Moons.Common20.Test.LuaScript
                 //res[2] = Config.Probe
                 //";
                 lua.DoString(value.Text);
+                string ret;
                 var res = lua["res"];
                 if (res is NLua.LuaTable table)
                 {
@@ -54,9 +55,9 @@ namespace Moons.Common20.Test.LuaScript
                     {
                         builder.AppendLine($"{enurator.Key}:{enurator.Value}");
                     }
-                    return builder.ToString();
+                    ret = builder.ToString();
                 }
-                var ret = res?.ToString();
+                else ret = res?.ToString();
                 Config.WriteLine(ret);
                 return ret;
             }

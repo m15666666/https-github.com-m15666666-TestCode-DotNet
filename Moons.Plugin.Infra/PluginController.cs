@@ -12,10 +12,10 @@ using System.Threading;
 namespace Moons.Plugin.Infra
 {
     /// <summary>
-    /// 
+    /// 插件控制器 demo
     /// https://cloud.tencent.com/developer/article/1520894
     /// </summary>
-    internal class PluginController : IPlugIn, IDisposable
+    public class PluginController : IPlugIn, IDisposable
     {
         private List<Assembly> _defaultAssemblies;
         private AssemblyLoadContext _context;
@@ -69,8 +69,7 @@ namespace Moons.Plugin.Infra
         {
             var binDirectory = Path.Combine(_pluginDirectory, "bin");
             var dllPath = Path.Combine(binDirectory, $"{_pluginName}.dll");
-            if (!Directory.Exists(binDirectory))
-                Directory.CreateDirectory(binDirectory);
+            if (!Directory.Exists(binDirectory)) Directory.CreateDirectory(binDirectory);
             if (File.Exists(dllPath))
             {
                 File.Delete($"{dllPath}.old");
@@ -112,14 +111,12 @@ namespace Moons.Plugin.Infra
         private IPlugIn GetInstance()
         {
             var instance = _instance;
-            if (instance != null && !_changed)
-                return instance;
+            if (instance != null && !_changed) return instance;
 
             lock (_reloadLock)
             {
                 instance = _instance;
-                if (instance != null && !_changed)
-                    return instance;
+                if (instance != null && !_changed) return instance;
 
                 UnloadPlugin();
                 _context = new AssemblyLoadContext(
@@ -139,7 +136,7 @@ namespace Moons.Plugin.Infra
 
         public string GetMessage()
         {
-            return GetInstance().ToString();//.GetMessage();
+            return GetInstance().GetValueByKey("abc") as string;//.GetMessage();
         }
 
         public void Dispose()
@@ -151,12 +148,11 @@ namespace Moons.Plugin.Infra
 
         void IPlugInContainer.SetValueByKey(string key, object value)
         {
-            throw new NotImplementedException();
         }
 
         object IPlugInContainer.GetValueByKey(string key)
         {
-            throw new NotImplementedException();
+            return key;
         }
     }
 

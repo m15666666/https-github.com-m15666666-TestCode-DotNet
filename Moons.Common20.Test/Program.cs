@@ -1,5 +1,7 @@
-﻿using NLua;
+﻿using Moons.Plugin.Infra;
+using NLua;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
@@ -9,14 +11,84 @@ namespace Moons.Common20.Test
 {
     class Program
     {
+        #region 实用工具
+
+        /// <summary>
+        /// 读文件返回字节数组Base64编码的字符串
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        private static string ReadFileToBase64(string path)
+        {
+            if (!File.Exists(path)) return string.Empty;
+            return Convert.ToBase64String(File.ReadAllBytes(path));
+        }
+
+        #endregion
+        
         static void Main(string[] args)
         {
+            #region 为了调用roslyn时，能从默认的程序域中加载所有需要的程序集，需要先预先调用“需要的程序集”一下
+
             Console.WriteLine("Test_Roslyn");
             using (Lua lua = new Lua()) { }
-            Test_Roslyn();
+
+            #endregion
+
+            Test_PlugInLoader();
 
             return; // 以下不做测试
+            Test_PluginController();
+            Test_Roslyn();
+            
             Test_SingletonOfExe(args);
+        }
+
+        /// <summary>
+        /// 测试生成dll字节的base64，然后动态加载调用dll
+        /// </summary>
+        static void Test_PlugInLoader()
+        {
+            using AssemblyLoader assemblyLoader = new AssemblyLoader();
+            var bytes = assemblyLoader.CompileToBytes(new List<string> { File.ReadAllText("LuaScript/PlugInDemo1.cs") }, "test_assembly");
+            var base64 = Convert.ToBase64String(bytes);
+
+            using PlugInLoader plugInLoader = new PlugInLoader();
+            var plugIn1 = plugInLoader.LoadPlugIn(
+                new LoadAssemblyDto {
+                    LoadAssemblyMethodType = LoadAssemblyMethodType.DLLBytesBase64,
+                    DLLBytesBase64 = base64
+                }, true);
+
+            plugIn1.SetValueByKey("hello", "world");
+            plugIn1.GetValueByKey("hi");
+        }
+
+        /// <summary>
+        /// 测试 Moons.Plugin.Infra.PluginController，插件控制器 demo
+        /// </summary>
+        static void Test_PluginController()
+        {
+            using (var controller = new PluginController("MyPlugin", "LuaScript"))
+            {
+                bool keepRunning = true;
+                Console.CancelKeyPress += (sender, e) => {
+                    e.Cancel = true;
+                    keepRunning = false;
+                };
+                while (keepRunning)
+                {
+                    try
+                    {
+                        Console.WriteLine(controller.GetMessage());
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"{ex.GetType()}: {ex.Message}");
+                    }
+                    Thread.Sleep(1000);
+                }
+            }
         }
 
         /// <summary>
