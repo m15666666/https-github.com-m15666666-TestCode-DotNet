@@ -28,11 +28,11 @@ class PathSumSolution
         if (root == null) return ret;
 
         List<int> list = new List<int>();
-        BackTrade(root, list, ret, 0, sum);
+        BackTrack(root, list, ret, 0, sum);
         return ret;
     }
 
-    private void BackTrade( TreeNode root, List<int> list, List<IList<int>> ret, int sum, int target )
+    private void BackTrack( TreeNode root, List<int> list, List<IList<int>> ret, int sum, int target )
     {
         if ( root == null ) return;
         var v = root.val;
@@ -54,8 +54,8 @@ class PathSumSolution
         }
         else
         {
-            BackTrade(root.left, list, ret, sum, target);
-            BackTrade(root.right, list, ret, sum, target);
+            BackTrack(root.left, list, ret, sum, target);
+            BackTrack(root.right, list, ret, sum, target);
         }
 
         list.RemoveAt(0);

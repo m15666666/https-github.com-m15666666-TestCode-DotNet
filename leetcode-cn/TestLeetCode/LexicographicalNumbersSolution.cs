@@ -37,14 +37,14 @@ class LexicographicalNumbersSolution
             if (i<= n)
             {
                 ret.Add(i);
-                BackTrade(ret, n, i * 10);
+                BackTrack(ret, n, i * 10);
             }
             else break;
         }
         return ret;
     }
 
-    private static void BackTrade( List<int> ret, int n, int baseNum )
+    private static void BackTrack( List<int> ret, int n, int baseNum )
     {
         for( int i = 0; i < 10; i++)
         {
@@ -52,7 +52,7 @@ class LexicographicalNumbersSolution
             if (temp <= n)
             {
                 ret.Add(temp);
-                BackTrade(ret, n, temp * 10);
+                BackTrack(ret, n, temp * 10);
             }
             else break;
         }

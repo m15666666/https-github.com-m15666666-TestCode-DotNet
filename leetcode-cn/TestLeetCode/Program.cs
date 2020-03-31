@@ -10,10 +10,11 @@ namespace TestLeetCode
         static void Main(string[] args)
         {
             // Test.CSharpClass.Bitset.Test();
-            var classname = $"{StringUtils.Capitalize("remove-duplicates-from-sorted-array-ii", "-")}Solution";
+            var classname = $"{StringUtils.Capitalize("substring-with-concatenation-of-all-words", "-")}Solution";
             Debug.WriteLine(classname);
 
-            new RemoveDuplicatesFromSortedArraySolution().Test();
+            new SubstringWithConcatenationOfAllWordsSolution().Test();
+            //new RemoveDuplicatesFromSortedArraySolution().Test();
             //new GenerateParenthesisSolution().Test();
             //new ValidParenthesesSolution().Test();
             //new ThreeSumClosestSolution().Test();

@@ -51,10 +51,10 @@ class MatchsticksToSquareSolution
 
         Array.Sort(nums, (x, y) => y.CompareTo(x));
         int[] lines = new int[4] { 0, 0, 0, 0 };
-        return BackTrade(nums, lines, 0, sum / 4);
+        return BackTrack(nums, lines, 0, sum / 4);
     }
 
-    private static bool BackTrade(int[] nums, int[] sums, int pos, int target)
+    private static bool BackTrack(int[] nums, int[] sums, int pos, int target)
     {
         if (nums.Length <= pos)
         {
@@ -65,7 +65,7 @@ class MatchsticksToSquareSolution
         {
             if (sums[i] + nums[pos] > target) continue;
             sums[i] += nums[pos]; //把当前火柴从i个边中拿出来，好尝试下一条边
-            if (BackTrade(nums, sums, pos + 1, target)) return true;  //如果这个火柴被成功使用，就开始尝试拼下一根火柴
+            if (BackTrack(nums, sums, pos + 1, target)) return true;  //如果这个火柴被成功使用，就开始尝试拼下一根火柴
             sums[i] -= nums[pos];  //用当前火柴拼第i个边
 
             // 优化：如果第一条边已经尝试失败，后面也不必尝试了，都一样。

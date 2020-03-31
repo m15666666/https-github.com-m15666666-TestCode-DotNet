@@ -29,10 +29,10 @@ class WordBreakSolution
         HashSet<string> set = new HashSet<string>(wordDict);
         Dictionary<int, bool> startIndex2CanWordBreak = new Dictionary<int, bool>();
 
-        return BackTrade(s, 0, 0, set, startIndex2CanWordBreak);
+        return BackTrack(s, 0, 0, set, startIndex2CanWordBreak);
     }
 
-    private bool BackTrade( string s, int startIndex, int charCount, HashSet<string> wordDict, Dictionary<int, bool> startIndex2CanWordBreak )
+    private bool BackTrack( string s, int startIndex, int charCount, HashSet<string> wordDict, Dictionary<int, bool> startIndex2CanWordBreak )
     {
         if (startIndex2CanWordBreak.ContainsKey(startIndex)) return startIndex2CanWordBreak[startIndex];
 
@@ -45,7 +45,7 @@ class WordBreakSolution
             var subString = s.Substring(startIndex, count);
             if (!wordDict.Contains(subString)) continue;
 
-            if (BackTrade(s, stopIndex + 1, charCount + count, wordDict, startIndex2CanWordBreak)) return startIndex2CanWordBreak[startIndex] = true;
+            if (BackTrack(s, stopIndex + 1, charCount + count, wordDict, startIndex2CanWordBreak)) return startIndex2CanWordBreak[startIndex] = true;
         }
 
         return startIndex2CanWordBreak[startIndex] = false;

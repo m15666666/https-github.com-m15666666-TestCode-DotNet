@@ -53,10 +53,10 @@ class SubsetsWithDupSolution
 
         List<int> list = new List<int>(k);
         HashSet<string> existing = new HashSet<string>();
-        BackTrade(nums, k, 0, list, ret, indexSet, existing);
+        BackTrack(nums, k, 0, list, ret, indexSet, existing);
     }
 
-    private void BackTrade(int[] nums, int k, int startIndex,
+    private void BackTrack(int[] nums, int k, int startIndex,
         List<int> list, List<IList<int>> ret, HashSet<int> indexSet, HashSet<string> existing)
     {
         int n = nums.Length;
@@ -85,7 +85,7 @@ class SubsetsWithDupSolution
             list.Insert(0, v);
             indexSet.Remove(i);
 
-            BackTrade(nums, k, i + 1,
+            BackTrack(nums, k, i + 1,
                 list, ret, indexSet, existing );
 
             list.RemoveAt(0);

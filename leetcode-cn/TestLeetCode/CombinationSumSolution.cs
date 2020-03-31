@@ -34,12 +34,12 @@ class CombinationSumSolution
 
         HashSet<string> existing = new HashSet<string>();
         List<int> list = new List<int>();
-        BackTrade( candidates, target, 0, list, ret, existing );
+        BackTrack( candidates, target, 0, list, ret, existing );
 
         return ret;
     }
 
-    private static void BackTrade(int[] candidates, int target, int startIndex, List<int> list, List<IList<int>> ret, HashSet<string> existing)
+    private static void BackTrack(int[] candidates, int target, int startIndex, List<int> list, List<IList<int>> ret, HashSet<string> existing)
     {
         if (target < 0) return;
 
@@ -61,7 +61,7 @@ class CombinationSumSolution
 
             list.Insert(0, v);
 
-            BackTrade( candidates, target - v, i, list, ret, existing );
+            BackTrack( candidates, target - v, i, list, ret, existing );
 
             list.RemoveAt(0);
         }

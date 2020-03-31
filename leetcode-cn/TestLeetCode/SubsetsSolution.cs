@@ -50,10 +50,10 @@ class SubsetsSolution
         if (n == 0 || k == 0 || n < k) return;
 
         List<int> list = new List<int>(k);
-        BackTrade(nums, k, 0, list, ret, set);
+        BackTrack(nums, k, 0, list, ret, set);
     }
 
-    private void BackTrade(int[] nums, int k, int startIndex,
+    private void BackTrack(int[] nums, int k, int startIndex,
         List<int> list, List<IList<int>> ret, HashSet<int> set)
     {
         int n = nums.Length;
@@ -76,7 +76,7 @@ class SubsetsSolution
             list.Insert(0, v);
             set.Remove(v);
 
-            BackTrade(nums, k, i + 1,
+            BackTrack(nums, k, i + 1,
                 list, ret, set);
 
             list.RemoveAt(0);

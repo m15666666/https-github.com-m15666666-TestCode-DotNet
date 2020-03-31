@@ -29,14 +29,14 @@ class CombineKOfNSolution
 
         //HashSet<int> indexset = new HashSet<int>();
         List<int> list = new List<int>();
-        BackTrade( n, k, 0, 
+        BackTrack( n, k, 0, 
             //indexset, 
             list, ret );
 
         return ret;
     }
 
-    private void BackTrade( int n, int k, int startIndex, 
+    private void BackTrack( int n, int k, int startIndex, 
         //HashSet<int> indexset, 
         List<int> list, List<IList<int>> ret )
     {
@@ -60,7 +60,7 @@ class CombineKOfNSolution
             list.Insert(0, v);
             //indexset.Add(i);
 
-            BackTrade( n, k, i + 1, 
+            BackTrack( n, k, i + 1, 
                 //indexset, 
                 list, ret );
 

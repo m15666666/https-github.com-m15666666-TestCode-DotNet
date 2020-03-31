@@ -44,12 +44,12 @@ class GetKthPermutationSolution
         for (; i < n - count; i++) high.Add(i + 1);
         for (; i < n; i++) low.Add(i + 1);
 
-        BackTrade(high, low, k, n1, count);
+        BackTrack(high, low, k, n1, count);
 
         return string.Join("", high);
     }
 
-    private static void BackTrade( List<int> high, List<int> low, int k, int n1, int count )
+    private static void BackTrack( List<int> high, List<int> low, int k, int n1, int count )
     {
         if (low.Count == 0) return;
         if( low.Count == 1)
@@ -70,7 +70,7 @@ class GetKthPermutationSolution
         low.RemoveAt(index);
 
         k -= smallN1 * index;
-        BackTrade(high, low, k, smallN1, count - 1);
+        BackTrack(high, low, k, smallN1, count - 1);
     }
 }
 

@@ -87,13 +87,13 @@ class MineSweeperSolution
         int i = click[0];
         int j = click[1];
         int order = 0;
-        BackTrade(board, i, j, ref order);
+        BackTrack(board, i, j, ref order);
         return board;
     }
 
     private static readonly int[] _iNext = new int[] { -1, -1, -1, 0, 0, 1, 1, 1 };
     private static readonly int[] _jNext = new int[] { -1, 0, 1, -1, 1, -1, 0, 1 };
-    private static void BackTrade( char[][] board, int i, int j, ref int order )
+    private static void BackTrack( char[][] board, int i, int j, ref int order )
     {
         ++order;
         int row = board.Length;
@@ -130,7 +130,7 @@ class MineSweeperSolution
                 {//递归搜索周围的八个方向
                     int iNext = i + _iNext[k];
                     int jNext = j + _jNext[k];
-                    BackTrade(board, iNext, jNext, ref order);//如果i,j被改为B,则递归搜索其他位置
+                    BackTrack(board, iNext, jNext, ref order);//如果i,j被改为B,则递归搜索其他位置
                 }
             }
             else

@@ -38,12 +38,12 @@ class PalindromePartitioningSolution
 
         Stack<string> stack = new Stack<string>();
 
-        BackTrade(s, 0, 0, stack, ret);
+        BackTrack(s, 0, 0, stack, ret);
 
         return ret;
     }
 
-    private void BackTrade( string s, int startIndex, int totalLength, Stack<string> stack, List<IList<string>> ret )
+    private void BackTrack( string s, int startIndex, int totalLength, Stack<string> stack, List<IList<string>> ret )
     {
         var length = s.Length;
         {
@@ -71,7 +71,7 @@ class PalindromePartitioningSolution
 
             stack.Push(subString);
 
-            BackTrade(s, stopIndex + 1, totalLength + subStringCount, stack, ret);
+            BackTrack(s, stopIndex + 1, totalLength + subStringCount, stack, ret);
 
             stack.Pop();
         }

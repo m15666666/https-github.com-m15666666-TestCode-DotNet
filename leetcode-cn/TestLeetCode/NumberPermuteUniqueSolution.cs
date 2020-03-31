@@ -32,12 +32,12 @@ class NumberPermuteUniqueSolution
         HashSet<int> indexset = new HashSet<int>();
         HashSet<string> existing = new HashSet<string>();
         List<int> list = new List<int>();
-        BackTrade(nums, indexset, list, ret, existing);
+        BackTrack(nums, indexset, list, ret, existing);
 
         return ret;
     }
 
-    private void BackTrade(int[] nums, HashSet<int> indexset, List<int> list, List<IList<int>> ret, HashSet<string> existing)
+    private void BackTrack(int[] nums, HashSet<int> indexset, List<int> list, List<IList<int>> ret, HashSet<string> existing)
     {
         if (indexset.Count == nums.Length)
         {
@@ -60,7 +60,7 @@ class NumberPermuteUniqueSolution
             list.Insert(0, v);
             indexset.Add(i);
 
-            BackTrade(nums, indexset, list, ret, existing);
+            BackTrack(nums, indexset, list, ret, existing);
 
             list.RemoveAt(0);
             indexset.Remove(i);

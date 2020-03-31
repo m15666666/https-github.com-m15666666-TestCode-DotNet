@@ -35,12 +35,12 @@ class CombinationSumIIISolution
         List<IList<int>> ret = new List<IList<int>>();
 
         List<int> list = new List<int>();
-        BackTrade(candidates, n, 0, list, ret, k);
+        BackTrack(candidates, n, 0, list, ret, k);
 
         return ret;
     }
 
-    private static void BackTrade(int[] candidates, int target, int startIndex, List<int> list, List<IList<int>> ret, int maxCount )
+    private static void BackTrack(int[] candidates, int target, int startIndex, List<int> list, List<IList<int>> ret, int maxCount )
     {
         if ( target < 0 ) return;
         //if ( maxCount < list.Count ) return;
@@ -63,7 +63,7 @@ class CombinationSumIIISolution
 
             list.Insert(0, v);
 
-            BackTrade(candidates, target - v, i + 1, list, ret, maxCount);
+            BackTrack(candidates, target - v, i + 1, list, ret, maxCount);
 
             list.RemoveAt(0);
         }

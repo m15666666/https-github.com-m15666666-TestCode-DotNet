@@ -31,12 +31,12 @@ class NumberPermuteSolution
 
         HashSet<int> numset = new HashSet<int>();
         List<int> list = new List<int>();
-        BackTrade( nums, numset, list, ret );
+        BackTrack( nums, numset, list, ret );
 
         return ret;
     }
 
-    private void BackTrade(int[] nums, HashSet<int> numset, List<int> list, List<IList<int>> ret )
+    private void BackTrack(int[] nums, HashSet<int> numset, List<int> list, List<IList<int>> ret )
     {
         if ( numset.Count == nums.Length )
         {
@@ -59,7 +59,7 @@ class NumberPermuteSolution
             list.Insert(0, v);
             numset.Add(v);
 
-            BackTrade( nums, numset, list, ret );
+            BackTrack( nums, numset, list, ret );
 
             list.RemoveAt(0);
             numset.Remove(v);

@@ -36,12 +36,12 @@ class GrayCodeSolution
         List<int> ret = new List<int>() { 0 };
         HashSet<int> existing = new HashSet<int>() { 0 };
 
-        BackTrade(n, 1, ref interValue, ret, existing);
+        BackTrack(n, 1, ref interValue, ret, existing);
 
         return ret;
     }
 
-    private void BackTrade(int n, int step, ref ulong interValue, List<int> ret, HashSet<int> existing)
+    private void BackTrack(int n, int step, ref ulong interValue, List<int> ret, HashSet<int> existing)
     {
         if ( n < step ) return;
 
@@ -58,7 +58,7 @@ class GrayCodeSolution
                 ret.Add(v);
                 interValue = interValue1;
             }
-            BackTrade( n, step + 1, ref interValue, ret, existing );
+            BackTrack( n, step + 1, ref interValue, ret, existing );
         }
     }
 }

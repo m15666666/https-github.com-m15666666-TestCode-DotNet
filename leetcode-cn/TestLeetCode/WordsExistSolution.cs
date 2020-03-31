@@ -38,7 +38,7 @@ class WordsExistSolution
                 {
                     var position = $"{row}-{column}";
                     path.Add(position);
-                    if (BackTrade(board, m, n, word, row, column, 1, path)) return true;
+                    if (BackTrack(board, m, n, word, row, column, 1, path)) return true;
                     path.Remove(position);
                 }
         return false;
@@ -54,7 +54,7 @@ class WordsExistSolution
     /// <param name="wordIndex"></param>
     /// <param name="path"></param>
     /// <returns>true: find complete word</returns>
-    private bool BackTrade(char[,] board, int m, int n, string word, int startRow, int startColumn, int wordIndex, HashSet<string> path)
+    private bool BackTrack(char[,] board, int m, int n, string word, int startRow, int startColumn, int wordIndex, HashSet<string> path)
     {
         if (word.Length <= wordIndex) return true;
 
@@ -69,7 +69,7 @@ class WordsExistSolution
             if (word[wordIndex] == board[row, column] && !path.Contains((position = $"{row}-{column}")))
             {
                 path.Add(position);
-                if( BackTrade( board, m, n, word, row, column, wordIndex + 1, path) ) return true;
+                if( BackTrack( board, m, n, word, row, column, wordIndex + 1, path) ) return true;
                 path.Remove(position);
             }
         }
@@ -82,7 +82,7 @@ class WordsExistSolution
             if (word[wordIndex] == board[row, column] && !path.Contains((position = $"{row}-{column}")))
             {
                 path.Add(position);
-                if (BackTrade(board, m, n, word, row, column, wordIndex + 1, path)) return true;
+                if (BackTrack(board, m, n, word, row, column, wordIndex + 1, path)) return true;
                 path.Remove(position);
             }
         }
@@ -95,7 +95,7 @@ class WordsExistSolution
             if (word[wordIndex] == board[row, column] && !path.Contains((position = $"{row}-{column}")))
             {
                 path.Add(position);
-                if (BackTrade(board, m, n, word, row, column, wordIndex + 1, path)) return true;
+                if (BackTrack(board, m, n, word, row, column, wordIndex + 1, path)) return true;
                 path.Remove(position);
             }
         }
@@ -108,7 +108,7 @@ class WordsExistSolution
             if (word[wordIndex] == board[row, column] && !path.Contains((position = $"{row}-{column}")))
             {
                 path.Add(position);
-                if (BackTrade(board, m, n, word, row, column, wordIndex + 1, path)) return true;
+                if (BackTrack(board, m, n, word, row, column, wordIndex + 1, path)) return true;
                 path.Remove(position);
             }
         }

@@ -41,7 +41,7 @@ class NextGreaterElementIIISolution
         Array.Fill(indexExisting, false);
         Stack<char> ret = new Stack<char>();
         long current = 0;
-        if ( BackTrade( n, origin, candidates, indexExisting, ret, ref current, 0 ) )
+        if ( BackTrack( n, origin, candidates, indexExisting, ret, ref current, 0 ) )
         {
             long r = 0;
             long multiple = 1;
@@ -55,7 +55,7 @@ class NextGreaterElementIIISolution
         return -1;
     }
 
-    private bool BackTrade( long n, string origin, char[] candidates, bool[] indexExisting, Stack<char> ret, ref long current, long partN )
+    private bool BackTrack( long n, string origin, char[] candidates, bool[] indexExisting, Stack<char> ret, ref long current, long partN )
     {
         var oC = origin[ret.Count];
         var len = candidates.Length;
@@ -80,7 +80,7 @@ class NextGreaterElementIIISolution
 
             if (ret.Count < len)
             {
-                if (BackTrade(n, origin, candidates, indexExisting, ret, ref current, partNext)) return true;
+                if (BackTrack(n, origin, candidates, indexExisting, ret, ref current, partNext)) return true;
             }
             else if (n < current) return true;
 

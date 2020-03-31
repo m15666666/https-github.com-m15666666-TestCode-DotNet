@@ -30,12 +30,12 @@ class RestoreIpAddressesSolution
 
         List<int> list = new List<int>(4) { 0 };
 
-        BackTrade(s, slotCount, 1, list, ret);
+        BackTrack(s, slotCount, 1, list, ret);
 
         return ret;
     }
 
-    private static void BackTrade(string s, int slotCount, int startIndex, List<int> list, List<string> ret )
+    private static void BackTrack(string s, int slotCount, int startIndex, List<int> list, List<string> ret )
     {
         var strStartIndex = list[list.Count - 1];
         var sLength = s.Length;
@@ -79,7 +79,7 @@ class RestoreIpAddressesSolution
 
             list.Add(i);
 
-            BackTrade( s, slotCount, i + 1, list, ret );
+            BackTrack( s, slotCount, i + 1, list, ret );
 
             list.RemoveAt(list.Count - 1);
         }
