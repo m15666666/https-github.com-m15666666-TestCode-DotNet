@@ -13,6 +13,8 @@ using Moons.Log4net;
 using log4net;
 using log4net.Config;
 using log4net.Repository;
+using Serilog;
+using Moons.Serilogs;
 
 namespace DataSampler
 {
@@ -21,16 +23,10 @@ namespace DataSampler
         public static async Task Main(string[] args)
         {
             EnvironmentUtils.IsDebug = true;
+            
+            //InitLog4net();
+            InitSerilog();
 
-            ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
-            // 默认简单配置，输出至控制台
-            //BasicConfigurator.Configure(repository);
-            //XmlConfigurator.Configure(repository, new System.IO.FileInfo("log4net.config"));
-            XmlConfigurator.ConfigureAndWatch(repository, new System.IO.FileInfo("log4net.config"));
-            //ILog log = LogManager.GetLogger(repository.Name, "Datasampler");
-
-            var logRepository = EnvironmentUtils.LogRepository = new Log4netRepositoryWrapper(repository);
-            EnvironmentUtils.Logger = logRepository.GetLogger("Datasampler");
             TraceUtils.Info("Starting Datasampler. time stamp: 2019-08-02.");
 
             try
@@ -62,6 +58,46 @@ namespace DataSampler
 
             Console.WriteLine("Press enter to exit.");
             Console.ReadLine();
+        }
+
+        private static void InitLog4net()
+        {
+            ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
+            // 默认简单配置，输出至控制台
+            //BasicConfigurator.Configure(repository);
+            //XmlConfigurator.Configure(repository, new System.IO.FileInfo("log4net.config"));
+            XmlConfigurator.ConfigureAndWatch(repository, new System.IO.FileInfo("log4net.config"));
+            //ILog log = LogManager.GetLogger(repository.Name, "Datasampler");
+
+            var logRepository = EnvironmentUtils.LogRepository = new Log4netRepositoryWrapper(repository);
+            EnvironmentUtils.Logger = logRepository.GetLogger("Datasampler");
+            TraceUtils.Info("InitLog4net");
+        }
+
+        private static void InitSerilog()
+        {
+            var logger = new Serilog.LoggerConfiguration()
+            .WriteTo.Console()
+            .WriteTo.File("log/log-.txt",
+                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
+                rollingInterval: Serilog.RollingInterval.Day)
+            .CreateLogger();
+
+            var loggerTcp = new Serilog.LoggerConfiguration()
+            .WriteTo.Console()
+            .WriteTo.File("log/tcp/log-.txt",
+                 outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}",
+                rollingInterval: Serilog.RollingInterval.Day)
+            .CreateLogger();
+
+            Serilog.Log.Logger = logger;
+            Dictionary<string, Serilog.ILogger> name2Loggers = new Dictionary<string, Serilog.ILogger> {
+                { "Datasampler", logger },
+                {DataSampler.Config.TcpLoggerName,loggerTcp },
+            };
+            var logRepository = EnvironmentUtils.LogRepository = new SerilogRepositoryWrapper(name2Loggers);
+            EnvironmentUtils.Logger = logRepository.GetLogger("Datasampler");
+            TraceUtils.Info("InitSerilog");
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

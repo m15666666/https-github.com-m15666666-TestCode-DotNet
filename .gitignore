@@ -241,3 +241,4 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /Test.ShaSteel.WebAPI.Server2.1/logfile
+/DataSampler/log
