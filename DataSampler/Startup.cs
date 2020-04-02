@@ -62,7 +62,8 @@ namespace DataSampler
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            services.AddSingleton<IJsonSerializer, JsonSerializer>();
+            //services.AddSingleton<IJsonSerializer, JsonSerializer>();// 保留null属性值的输出
+            services.AddSingleton<IJsonSerializer> (sp => new JsonSerializer(true) ); // 去掉null属性值的输出
             //services.AddSingleton<IObjectMapper, ObjectMapperOfMapster>();
             services.AddSingleton<IObjectMapper>( 
                 serviceProvider => {
