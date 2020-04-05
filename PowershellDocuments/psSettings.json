@@ -1,0 +1,8 @@
+{
+  "CheckRunningApps": [
+    {
+      "processName": "notepad",
+      "path": "c:\\notepad.exe"
+    }
+  ]
+}
