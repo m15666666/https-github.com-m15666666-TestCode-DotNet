@@ -336,4 +336,61 @@ public class Solution
     }
 }
 
+public class Solution {
+    public void SolveSudoku(char[][] board) {
+        // 三个布尔数组 表明 行, 列, 还有 3*3 的方格的数字是否被使用过
+        bool[,] rowUsed = new bool[9,10];
+        bool[,] colUsed = new bool[9,10];
+        bool[,,] boxUsed = new bool[3,3,10];
+        // 初始化
+        for(int row = 0; row < board.Length; row++){
+            for(int col = 0; col < board[0].Length; col++) {
+                int num = board[row][col] - '0';
+                if(1 <= num && num <= 9){
+                    rowUsed[row,num] = true;
+                    colUsed[col,num] = true;
+                    boxUsed[row/3,col/3,num] = true;
+                }
+            }
+        }
+        // 递归尝试填充数组 
+        recusiveSolveSudoku(board, rowUsed, colUsed, boxUsed, 0, 0);
+    }
+    
+    private bool recusiveSolveSudoku(char[][]board, bool[,]rowUsed, bool[,]colUsed, bool[,,]boxUsed, int row, int col){
+        // 边界校验, 如果已经填充完成, 返回true, 表示一切结束
+        if(col == board[0].Length){
+            col = 0;
+            row++;
+            if(row == board.Length){
+                return true;
+            }
+        }
+        // 是空则尝试填充, 否则跳过继续尝试填充下一个位置
+        if(board[row][col] == '.') {
+            // 尝试填充1~9
+            for(int num = 1; num <= 9; num++){
+                bool canUsed = !(rowUsed[row,num] || colUsed[col,num] || boxUsed[row/3,col/3,num]);
+                if(canUsed){
+                    rowUsed[row,num] = true;
+                    colUsed[col,num] = true;
+                    boxUsed[row/3,col/3,num] = true;
+                    
+                    board[row][col] = (char)('0' + num);
+                    if(recusiveSolveSudoku(board, rowUsed, colUsed, boxUsed, row, col + 1)){
+                        return true;
+                    }
+                    board[row][col] = '.';
+                    
+                    rowUsed[row,num] = false;
+                    colUsed[col,num] = false;
+                    boxUsed[row/3,col/3,num] = false;
+                }
+            }
+        } else {
+            return recusiveSolveSudoku(board, rowUsed, colUsed, boxUsed, row, col + 1);
+        }
+        return false;
+    }
+}
 */
