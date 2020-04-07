@@ -39,7 +39,17 @@ function CheckRunning($processName, $path) {
     #>
 }
 #Pause
+
 ChangeCurrentDir $MyInvocation.MyCommand.Definition
+$date = Get-Date
+#$log = "ps-$($date.Year)-$($date.Month)-$($date.Day)-$($date.Hour)-$($date.Minute).log"
+$log = "ps-$($date.ToString("yyyy-MM-dd-HH-mm-ss")).log"
+<#
+assoc.Id + "  -  "  + $assoc.Name + "  -  " + $assoc.Owner
+("{0}  -  {1}  -  {2}" -f $assoc.Id,$assoc.Name,$assoc.Owner )
+"$($assoc.Id)  -  $($assoc.Name)  -  $($assoc.Owner)"
+#>
+Start-Transcript $log
 
 <# 反复检查指定路径的进程是否运行 #>
 $json =  ReadJson "psSettings.json"
@@ -58,6 +68,7 @@ for(;;)
     }
     Start-Sleep 1
 }
+Stop-Transcript
 <# CheckRunning "notepad" "c:\notepad.exe" #>
 
 Write-Output "not reachable"
