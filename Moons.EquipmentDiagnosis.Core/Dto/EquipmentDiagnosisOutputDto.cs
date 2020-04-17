@@ -13,5 +13,9 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 设备id
         /// </summary>
         public object EquipmentId { get; set; }
+        /// <summary>
+        /// 可能的故障
+        /// </summary>
+        public PossibleFault[] PossibleFaults { get; set; }
     }
 }

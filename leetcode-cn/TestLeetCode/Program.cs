@@ -13,7 +13,8 @@ namespace TestLeetCode
             var classname = $"{StringUtils.Capitalize("substring-with-concatenation-of-all-words", "-")}Solution";
             Debug.WriteLine(classname);
 
-            new JumpGameIISolution().Test();
+            new NumberPermuteUniqueSolution().Test();
+            //new JumpGameIISolution().Test();
             //new FirstMissingPositiveSolution().Test();
             //new SubstringWithConcatenationOfAllWordsSolution().Test();
             //new RemoveDuplicatesFromSortedArraySolution().Test();

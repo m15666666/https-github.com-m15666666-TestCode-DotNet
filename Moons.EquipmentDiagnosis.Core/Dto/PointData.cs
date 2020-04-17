@@ -14,6 +14,10 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 测点编号
         /// </summary>
         public object Point_ID { get; set; }
+        /// <summary>
+        /// 测点路径
+        /// </summary>
+        public string PointPath { get; set; }
 
         /// <summary>
         /// 数据类型
@@ -97,8 +101,8 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
             }
         }
 
-        public PointDataCollection GetAccPoints => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Acc));
-        public PointDataCollection GetVelPoints => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Vel));
+        public PointDataCollection AccPoints => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Acc));
+        public PointDataCollection VelPoints => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Vel));
 
         private void CalcAlm(PointData p)
         {
@@ -229,6 +233,15 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 幅值谱*0.707转换为有效值谱
         /// </summary>
         public double[] FFT { get; set; }
+        /// <summary>
+        /// 幅值谱*0.707转换为有效值谱中的整数分频，下标为0对应1X
+        /// </summary>
+        public double[] XFFT { get; set; }
+
+        /// <summary>
+        /// 100Hz分量
+        /// </summary>
+        public double Hz100 { get; set; }
 
         /// <summary>
         /// 
@@ -241,11 +254,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public double X3_5 { get; set; }
         public double X4_5 { get; set; }
         public double X5_5 { get; set; }
-        public double X1 { get; set; }
-        public double X2 { get; set; }
-        public double X3 { get; set; }
-        public double X4 { get; set; }
-        public double X5 { get; set; }
-        public double X6 { get; set; }
+        public double X1 => XFFT != null && 0 < XFFT.Length ? XFFT[0] : 0;
+        public double X2  => XFFT != null && 1 < XFFT.Length ? XFFT[1] : 0;
+        public double X3  => XFFT != null && 2 < XFFT.Length ? XFFT[2] : 0;
+        public double X4  => XFFT != null && 3 < XFFT.Length ? XFFT[3] : 0;
+        public double X5  => XFFT != null && 4 < XFFT.Length ? XFFT[4] : 0;
+        public double X6  => XFFT != null && 5 < XFFT.Length ? XFFT[5] : 0;
     }
 }
