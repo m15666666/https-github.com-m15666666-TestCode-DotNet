@@ -122,15 +122,33 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
     [Serializable]
     public class HistorySummaryData
     {
+        public object Id { get; set; }
+
+        public object PartitionId { get; set; }
+
+        public string PointOnlyCode { get; set; }
+
+        /// <summary>
+        /// 是MongoDB的外键
+        /// </summary>
+        public string HistoryDataRef_Id { get; set; }
+
+
+        public object Point_ID { get; set; }
+
+        public DateTime SampTime_DT { get; set; }
+
+        public DateTime SampTimeGMT_DT { get; set; }
+
         /// <summary>
         ///     采样频率
         /// </summary>
-        public double SampleFreq { get; set; }
+        public double SampleFreq_NR { get; set; }
 
         /// <summary>
         ///     倍频系数
         /// </summary>
-        public int MultiFreq { get; set; }
+        public int SampMod_NR { get; set; }
 
         /// <summary>
         ///     数据类型编号
@@ -146,16 +164,6 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         ///     数据长度
         /// </summary>
         public int DatLen_NR { get; set; }
-
-        public long Partition_ID { get; set; }
-
-        public object History_ID { get; set; }
-
-        public object Point_ID { get; set; }
-
-        public DateTime SampTime_DT { get; set; }
-
-        public DateTime SampTimeGMT_DT { get; set; }
 
         public int RotSpeed_NR { get; set; }
 
