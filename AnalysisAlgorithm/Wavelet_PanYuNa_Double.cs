@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Moons.Common20;
 
 namespace AnalysisAlgorithm
@@ -160,7 +160,7 @@ namespace AnalysisAlgorithm
             Double[] filter0 = filter[0];
             Double[] filter1 = filter[1];
 
-            Double sumw = CollectionUtils.SumArray( w );
+            Double sumw = NumbersUtils.SumArray( w );
             for( int i = 0; i < sizew; i++ )
             {
                 w[i] = w[i] / sumw;
@@ -190,7 +190,7 @@ namespace AnalysisAlgorithm
             Double[] filter0 = filter[0];
             Double[] filter1 = filter[1];
 
-            Double sumw = CollectionUtils.SumArray( w );
+            Double sumw = NumbersUtils.SumArray( w );
             for( int i = 0; i < sizew; i++ )
             {
                 w[i] = w[i] / sumw;

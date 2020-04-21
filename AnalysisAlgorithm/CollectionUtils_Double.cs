@@ -1,18 +1,18 @@
 using System;
-// ¼ÆËãÖĞÊ¹ÓÃµÄÊıÖµÀàĞÍ£¬ÓÃÒÔÃÖ²¹²»ÄÜÖ±½ÓÊ¹ÓÃ·ºĞÍµÄÎÊÌâ¡£
+// è®¡ç®—ä¸­ä½¿ç”¨çš„æ•°å€¼ç±»å‹ï¼Œç”¨ä»¥å¼¥è¡¥ä¸èƒ½ç›´æ¥ä½¿ç”¨æ³›å‹çš„é—®é¢˜ã€‚
 using _ValueT = System.Double;
 
 namespace AnalysisAlgorithm
 {
     /// <summary>
-    /// ¼¯ºÏ²Ù×÷ÊµÓÃ¹¤¾ßÀà
+    /// é›†åˆæ“ä½œå®ç”¨å·¥å…·ç±»
     /// </summary>
-    public static partial class CollectionUtils
+    public static partial class NumbersUtils
     {
-        #region Êı×é²Ù×÷
+        #region æ•°ç»„æ“ä½œ
 
         /// <summary>
-        /// ½«Êı×éÖĞÃ¿¸öÔªËØ³ıÒÔÒ»¸öÊıÖµ
+        /// å°†æ•°ç»„ä¸­æ¯ä¸ªå…ƒç´ é™¤ä»¥ä¸€ä¸ªæ•°å€¼
         /// </summary>
         public static void ArrayDivValue( _ValueT[] array, _ValueT value )
         {
@@ -20,7 +20,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Êı×éÖĞÃ¿¸öÔªËØ¼ÓÒ»¸öÊıÖµoffset
+        /// å°†æ•°ç»„ä¸­æ¯ä¸ªå…ƒç´ åŠ ä¸€ä¸ªæ•°å€¼offset
         /// </summary>
         public static void OffsetArray( _ValueT[] array, _ValueT offset )
         {
@@ -31,7 +31,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Êı×éÖĞÃ¿¸öÔªËØ³ËÒ»¸öÊıÖµ
+        /// å°†æ•°ç»„ä¸­æ¯ä¸ªå…ƒç´ ä¹˜ä¸€ä¸ªæ•°å€¼
         /// </summary>
         public static void ScaleArray( _ValueT[] array, _ValueT scale )
         {
@@ -42,7 +42,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Êı×éÖĞÃ¿¸öÔªËØÈ¡¾ø¶ÔÖµ
+        /// å°†æ•°ç»„ä¸­æ¯ä¸ªå…ƒç´ å–ç»å¯¹å€¼
         /// </summary>
         public static void AbsArray( _ValueT[] array )
         {
@@ -53,7 +53,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Á½¸öÊı×éµÄÔªËØÏà¼Ó£¬²¢·µ»ØĞÂÊı×é
+        /// å°†ä¸¤ä¸ªæ•°ç»„çš„å…ƒç´ ç›¸åŠ ï¼Œå¹¶è¿”å›æ–°æ•°ç»„
         /// </summary>
         public static _ValueT[] AddArray( _ValueT[] xArray, _ValueT[] yArray )
         {
@@ -72,7 +72,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Á½¸öÊı×éµÄÔªËØÏà¼õ£¬²¢·µ»ØĞÂÊı×é
+        /// å°†ä¸¤ä¸ªæ•°ç»„çš„å…ƒç´ ç›¸å‡ï¼Œå¹¶è¿”å›æ–°æ•°ç»„
         /// </summary>
         public static _ValueT[] SubArray( _ValueT[] xArray, _ValueT[] yArray )
         {
@@ -91,7 +91,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Á½¸öÊı×éµÄÔªËØÏà³Ë£¬²¢·µ»ØĞÂÊı×é
+        /// å°†ä¸¤ä¸ªæ•°ç»„çš„å…ƒç´ ç›¸ä¹˜ï¼Œå¹¶è¿”å›æ–°æ•°ç»„
         /// </summary>
         public static _ValueT[] MulArray( _ValueT[] xArray, _ValueT[] yArray )
         {
@@ -110,7 +110,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Á½¸öÊı×éµÄÔªËØÏà³ı£¬²¢·µ»ØĞÂÊı×é
+        /// å°†ä¸¤ä¸ªæ•°ç»„çš„å…ƒç´ ç›¸é™¤ï¼Œå¹¶è¿”å›æ–°æ•°ç»„
         /// </summary>
         public static _ValueT[] DivArray( _ValueT[] xArray, _ValueT[] yArray )
         {
@@ -129,7 +129,7 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éÈ«²¿ÔªËØµÄºÍ
+        /// è®¡ç®—æ•°ç»„å…¨éƒ¨å…ƒç´ çš„å’Œ
         /// </summary>
         public static _ValueT SumArray( _ValueT[] array )
         {
@@ -142,12 +142,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éÖĞÖ¸¶¨Çø¼äÔªËØµÄºÍ
+        /// è®¡ç®—æ•°ç»„ä¸­æŒ‡å®šåŒºé—´å…ƒç´ çš„å’Œ
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <param name="startIndex">¿ªÊ¼ÏÂ±ê</param>
-        /// <param name="endIndex">½áÎ²ÏÂ±ê</param>
-        /// <returns>Êı×éµÄºÍ</returns>
+        /// <param name="array">æ•°ç»„</param>
+        /// <param name="startIndex">å¼€å§‹ä¸‹æ ‡</param>
+        /// <param name="endIndex">ç»“å°¾ä¸‹æ ‡</param>
+        /// <returns>æ•°ç»„çš„å’Œ</returns>
         public static _ValueT SumArray( _ValueT[] array, int startIndex, int endIndex )
         {
             _ValueT sum = 0;
@@ -159,9 +159,9 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃÊı×éÖĞµÄ×î´óÖµ
+        /// è·å¾—æ•°ç»„ä¸­çš„æœ€å¤§å€¼
         /// </summary>
-        /// <param name="array">Êı×é</param>
+        /// <param name="array">æ•°ç»„</param>
         public static _ValueT Max( _ValueT[] array )
         {
             _ValueT max = _ValueT.MinValue;
@@ -176,9 +176,9 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃÊı×éÖĞµÄ×îĞ¡Öµ
+        /// è·å¾—æ•°ç»„ä¸­çš„æœ€å°å€¼
         /// </summary>
-        /// <param name="array">Êı×é</param>
+        /// <param name="array">æ•°ç»„</param>
         public static _ValueT Min( _ValueT[] array )
         {
             _ValueT min = _ValueT.MaxValue;
@@ -193,9 +193,9 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃÊı×é¾ø¶ÔÖµÖĞµÄ×î´óÖµ
+        /// è·å¾—æ•°ç»„ç»å¯¹å€¼ä¸­çš„æœ€å¤§å€¼
         /// </summary>
-        /// <param name="array">Êı×é</param>
+        /// <param name="array">æ•°ç»„</param>
         public static _ValueT AbsMax( _ValueT[] array )
         {
             _ValueT max = 0;
@@ -211,10 +211,10 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¾ø¶ÔÖµ×î´óÖµ
+        /// ç»å¯¹å€¼æœ€å¤§å€¼
         /// </summary>
-        /// <param name="arrays">Êı×é</param>
-        /// <returns>¾ø¶ÔÖµ×î´óÖµ</returns>
+        /// <param name="arrays">æ•°ç»„</param>
+        /// <returns>ç»å¯¹å€¼æœ€å¤§å€¼</returns>
         public static _ValueT AbsMax( params _ValueT[][] arrays )
         {
             _ValueT max = 0;
@@ -226,12 +226,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Êı×éµÄÔªËØÈ¡scale * lg(x[i]/x0)
+        /// å°†æ•°ç»„çš„å…ƒç´ å–scale * lg(x[i]/x0)
         /// </summary>
-        /// <param name="array">ÏßĞÔÊı×é</param>
-        /// <param name="x0">»ù×¼Öµ</param>
-        /// <param name="scale">±ÈÀıÖµ</param>
-        /// <returns>·Ö±´Êı×é(µ¥Î»: dB·Ö±´)</returns>
+        /// <param name="array">çº¿æ€§æ•°ç»„</param>
+        /// <param name="x0">åŸºå‡†å€¼</param>
+        /// <param name="scale">æ¯”ä¾‹å€¼</param>
+        /// <returns>åˆ†è´æ•°ç»„(å•ä½: dBåˆ†è´)</returns>
         public static _ValueT[] ArrayLog10( _ValueT[] array, Double x0, Double scale )
         {
             Double x0_dB = Math.Log10( x0 );
@@ -252,22 +252,22 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«Êı×éµÄÔªËØÈ¡20lg(x[i]/x0)
+        /// å°†æ•°ç»„çš„å…ƒç´ å–20lg(x[i]/x0)
         /// </summary>
-        /// <param name="array">ÏßĞÔÊı×é</param>
-        /// <param name="x0">»ù×¼Öµ</param>
-        /// <returns>·Ö±´Êı×é(µ¥Î»: dB·Ö±´)</returns>
+        /// <param name="array">çº¿æ€§æ•°ç»„</param>
+        /// <param name="x0">åŸºå‡†å€¼</param>
+        /// <returns>åˆ†è´æ•°ç»„(å•ä½: dBåˆ†è´)</returns>
         public static _ValueT[] Array20Log10( _ValueT[] array, Double x0 )
         {
             return ArrayLog10( array, x0, MathConst.LogScale_20 );
         }
 
         /// <summary>
-        /// ½«Êı×éµÄÔªËØÈ¡10lg(x[i]/x0)
+        /// å°†æ•°ç»„çš„å…ƒç´ å–10lg(x[i]/x0)
         /// </summary>
-        /// <param name="array">ÏßĞÔÊı×é</param>
-        /// <param name="x0">»ù×¼Öµ</param>
-        /// <returns>·Ö±´Êı×é(µ¥Î»: dB·Ö±´)</returns>
+        /// <param name="array">çº¿æ€§æ•°ç»„</param>
+        /// <param name="x0">åŸºå‡†å€¼</param>
+        /// <returns>åˆ†è´æ•°ç»„(å•ä½: dBåˆ†è´)</returns>
         public static _ValueT[] Array10Log10( _ValueT[] array, Double x0 )
         {
             return ArrayLog10( array, x0, MathConst.LogScale_10 );

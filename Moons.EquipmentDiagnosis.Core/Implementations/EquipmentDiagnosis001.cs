@@ -1,4 +1,6 @@
-﻿using MathNet.Numerics;
+using AnalysisAlgorithm;
+using AnalysisAlgorithm.FFT;
+using MathNet.Numerics;
 using Moons.EquipmentDiagnosis.Core.Abstractions;
 using Moons.EquipmentDiagnosis.Core.Dto;
 using System;
@@ -58,7 +60,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 var timewave = velAlmPoint.TimewaveData;
 
                 {
-                    double limit0_2 = 0.2 * timewave.HighestRMS;
+                    double limit0_2 = 0.2 * timewave.HighestPeak;
                     double[] values = new double[] { timewave.X0_5, timewave.X1_5, timewave.X2_5, timewave.X3_5, timewave.X4_5, timewave.X5_5 };
 
                     var count1 = values.Count(v => limit0_2 < v);
@@ -69,7 +71,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                         return;
                     }
 
-                    double limit0_1 = 0.1 * timewave.HighestRMS;
+                    double limit0_1 = 0.1 * timewave.HighestPeak;
                     var count2 = 0;
                     var xfft = timewave.XFFT;
                     // 从6x开始
@@ -163,6 +165,23 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             _equipmentDiagnosisInput = equipmentDiagnosisInput;
             _equipmentData = Context.GetEquipmentData(equipmentId);
             _pointDatas.AddRange( Context.GetPointDatas(equipmentDiagnosisInput) );
+            foreach( var p in _pointDatas)
+            {
+                var summary = p.HistorySummaryData;
+                var timewave = p.TimewaveData;
+                if (summary == null || timewave == null) continue;
+                var rev = summary.RotSpeed_NR;
+                if (rev <= 0) continue;
+
+                SpectrumUtils spectrumUtils = new SpectrumUtils();
+                spectrumUtils.InitByTimewave(summary.SampleFreq_NR, rev / 60f, timewave.Timewave, true);
+
+                timewave.XFFT = spectrumUtils.XFFT;
+                timewave.XHalfFFT = spectrumUtils.XHalfFFT;
+                timewave.Overall = spectrumUtils.Overall;
+                timewave.HighestPeak = spectrumUtils.HighestPeak;
+                timewave.Hz100 = spectrumUtils.Hz100;
+            }
 
         }
         protected IEquipmentDiagnosisContext Context => Config.Context;

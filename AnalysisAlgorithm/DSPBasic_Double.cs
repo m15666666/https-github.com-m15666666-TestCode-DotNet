@@ -1,24 +1,24 @@
 using System;
-// ¼ÆËãÖĞÊ¹ÓÃµÄÊıÖµÀàĞÍ£¬ÓÃÒÔÃÖ²¹²»ÄÜÖ±½ÓÊ¹ÓÃ·ºĞÍµÄÎÊÌâ¡£
+// è®¡ç®—ä¸­ä½¿ç”¨çš„æ•°å€¼ç±»å‹ï¼Œç”¨ä»¥å¼¥è¡¥ä¸èƒ½ç›´æ¥ä½¿ç”¨æ³›å‹çš„é—®é¢˜ã€‚
 using _ValueT = System.Double;
 
 namespace AnalysisAlgorithm
 {
     /// <summary>
-    /// »ù±¾Êı×ÖĞÅºÅ´¦ÀíËã·¨¿â
+    /// åŸºæœ¬æ•°å­—ä¿¡å·å¤„ç†ç®—æ³•åº“
     /// </summary>
     public static partial class DSPBasic
     {
-        #region ÆµÆ×Ëã·¨
+        #region é¢‘è°±ç®—æ³•
 
-        #region »ùÓÚ×ªËÙ½«Ãë×ª»¯Îª×ªÊı(ÖÜÆÚ).
+        #region åŸºäºè½¬é€Ÿå°†ç§’è½¬åŒ–ä¸ºè½¬æ•°(å‘¨æœŸ).
 
         /// <summary>
-        /// »ùÓÚ×ªËÙ½«Ãë×ª»¯Îª×ªÊı(ÖÜÆÚ).
+        /// åŸºäºè½¬é€Ÿå°†ç§’è½¬åŒ–ä¸ºè½¬æ•°(å‘¨æœŸ).
         /// </summary>
-        /// <param name="second">½×´Î</param>
-        /// <param name="rpm">·ÖÖÓ×ªËÙ</param>
-        /// <returns>×ªÊı(ÖÜÆÚ)</returns>
+        /// <param name="second">é˜¶æ¬¡</param>
+        /// <param name="rpm">åˆ†é’Ÿè½¬é€Ÿ</param>
+        /// <returns>è½¬æ•°(å‘¨æœŸ)</returns>
         public static Double SecondtoCycle( _ValueT second, Double rpm )
         {
 // ReSharper disable RedundantCast
@@ -27,11 +27,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ùÓÚ×ªËÙ½«×ªÊı(ÖÜÆÚ)×ª»¯ÎªÃë.
+        /// åŸºäºè½¬é€Ÿå°†è½¬æ•°(å‘¨æœŸ)è½¬åŒ–ä¸ºç§’.
         /// </summary>
-        /// <param name="cycle">½×´Î</param>
-        /// <param name="rpm">·ÖÖÓ×ªËÙ</param>
-        /// <returns>×ªÊı(ÖÜÆÚ)</returns>
+        /// <param name="cycle">é˜¶æ¬¡</param>
+        /// <param name="rpm">åˆ†é’Ÿè½¬é€Ÿ</param>
+        /// <returns>è½¬æ•°(å‘¨æœŸ)</returns>
         public static Double CycletoSecond( _ValueT cycle, Double rpm )
         {
 // ReSharper disable RedundantCast
@@ -41,14 +41,14 @@ namespace AnalysisAlgorithm
 
         #endregion
 
-        #region HzÓë½×´Î×ª»»
+        #region Hzä¸é˜¶æ¬¡è½¬æ¢
 
         /// <summary>
-        /// »ùÓÚ×ªËÙ½«X×ª»¯ÎªHz.
+        /// åŸºäºè½¬é€Ÿå°†Xè½¬åŒ–ä¸ºHz.
         /// </summary>
-        /// <param name="order">½×´Î</param>
-        /// <param name="rpm">·ÖÖÓ×ªËÙ</param>
-        /// <returns>ÆµÂÊÖµ</returns>
+        /// <param name="order">é˜¶æ¬¡</param>
+        /// <param name="rpm">åˆ†é’Ÿè½¬é€Ÿ</param>
+        /// <returns>é¢‘ç‡å€¼</returns>
         public static Double XtoHz( _ValueT order, Double rpm )
         {
 // ReSharper disable RedundantCast
@@ -57,11 +57,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ùÓÚ×ªËÙ½«Hz×ª»¯ÎªX.
+        /// åŸºäºè½¬é€Ÿå°†Hzè½¬åŒ–ä¸ºX.
         /// </summary>
-        /// <param name="hz">ÆµÂÊÖµ</param>
-        /// <param name="rpm">·ÖÖÓ×ªËÙ</param>
-        /// <returns>½×´Î</returns>
+        /// <param name="hz">é¢‘ç‡å€¼</param>
+        /// <param name="rpm">åˆ†é’Ÿè½¬é€Ÿ</param>
+        /// <returns>é˜¶æ¬¡</returns>
         public static Double HztoX( _ValueT hz, Double rpm )
         {
 // ReSharper disable RedundantCast
@@ -70,50 +70,50 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ùÓÚ×ªËÙ½«Hz×ª»¯ÎªX.
+        /// åŸºäºè½¬é€Ÿå°†Hzè½¬åŒ–ä¸ºX.
         /// </summary>
-        /// <param name="xArray">ÊäÈëHzÊı×é£¬Êä³ö½×´ÎÊı×é</param>
-        /// <param name="rpm">·ÖÖÓ×ªËÙ</param>
+        /// <param name="xArray">è¾“å…¥Hzæ•°ç»„ï¼Œè¾“å‡ºé˜¶æ¬¡æ•°ç»„</param>
+        /// <param name="rpm">åˆ†é’Ÿè½¬é€Ÿ</param>
         public static void HztoX( _ValueT[] xArray, Double rpm )
         {
 // ReSharper disable RedundantCast
-            CollectionUtils.ScaleArray( xArray, (_ValueT)( MathConst.SecondCountOfMinute / rpm ) );
+            NumbersUtils.ScaleArray( xArray, (_ValueT)( MathConst.SecondCountOfMinute / rpm ) );
 // ReSharper restore RedundantCast
         }
 
         /// <summary>
-        /// »ùÓÚ×ªËÙ½«X×ª»¯ÎªHz.
+        /// åŸºäºè½¬é€Ÿå°†Xè½¬åŒ–ä¸ºHz.
         /// </summary>
-        /// <param name="xArray">ÊäÈë½×´ÎÊı×é£¬Êä³öHzÊı×é</param>
-        /// <param name="rpm">·ÖÖÓ×ªËÙ</param>
+        /// <param name="xArray">è¾“å…¥é˜¶æ¬¡æ•°ç»„ï¼Œè¾“å‡ºHzæ•°ç»„</param>
+        /// <param name="rpm">åˆ†é’Ÿè½¬é€Ÿ</param>
         public static void XtoHz( _ValueT[] xArray, Double rpm )
         {
 // ReSharper disable RedundantCast
-            CollectionUtils.ScaleArray( xArray, (_ValueT)( RpmtoHz( rpm ) ) );
+            NumbersUtils.ScaleArray( xArray, (_ValueT)( RpmtoHz( rpm ) ) );
 // ReSharper restore RedundantCast
         }
 
         #endregion
 
         /// <summary>
-        /// ¼ÆËã¸´ĞòÁĞ»ù2¿ìËÙ¸µÁ¢Ò¶Õı±ä»»(Ë«±ß), x(t) => X(f)
+        /// è®¡ç®—å¤åºåˆ—åŸº2å¿«é€Ÿå‚…ç«‹å¶æ­£å˜æ¢(åŒè¾¹), x(t) => X(f)
         /// </summary>
-        /// <param name="reArray">ÊäÈë¸´ĞÅºÅÊµ²¿Re(x)£¬·µ»ØFFTÊµ²¿</param>
-        /// <param name="imArray">ÊäÈë¸´ĞÅºÅĞé²¿Im(x)£¬·µ»ØFFTĞé²¿</param>
+        /// <param name="reArray">è¾“å…¥å¤ä¿¡å·å®éƒ¨Re(x)ï¼Œè¿”å›FFTå®éƒ¨</param>
+        /// <param name="imArray">è¾“å…¥å¤ä¿¡å·è™šéƒ¨Im(x)ï¼Œè¿”å›FFTè™šéƒ¨</param>
         /// <remarks>
-        /// °´ÕÕFFT±ê×¼¹«Ê½¼ÆËã£¬ËùÓĞ·µ»ØÖµ¾ùÎ´³ıN. 
+        /// æŒ‰ç…§FFTæ ‡å‡†å…¬å¼è®¡ç®—ï¼Œæ‰€æœ‰è¿”å›å€¼å‡æœªé™¤N. 
         /// </remarks>
         public static void CxFFT( _ValueT[] reArray, _ValueT[] imArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞëÏàµÈ
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»ç›¸ç­‰
             MathError.CheckLengthEqual( reArray, imArray );
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( reArray );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( reArray.Length );
 
             #endregion
@@ -122,24 +122,24 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËã¸´ĞòÁĞ»ù2¿ìËÙ¸µÁ¢Ò¶Äæ±ä»»(Ë«±ß), X(f) => x(t)
+        /// è®¡ç®—å¤åºåˆ—åŸº2å¿«é€Ÿå‚…ç«‹å¶é€†å˜æ¢(åŒè¾¹), X(f) => x(t)
         /// </summary>
-        /// <param name="reArray">ÊäÈëFFTÊµ²¿£¬·µ»Ø¸´ĞÅºÅÊµ²¿</param>
-        /// <param name="imArray">ÊäÈëFFTĞé²¿£¬·µ»Ø¸´ĞÅºÅĞé²¿</param>
+        /// <param name="reArray">è¾“å…¥FFTå®éƒ¨ï¼Œè¿”å›å¤ä¿¡å·å®éƒ¨</param>
+        /// <param name="imArray">è¾“å…¥FFTè™šéƒ¨ï¼Œè¿”å›å¤ä¿¡å·è™šéƒ¨</param>
         /// <remarks>
-        /// ·µ»ØÖµ¾ù³ıÒÔN£¬¼´£ºreArray[i]=Re{x[i]/N}, imArray[i]=Im{x[i]/N}. 
+        /// è¿”å›å€¼å‡é™¤ä»¥Nï¼Œå³ï¼šreArray[i]=Re{x[i]/N}, imArray[i]=Im{x[i]/N}. 
         /// </remarks>
         public static void CxInvFFT( _ValueT[] reArray, _ValueT[] imArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞëÏàµÈ
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»ç›¸ç­‰
             MathError.CheckLengthEqual( reArray, imArray );
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( reArray );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( reArray.Length );
 
             #endregion
@@ -149,21 +149,21 @@ namespace AnalysisAlgorithm
 
 
         /// <summary>
-        /// ¼ÆËãÊµĞòÁĞ»ù2¿ìËÙ¸µÁ¢Ò¶Õı±ä»»(Ë«±ß)
+        /// è®¡ç®—å®åºåˆ—åŸº2å¿«é€Ÿå‚…ç«‹å¶æ­£å˜æ¢(åŒè¾¹)
         /// </summary>
-        /// <param name="reArray">ÊäÈë¸´ĞÅºÅÊµ²¿Êı×é£¬·µ»ØFFTÊµ²¿Êı×é</param>
-        /// <param name="imArray">ÊäÈë¸´ĞÅºÅĞé²¿Êı×é£¬·µ»ØFFTĞé²¿Êı×é</param>
+        /// <param name="reArray">è¾“å…¥å¤ä¿¡å·å®éƒ¨æ•°ç»„ï¼Œè¿”å›FFTå®éƒ¨æ•°ç»„</param>
+        /// <param name="imArray">è¾“å…¥å¤ä¿¡å·è™šéƒ¨æ•°ç»„ï¼Œè¿”å›FFTè™šéƒ¨æ•°ç»„</param>
         /// <remarks>
-        /// °´ÕÕFFT±ê×¼¹«Ê½¼ÆËã£¬ËùÓĞ·µ»ØÖµ¾ùÎ´³ıN. 
+        /// æŒ‰ç…§FFTæ ‡å‡†å…¬å¼è®¡ç®—ï¼Œæ‰€æœ‰è¿”å›å€¼å‡æœªé™¤N. 
         /// </remarks>
         public static void ReFFT( _ValueT[] reArray, out _ValueT[] imArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( reArray );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( reArray.Length );
 
             #endregion
@@ -174,12 +174,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ´ÓÆµÆ×µÄÊµ²¿¡¢Ğé²¿µÃµ½Ë«±ß·ùÖµÆ×
+        /// ä»é¢‘è°±çš„å®éƒ¨ã€è™šéƒ¨å¾—åˆ°åŒè¾¹å¹…å€¼è°±
         /// </summary>
-        /// <param name="reArray">ÆµÆ×µÄÊµ²¿</param>
-        /// <param name="imArray">ÆµÆ×µÄĞé²¿</param>
-        /// <param name="divLength">ÊÇ·ñ³ıÊı¾İµÄ³¤¶È£¬Ö÷ÒªÎªÁË¼æÈİÁ½ÖÖFFTµÄ¼ÆËã·½·¨</param>
-        /// <returns>Ë«±ß·ùÖµÆ×</returns>
+        /// <param name="reArray">é¢‘è°±çš„å®éƒ¨</param>
+        /// <param name="imArray">é¢‘è°±çš„è™šéƒ¨</param>
+        /// <param name="divLength">æ˜¯å¦é™¤æ•°æ®çš„é•¿åº¦ï¼Œä¸»è¦ä¸ºäº†å…¼å®¹ä¸¤ç§FFTçš„è®¡ç®—æ–¹æ³•</param>
+        /// <returns>åŒè¾¹å¹…å€¼è°±</returns>
         public static _ValueT[] ReIm2AmpSpectrum( _ValueT[] reArray, _ValueT[] imArray, bool divLength )
         {
             _ValueT[] ret = new _ValueT[reArray.Length];
@@ -195,11 +195,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ´ÓÆµÆ×µÄÊµ²¿¡¢Ğé²¿µÃµ½ÏàÎ»Æ×£¬ÏàÎ»Æ×Îª0µ½360¶È
+        /// ä»é¢‘è°±çš„å®éƒ¨ã€è™šéƒ¨å¾—åˆ°ç›¸ä½è°±ï¼Œç›¸ä½è°±ä¸º0åˆ°360åº¦
         /// </summary>
-        /// <param name="reArray">ÆµÆ×µÄÊµ²¿</param>
-        /// <param name="imArray">ÆµÆ×µÄĞé²¿</param>
-        /// <returns>ÏàÎ»Æ×</returns>
+        /// <param name="reArray">é¢‘è°±çš„å®éƒ¨</param>
+        /// <param name="imArray">é¢‘è°±çš„è™šéƒ¨</param>
+        /// <returns>ç›¸ä½è°±</returns>
         public static _ValueT[] ReIm2PhaseSpectrum( _ValueT[] reArray, _ValueT[] imArray )
         {
             _ValueT[] ret = new _ValueT[reArray.Length];
@@ -213,19 +213,19 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãË«±ßÆµÆ×µÄÊµ²¿ºÍĞé²¿£¬ÒÑ¾­³ıN¡£
+        /// è®¡ç®—åŒè¾¹é¢‘è°±çš„å®éƒ¨å’Œè™šéƒ¨ï¼Œå·²ç»é™¤Nã€‚
         /// </summary>
-        /// <param name="xArray">ÊäÈëĞÅºÅ</param>
-        /// <param name="reArray">ÆµÆ×µÄÊµ²¿</param>
-        /// <param name="imArray">ÆµÆ×µÄĞé²¿</param>
+        /// <param name="xArray">è¾“å…¥ä¿¡å·</param>
+        /// <param name="reArray">é¢‘è°±çš„å®éƒ¨</param>
+        /// <param name="imArray">é¢‘è°±çš„è™šéƒ¨</param>
         public static void BiReImSpectrum( _ValueT[] xArray, out _ValueT[] reArray, out _ValueT[] imArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( xArray );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( xArray.Length );
 
             #endregion
@@ -244,11 +244,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãµ¥±ßÆµÆ×µÄÊµ²¿ºÍĞé²¿( Æ×ÏßÊı = ÊäÈëĞÅºÅ³¤¶È / 2)£¬ÒÑ¾­³ıN¡£
+        /// è®¡ç®—å•è¾¹é¢‘è°±çš„å®éƒ¨å’Œè™šéƒ¨( è°±çº¿æ•° = è¾“å…¥ä¿¡å·é•¿åº¦ / 2)ï¼Œå·²ç»é™¤Nã€‚
         /// </summary>
-        /// <param name="xArray">ÊäÈëĞÅºÅ</param>
-        /// <param name="reArray">ÆµÆ×µÄÊµ²¿</param>
-        /// <param name="imArray">ÆµÆ×µÄĞé²¿</param>
+        /// <param name="xArray">è¾“å…¥ä¿¡å·</param>
+        /// <param name="reArray">é¢‘è°±çš„å®éƒ¨</param>
+        /// <param name="imArray">é¢‘è°±çš„è™šéƒ¨</param>
         public static void ReImSpectrum( _ValueT[] xArray, out _ValueT[] reArray, out _ValueT[] imArray )
         {
             _ValueT[] re, im;
@@ -267,21 +267,21 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãË«±ß·ùÖµÏàÎ»Æ×.
+        /// è®¡ç®—åŒè¾¹å¹…å€¼ç›¸ä½è°±.
         /// </summary>
-        /// <param name="xArray">ÊäÈëĞÅºÅ</param>
-        /// <param name="ampSpectrum">·µ»ØË«±ß·ùÖµÆ×</param>
-        /// <param name="phaseSpectrum">·µ»ØË«±ßÏàÎ»Æ×(µ¥Î»£º¶È)£¬-180¡ã ~ 180¡ã</param>
-        //	¼ÆËã¹«Ê½ÈçÏÂ: 
+        /// <param name="xArray">è¾“å…¥ä¿¡å·</param>
+        /// <param name="ampSpectrum">è¿”å›åŒè¾¹å¹…å€¼è°±</param>
+        /// <param name="phaseSpectrum">è¿”å›åŒè¾¹ç›¸ä½è°±(å•ä½ï¼šåº¦)ï¼Œ-180Â° ~ 180Â°</param>
+        //	è®¡ç®—å…¬å¼å¦‚ä¸‹: 
         //				AmpSpectrum= |FFT{x}| / N
         public static void BiAmpPhaseSpectrum( _ValueT[] xArray, out _ValueT[] ampSpectrum, out _ValueT[] phaseSpectrum )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( xArray );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( xArray.Length );
 
             #endregion
@@ -297,13 +297,13 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãµ¥±ß·ùÖµÏàÎ»Æ×( Æ×ÏßÊı = ÊäÈëĞÅºÅ³¤¶È / 2)
+        /// è®¡ç®—å•è¾¹å¹…å€¼ç›¸ä½è°±( è°±çº¿æ•° = è¾“å…¥ä¿¡å·é•¿åº¦ / 2)
         /// </summary>
-        /// <param name="xArray">ÊäÈëĞÅºÅx[i]</param>
-        /// <param name="ampSpectrum">·µ»Øµ¥±ß·ùÖµÆ×</param>
-        /// <param name="phaseSpectrum">·µ»ØÏàÎ»Æ×(µ¥Î»£º¶È)</param>
+        /// <param name="xArray">è¾“å…¥ä¿¡å·x[i]</param>
+        /// <param name="ampSpectrum">è¿”å›å•è¾¹å¹…å€¼è°±</param>
+        /// <param name="phaseSpectrum">è¿”å›ç›¸ä½è°±(å•ä½ï¼šåº¦)</param>
         /// <remarks>
-        /// ¿ÉÒÔÖ±½ÓÏÔÊ¾£¬ ÎŞĞë³Ë»ò³ıÈÎºÎÏµÊı¡£ÀıÈç£¬1024µãµÄÊ±¼ä²¨ĞÎµÃµ½512µãÆ×¡£
+        /// å¯ä»¥ç›´æ¥æ˜¾ç¤ºï¼Œ æ— é¡»ä¹˜æˆ–é™¤ä»»ä½•ç³»æ•°ã€‚ä¾‹å¦‚ï¼Œ1024ç‚¹çš„æ—¶é—´æ³¢å½¢å¾—åˆ°512ç‚¹è°±ã€‚
         /// </remarks>
         public static void AmpPhaseSpectrum( _ValueT[] xArray, out _ValueT[] ampSpectrum, out _ValueT[] phaseSpectrum )
         {
@@ -323,12 +323,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãË«±ß¹¦ÂÊÆ×.
+        /// è®¡ç®—åŒè¾¹åŠŸç‡è°±.
         /// </summary>
-        /// <param name="xArray">Ô­Ê¼ĞÅºÅ</param>
-        /// <param name="powerSpectrum">·µ»ØË«±ß¹¦ÂÊÆ×</param>
-        /// <param name="phaseSpectrum">·µ»ØË«±ßÏàÎ»Æ×(µ¥Î»£º¶È)</param>
-        //	¼ÆËã¹«Ê½ÈçÏÂ: 
+        /// <param name="xArray">åŸå§‹ä¿¡å·</param>
+        /// <param name="powerSpectrum">è¿”å›åŒè¾¹åŠŸç‡è°±</param>
+        /// <param name="phaseSpectrum">è¿”å›åŒè¾¹ç›¸ä½è°±(å•ä½ï¼šåº¦)</param>
+        //	è®¡ç®—å…¬å¼å¦‚ä¸‹: 
         //				Gs(f) = |FFT{x}|^2 / N^2 = Amp{x}^2
         public static void BiPowerSpectrum( _ValueT[] xArray, out _ValueT[] powerSpectrum, out _ValueT[] phaseSpectrum )
         {
@@ -343,14 +343,14 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãµ¥±ß¹¦ÂÊÆ×.( Æ×ÏßÊı = Ô­Ê¼ĞÅºÅ³¤¶È / 2)
+        /// è®¡ç®—å•è¾¹åŠŸç‡è°±.( è°±çº¿æ•° = åŸå§‹ä¿¡å·é•¿åº¦ / 2)
         /// </summary>
-        /// <param name="xArray">Ô­Ê¼ĞÅºÅ</param>
-        /// <returns>µ¥±ß¹¦ÂÊÆ×</returns>
+        /// <param name="xArray">åŸå§‹ä¿¡å·</param>
+        /// <returns>å•è¾¹åŠŸç‡è°±</returns>
         /// <remarks>
-        /// ÎŞĞë³Ë»ò³ıÈÎºÎÏµÊı¡£ÀıÈç£º1024µãµÄÊ±¼ä²¨ĞÎµÃµ½512µãÆ×¡£
+        /// æ— é¡»ä¹˜æˆ–é™¤ä»»ä½•ç³»æ•°ã€‚ä¾‹å¦‚ï¼š1024ç‚¹çš„æ—¶é—´æ³¢å½¢å¾—åˆ°512ç‚¹è°±ã€‚
         /// </remarks>
-        //	¼ÆËã¹«Ê½ÈçÏÂ: 
+        //	è®¡ç®—å…¬å¼å¦‚ä¸‹: 
         //				Gs(f) = 2 * |FFT{x}|^2 / N^2 = 2 * Amp{x}^2
         public static _ValueT[] PowerSpectrum( _ValueT[] xArray )
         {
@@ -368,21 +368,21 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÏ£¶û²®ÌØ±ä»»¡£¶ÔÓÚÊµĞÅºÅ£¬ re[]=ÊµĞÅºÅ£¬im[]=0¡£
+        /// è®¡ç®—å¸Œå°”ä¼¯ç‰¹å˜æ¢ã€‚å¯¹äºå®ä¿¡å·ï¼Œ re[]=å®ä¿¡å·ï¼Œim[]=0ã€‚
         /// </summary>
-        /// <param name="reArray">ÊäÈëĞÅºÅµÄÊµ²¿Êı×é£¬Êä³ö±ä»»ºóµÄÊµ²¿Êı×é</param>
-        /// <param name="imArray">ÊäÈëĞÅºÅµÄĞé²¿Êı×é£¬Êä³ö±ä»»ºóµÄĞé²¿Êı×é</param>
+        /// <param name="reArray">è¾“å…¥ä¿¡å·çš„å®éƒ¨æ•°ç»„ï¼Œè¾“å‡ºå˜æ¢åçš„å®éƒ¨æ•°ç»„</param>
+        /// <param name="imArray">è¾“å…¥ä¿¡å·çš„è™šéƒ¨æ•°ç»„ï¼Œè¾“å‡ºå˜æ¢åçš„è™šéƒ¨æ•°ç»„</param>
         public static void HilbertT( _ValueT[] reArray, _ValueT[] imArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞëÏàµÈ
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»ç›¸ç­‰
             MathError.CheckLengthEqual( reArray, imArray );
 
-            //¼ì²éÊµ²¿ÓëĞé²¿Êı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®éƒ¨ä¸è™šéƒ¨æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( reArray );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( reArray.Length );
 
             #endregion
@@ -392,56 +392,56 @@ namespace AnalysisAlgorithm
 
         #endregion
 
-        #region Ê±ÓòĞÅºÅ´¦Àí
+        #region æ—¶åŸŸä¿¡å·å¤„ç†
 
         /// <summary>
-        /// ¼ÆËãÁ½¸öÊı×éµÄÖ±½Ó¾í»ıCxy
+        /// è®¡ç®—ä¸¤ä¸ªæ•°ç»„çš„ç›´æ¥å·ç§¯Cxy
         /// </summary>
-        /// <param name="xArray">µÚÒ»¸öÊı×é[n]</param>
-        /// <param name="yArray">µÚ¶ş¸öÊı×é[m]</param>
-        /// <returns>¾í»ı½á¹ûÊı×é[n+m-1]</returns>
+        /// <param name="xArray">ç¬¬ä¸€ä¸ªæ•°ç»„[n]</param>
+        /// <param name="yArray">ç¬¬äºŒä¸ªæ•°ç»„[m]</param>
+        /// <returns>å·ç§¯ç»“æœæ•°ç»„[n+m-1]</returns>
         public static _ValueT[] DirectConvolve( _ValueT[] xArray, _ValueT[] yArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
             MathError.CheckLengthGTZero( xArray );
             MathError.CheckLengthGTZero( yArray );
 
             #endregion
 
-            //ÏµÍ³Ä¬ÈÏxÊı×é³¤¶È >= yÊı×é³¤¶È
+            //ç³»ç»Ÿé»˜è®¤xæ•°ç»„é•¿åº¦ >= yæ•°ç»„é•¿åº¦
             if( xArray.Length >= yArray.Length )
             {
                 return Convolve.DirectConvolve( xArray, yArray );
             }
 
-            //Èç¹ûxÊı×é³¤¶È < yÊı×é³¤¶È,½»»»xºÍyÊı×é
+            //å¦‚æœxæ•°ç»„é•¿åº¦ < yæ•°ç»„é•¿åº¦,äº¤æ¢xå’Œyæ•°ç»„
             return Convolve.DirectConvolve( yArray, xArray );
         }
 
         /// <summary>
-        /// ½øĞĞButterworth´øÍ¨ÂË²¨
+        /// è¿›è¡ŒButterworthå¸¦é€šæ»¤æ³¢
         /// </summary>
-        /// <param name="xArray">ÊäÈëĞÅºÅÊı×é</param>
-        /// <param name="order">ÂË²¨Æ÷½×Êı</param>
-        /// <param name="fl">µÍ½ØÖ¹ÆµÂÊ</param>
-        /// <param name="fh">¸ß½ØÖ¹ÆµÂÊ</param>
-        /// <param name="fs">²ÉÑùÆµÂÊ</param>
-        /// <returns>·µ»ØÂË²¨ºóµÄÊı¾İ</returns>
+        /// <param name="xArray">è¾“å…¥ä¿¡å·æ•°ç»„</param>
+        /// <param name="order">æ»¤æ³¢å™¨é˜¶æ•°</param>
+        /// <param name="fl">ä½æˆªæ­¢é¢‘ç‡</param>
+        /// <param name="fh">é«˜æˆªæ­¢é¢‘ç‡</param>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡</param>
+        /// <returns>è¿”å›æ»¤æ³¢åçš„æ•°æ®</returns>
         public static _ValueT[] ButterworthBandPass( _ValueT[] xArray, int order, Double fl, Double fh,
                                                      Double fs )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
             MathError.CheckLengthGTZero( xArray );
 
-            //¼ì²é½×Êı±ØĞë´óÓÚ0
+            //æ£€æŸ¥é˜¶æ•°å¿…é¡»å¤§äº0
             if( order <= 0 )
             {
                 throw new AlgorithmException( MathError.MathErrorOrderGTZero );
             }
 
-            //¼ì²é½ØÖ¹ÆµÂÊ±ØĞë´óÓÚ0
+            //æ£€æŸ¥æˆªæ­¢é¢‘ç‡å¿…é¡»å¤§äº0
             if( fl < 0 )
             {
                 fl = 0;
@@ -456,7 +456,7 @@ namespace AnalysisAlgorithm
                 fh = freqBand;
             }
 
-            //¼ì²é½ØÖ¹ÆµÂÊÉÏÏÂÏŞ¹ØÏµ
+            //æ£€æŸ¥æˆªæ­¢é¢‘ç‡ä¸Šä¸‹é™å…³ç³»
             if( fl > fh )
             {
                 Double mid = fl;
@@ -470,20 +470,20 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÁ½¸öÊı×éµÄÖ±½ÓÏà¹ØRxy(ÒÑ×ö¶ËµãĞ§Ó¦ĞŞÕı)
+        /// è®¡ç®—ä¸¤ä¸ªæ•°ç»„çš„ç›´æ¥ç›¸å…³Rxy(å·²åšç«¯ç‚¹æ•ˆåº”ä¿®æ­£)
         /// </summary>
-        /// <param name="xArray">ÊäÈëµÚÒ»¸öÊı×éx[n]</param>
-        /// <param name="yArray">ÊäÈëµÚ¶ş¸öÊı×éy[m]</param>
-        /// <param name="dt">ÊäÈë²ÉÑùÊ±¼ä¼ä¸ô</param>
-        /// <param name="rxyArray">·µ»ØÏà¹Ø½á¹ûÊı×é</param>
-        /// <param name="tauArray">·µ»ØÊ±¼äÑÓ³ÙÊı×é</param>
+        /// <param name="xArray">è¾“å…¥ç¬¬ä¸€ä¸ªæ•°ç»„x[n]</param>
+        /// <param name="yArray">è¾“å…¥ç¬¬äºŒä¸ªæ•°ç»„y[m]</param>
+        /// <param name="dt">è¾“å…¥é‡‡æ ·æ—¶é—´é—´éš”</param>
+        /// <param name="rxyArray">è¿”å›ç›¸å…³ç»“æœæ•°ç»„</param>
+        /// <param name="tauArray">è¿”å›æ—¶é—´å»¶è¿Ÿæ•°ç»„</param>
         /// <remarks>
-        /// Èç¹ûÊ±¼äÑÓ³Ùtau[i]´óÓÚ0, ±íÊ¾ĞÅºÅy[m]³¬Ç°x[n];Èç¹ûÊ±¼äÑÓ³Ùtau[i]Ğ¡ÓÚ0, ±íÊ¾ĞÅºÅy[m]ÖÍºóx[n].
+        /// å¦‚æœæ—¶é—´å»¶è¿Ÿtau[i]å¤§äº0, è¡¨ç¤ºä¿¡å·y[m]è¶…å‰x[n];å¦‚æœæ—¶é—´å»¶è¿Ÿtau[i]å°äº0, è¡¨ç¤ºä¿¡å·y[m]æ»åx[n].
         /// </remarks>
         public static void DirectCorrelate( _ValueT[] xArray, _ValueT[] yArray, _ValueT dt,
                                             out _ValueT[] rxyArray, out _ValueT[] tauArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
             MathError.CheckLengthGTZero( xArray );
             MathError.CheckLengthGTZero( yArray );
@@ -495,20 +495,20 @@ namespace AnalysisAlgorithm
 
 
         /// <summary>
-        /// ¼ÆËãÁ½¸öÊı×éµÄ¿ìËÙÏà¹ØRxy(ÒÑ×ö¶ËµãĞ§Ó¦ĞŞÕı)
+        /// è®¡ç®—ä¸¤ä¸ªæ•°ç»„çš„å¿«é€Ÿç›¸å…³Rxy(å·²åšç«¯ç‚¹æ•ˆåº”ä¿®æ­£)
         /// </summary>
-        /// <param name="xArray">ÊäÈëµÚÒ»¸öÊı×éx[n]</param>
-        /// <param name="yArray">ÊäÈëµÚ¶ş¸öÊı×éy[m]</param>
-        /// <param name="dt">ÊäÈë²ÉÑùÊ±¼ä¼ä¸ô</param>
-        /// <param name="rxyArray">·µ»ØÏà¹Ø½á¹ûÊı×é</param>
-        /// <param name="tauArray">·µ»ØÊ±¼äÑÓ³ÙÊı×é</param>
+        /// <param name="xArray">è¾“å…¥ç¬¬ä¸€ä¸ªæ•°ç»„x[n]</param>
+        /// <param name="yArray">è¾“å…¥ç¬¬äºŒä¸ªæ•°ç»„y[m]</param>
+        /// <param name="dt">è¾“å…¥é‡‡æ ·æ—¶é—´é—´éš”</param>
+        /// <param name="rxyArray">è¿”å›ç›¸å…³ç»“æœæ•°ç»„</param>
+        /// <param name="tauArray">è¿”å›æ—¶é—´å»¶è¿Ÿæ•°ç»„</param>
         /// <remarks>
-        /// Èç¹ûÊ±¼äÑÓ³Ùtau[i]´óÓÚ0, ±íÊ¾ĞÅºÅy[m]³¬Ç°x[n];Èç¹ûÊ±¼äÑÓ³Ùtau[i]Ğ¡ÓÚ0, ±íÊ¾ĞÅºÅy[m]ÖÍºóx[n].
+        /// å¦‚æœæ—¶é—´å»¶è¿Ÿtau[i]å¤§äº0, è¡¨ç¤ºä¿¡å·y[m]è¶…å‰x[n];å¦‚æœæ—¶é—´å»¶è¿Ÿtau[i]å°äº0, è¡¨ç¤ºä¿¡å·y[m]æ»åx[n].
         /// </remarks>
         public static void FastCorrelate( _ValueT[] xArray, _ValueT[] yArray, _ValueT dt,
                                           out _ValueT[] rxyArray, out _ValueT[] tauArray )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
             MathError.CheckLengthGTZero( xArray );
             MathError.CheckLengthGTZero( yArray );
@@ -519,9 +519,9 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// È¥³ıÖ±Á÷·ÖÁ¿
+        /// å»é™¤ç›´æµåˆ†é‡
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ£¬·µ»ØACºóµÄÊı×é</param>
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·ï¼Œè¿”å›ACåçš„æ•°ç»„</param>
         public static void ACCoupling( _ValueT[] xArray )
         {
             if( 0 < xArray.Length )
@@ -536,14 +536,14 @@ namespace AnalysisAlgorithm
 
         #endregion
 
-        #region Ê±ÓòÓĞÁ¿¸ÙÖ¸±ê
+        #region æ—¶åŸŸæœ‰é‡çº²æŒ‡æ ‡
 
         /// <summary>
-        /// Õæ·å·åÖµ. ·´Ó³ÁËĞÅºÅË²Ê±×÷ÓÃÇ¿¶È, ·´Ó³ÁË·ùÖµ±ä»¯·¶Î§,ÒÔ¼°Æ«ÀëÖĞĞÄÇé¿ö. ¸ù¾İÀíÂÛ¹«Ê½¼ÆËã, ³£×÷ÎªÎ»ÒÆĞÅºÅµÄÊı×ÖÌØÕ÷.
+        /// çœŸå³°å³°å€¼. åæ˜ äº†ä¿¡å·ç¬æ—¶ä½œç”¨å¼ºåº¦, åæ˜ äº†å¹…å€¼å˜åŒ–èŒƒå›´,ä»¥åŠåç¦»ä¸­å¿ƒæƒ…å†µ. æ ¹æ®ç†è®ºå…¬å¼è®¡ç®—, å¸¸ä½œä¸ºä½ç§»ä¿¡å·çš„æ•°å­—ç‰¹å¾.
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>Õæ·å·åÖµ</returns>
-        //¼ÆËã¹«Ê½£º max(x[])-min(x[])
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>çœŸå³°å³°å€¼</returns>
+        //è®¡ç®—å…¬å¼ï¼š max(x[])-min(x[])
         public static _ValueT TruePeak2Peak( _ValueT[] xArray )
         {
             if( 0 < xArray.Length )
@@ -568,33 +568,33 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ·å·åÖµ. ·´Ó³ÁËĞÅºÅË²Ê±×÷ÓÃÇ¿¶È. ¸ù¾İRMSÖµ¼ÆËã,³£×÷Îª¹¤³ÌÓ¦ÓÃÖĞÎ»ÒÆĞÅºÅµÄÊı×ÖÌØÕ÷.
+        /// å³°å³°å€¼. åæ˜ äº†ä¿¡å·ç¬æ—¶ä½œç”¨å¼ºåº¦. æ ¹æ®RMSå€¼è®¡ç®—,å¸¸ä½œä¸ºå·¥ç¨‹åº”ç”¨ä¸­ä½ç§»ä¿¡å·çš„æ•°å­—ç‰¹å¾.
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>·å·åÖµ</returns>
-        //¼ÆËã¹«Ê½£º 2¡Ásqrt(2)¡ÁRMS
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>å³°å³°å€¼</returns>
+        //è®¡ç®—å…¬å¼ï¼š 2Ã—sqrt(2)Ã—RMS
         public static _ValueT Peak2Peak( _ValueT[] xArray )
         {
             return 2 * Peak( xArray );
         }
 
         /// <summary>
-        /// Õæ·åÖµ. ·´Ó³ÁËĞÅºÅË²Ê±×÷ÓÃ×î´óÇ¿¶È. ¸ù¾İÀíÂÛ¹«Ê½¼ÆËã,³£×÷Îª¼ÓËÙ¶ÈĞÅºÅµÄÊı×ÖÌØÕ÷.
+        /// çœŸå³°å€¼. åæ˜ äº†ä¿¡å·ç¬æ—¶ä½œç”¨æœ€å¤§å¼ºåº¦. æ ¹æ®ç†è®ºå…¬å¼è®¡ç®—,å¸¸ä½œä¸ºåŠ é€Ÿåº¦ä¿¡å·çš„æ•°å­—ç‰¹å¾.
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>Õæ·åÖµ</returns>
-        //	Ê¹ÓÃCollectionUtils.AbsMax()·½·¨
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>çœŸå³°å€¼</returns>
+        //	ä½¿ç”¨CollectionUtils.AbsMax()æ–¹æ³•
         public static _ValueT TruePeak( _ValueT[] xArray )
         {
-            return CollectionUtils.AbsMax( xArray );
+            return NumbersUtils.AbsMax( xArray );
         }
 
         /// <summary>
-        /// ·åÖµ. ·´Ó³ÁËĞÅºÅË²Ê±×÷ÓÃ×î´óÇ¿¶È. ¸ù¾İRMSÖµ¼ÆËã,³£×÷Îª¹¤³ÌÓ¦ÓÃÖĞ¼ÓËÙ¶ÈĞÅºÅµÄÊı×ÖÌØÕ÷.
+        /// å³°å€¼. åæ˜ äº†ä¿¡å·ç¬æ—¶ä½œç”¨æœ€å¤§å¼ºåº¦. æ ¹æ®RMSå€¼è®¡ç®—,å¸¸ä½œä¸ºå·¥ç¨‹åº”ç”¨ä¸­åŠ é€Ÿåº¦ä¿¡å·çš„æ•°å­—ç‰¹å¾.
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>·åÖµ</returns>
-        //¼ÆËã¹«Ê½£º sqrt(2)¡ÁRMS
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>å³°å€¼</returns>
+        //è®¡ç®—å…¬å¼ï¼š sqrt(2)Ã—RMS
         public static _ValueT Peak( _ValueT[] xArray )
         {
 // ReSharper disable RedundantCast
@@ -603,11 +603,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ×ÜÖµ. ·´Ó³ÁËĞÅºÅµÄÆ½¾ù¹¦ÂÊ. ¸ù¾İRMSÖµ¼ÆËã,³£×÷Îª¹¤³ÌÓ¦ÓÃÖĞÎ»ÒÆ¡¢ËÙ¶ÈºÍ¼ÓËÙ¶ÈĞÅºÅµÄÊı×ÖÌØÕ÷.
+        /// æ€»å€¼. åæ˜ äº†ä¿¡å·çš„å¹³å‡åŠŸç‡. æ ¹æ®RMSå€¼è®¡ç®—,å¸¸ä½œä¸ºå·¥ç¨‹åº”ç”¨ä¸­ä½ç§»ã€é€Ÿåº¦å’ŒåŠ é€Ÿåº¦ä¿¡å·çš„æ•°å­—ç‰¹å¾.
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>×ÜÖµ</returns>
-        //	¼ÆËã¹«Ê½£º RMS^2
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>æ€»å€¼</returns>
+        //	è®¡ç®—å…¬å¼ï¼š RMS^2
         public static _ValueT Overall( _ValueT[] xArray )
         {
 // ReSharper disable RedundantCast
@@ -616,12 +616,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ÓĞĞ§Öµ(ÓÖ½Ğ¾ù·½¸ùÖµ). ·´Ó³ÁËĞÅºÅ×÷ÓÃÇ¿¶È. ³£×÷ÎªËÙ¶ÈĞÅºÅµÄÊı×ÖÌØÕ÷.
+        /// æœ‰æ•ˆå€¼(åˆå«å‡æ–¹æ ¹å€¼). åæ˜ äº†ä¿¡å·ä½œç”¨å¼ºåº¦. å¸¸ä½œä¸ºé€Ÿåº¦ä¿¡å·çš„æ•°å­—ç‰¹å¾.
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>ÓĞĞ§Öµ</returns>
-        //	Ê¹ÓÃStatisticsUtils.OriginMomentËã·¨
-        //	¼ÆËã¹«Ê½£º sqrt(sum(x[t]^2/N))
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>æœ‰æ•ˆå€¼</returns>
+        //	ä½¿ç”¨StatisticsUtils.OriginMomentç®—æ³•
+        //	è®¡ç®—å…¬å¼ï¼š sqrt(sum(x[t]^2/N))
         public static _ValueT RMS( _ValueT[] xArray )
         {
 // ReSharper disable RedundantCast
@@ -630,11 +630,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¾ù·½Öµ. ·´Ó³ÁËĞÅºÅ×÷ÓÃÇ¿¶È. ³£×÷ÎªËÙ¶ÈĞÅºÅµÄÊı×ÖÌØÕ÷.
+        /// å‡æ–¹å€¼. åæ˜ äº†ä¿¡å·ä½œç”¨å¼ºåº¦. å¸¸ä½œä¸ºé€Ÿåº¦ä¿¡å·çš„æ•°å­—ç‰¹å¾.
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>¾ù·½Öµ</returns>
-        //¼ÆËã¹«Ê½£º RMS^2
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>å‡æ–¹å€¼</returns>
+        //è®¡ç®—å…¬å¼ï¼š RMS^2
         public static _ValueT MeanSquare( _ValueT[] xArray )
         {
 // ReSharper disable RedundantCast
@@ -644,74 +644,74 @@ namespace AnalysisAlgorithm
 
         #endregion
 
-        #region Ê±ÓòÎŞÁ¿¸ÙÖ¸±ê
+        #region æ—¶åŸŸæ— é‡çº²æŒ‡æ ‡
 
         /// <summary>
-        /// ²¨ĞÎÖ¸±ê.(ÎŞÁ¿¸ÙÖ¸±ê)
+        /// æ³¢å½¢æŒ‡æ ‡.(æ— é‡çº²æŒ‡æ ‡)
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>²¨ĞÎÖ¸±ê</returns>
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>æ³¢å½¢æŒ‡æ ‡</returns>
         /// <remarks>
-        /// ¶ÔĞÅºÅµÄ·ùÖµºÍÆµÂÊ±ä»¯²»Ãô¸Ğ£¨Óë»úÆ÷¹¤×÷Ìõ¼ş¹ØÏµ²»´ó£©£¬¶ø¶Ô¹ÊÕÏ×ã¹»Ãô¸Ğ¡£
+        /// å¯¹ä¿¡å·çš„å¹…å€¼å’Œé¢‘ç‡å˜åŒ–ä¸æ•æ„Ÿï¼ˆä¸æœºå™¨å·¥ä½œæ¡ä»¶å…³ç³»ä¸å¤§ï¼‰ï¼Œè€Œå¯¹æ•…éšœè¶³å¤Ÿæ•æ„Ÿã€‚
         /// </remarks>
-        //	Ê¹ÓÃMathBasic.Div()·½·¨
+        //	ä½¿ç”¨MathBasic.Div()æ–¹æ³•
         public static _ValueT ShapeFactor( _ValueT[] xArray )
         {
             return MathBasic.Div( RMS( xArray ), StatisticsUtils.AbsMean( xArray ) );
         }
 
         /// <summary>
-        /// Âö³åÖ¸±ê. (ÎŞÁ¿¸ÙÖ¸±ê)
+        /// è„‰å†²æŒ‡æ ‡. (æ— é‡çº²æŒ‡æ ‡)
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>Âö³åÖ¸±ê</returns>
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>è„‰å†²æŒ‡æ ‡</returns>
         /// <remarks>
-        /// ¶ÔĞÅºÅµÄ·ùÖµºÍÆµÂÊ±ä»¯²»Ãô¸Ğ£¨Óë»úÆ÷¹¤×÷Ìõ¼ş¹ØÏµ²»´ó£©£¬¶ø¶Ô¹ÊÕÏ×ã¹»Ãô¸Ğ¡£
+        /// å¯¹ä¿¡å·çš„å¹…å€¼å’Œé¢‘ç‡å˜åŒ–ä¸æ•æ„Ÿï¼ˆä¸æœºå™¨å·¥ä½œæ¡ä»¶å…³ç³»ä¸å¤§ï¼‰ï¼Œè€Œå¯¹æ•…éšœè¶³å¤Ÿæ•æ„Ÿã€‚
         /// </remarks>
-        //	Ê¹ÓÃCollectionUtils.AbsMax()·½·¨Ìæ»»CollectionUtils.Max()
-        //	Ê¹ÓÃMathBasic.Div()·½·¨ºÍCollectionUtils.AbsMax()
+        //	ä½¿ç”¨CollectionUtils.AbsMax()æ–¹æ³•æ›¿æ¢CollectionUtils.Max()
+        //	ä½¿ç”¨MathBasic.Div()æ–¹æ³•å’ŒCollectionUtils.AbsMax()
         public static _ValueT ImpulseFactor( _ValueT[] xArray )
         {
-            return MathBasic.Div( CollectionUtils.AbsMax( xArray ), StatisticsUtils.AbsMean( xArray ) );
+            return MathBasic.Div( NumbersUtils.AbsMax( xArray ), StatisticsUtils.AbsMean( xArray ) );
         }
 
         /// <summary>
-        /// ·åÖµÖ¸±ê. (ÎŞÁ¿¸ÙÖ¸±ê)
+        /// å³°å€¼æŒ‡æ ‡. (æ— é‡çº²æŒ‡æ ‡)
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>·åÖµÖ¸±ê</returns>
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>å³°å€¼æŒ‡æ ‡</returns>
         /// <remarks>
-        /// ¶ÔĞÅºÅµÄ·ùÖµºÍÆµÂÊ±ä»¯²»Ãô¸Ğ£¨Óë»úÆ÷¹¤×÷Ìõ¼ş¹ØÏµ²»´ó£©£¬¶ø¶Ô¹ÊÕÏ×ã¹»Ãô¸Ğ¡£
+        /// å¯¹ä¿¡å·çš„å¹…å€¼å’Œé¢‘ç‡å˜åŒ–ä¸æ•æ„Ÿï¼ˆä¸æœºå™¨å·¥ä½œæ¡ä»¶å…³ç³»ä¸å¤§ï¼‰ï¼Œè€Œå¯¹æ•…éšœè¶³å¤Ÿæ•æ„Ÿã€‚
         /// </remarks>
-        //	Ê¹ÓÃCollectionUtils.AbsMax()·½·¨Ìæ»»CollectionUtils.Max()
-        //	Ê¹ÓÃMathBasic.Div()·½·¨ºÍCollectionUtils.AbsMax()
+        //	ä½¿ç”¨CollectionUtils.AbsMax()æ–¹æ³•æ›¿æ¢CollectionUtils.Max()
+        //	ä½¿ç”¨MathBasic.Div()æ–¹æ³•å’ŒCollectionUtils.AbsMax()
         public static _ValueT CrestFactor( _ValueT[] xArray )
         {
-            return MathBasic.Div( CollectionUtils.AbsMax( xArray ), RMS( xArray ) );
+            return MathBasic.Div( NumbersUtils.AbsMax( xArray ), RMS( xArray ) );
         }
 
         /// <summary>
-        /// Ô£¶ÈÖ¸±ê. (ÎŞÁ¿¸ÙÖ¸±ê)
+        /// è£•åº¦æŒ‡æ ‡. (æ— é‡çº²æŒ‡æ ‡)
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>Ô£¶ÈÖ¸±ê</returns>
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>è£•åº¦æŒ‡æ ‡</returns>
         /// <remarks>
-        /// ¶ÔĞÅºÅµÄ·ùÖµºÍÆµÂÊ±ä»¯²»Ãô¸Ğ£¨Óë»úÆ÷¹¤×÷Ìõ¼ş¹ØÏµ²»´ó£©£¬¶ø¶Ô¹ÊÕÏ×ã¹»Ãô¸Ğ¡£
+        /// å¯¹ä¿¡å·çš„å¹…å€¼å’Œé¢‘ç‡å˜åŒ–ä¸æ•æ„Ÿï¼ˆä¸æœºå™¨å·¥ä½œæ¡ä»¶å…³ç³»ä¸å¤§ï¼‰ï¼Œè€Œå¯¹æ•…éšœè¶³å¤Ÿæ•æ„Ÿã€‚
         /// </remarks>
-        //	Ê¹ÓÃCollectionUtils.AbsMax()·½·¨Ìæ»»CollectionUtils.Max()
-        //	Ê¹ÓÃMathBasic.Div()·½·¨ºÍCollectionUtils.AbsMax()
+        //	ä½¿ç”¨CollectionUtils.AbsMax()æ–¹æ³•æ›¿æ¢CollectionUtils.Max()
+        //	ä½¿ç”¨MathBasic.Div()æ–¹æ³•å’ŒCollectionUtils.AbsMax()
         public static _ValueT ClearanceFactor( _ValueT[] xArray )
         {
-            return MathBasic.Div( CollectionUtils.AbsMax( xArray ), StatisticsUtils.SMR( xArray ) );
+            return MathBasic.Div( NumbersUtils.AbsMax( xArray ), StatisticsUtils.SMR( xArray ) );
         }
 
         /// <summary>
-        /// Íá¶ÈÖ¸±ê. (ÎŞÁ¿¸ÙÖ¸±ê)
+        /// æ­ªåº¦æŒ‡æ ‡. (æ— é‡çº²æŒ‡æ ‡)
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>Íá¶ÈÖ¸±ê</returns>
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>æ­ªåº¦æŒ‡æ ‡</returns>
         /// <remarks>
-        /// ¶ÔĞÅºÅµÄ·ùÖµºÍÆµÂÊ±ä»¯²»Ãô¸Ğ£¨Óë»úÆ÷¹¤×÷Ìõ¼ş¹ØÏµ²»´ó£©£¬¶ø¶Ô¹ÊÕÏ×ã¹»Ãô¸Ğ¡£
+        /// å¯¹ä¿¡å·çš„å¹…å€¼å’Œé¢‘ç‡å˜åŒ–ä¸æ•æ„Ÿï¼ˆä¸æœºå™¨å·¥ä½œæ¡ä»¶å…³ç³»ä¸å¤§ï¼‰ï¼Œè€Œå¯¹æ•…éšœè¶³å¤Ÿæ•æ„Ÿã€‚
         /// </remarks>
         public static _ValueT SkewFactor( _ValueT[] xArray )
         {
@@ -722,12 +722,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ÇÍ¶ÈÖ¸±ê. (ÎŞÁ¿¸ÙÖ¸±ê)
+        /// å³­åº¦æŒ‡æ ‡. (æ— é‡çº²æŒ‡æ ‡)
         /// </summary>
-        /// <param name="xArray">ÊäÈëÔ­Ê¼ĞÅºÅ</param>
-        /// <returns>ÇÍ¶ÈÖ¸±ê</returns>
+        /// <param name="xArray">è¾“å…¥åŸå§‹ä¿¡å·</param>
+        /// <returns>å³­åº¦æŒ‡æ ‡</returns>
         /// <remarks>
-        /// ¶ÔĞÅºÅµÄ·ùÖµºÍÆµÂÊ±ä»¯²»Ãô¸Ğ£¨Óë»úÆ÷¹¤×÷Ìõ¼ş¹ØÏµ²»´ó£©£¬¶ø¶Ô¹ÊÕÏ×ã¹»Ãô¸Ğ¡£
+        /// å¯¹ä¿¡å·çš„å¹…å€¼å’Œé¢‘ç‡å˜åŒ–ä¸æ•æ„Ÿï¼ˆä¸æœºå™¨å·¥ä½œæ¡ä»¶å…³ç³»ä¸å¤§ï¼‰ï¼Œè€Œå¯¹æ•…éšœè¶³å¤Ÿæ•æ„Ÿã€‚
         /// </remarks>
         public static _ValueT KurtoFactor( _ValueT[] xArray )
         {
@@ -739,13 +739,13 @@ namespace AnalysisAlgorithm
 
         #endregion
 
-        #region ĞÅºÅ¼Ó´°Ëã·¨
+        #region ä¿¡å·åŠ çª—ç®—æ³•
 
         /// <summary>
-        /// ¶ÔĞÅºÅÓ¦ÓÃÒ»¸öÈı½Ç´°
+        /// å¯¹ä¿¡å·åº”ç”¨ä¸€ä¸ªä¸‰è§’çª—
         /// </summary>
-        /// <param name="xArray">Ò»Î¬ÊäÈëĞÅºÅ</param>
-        /// <returns>·µ»Ø¼Ó´°ºóµÄĞÅºÅ</returns>
+        /// <param name="xArray">ä¸€ç»´è¾“å…¥ä¿¡å·</param>
+        /// <returns>è¿”å›åŠ çª—åçš„ä¿¡å·</returns>
         public static _ValueT[] TriangleWindow( _ValueT[] xArray )
         {
             Single[] win = Window.GenTriWindow( xArray.Length );
@@ -753,10 +753,10 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¶ÔĞÅºÅÓ¦ÓÃÒ»¸öººÄş´°
+        /// å¯¹ä¿¡å·åº”ç”¨ä¸€ä¸ªæ±‰å®çª—
         /// </summary>
-        /// <param name="xArray">Ò»Î¬ÊäÈëĞÅºÅ</param>
-        /// <returns>·µ»Ø¼Ó´°ºóµÄĞÅºÅ</returns>
+        /// <param name="xArray">ä¸€ç»´è¾“å…¥ä¿¡å·</param>
+        /// <returns>è¿”å›åŠ çª—åçš„ä¿¡å·</returns>
         public static _ValueT[] HanningWindow( _ValueT[] xArray )
         {
             Single[] win = Window.GenCosWindows( WindowType.Hanning, xArray.Length );
@@ -764,10 +764,10 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¶ÔĞÅºÅÓ¦ÓÃÒ»¸ö¹şÃ÷´°
+        /// å¯¹ä¿¡å·åº”ç”¨ä¸€ä¸ªå“ˆæ˜çª—
         /// </summary>
-        /// <param name="xArray">Ò»Î¬ÊäÈëĞÅºÅ</param>
-        /// <returns>·µ»Ø¼Ó´°ºóµÄĞÅºÅ</returns>
+        /// <param name="xArray">ä¸€ç»´è¾“å…¥ä¿¡å·</param>
+        /// <returns>è¿”å›åŠ çª—åçš„ä¿¡å·</returns>
         public static _ValueT[] HammingWindow( _ValueT[] xArray )
         {
             Single[] win = Window.GenCosWindows( WindowType.Hamming, xArray.Length );
@@ -775,10 +775,10 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¶ÔĞÅºÅÓ¦ÓÃÒ»¸ö²¼À³¿ËÂü´°
+        /// å¯¹ä¿¡å·åº”ç”¨ä¸€ä¸ªå¸ƒè±å…‹æ›¼çª—
         /// </summary>
-        /// <param name="xArray">Ò»Î¬ÊäÈëĞÅºÅ</param>
-        /// <returns>·µ»Ø¼Ó´°ºóµÄĞÅºÅ</returns>
+        /// <param name="xArray">ä¸€ç»´è¾“å…¥ä¿¡å·</param>
+        /// <returns>è¿”å›åŠ çª—åçš„ä¿¡å·</returns>
         public static _ValueT[] BlackmanWindow( _ValueT[] xArray )
         {
             Single[] win = Window.GenCosWindows( WindowType.Blackman, xArray.Length );
@@ -786,10 +786,10 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¶ÔĞÅºÅÓ¦ÓÃÒ»¸öÆ½¶¥´°
+        /// å¯¹ä¿¡å·åº”ç”¨ä¸€ä¸ªå¹³é¡¶çª—
         /// </summary>
-        /// <param name="xArray">Ò»Î¬ÊäÈëĞÅºÅ</param>
-        /// <returns>·µ»Ø¼Ó´°ºóµÄĞÅºÅ</returns>
+        /// <param name="xArray">ä¸€ç»´è¾“å…¥ä¿¡å·</param>
+        /// <returns>è¿”å›åŠ çª—åçš„ä¿¡å·</returns>
         public static _ValueT[] FlatTopWindow( _ValueT[] xArray )
         {
             Single[] win = Window.GenCosWindows( WindowType.FlatTop, xArray.Length );
@@ -797,11 +797,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¶ÔĞÅºÅÓ¦ÓÃÒ»¸öÆ½¶¥´°
+        /// å¯¹ä¿¡å·åº”ç”¨ä¸€ä¸ªå¹³é¡¶çª—
         /// </summary>
-        /// <param name="xArray">Ò»Î¬ÊäÈëĞÅºÅ</param>
-        /// <param name="final">Ö¸Êı´°ÖÕÖµ(ÍÆ¼öfinal=0.01)</param>
-        /// <returns>·µ»Ø¼Ó´°ºóµÄĞÅºÅ</returns>
+        /// <param name="xArray">ä¸€ç»´è¾“å…¥ä¿¡å·</param>
+        /// <param name="final">æŒ‡æ•°çª—ç»ˆå€¼(æ¨èfinal=0.01)</param>
+        /// <returns>è¿”å›åŠ çª—åçš„ä¿¡å·</returns>
         public static _ValueT[] ExpWindow( _ValueT[] xArray, Single final )
         {
             Single[] win = Window.GenExpWindow( xArray.Length, final );
@@ -809,11 +809,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¶ÔĞÅºÅÓ¦ÓÃÒ»¸öÁ¦´°
+        /// å¯¹ä¿¡å·åº”ç”¨ä¸€ä¸ªåŠ›çª—
         /// </summary>
-        /// <param name="xArray">Ò»Î¬ÊäÈëĞÅºÅ</param>
-        /// <param name="duty">ÑÓ³ÙµÄ°Ù·Ö±È(ÍÆ¼öduty=50)</param>
-        /// <returns>·µ»Ø¼Ó´°ºóµÄĞÅºÅ</returns>
+        /// <param name="xArray">ä¸€ç»´è¾“å…¥ä¿¡å·</param>
+        /// <param name="duty">å»¶è¿Ÿçš„ç™¾åˆ†æ¯”(æ¨èduty=50)</param>
+        /// <returns>è¿”å›åŠ çª—åçš„ä¿¡å·</returns>
         public static _ValueT[] ForceWindow( _ValueT[] xArray, Single duty )
         {
             Single[] win = Window.GenForceWindow( xArray.Length, duty );
@@ -821,21 +821,21 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¸øĞÅºÅ¼Ó´°
+        /// ç»™ä¿¡å·åŠ çª—
         /// </summary>
-        /// <param name="xArray">ĞÅºÅ</param>
-        /// <param name="window">´°ÏµÊı</param>
+        /// <param name="xArray">ä¿¡å·</param>
+        /// <param name="window">çª—ç³»æ•°</param>
         private static _ValueT[] MaskWindow( _ValueT[] xArray, Single[] window )
         {
             return MaskWindow( xArray, window, Window.AmpScale_Rectangle );
         }
 
         /// <summary>
-        /// ¸øĞÅºÅ¼Ó´°
+        /// ç»™ä¿¡å·åŠ çª—
         /// </summary>
-        /// <param name="xArray">ĞÅºÅ</param>
-        /// <param name="window">´°ÏµÊı</param>
-        /// <param name="ampScale">·ùÖµÏàµÈ»Ö¸´ÏµÊı</param>
+        /// <param name="xArray">ä¿¡å·</param>
+        /// <param name="window">çª—ç³»æ•°</param>
+        /// <param name="ampScale">å¹…å€¼ç›¸ç­‰æ¢å¤ç³»æ•°</param>
         private static _ValueT[] MaskWindow( _ValueT[] xArray, Single[] window, Single ampScale )
         {
             _ValueT[] ret = new _ValueT[xArray.Length];

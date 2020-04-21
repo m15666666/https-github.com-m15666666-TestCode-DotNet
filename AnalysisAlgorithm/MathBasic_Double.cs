@@ -1,31 +1,41 @@
 using System;
-// ¼ÆËãÖĞÊ¹ÓÃµÄÊıÖµÀàĞÍ£¬ÓÃÒÔÃÖ²¹²»ÄÜÖ±½ÓÊ¹ÓÃ·ºĞÍµÄÎÊÌâ¡£
+// è®¡ç®—ä¸­ä½¿ç”¨çš„æ•°å€¼ç±»å‹ï¼Œç”¨ä»¥å¼¥è¡¥ä¸èƒ½ç›´æ¥ä½¿ç”¨æ³›å‹çš„é—®é¢˜ã€‚
 using _ValueT = System.Double;
 
 namespace AnalysisAlgorithm
 {
     /// <summary>
-    /// ÊıÑ§»ù±¾Ëã·¨Àà¡£
+    /// æ•°å­¦åŸºæœ¬ç®—æ³•ç±»ã€‚
     /// </summary>
     public static partial class MathBasic
     {
         /// <summary>
-        /// ½«Á½¸öÊıÏà³ı£¬·ÀÖ¹³ı0´ëÊ©,ÒıÈë¼«Ğ¡Öµ¡£
+        /// å°†ä¸¤ä¸ªæ•°ç›¸é™¤ï¼Œé˜²æ­¢é™¤0æªæ–½,å¼•å…¥æå°å€¼ã€‚
         /// </summary>
         /// <param name="x">x</param>
         /// <param name="y">y</param>
-        /// <returns>·µ»Øz</returns>
+        /// <returns>è¿”å›z</returns>
         public static _ValueT Div( _ValueT x, _ValueT y )
         {
             return x / ( y == 0 ? MathConst.epsilon : y );
         }
 
         /// <summary>
-        /// Æ½·½ÖµºÍ
+        /// å¹³æ–¹å€¼å’Œ
         /// </summary>
-        /// <param name="values">ÊäÈëÖµ</param>
-        /// <returns>Æ½·½Öµ</returns>
+        /// <param name="values">è¾“å…¥å€¼</param>
+        /// <returns>å¹³æ–¹å€¼</returns>
         public static _ValueT SquareSum( params _ValueT[] values )
+        {
+            return SquareSum(values.AsSpan());
+        }
+
+        /// <summary>
+        /// å¹³æ–¹å€¼å’Œ
+        /// </summary>
+        /// <param name="values">è¾“å…¥å€¼</param>
+        /// <returns>å¹³æ–¹å€¼</returns>
+        public static _ValueT SquareSum( Span<_ValueT> values )
         {
             _ValueT sum = 0;
             foreach( _ValueT value in values )
@@ -38,16 +48,16 @@ namespace AnalysisAlgorithm
         #region integer power
 
         /// <summary>
-        /// ·µ»ØÖ¸¶¨Êı×ÖµÄÖ¸¶¨´ÎÃİ£¬power±ØĞëÎªÕıÕûÊı
+        /// è¿”å›æŒ‡å®šæ•°å­—çš„æŒ‡å®šæ¬¡å¹‚ï¼Œpowerå¿…é¡»ä¸ºæ­£æ•´æ•°
         /// </summary>
         /// <param name="x">x</param>
-        /// <param name="power">Ãİ´Î</param>
-        /// <returns>Ö¸¶¨Êı×ÖµÄÖ¸¶¨´ÎÃİ</returns>
+        /// <param name="power">å¹‚æ¬¡</param>
+        /// <returns>æŒ‡å®šæ•°å­—çš„æŒ‡å®šæ¬¡å¹‚</returns>
         public static _ValueT PositivePow( _ValueT x, int power )
         {
             if( power <= 0 )
             {
-                throw new ArgumentOutOfRangeException( String.Format( "power({0})±ØĞëÊÇÕıÕûÊı£¡", power ) );
+                throw new ArgumentOutOfRangeException( String.Format( "power({0})å¿…é¡»æ˜¯æ­£æ•´æ•°ï¼", power ) );
             }
 
             _ValueT ret = 1;
@@ -59,11 +69,11 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ·µ»ØÖ¸¶¨Êı×ÖµÄÖ¸¶¨´ÎÃİ
+        /// è¿”å›æŒ‡å®šæ•°å­—çš„æŒ‡å®šæ¬¡å¹‚
         /// </summary>
         /// <param name="x">x</param>
-        /// <param name="power">Ãİ´Î</param>
-        /// <returns>Ö¸¶¨Êı×ÖµÄÖ¸¶¨´ÎÃİ</returns>
+        /// <param name="power">å¹‚æ¬¡</param>
+        /// <returns>æŒ‡å®šæ•°å­—çš„æŒ‡å®šæ¬¡å¹‚</returns>
         public static _ValueT IntegerPow( _ValueT x, int power )
         {
             if( power == 0 )

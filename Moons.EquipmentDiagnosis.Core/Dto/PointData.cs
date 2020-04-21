@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -238,13 +238,15 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public double[] Timewave { get; set; }
 
         /// <summary>
-        /// 幅值谱*0.707转换为有效值谱
-        /// </summary>
-        public double[] FFT { get; set; }
-        /// <summary>
-        /// 幅值谱*0.707转换为有效值谱中的整数分频，下标为0对应1X
+        /// 幅值谱或有效值谱中的整数分频，下标为0对应1X
         /// </summary>
         public double[] XFFT { get; set; }
+
+        /// <summary>
+        /// 幅值谱或有效值谱中的0.5整数分频，下标为0对应0.5X
+        /// </summary>
+        public double[] XHalfFFT { get; set; }
+
 
         /// <summary>
         /// 100Hz分量
@@ -255,18 +257,18 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 
         /// </summary>
         public double Overall { get; set; }
-        public double HighestRMS { get; set; }
-        public double X0_5 { get; set; }
-        public double X1_5 { get; set; }
-        public double X2_5 { get; set; }
-        public double X3_5 { get; set; }
-        public double X4_5 { get; set; }
-        public double X5_5 { get; set; }
+        public double HighestPeak { get; set; }
+        public double X0_5 => XHalfFFT != null && 0 < XHalfFFT.Length ? XHalfFFT[0] : 0;
+        public double X1_5 => XHalfFFT != null && 1 < XHalfFFT.Length ? XHalfFFT[1] : 0;
+        public double X2_5 => XHalfFFT != null && 2 < XHalfFFT.Length ? XHalfFFT[2] : 0;
+        public double X3_5 => XHalfFFT != null && 3 < XHalfFFT.Length ? XHalfFFT[3] : 0;
+        public double X4_5 => XHalfFFT != null && 4 < XHalfFFT.Length ? XHalfFFT[4] : 0;
+        public double X5_5 => XHalfFFT != null && 5 < XHalfFFT.Length ? XHalfFFT[5] : 0;
         public double X1 => XFFT != null && 0 < XFFT.Length ? XFFT[0] : 0;
-        public double X2  => XFFT != null && 1 < XFFT.Length ? XFFT[1] : 0;
-        public double X3  => XFFT != null && 2 < XFFT.Length ? XFFT[2] : 0;
-        public double X4  => XFFT != null && 3 < XFFT.Length ? XFFT[3] : 0;
-        public double X5  => XFFT != null && 4 < XFFT.Length ? XFFT[4] : 0;
-        public double X6  => XFFT != null && 5 < XFFT.Length ? XFFT[5] : 0;
+        public double X2 => XFFT != null && 1 < XFFT.Length ? XFFT[1] : 0;
+        public double X3 => XFFT != null && 2 < XFFT.Length ? XFFT[2] : 0;
+        public double X4 => XFFT != null && 3 < XFFT.Length ? XFFT[3] : 0;
+        public double X5 => XFFT != null && 4 < XFFT.Length ? XFFT[4] : 0;
+        public double X6 => XFFT != null && 5 < XFFT.Length ? XFFT[5] : 0;
     }
 }

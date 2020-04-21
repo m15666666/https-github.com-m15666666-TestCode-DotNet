@@ -3,9 +3,9 @@ using System;
 namespace AnalysisAlgorithm
 {
     /// <summary>
-    /// ¼¯ºÏ²Ù×÷ÊµÓÃ¹¤¾ßÀà
+    /// é›†åˆæ“ä½œå®ç”¨å·¥å…·ç±»
     /// </summary>
-    public static partial class CollectionUtils
+    public static partial class NumbersUtils
     {
     }
 }

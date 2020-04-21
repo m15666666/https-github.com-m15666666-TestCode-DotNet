@@ -1,4 +1,4 @@
-﻿using AnalysisAlgorithm;
+using AnalysisAlgorithm;
 
 namespace AnalysisData.Helper
 {
@@ -69,7 +69,7 @@ namespace AnalysisData.Helper
         /// <param name="waveScale">波形的比例系数</param>
         public static void DoubleWave2Short( double[] inWave, out short[] outWave, out double waveScale )
         {
-            double absMax = CollectionUtils.AbsMax( inWave );
+            double absMax = NumbersUtils.AbsMax( inWave );
 
             waveScale = GetWaveScale( absMax );
 

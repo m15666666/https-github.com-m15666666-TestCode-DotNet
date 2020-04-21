@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 // 计算中使用的数值类型，用以弥补不能直接使用泛型的问题。
 using Moons.Common20;
@@ -43,7 +43,7 @@ namespace AnalysisAlgorithm
             b[1] = 1;
 
             _ValueT[] xDataOffset = ArrayUtils.Clone( xData );
-            CollectionUtils.OffsetArray( xDataOffset, -xMean );
+            NumbersUtils.OffsetArray( xDataOffset, -xMean );
 
             Double xSum = StatisticsUtils.Mean( xDataOffset );
 

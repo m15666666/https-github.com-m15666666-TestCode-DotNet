@@ -4,15 +4,15 @@ using Moons.Common20;
 namespace AnalysisAlgorithm
 {
     /// <summary>
-    /// ÓëEMD£¨¾­ÑéÄ£Ì¬·Ö½â£©Ïà¹ØµÄËã·¨Àà
+    /// ä¸EMDï¼ˆç»éªŒæ¨¡æ€åˆ†è§£ï¼‰ç›¸å…³çš„ç®—æ³•ç±»
     /// </summary>
     public static class EMD
     {
         /// <summary>
-        /// EMD·Ö½â
+        /// EMDåˆ†è§£
         /// </summary>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <returns>·Ö½âµÄ½á¹û</returns>
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <returns>åˆ†è§£çš„ç»“æœ</returns>
         public static Double[][] EMDDecomposition( Double[] timeWave )
         {
             Double[][] decomposition = new EMDImp( timeWave ).EMDDecomposition();
@@ -33,57 +33,57 @@ namespace AnalysisAlgorithm
             return null;
         }
 
-        #region EMDµÄÊµÏÖÀà
+        #region EMDçš„å®ç°ç±»
 
         /// <summary>
-        /// EMDµÄÊµÏÖÀà
+        /// EMDçš„å®ç°ç±»
         /// </summary>
         private class EMDImp
         {
             private int MaxNumber, MinNumber;
 
             /// <summary>
-            /// Êı¾İ³¤¶È
+            /// æ•°æ®é•¿åº¦
             /// </summary>
             private readonly int DataLength;
 
             /// <summary>
-            /// Éú³É°üÂç¹ı³ÌÖĞ±£´æ×î´óÖµ£¬×îĞ¡Öµ
+            /// ç”ŸæˆåŒ…ç»œè¿‡ç¨‹ä¸­ä¿å­˜æœ€å¤§å€¼ï¼Œæœ€å°å€¼
             /// </summary>
             private readonly Double[][] maxdata;
 
             /// <summary>
-            /// Éú³É°üÂç¹ı³ÌÖĞ±£´æ×î´óÖµ£¬×îĞ¡Öµ
+            /// ç”ŸæˆåŒ…ç»œè¿‡ç¨‹ä¸­ä¿å­˜æœ€å¤§å€¼ï¼Œæœ€å°å€¼
             /// </summary>
             private readonly Double[][] mindata;
 
             /// <summary>
-            /// XÖáÊı×é
+            /// Xè½´æ•°ç»„
             /// </summary>
             private readonly Double[] time;
 
             /// <summary>
-            /// ÓÃÓÚ´«ÈëÉú³É°üÂçµÄÏµÊı
+            /// ç”¨äºä¼ å…¥ç”ŸæˆåŒ…ç»œçš„ç³»æ•°
             /// </summary>
             private readonly Double[] x0;
 
             /// <summary>
-            /// ÓÃÓÚ´«ÈëÉú³É°üÂçµÄÏµÊı
+            /// ç”¨äºä¼ å…¥ç”ŸæˆåŒ…ç»œçš„ç³»æ•°
             /// </summary>
             private readonly Double[] y0;
 
             /// <summary>
-            /// XÖáÊı×é£¬Í¬time£¬Ö±½Ó¸´ÖÆtimeµÄÊı¾İ
+            /// Xè½´æ•°ç»„ï¼ŒåŒtimeï¼Œç›´æ¥å¤åˆ¶timeçš„æ•°æ®
             /// </summary>
             private readonly Double[] x;
 
             /// <summary>
-            /// °üÂç½á¹ûµÄÊä³ö
+            /// åŒ…ç»œç»“æœçš„è¾“å‡º
             /// </summary>
             private readonly Double[] y;
 
             /// <summary>
-            /// µÚÒ»ĞĞÊÇÊ±¼ä²¨ĞÎ£¬ÆäËû4ĞĞ±£´æÖĞ¼ä½á¹û
+            /// ç¬¬ä¸€è¡Œæ˜¯æ—¶é—´æ³¢å½¢ï¼Œå…¶ä»–4è¡Œä¿å­˜ä¸­é—´ç»“æœ
             /// </summary>
             private readonly Double[][] data;
 
@@ -106,7 +106,7 @@ namespace AnalysisAlgorithm
                 x0 = new Double[DataLength];
                 y0 = new Double[DataLength];
 
-                // ½«Ê±¼äÊıÖµ¸³Óèx(t)Êı×é,¹©ºóÃæµÄÀı³Ìµ÷ÓÃ
+                // å°†æ—¶é—´æ•°å€¼èµ‹äºˆx(t)æ•°ç»„,ä¾›åé¢çš„ä¾‹ç¨‹è°ƒç”¨
                 x = new Double[DataLength];
                 time.CopyTo( x, 0 );
 
@@ -236,7 +236,7 @@ namespace AnalysisAlgorithm
             }
 
             /// <summary>
-            /// Èç¹ûÉÏÏÂ¼«ÖµµãµÄÊıÄ¿Ğ¡ÓÚ3, Ôò³ö´í
+            /// å¦‚æœä¸Šä¸‹æå€¼ç‚¹çš„æ•°ç›®å°äº3, åˆ™å‡ºé”™
             /// </summary>
             private bool IsMaxMinNumberError()
             {
@@ -245,13 +245,13 @@ namespace AnalysisAlgorithm
 
             public Double[][] EMDDecomposition()
             {
-                // ³õÊ¼»¯Êı¾İ
+                // åˆå§‹åŒ–æ•°æ®
                 Double[][] ret = ArrayUtils.CreateJaggedArray<double>( 4, DataLength );
 
-                // ±£´ædataÖĞÉÏÒ»¸öÏÂ±êµÄÊı¾İ
+                // ä¿å­˜dataä¸­ä¸Šä¸€ä¸ªä¸‹æ ‡çš„æ•°æ®
                 Double[] dataBackup = new Double[DataLength];
 
-                // ÓÃÓÚµÚ¶ş´Î¼ÆËã
+                // ç”¨äºç¬¬äºŒæ¬¡è®¡ç®—
                 Double[] work2 = new Double[DataLength];
 
                 //Double[] vTmpData = new Double[DataLength];
@@ -265,31 +265,31 @@ namespace AnalysisAlgorithm
                 const int IMFNumber = 4;
                 for( int imfNumber = 1; imfNumber <= IMFNumber; imfNumber++ )
                 {
-                    // µ±Ç°imfNumberÏÂ±êµÄdata
+                    // å½“å‰imfNumberä¸‹æ ‡çš„data
                     Double[] imfData = data[imfNumber];
 
-                    // ÉÏÒ»¸öimfNumberÏÂ±êµÄdata
+                    // ä¸Šä¸€ä¸ªimfNumberä¸‹æ ‡çš„data
                     Double[] imfDataLast = data[imfNumber - 1];
 
-                    // ±¸·İÏÂ±êÎªimfNumber - 1µÄdataÊı×é
+                    // å¤‡ä»½ä¸‹æ ‡ä¸ºimfNumber - 1çš„dataæ•°ç»„
                     imfDataLast.CopyTo( dataBackup, 0 );
 
-                    // Ñ¡È¡ÓàÁ¿×î´óÊıÖµµÄãĞÖµ
-                    Double threshold = CollectionUtils.AbsMax( imfDataLast ) / 10;
+                    // é€‰å–ä½™é‡æœ€å¤§æ•°å€¼çš„é˜ˆå€¼
+                    Double threshold = NumbersUtils.AbsMax( imfDataLast ) / 10;
 
-                    // ÖÁÉÙÖ´ĞĞÒ»´Î
+                    // è‡³å°‘æ‰§è¡Œä¸€æ¬¡
                     while( true )
                     {
-                        // ¼ÆËã¾Ö²¿¼«Öµ
+                        // è®¡ç®—å±€éƒ¨æå€¼
                         CalcMaxMinData( imfDataLast );
 
-                        // Èç¹ûÉÏÏÂ¼«ÖµµãµÄÊıÄ¿Ğ¡ÓÚ3, ÔòÍ£Ö¹Ö´ĞĞ
+                        // å¦‚æœä¸Šä¸‹æå€¼ç‚¹çš„æ•°ç›®å°äº3, åˆ™åœæ­¢æ‰§è¡Œ
                         if( IsMaxMinNumberError() )
                         {
                             throw GetIMFNUException( imfNumber - 1 );
                         }
 
-                        // ¿ªÊ¼¼ÆËãÉÏ°üÂçÏß
+                        // å¼€å§‹è®¡ç®—ä¸ŠåŒ…ç»œçº¿
                         for( int index = 0; index < MaxNumber; index++ )
                         {
                             x0[index] = max_0[index];
@@ -300,10 +300,10 @@ namespace AnalysisAlgorithm
 
                         y.CopyTo( imfData, 0 );
 
-                        // ÒÔÉÏ£ºÉÏ°üÂçÏß¼ÆËãÍê±Ï
+                        // ä»¥ä¸Šï¼šä¸ŠåŒ…ç»œçº¿è®¡ç®—å®Œæ¯•
 
 
-                        // ¿ªÊ¼¼ÆËãÏÂ°üÂçÏß
+                        // å¼€å§‹è®¡ç®—ä¸‹åŒ…ç»œçº¿
                         for( int index = 0; index < MinNumber; index++ )
                         {
                             x0[index] = min_0[index];
@@ -317,19 +317,19 @@ namespace AnalysisAlgorithm
                             imfData[index] = ( imfData[index] + y[index] ) / 2;
                         }
 
-                        // ÒÔÉÏ£ºÏÂ°üÂçÏßºÍÉÏ°üÂçÏßµÄÖĞĞÄÏß¼ÆËãÍê±Ï,ÊıÖµ´æ·ÅÔÚ (data(imfnumber, k),k=0..DataLength-1)
+                        // ä»¥ä¸Šï¼šä¸‹åŒ…ç»œçº¿å’Œä¸ŠåŒ…ç»œçº¿çš„ä¸­å¿ƒçº¿è®¡ç®—å®Œæ¯•,æ•°å€¼å­˜æ”¾åœ¨ (data(imfnumber, k),k=0..DataLength-1)
 
 
-                        // ¿ªÊ¼¼ÆËãIMF
+                        // å¼€å§‹è®¡ç®—IMF
                         for( int index = 0; index < DataLength; index++ )
                         {
                             imfData[index] = imfDataLast[index] - imfData[index];
                         }
 
-                        // ÑéÖ¤ÊÇ·ñÎªÕæÊµµÄIMF,ÖØĞÂ¼ÆËãÉÏÏÂ°üÂçÏß
+                        // éªŒè¯æ˜¯å¦ä¸ºçœŸå®çš„IMF,é‡æ–°è®¡ç®—ä¸Šä¸‹åŒ…ç»œçº¿
                         CalcMaxMinData( imfData );
 
-                        // Èç¹ûÉÏÏÂ¼«ÖµµãµÄÊıÄ¿Ğ¡ÓÚ3, ÔòÍ£Ö¹Ö´ĞĞ
+                        // å¦‚æœä¸Šä¸‹æå€¼ç‚¹çš„æ•°ç›®å°äº3, åˆ™åœæ­¢æ‰§è¡Œ
                         if( IsMaxMinNumberError() )
                         {
                             throw GetIMFNUException( imfNumber - 1 );
@@ -358,10 +358,10 @@ namespace AnalysisAlgorithm
                             work2[index] = ( work2[index] + y[index] ) / 2;
                         }
 
-                        // ×¼±¸ÏÂÒ»´ÎÑ­»·
+                        // å‡†å¤‡ä¸‹ä¸€æ¬¡å¾ªç¯
                         imfData.CopyTo( imfDataLast, 0 );
 
-                        // ¼ÆËãÖĞĞÄÏßµÄÆ½¾ùÊ±£¬ĞèÒª¿¼ÂÇ±ß½çµÄÓ°Ïì
+                        // è®¡ç®—ä¸­å¿ƒçº¿çš„å¹³å‡æ—¶ï¼Œéœ€è¦è€ƒè™‘è¾¹ç•Œçš„å½±å“
                         Double mean = 0;
                         for( int index = 100; index < DataLength - 100; index++ )
                         {
@@ -372,7 +372,7 @@ namespace AnalysisAlgorithm
                             }
                         }
 
-                        // ÍË³öÑ­»·µÄÌõ¼ş
+                        // é€€å‡ºå¾ªç¯çš„æ¡ä»¶
                         if( mean <= threshold )
                         {
                             break;
@@ -380,7 +380,7 @@ namespace AnalysisAlgorithm
                     } // while (true)
 
 
-                    // ÖØĞÂ¸³ÓèÔ­À´µÄÕæÊµÊıÖµ
+                    // é‡æ–°èµ‹äºˆåŸæ¥çš„çœŸå®æ•°å€¼
                     dataBackup.CopyTo( imfDataLast, 0 );
 
                     //Double max = Double.MinValue;

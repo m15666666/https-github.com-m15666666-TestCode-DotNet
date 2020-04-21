@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Moons.Common20.Compare;
 
 namespace Moons.Common20
@@ -128,6 +128,18 @@ namespace Moons.Common20
             var ret = new T[count];
             Array.Copy( array, startIndex, ret, 0, ret.Length );
             return ret;
+        }
+        /// <summary>
+        /// 获得分片数组
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="array">数组</param>
+        /// <param name="startIndex">分片的起始下标</param>
+        /// <param name="count">分片的长度</param>
+        /// <returns>分片数组</returns>
+        public static Span<T> SliceSpan<T>( T[] array, int startIndex, int count )
+        {
+            return array.AsSpan(startIndex, count);
         }
 
         #region 二维数组函数

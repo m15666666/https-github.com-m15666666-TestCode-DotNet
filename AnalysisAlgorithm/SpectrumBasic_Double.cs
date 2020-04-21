@@ -1,26 +1,26 @@
 using System;
 using System.Collections.Generic;
 using Moons.Common20;
-// ¼ÆËãÖĞÊ¹ÓÃµÄÊıÖµÀàĞÍ£¬ÓÃÒÔÃÖ²¹²»ÄÜÖ±½ÓÊ¹ÓÃ·ºĞÍµÄÎÊÌâ¡£
+// è®¡ç®—ä¸­ä½¿ç”¨çš„æ•°å€¼ç±»å‹ï¼Œç”¨ä»¥å¼¥è¡¥ä¸èƒ½ç›´æ¥ä½¿ç”¨æ³›å‹çš„é—®é¢˜ã€‚
 using _ValueT = System.Double;
 
 namespace AnalysisAlgorithm
 {
     /// <summary>
-    /// ÓëÆµÆ×Ïà¹ØµÄ»ù±¾Ëã·¨Àà
+    /// ä¸é¢‘è°±ç›¸å…³çš„åŸºæœ¬ç®—æ³•ç±»
     /// </summary>
     public static partial class SpectrumBasic
     {
-        #region »ñµÃ¹¤Æµ´¦µÄĞÅÏ¢
+        #region è·å¾—å·¥é¢‘å¤„çš„ä¿¡æ¯
 
         /// <summary>
-        /// »ñµÃ¹¤Æµ´¦µÄµ¥±ßÆµÆ×µÄÊµ²¿ºÍĞé²¿
+        /// è·å¾—å·¥é¢‘å¤„çš„å•è¾¹é¢‘è°±çš„å®éƒ¨å’Œè™šéƒ¨
         /// </summary>
-        /// <param name="fs">²ÉÑùÆµÂÊ</param>
-        /// <param name="f0">¹¤Æµ</param>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <param name="re">¹¤Æµ´¦µÄµ¥±ßÆµÆ×µÄÊµ²¿</param>
-        /// <param name="im">¹¤Æµ´¦µÄµ¥±ßÆµÆ×µÄĞé²¿</param>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡</param>
+        /// <param name="f0">å·¥é¢‘</param>
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <param name="re">å·¥é¢‘å¤„çš„å•è¾¹é¢‘è°±çš„å®éƒ¨</param>
+        /// <param name="im">å·¥é¢‘å¤„çš„å•è¾¹é¢‘è°±çš„è™šéƒ¨</param>
         public static void GetBaseFreqReIm( Double fs, Double f0, _ValueT[] timeWave, out _ValueT re, out _ValueT im )
         {
             int baseFreqIndex = GetBaseFreqIndex( fs, f0, timeWave );
@@ -32,12 +32,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃ¹¤Æµ´¦µÄÏÂ±ê
+        /// è·å¾—å·¥é¢‘å¤„çš„ä¸‹æ ‡
         /// </summary>
-        /// <param name="fs">²ÉÑùÆµÂÊ</param>
-        /// <param name="f0">¹¤Æµ</param>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <returns>¹¤Æµ´¦µÄÏÂ±ê</returns>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡</param>
+        /// <param name="f0">å·¥é¢‘</param>
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <returns>å·¥é¢‘å¤„çš„ä¸‹æ ‡</returns>
         public static int GetBaseFreqIndex( Double fs, Double f0, _ValueT[] timeWave )
         {
             int centerIndex = GetFreqIndex( fs, f0, timeWave.Length );
@@ -49,14 +49,14 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃ¹¤Æµ´¦µÄÏÂ±ê
+        /// è·å¾—å·¥é¢‘å¤„çš„ä¸‹æ ‡
         /// </summary>
-        /// <param name="fs">²ÉÑùÆµÂÊ</param>
-        /// <param name="beginFrequency">ÆµÂÊ·¶Î§ÆğÊ¼</param>
-        /// <param name="endFrequency">ÆµÂÊ·¶Î§½ØÖÁ</param>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <param name="amplitudeOfF0">ÆµÆ×µÄ¹¤Æµ·ùÖµ</param>
-        /// <returns>¹¤Æµ´¦µÄÏÂ±ê</returns>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡</param>
+        /// <param name="beginFrequency">é¢‘ç‡èŒƒå›´èµ·å§‹</param>
+        /// <param name="endFrequency">é¢‘ç‡èŒƒå›´æˆªè‡³</param>
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <param name="amplitudeOfF0">é¢‘è°±çš„å·¥é¢‘å¹…å€¼</param>
+        /// <returns>å·¥é¢‘å¤„çš„ä¸‹æ ‡</returns>
         public static int GetBaseFreqIndex( Double fs, Double beginFrequency, Double endFrequency, _ValueT[] timeWave, out Double amplitudeOfF0 )
         {
             int beginIndex = GetFreqIndex( fs, Math.Min( beginFrequency, endFrequency ), timeWave.Length );
@@ -71,14 +71,14 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃ¹¤Æµ
+        /// è·å¾—å·¥é¢‘
         /// </summary>
-        /// <param name="fs">²ÉÑùÆµÂÊ</param>
-        /// <param name="beginFreq">ÆµÂÊ·¶Î§ÆğÊ¼</param>
-        /// <param name="endFreq">ÆµÂÊ·¶Î§½ØÖÁ</param>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <param name="amplitudeOfF0">ÆµÆ×µÄ¹¤Æµ·ùÖµ</param>
-        /// <returns>¹¤Æµ</returns>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡</param>
+        /// <param name="beginFreq">é¢‘ç‡èŒƒå›´èµ·å§‹</param>
+        /// <param name="endFreq">é¢‘ç‡èŒƒå›´æˆªè‡³</param>
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <param name="amplitudeOfF0">é¢‘è°±çš„å·¥é¢‘å¹…å€¼</param>
+        /// <returns>å·¥é¢‘</returns>
         public static Double GetBaseFreq( Double fs, Double beginFreq, Double endFreq, _ValueT[] timeWave, out Double amplitudeOfF0 )
         {
             int index = GetBaseFreqIndex( fs, beginFreq, endFreq, timeWave, out amplitudeOfF0 );
@@ -87,48 +87,74 @@ namespace AnalysisAlgorithm
 
         #endregion
 
-            #region »ñµÃ×ÜÖµ
+            #region è·å¾—æ€»å€¼
 
             /// <summary>
-            /// ×ÜÖµ. ·´Ó³ÁËĞÅºÅµÄÆ½¾ù¹¦ÂÊ. ¸ù¾İÆµÆ×¼ÆËã,³£×÷Îª¹¤³ÌÓ¦ÓÃÖĞÎ»ÒÆ¡¢ËÙ¶ÈºÍ¼ÓËÙ¶ÈĞÅºÅµÄÊı×ÖÌØÕ÷.
+            /// æ€»å€¼. åæ˜ äº†ä¿¡å·çš„å¹³å‡åŠŸç‡. æ ¹æ®é¢‘è°±è®¡ç®—,å¸¸ä½œä¸ºå·¥ç¨‹åº”ç”¨ä¸­ä½ç§»ã€é€Ÿåº¦å’ŒåŠ é€Ÿåº¦ä¿¡å·çš„æ•°å­—ç‰¹å¾.
             /// </summary>
-            /// <param name="xArray">Ê±¼ä²¨ĞÎ</param>
-            /// <returns>×ÜÖµ</returns>
+            /// <param name="xArray">æ—¶é—´æ³¢å½¢</param>
+            /// <returns>æ€»å€¼</returns>
         public static _ValueT Overall( _ValueT[] xArray )
         {
             return Overall_AmpSpectrum( AmpSpectrum( xArray ) );
         }
 
         /// <summary>
-        /// Í¨¹ıµ¥±ß·ùÖµÆ×»ñµÃ×ÜÖµ
+        /// é€šè¿‡å•è¾¹å¹…å€¼è°±è·å¾—æ€»å€¼
         /// </summary>
-        /// <param name="ampSpectrum">·ùÖµÆ×</param>
-        /// <returns>×ÜÖµ</returns>
+        /// <param name="ampSpectrum">å¹…å€¼è°±</param>
+        /// <returns>æ€»å€¼</returns>
         public static _ValueT Overall_AmpSpectrum( _ValueT[] ampSpectrum )
         {
             return Overall_AmpSpectrum( ampSpectrum, 0, ampSpectrum.Length, WindowType.Rectangular );
         }
+        /// <summary>
+        /// é€šè¿‡æœ‰æ•ˆå€¼å•è¾¹è°±è·å¾—æ€»å€¼
+        /// </summary>
+        /// <param name="rmsSpectrum">æœ‰æ•ˆå€¼è°±</param>
+        /// <returns>æ€»å€¼</returns>
+        public static _ValueT Overall_RmsSpectrum( _ValueT[] rmsSpectrum )
+        {
+            return Overall_RmsSpectrum( rmsSpectrum, 0, rmsSpectrum.Length, WindowType.Rectangular );
+        }
 
         /// <summary>
-        /// Í¨¹ıµ¥±ß·ùÖµÆ×»ñµÃ×ÜÖµ
+        /// é€šè¿‡å•è¾¹å¹…å€¼è°±è·å¾—æ€»å€¼
         /// </summary>
-        /// <param name="ampSpectrum">·ùÖµÆ×</param>
-        /// <param name="startIndex">ÆğÊ¼ÏÂ±ê</param>
-        /// <param name="count">¸öÊı</param>
-        /// <param name="windowType">ĞÅºÅ´°ÀàĞÍ</param>
-        /// <returns>×ÜÖµ</returns>
+        /// <param name="ampSpectrum">å¹…å€¼è°±</param>
+        /// <param name="startIndex">èµ·å§‹ä¸‹æ ‡</param>
+        /// <param name="count">ä¸ªæ•°</param>
+        /// <param name="windowType">ä¿¡å·çª—ç±»å‹</param>
+        /// <returns>æ€»å€¼</returns>
         public static _ValueT Overall_AmpSpectrum( _ValueT[] ampSpectrum, int startIndex, int count,
                                                    WindowType windowType )
         {
-            if( Moons.Common20.CollectionUtils.IsNullOrEmptyG( ampSpectrum ) || count < 1 ||
-                ampSpectrum.Length <= startIndex )
+            var ret = Overall_RmsSpectrum(ampSpectrum, startIndex, count, windowType);
+            ret /= MathConst.SqrtTwo;
+// ReSharper disable RedundantCast
+            return (_ValueT)ret;
+// ReSharper restore RedundantCast
+        }
+
+        /// <summary>
+        /// é€šè¿‡æœ‰æ•ˆå€¼å•è¾¹è°±è·å¾—æ€»å€¼
+        /// </summary>
+        /// <param name="rmsSpectrum">æœ‰æ•ˆå€¼è°±</param>
+        /// <param name="startIndex">èµ·å§‹ä¸‹æ ‡</param>
+        /// <param name="count">ä¸ªæ•°</param>
+        /// <param name="windowType">ä¿¡å·çª—ç±»å‹</param>
+        /// <returns>æ€»å€¼</returns>
+        public static _ValueT Overall_RmsSpectrum( _ValueT[] rmsSpectrum, int startIndex, int count,
+                                                   WindowType windowType )
+        {
+            if( CollectionUtils.IsNullOrEmptyG( rmsSpectrum ) || count < 1 || rmsSpectrum.Length <= startIndex )
             {
                 return 0;
             }
 
-            startIndex = IndexUtils.GetIndexInRange( startIndex, 0, ampSpectrum.Length - 1 );
-            count = Math.Min( count, ampSpectrum.Length - startIndex );
-            Double ret = MathBasic.SquareSum( ArrayUtils.Slice( ampSpectrum, startIndex, count ) ) / MathConst.SqrtTwo;
+            startIndex = IndexUtils.GetIndexInRange( startIndex, 0, rmsSpectrum.Length - 1 );
+            count = Math.Min( count, rmsSpectrum.Length - startIndex );
+            Double ret = MathBasic.SquareSum( ArrayUtils.SliceSpan( rmsSpectrum, startIndex, count ) );
             if( windowType == WindowType.Hanning )
             {
                 ret *= Window.PowerScale_Hanning;
@@ -137,16 +163,15 @@ namespace AnalysisAlgorithm
             return (_ValueT)ret;
 // ReSharper restore RedundantCast
         }
-
         #endregion
 
         /// <summary>
-        /// ¼ÆËãµ¥±ß·ùÖµÆ×( Æ×ÏßÊı = ÊäÈëĞÅºÅ³¤¶È / 2.56 + 1)
+        /// è®¡ç®—å•è¾¹å¹…å€¼è°±( è°±çº¿æ•° = è¾“å…¥ä¿¡å·é•¿åº¦ / 2.56 + 1)
         /// </summary>
-        /// <param name="xArray">ÊäÈëĞÅºÅx[i]</param>
-        /// <returns>µ¥±ßÆ×</returns>
+        /// <param name="xArray">è¾“å…¥ä¿¡å·x[i]</param>
+        /// <returns>å•è¾¹è°±</returns>
         /// <remarks>
-        /// ¿ÉÒÔÖ±½ÓÏÔÊ¾£¬ ÎŞĞë³Ë»ò³ıÈÎºÎÏµÊı¡£ÀıÈç£¬1024µãµÄÊ±¼ä²¨ĞÎµÃµ½401µãÆ×¡£
+        /// å¯ä»¥ç›´æ¥æ˜¾ç¤ºï¼Œ æ— é¡»ä¹˜æˆ–é™¤ä»»ä½•ç³»æ•°ã€‚ä¾‹å¦‚ï¼Œ1024ç‚¹çš„æ—¶é—´æ³¢å½¢å¾—åˆ°401ç‚¹è°±ã€‚
         /// </remarks>
         public static _ValueT[] AmpSpectrum( _ValueT[] xArray )
         {
@@ -165,10 +190,10 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÏàÎ»Æ×( Æ×ÏßÊı = ÊäÈëĞÅºÅ³¤¶È / 2.56 + 1)£¬-180¡ã ~ 180¡ã
+        /// è®¡ç®—ç›¸ä½è°±( è°±çº¿æ•° = è¾“å…¥ä¿¡å·é•¿åº¦ / 2.56 + 1)ï¼Œ-180Â° ~ 180Â°
         /// </summary>
-        /// <param name="xArray">ÊäÈëĞÅºÅx[i]</param>
-        /// <returns>ÏàÎ»Æ×£¬-180¡ã ~ 180¡ã</returns>
+        /// <param name="xArray">è¾“å…¥ä¿¡å·x[i]</param>
+        /// <returns>ç›¸ä½è°±ï¼Œ-180Â° ~ 180Â°</returns>
         public static _ValueT[] PhaseSpectrum( _ValueT[] xArray )
         {
             _ValueT[] biSideSpectrum, phaseSpectrum;
@@ -182,12 +207,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ·µ»ØÆµÆ×XÖáµÄÊı¾İ£¬ÓÃÓÚÏÔÊ¾
+        /// è¿”å›é¢‘è°±Xè½´çš„æ•°æ®ï¼Œç”¨äºæ˜¾ç¤º
         /// </summary>
-        /// <param name="fs">²ÉÑùÆµÂÊ£¬Èç¹ûÊÇµÈ½Ç¶È²ÉÑùÔò´«Èë±¶ÆµÏµÊı</param>
-        /// <param name="dataLength">²ÉÑùµÄÊı¾İ³¤¶È</param>
-        /// <param name="retLength">Ï£Íû·µ»ØµÄÊı×éµÄ³¤¶È</param>
-        /// <returns>ÆµÆ×XÖáµÄÊı¾İ£¬ÓÃÓÚÏÔÊ¾</returns>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡ï¼Œå¦‚æœæ˜¯ç­‰è§’åº¦é‡‡æ ·åˆ™ä¼ å…¥å€é¢‘ç³»æ•°</param>
+        /// <param name="dataLength">é‡‡æ ·çš„æ•°æ®é•¿åº¦</param>
+        /// <param name="retLength">å¸Œæœ›è¿”å›çš„æ•°ç»„çš„é•¿åº¦</param>
+        /// <returns>é¢‘è°±Xè½´çš„æ•°æ®ï¼Œç”¨äºæ˜¾ç¤º</returns>
         public static _ValueT[] SpectrumXAxisTicks( _ValueT fs, int dataLength, int retLength )
         {
             _ValueT delta = fs / dataLength;
@@ -202,12 +227,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ·µ»ØÊ±¼ä²¨ĞÎXÖáµÄÊı¾İ£¬ÓÃÓÚÏÔÊ¾£¬µÈÊ±¼ä²ÉÑùÊ±µ¥Î»ÊÇºÁÃë
+        /// è¿”å›æ—¶é—´æ³¢å½¢Xè½´çš„æ•°æ®ï¼Œç”¨äºæ˜¾ç¤ºï¼Œç­‰æ—¶é—´é‡‡æ ·æ—¶å•ä½æ˜¯æ¯«ç§’
         /// </summary>
-        /// <param name="fs">²ÉÑùÆµÂÊ</param>
-        /// <param name="isOrder">ÊÇ·ñÊÇµÈ½Ç¶È²ÉÑù</param>
-        /// <param name="dataLength">²ÉÑùµÄÊı¾İ³¤¶È</param>
-        /// <returns>Ê±¼ä²¨ĞÎXÖáµÄÊı¾İ£¬ÓÃÓÚÏÔÊ¾</returns>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡</param>
+        /// <param name="isOrder">æ˜¯å¦æ˜¯ç­‰è§’åº¦é‡‡æ ·</param>
+        /// <param name="dataLength">é‡‡æ ·çš„æ•°æ®é•¿åº¦</param>
+        /// <returns>æ—¶é—´æ³¢å½¢Xè½´çš„æ•°æ®ï¼Œç”¨äºæ˜¾ç¤º</returns>
         public static _ValueT[] TimeWaveXAxisTicks( _ValueT fs, bool isOrder, int dataLength )
         {
             _ValueT[] ret = new _ValueT[dataLength];
@@ -232,17 +257,17 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËã±ÈÆ×ºÍ²îÆ×.
+        /// è®¡ç®—æ¯”è°±å’Œå·®è°±.
         /// </summary>
-        /// <param name="waveType">ÊäÈëĞÅºÅµÄÊı¾İÀàĞÍ</param>
-        /// <param name="xArray">ÊäÈëĞÅºÅx[i]</param>
-        /// <param name="yArray">ÊäÈëĞÅºÅy[i]</param>
-        /// <param name="diffSpectrum">Êä³ö²îÆ×</param>
-        /// <param name="ratioSpectrum">Êä³ö±ÈÆ×</param>
+        /// <param name="waveType">è¾“å…¥ä¿¡å·çš„æ•°æ®ç±»å‹</param>
+        /// <param name="xArray">è¾“å…¥ä¿¡å·x[i]</param>
+        /// <param name="yArray">è¾“å…¥ä¿¡å·y[i]</param>
+        /// <param name="diffSpectrum">è¾“å‡ºå·®è°±</param>
+        /// <param name="ratioSpectrum">è¾“å‡ºæ¯”è°±</param>
         public static void DiffRatioSpectrum( WaveType waveType, _ValueT[] xArray, _ValueT[] yArray,
                                               out _ValueT[] diffSpectrum, out _ValueT[] ratioSpectrum )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
             MathError.CheckLengthEqual( xArray, yArray );
 
@@ -251,16 +276,16 @@ namespace AnalysisAlgorithm
             bool isTimeWave = ( WaveType.TimeWave == waveType );
             _ValueT[] xAmpArray = isTimeWave ? AmpSpectrum( xArray ) : xArray;
             _ValueT[] yAmpArray = isTimeWave ? AmpSpectrum( yArray ) : yArray;
-            diffSpectrum = CollectionUtils.SubArray( xAmpArray, yAmpArray );
-            ratioSpectrum = CollectionUtils.DivArray( xAmpArray, yAmpArray );
+            diffSpectrum = NumbersUtils.SubArray( xAmpArray, yAmpArray );
+            ratioSpectrum = NumbersUtils.DivArray( xAmpArray, yAmpArray );
         }
 
         /// <summary>
-        /// »ñµÃ²¨ĞÎÊı¾İÖĞµÄÖ÷Òª·åÖµµÄĞòºÅ(´Ó´óµ½Ğ¡ÅÅÁĞ).
+        /// è·å¾—æ³¢å½¢æ•°æ®ä¸­çš„ä¸»è¦å³°å€¼çš„åºå·(ä»å¤§åˆ°å°æ’åˆ—).
         /// </summary>
-        /// <param name="xArray">²¨ĞÎÊı¾İ</param>
-        /// <param name="includeTwoSide">ÊÇ·ñ°üº¬Á½¶ËµÄ·åÖµ</param>
-        /// <returns>Ö÷Òª·åÖµµÄÏÂ±ê£¬Èç¹ûÎ´ÕÒµ½ÈÎºÎ·åÖµÔò·µ»Ønull</returns>
+        /// <param name="xArray">æ³¢å½¢æ•°æ®</param>
+        /// <param name="includeTwoSide">æ˜¯å¦åŒ…å«ä¸¤ç«¯çš„å³°å€¼</param>
+        /// <returns>ä¸»è¦å³°å€¼çš„ä¸‹æ ‡ï¼Œå¦‚æœæœªæ‰¾åˆ°ä»»ä½•å³°å€¼åˆ™è¿”å›null</returns>
         public static int[] MaxPeaksIndex( _ValueT[] xArray, bool includeTwoSide )
         {
             switch( xArray.Length )
@@ -275,7 +300,7 @@ namespace AnalysisAlgorithm
             List<int> peakIndexList = new List<int>();
             int lineCount = xArray.Length;
 
-            // °üÀ¨Á½¶ËµÄ·åÖµ
+            // åŒ…æ‹¬ä¸¤ç«¯çš„å³°å€¼
             if( includeTwoSide )
             {
                 if( xArray[0] > xArray[1] )
@@ -316,12 +341,12 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃ²¨ĞÎÊı¾İÖĞ×î´óµÄn¸öÖ÷Òª·åÖµ(´Ó´óµ½Ğ¡ÅÅÁĞ).
+        /// è·å¾—æ³¢å½¢æ•°æ®ä¸­æœ€å¤§çš„nä¸ªä¸»è¦å³°å€¼(ä»å¤§åˆ°å°æ’åˆ—).
         /// </summary>
-        /// <param name="xArray">²¨ĞÎÊı¾İ</param>
-        /// <param name="includeTwoSide">ÊÇ·ñ°üº¬Á½¶ËµÄ·åÖµ</param>
-        /// <param name="maxNum">×î´ó·åÖµ¸öÊı</param>
-        /// <returns>n¸öÖ÷Òª·åÖµ£¬Èç¹ûÎ´ÕÒµ½ÈÎºÎ·åÖµÔò·µ»Ønull</returns>
+        /// <param name="xArray">æ³¢å½¢æ•°æ®</param>
+        /// <param name="includeTwoSide">æ˜¯å¦åŒ…å«ä¸¤ç«¯çš„å³°å€¼</param>
+        /// <param name="maxNum">æœ€å¤§å³°å€¼ä¸ªæ•°</param>
+        /// <returns>nä¸ªä¸»è¦å³°å€¼ï¼Œå¦‚æœæœªæ‰¾åˆ°ä»»ä½•å³°å€¼åˆ™è¿”å›null</returns>
         public static _ValueT[] MaxPeaks( _ValueT[] xArray, bool includeTwoSide, int maxNum )
         {
             if( maxNum <= 0 )
@@ -345,16 +370,16 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ½«ÏßĞÔÆ××ª»¯Îª·Ö±´Æ×.
+        /// å°†çº¿æ€§è°±è½¬åŒ–ä¸ºåˆ†è´è°±.
         /// </summary>
-        /// <param name="linearSpectrum">ÏßĞÔÆ×</param>
-        /// <param name="vibQtyType">Õñ¶¯Á¿ÀàĞÍ</param>
-        /// <param name="isAmpSpectrum">ÊÇ·ñ·ùÖµÆ×(trueÎª·ùÖµÆ×, falseÎª¹¦ÂÊÆ×)</param>
-        /// <returns>·Ö±´Æ×</returns>
-        //	½«¹¦ÂÊÆ×µÄ»ù×¼ÖµÈ¡Æ½·½
+        /// <param name="linearSpectrum">çº¿æ€§è°±</param>
+        /// <param name="vibQtyType">æŒ¯åŠ¨é‡ç±»å‹</param>
+        /// <param name="isAmpSpectrum">æ˜¯å¦å¹…å€¼è°±(trueä¸ºå¹…å€¼è°±, falseä¸ºåŠŸç‡è°±)</param>
+        /// <returns>åˆ†è´è°±</returns>
+        //	å°†åŠŸç‡è°±çš„åŸºå‡†å€¼å–å¹³æ–¹
         private static _ValueT[] LinearToDBSpectrum( _ValueT[] linearSpectrum, VibQtyType vibQtyType, bool isAmpSpectrum )
         {
-            // »ù×¼Öµ
+            // åŸºå‡†å€¼
             Double x0 = 1;
 
             switch( vibQtyType )
@@ -378,35 +403,35 @@ namespace AnalysisAlgorithm
 
             if( isAmpSpectrum )
             {
-                return CollectionUtils.Array20Log10( linearSpectrum, x0 );
+                return NumbersUtils.Array20Log10( linearSpectrum, x0 );
             }
-            return CollectionUtils.Array10Log10( linearSpectrum, MathBasic.Square( x0 ) );
+            return NumbersUtils.Array10Log10( linearSpectrum, MathBasic.Square( x0 ) );
         }
 
         /// <summary>
-        /// ½«ÏßĞÔÆ××ª»¯Îª·Ö±´Æ×£¬»ù×¼ÖµÎª1£¬ÏµÊıÎª10
+        /// å°†çº¿æ€§è°±è½¬åŒ–ä¸ºåˆ†è´è°±ï¼ŒåŸºå‡†å€¼ä¸º1ï¼Œç³»æ•°ä¸º10
         /// </summary>
-        /// <param name="linearSpectrum">ÏßĞÔÆ×</param>
-        /// <returns>·Ö±´Æ×</returns>
+        /// <param name="linearSpectrum">çº¿æ€§è°±</param>
+        /// <returns>åˆ†è´è°±</returns>
         public static _ValueT[] LinearToDBSpectrum( _ValueT[] linearSpectrum )
         {
             return LinearToDBSpectrum( linearSpectrum, VibQtyType.Generic, false );
         }
 
         /// <summary>
-        /// ¼ÆËãÊµµ¹Æ×( Æ×ÏßÊı = ÊäÈëĞÅºÅ³¤¶È / 2)
+        /// è®¡ç®—å®å€’è°±( è°±çº¿æ•° = è¾“å…¥ä¿¡å·é•¿åº¦ / 2)
         /// </summary>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <returns>µ¹Æ×²¨ĞÎ</returns>
-        // »ùÓÚ¹¦ÂÊÆ×¼ÆËãÊµµ¹Æ×¡£
-        // ¼ÆËã¹«Ê½£º  C(q) = Real{IFFT{log10[Gx(f)]}}
-        // ²Î¿¼ÎÄÏ×£º1990-ÉòÓñæ·-¡¶FORTRANÔ´³ÌĞò»ã±à¡·
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <returns>å€’è°±æ³¢å½¢</returns>
+        // åŸºäºåŠŸç‡è°±è®¡ç®—å®å€’è°±ã€‚
+        // è®¡ç®—å…¬å¼ï¼š  C(q) = Real{IFFT{log10[Gx(f)]}}
+        // å‚è€ƒæ–‡çŒ®ï¼š1990-æ²ˆç‰å¨£-ã€ŠFORTRANæºç¨‹åºæ±‡ç¼–ã€‹
         public static _ValueT[] Cepstrum( _ValueT[] timeWave )
         {
-            //Ô­Ê¼ĞÅºÅÈ¥³ı¾ùÖµ, 1990-ÉòÓñæ·-¡¶FORTRANÔ´³ÌĞò»ã±à¡·
+            //åŸå§‹ä¿¡å·å»é™¤å‡å€¼, 1990-æ²ˆç‰å¨£-ã€ŠFORTRANæºç¨‹åºæ±‡ç¼–ã€‹
             DSPBasic.ACCoupling( timeWave );
 
-            // ÏÈµÃµ½Ë«±ß¶ÔÊı¹¦ÂÊÆ×
+            // å…ˆå¾—åˆ°åŒè¾¹å¯¹æ•°åŠŸç‡è°±
             _ValueT[] biAmpSpectrum, phaseSpectrum;
             DSPBasic.BiAmpPhaseSpectrum( timeWave, out biAmpSpectrum, out phaseSpectrum );
             int lineCount = biAmpSpectrum.Length;
@@ -424,10 +449,10 @@ namespace AnalysisAlgorithm
 // ReSharper restore RedundantCast
             }
 
-            //Ë«±ßFFTÄæ±ä»»
+            //åŒè¾¹FFTé€†å˜æ¢
             _ValueT[] imArray = new _ValueT[lineCount];
             DSPBasic.CxInvFFT( powerSpectrum, imArray );
-            //È¥µôµ¹Æ×ÖĞt=0´¦·ùÖµ
+            //å»æ‰å€’è°±ä¸­t=0å¤„å¹…å€¼
             powerSpectrum[0] = 0;
 
             _ValueT[] cepstrum = new _ValueT[lineCount / 2];
@@ -440,22 +465,22 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// °üÂç½âµ÷
+        /// åŒ…ç»œè§£è°ƒ
         /// </summary>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <param name="fl">µÍ½ØÖ¹ÆµÂÊ</param>
-        /// <param name="fh">¸ß½ØÖ¹ÆµÂÊ</param>
-        /// <param name="fs">²ÉÑùÆµÂÊ</param>
-        /// <returns>°üÂç½âµ÷²¨ĞÎ</returns>
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <param name="fl">ä½æˆªæ­¢é¢‘ç‡</param>
+        /// <param name="fh">é«˜æˆªæ­¢é¢‘ç‡</param>
+        /// <param name="fs">é‡‡æ ·é¢‘ç‡</param>
+        /// <returns>åŒ…ç»œè§£è°ƒæ³¢å½¢</returns>
         public static _ValueT[] DeModSpectrum( _ValueT[] timeWave, Double fl, Double fh,
                                                Double fs )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµÊıÊı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®æ•°æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( timeWave );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( timeWave.Length );
 
             #endregion
@@ -464,29 +489,29 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// °üÂç½âµ÷
+        /// åŒ…ç»œè§£è°ƒ
         /// </summary>
-        /// <param name="timeWave">Ê±¼ä²¨ĞÎ</param>
-        /// <returns>°üÂç½âµ÷²¨ĞÎ</returns>
+        /// <param name="timeWave">æ—¶é—´æ³¢å½¢</param>
+        /// <returns>åŒ…ç»œè§£è°ƒæ³¢å½¢</returns>
         public static _ValueT[] DeModSpectrum( _ValueT[] timeWave )
         {
-            #region ÊäÈë²ÎÊıºÏÀíĞÔ¼ì²é
+            #region è¾“å…¥å‚æ•°åˆç†æ€§æ£€æŸ¥
 
-            //¼ì²éÊµÊıÊı×éµÄ¸öÊı±ØĞë´óÓÚ0
+            //æ£€æŸ¥å®æ•°æ•°ç»„çš„ä¸ªæ•°å¿…é¡»å¤§äº0
             MathError.CheckLengthGTZero( timeWave );
 
-            //¼ì²éÊı×é³¤¶ÈÊÇ·ñ2µÄÃİ´Î
+            //æ£€æŸ¥æ•°ç»„é•¿åº¦æ˜¯å¦2çš„å¹‚æ¬¡
             MathError.CheckPowerOfTwo( timeWave.Length );
 
             #endregion
 
-            //½øĞĞ»ùÓÚHilbert±ä»»µÄ°üÂç½âµ÷
+            //è¿›è¡ŒåŸºäºHilbertå˜æ¢çš„åŒ…ç»œè§£è°ƒ
             _ValueT[] envArray = Envelope.HilbertDetection( timeWave );
 
-            //È¥³ıÖ§Á÷·ÖÁ¿
+            //å»é™¤æ”¯æµåˆ†é‡
             DSPBasic.ACCoupling( envArray );
 
-            //¼ÆËã°üÂç·ùÖµÆ×
+            //è®¡ç®—åŒ…ç»œå¹…å€¼è°±
             _ValueT[] ampSpectrum, phaseSpectrum;
             DSPBasic.AmpPhaseSpectrum( envArray, out ampSpectrum, out phaseSpectrum );
 
@@ -494,27 +519,27 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// »ñµÃ²¨µÂÍ¼µÄÏàÎ»Êı×é
+        /// è·å¾—æ³¢å¾·å›¾çš„ç›¸ä½æ•°ç»„
         /// </summary>
-        /// <param name="reArray">ÆµÆ×µÄÊµ²¿</param>
-        /// <param name="imArray">ÆµÆ×µÄĞé²¿</param>
-        /// <param name="revs">·ÖÖÓ×ªËÙÊı×é</param>
-        /// <returns>²¨µÂÍ¼µÄÏàÎ»Êı×é</returns>
+        /// <param name="reArray">é¢‘è°±çš„å®éƒ¨</param>
+        /// <param name="imArray">é¢‘è°±çš„è™šéƒ¨</param>
+        /// <param name="revs">åˆ†é’Ÿè½¬é€Ÿæ•°ç»„</param>
+        /// <returns>æ³¢å¾·å›¾çš„ç›¸ä½æ•°ç»„</returns>
         public static _ValueT[] BodePhase( _ValueT[] reArray, _ValueT[] imArray, int[] revs )
         {
             return BodePhase( reArray, imArray, revs[0] < revs[revs.Length - 1] );
         }
 
         /// <summary>
-        /// »ñµÃ²¨µÂÍ¼µÄÏàÎ»Êı×é
+        /// è·å¾—æ³¢å¾·å›¾çš„ç›¸ä½æ•°ç»„
         /// </summary>
-        /// <param name="reArray">ÆµÆ×µÄÊµ²¿</param>
-        /// <param name="imArray">ÆµÆ×µÄĞé²¿</param>
-        /// <param name="isClockWise">true£ºÆğ»úË³Ê±Õë£»false£ºÍ£»úÏàÎ»Öğ½¥Ôö´ó£¬ÄæÊ±Õë¹ı³Ì</param>
-        /// <returns>²¨µÂÍ¼µÄÏàÎ»Êı×é</returns>
+        /// <param name="reArray">é¢‘è°±çš„å®éƒ¨</param>
+        /// <param name="imArray">é¢‘è°±çš„è™šéƒ¨</param>
+        /// <param name="isClockWise">trueï¼šèµ·æœºé¡ºæ—¶é’ˆï¼›falseï¼šåœæœºç›¸ä½é€æ¸å¢å¤§ï¼Œé€†æ—¶é’ˆè¿‡ç¨‹</param>
+        /// <returns>æ³¢å¾·å›¾çš„ç›¸ä½æ•°ç»„</returns>
         private static _ValueT[] BodePhase( _ValueT[] reArray, _ValueT[] imArray, bool isClockWise )
         {
-            // ÉÏÒ»¸öÏàÎ»
+            // ä¸Šä¸€ä¸ªç›¸ä½
             Double lastPhase = 0;
 
             _ValueT[] ret = new _ValueT[reArray.Length];
@@ -534,7 +559,7 @@ namespace AnalysisAlgorithm
                     Double offset = phase - lastPhase;
                     if( Math.Abs( offset ) <= MathConst.Deg_180 )
                     {
-                        // ÏàÎ»²îÂú×ãÒªÇó£¬±£´æÕâ¸öÏàÎ»¡£
+                        // ç›¸ä½å·®æ»¡è¶³è¦æ±‚ï¼Œä¿å­˜è¿™ä¸ªç›¸ä½ã€‚
                     }
                     else if( Math.Abs( offset + MathConst.Deg_360 ) <= MathConst.Deg_180 )
                     {
