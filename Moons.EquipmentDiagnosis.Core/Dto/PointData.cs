@@ -55,6 +55,31 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public double[] HighLimits { get; set; }
 
         /// <summary>
+        /// 测量值上限
+        /// </summary>
+        public double? MeasurementValueHighLimit { get; set; }
+
+        /// <summary>
+        /// 测量值下限
+        /// </summary>
+        public double? MeasurementValueLowLimit { get; set; }
+
+        public double? GetMeasurementValueLowLimit()
+        {
+            if (MeasurementValueLowLimit.HasValue) return MeasurementValueLowLimit.Value;
+
+            switch( (SignalTypeIdEnum)SigType_ID )
+            {
+                case SignalTypeIdEnum.Acc:
+                    return 2;
+
+                case SignalTypeIdEnum.Vel:
+                    return 0.3;
+            }
+            return null;
+        }
+
+        /// <summary>
         /// 历史summary数据
         /// </summary>
         public HistorySummaryData HistorySummaryData { get; set; }
@@ -114,6 +139,42 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
 
             if (highLimits[0] < summary.MeasureValue) summary.AlmLevel_ID = 2;
         }
+    }
+
+    /// <summary>
+    /// 历史数据查询条件数据
+    /// </summary>
+    public class HistoryQueryConditionData
+    {
+        /// <summary>
+        /// 使用的历史数据起始时间
+        /// </summary>
+        public DateTime HistoryDataBegin { get; set; }
+
+        /// <summary>
+        /// 使用的历史数据截止时间
+        /// </summary>
+        public DateTime HistoryDataEnd { get; set; }
+
+        /// <summary>
+        /// 测量值上限
+        /// </summary>
+        public double? MeasurementValueHighLimit { get; set; }
+
+        /// <summary>
+        /// 测量值下限
+        /// </summary>
+        public double? MeasurementValueLowLimit { get; set; }
+
+        /// <summary>
+        /// 查询的记录条数
+        /// </summary>
+        public int? Count { get; set; }
+
+        /// <summary>
+        /// 是否必须包含时间波形数据
+        /// </summary>
+        public bool MustHasTimewave { get; set; }
     }
 
     /// <summary>

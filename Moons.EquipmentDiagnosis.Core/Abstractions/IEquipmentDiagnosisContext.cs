@@ -1,4 +1,4 @@
-﻿using Moons.EquipmentDiagnosis.Core.Dto;
+using Moons.EquipmentDiagnosis.Core.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,9 +27,10 @@ namespace Moons.EquipmentDiagnosis.Core.Abstractions
         /// <summary>
         /// 获得summary数据
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="point">PointData</param>
+        /// <param name="condition">查询条件</param>
         /// <returns></returns>
-        HistorySummaryData GetHistorySummaryData(object id);
+        HistorySummaryDataCollection GetHistorySummaryData(PointData point, HistoryQueryConditionData condition);
 
         /// <summary>
         /// 获得测点数据

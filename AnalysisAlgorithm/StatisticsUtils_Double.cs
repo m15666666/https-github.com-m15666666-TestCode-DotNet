@@ -1,21 +1,21 @@
 using System;
 
-// ¼ÆËãÖĞÊ¹ÓÃµÄÊıÖµÀàĞÍ£¬ÓÃÒÔÃÖ²¹²»ÄÜÖ±½ÓÊ¹ÓÃ·ºĞÍµÄÎÊÌâ¡£
+// è®¡ç®—ä¸­ä½¿ç”¨çš„æ•°å€¼ç±»å‹ï¼Œç”¨ä»¥å¼¥è¡¥ä¸èƒ½ç›´æ¥ä½¿ç”¨æ³›å‹çš„é—®é¢˜ã€‚
 using _ValueT = System.Double;
 
 namespace AnalysisAlgorithm
 {
     /// <summary>
-    /// Í³¼Æº¯ÊıµÄÊµÓÃ¹¤¾ßÀà
+    /// ç»Ÿè®¡å‡½æ•°çš„å®ç”¨å·¥å…·ç±»
     /// </summary>
     public static partial class StatisticsUtils
     {
         /// <summary>
-        /// ¼ÆËãÊı×éµÄ¾ùÖµ
+        /// è®¡ç®—æ•°ç»„çš„å‡å€¼
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <returns>¾ùÖµ</returns>
-        public static _ValueT Mean(_ValueT[] array)
+        /// <param name="array">æ•°ç»„</param>
+        /// <returns>å‡å€¼</returns>
+        public static _ValueT Mean( Span<_ValueT> array )
         {
             int count = array.Length;
             _ValueT averageValue = 0;
@@ -27,10 +27,20 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éµÄ¾ø¶Ô¾ùÖµ
+        /// è®¡ç®—æ•°ç»„çš„å‡å€¼
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <returns>¾ø¶Ô¾ùÖµ</returns>
+        /// <param name="array">æ•°ç»„</param>
+        /// <returns>å‡å€¼</returns>
+        public static _ValueT Mean(_ValueT[] array)
+        {
+            return Mean(array.AsSpan());
+        }
+
+        /// <summary>
+        /// è®¡ç®—æ•°ç»„çš„ç»å¯¹å‡å€¼
+        /// </summary>
+        /// <param name="array">æ•°ç»„</param>
+        /// <returns>ç»å¯¹å‡å€¼</returns>
         public static _ValueT AbsMean(_ValueT[] array)
         {
             int count = array.Length;
@@ -43,10 +53,10 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éµÄ·½¸ù·ùÖµ
+        /// è®¡ç®—æ•°ç»„çš„æ–¹æ ¹å¹…å€¼
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <returns>·½¸ù·ùÖµ</returns>
+        /// <param name="array">æ•°ç»„</param>
+        /// <returns>æ–¹æ ¹å¹…å€¼</returns>
         public static _ValueT SMR(_ValueT[] array)
         {
             int count = array.Length;
@@ -59,21 +69,21 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éµÄ·½²î
+        /// è®¡ç®—æ•°ç»„çš„æ–¹å·®
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <returns>·½²î</returns>
+        /// <param name="array">æ•°ç»„</param>
+        /// <returns>æ–¹å·®</returns>
         public static _ValueT Variance(_ValueT[] array)
         {
             return Moment(array, 2);
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éµÄn½×¾Ø
+        /// è®¡ç®—æ•°ç»„çš„né˜¶çŸ©
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <param name="order">½×Êı</param>
-        /// <returns>Ö¸¶¨½×ÊıµÄ¾Ø</returns>
+        /// <param name="array">æ•°ç»„</param>
+        /// <param name="order">é˜¶æ•°</param>
+        /// <returns>æŒ‡å®šé˜¶æ•°çš„çŸ©</returns>
         public static _ValueT Moment(_ValueT[] array, int order)
         {
             int count = array.Length;
@@ -87,21 +97,21 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éµÄ±ê×¼Æ«²î
+        /// è®¡ç®—æ•°ç»„çš„æ ‡å‡†åå·®
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <returns>±ê×¼Æ«²î</returns>
+        /// <param name="array">æ•°ç»„</param>
+        /// <returns>æ ‡å‡†åå·®</returns>
         public static _ValueT StdDeviation(_ValueT[] array)
         {
             return (_ValueT)Math.Sqrt(Variance(array));
         }
 
         /// <summary>
-        /// ¼ÆËãÊı×éµÄn½×Ô­µã¾Ø
+        /// è®¡ç®—æ•°ç»„çš„né˜¶åŸç‚¹çŸ©
         /// </summary>
-        /// <param name="array">Êı×é</param>
-        /// <param name="order">½×Êı</param>
-        /// <returns>Ö¸¶¨½×ÊıµÄÔ­µã¾Ø</returns>
+        /// <param name="array">æ•°ç»„</param>
+        /// <param name="order">é˜¶æ•°</param>
+        /// <returns>æŒ‡å®šé˜¶æ•°çš„åŸç‚¹çŸ©</returns>
         public static _ValueT OriginMoment(_ValueT[] array, int order)
         {
             int count = array.Length;
