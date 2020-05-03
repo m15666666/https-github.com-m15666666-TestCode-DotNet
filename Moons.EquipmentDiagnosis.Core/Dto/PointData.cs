@@ -64,6 +64,12 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// </summary>
         public double? MeasurementValueLowLimit { get; set; }
 
+        /// <summary>
+        /// 获得测量值下限，用于过滤掉停机数据
+        /// A < 2 m/g^2
+        /// V < 0.3 mm/s
+        /// </summary>
+        /// <returns></returns>
         public double? GetMeasurementValueLowLimit()
         {
             if (MeasurementValueLowLimit.HasValue) return MeasurementValueLowLimit.Value;
