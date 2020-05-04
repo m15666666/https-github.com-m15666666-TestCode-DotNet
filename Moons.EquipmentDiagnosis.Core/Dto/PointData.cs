@@ -14,6 +14,12 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 测点编号
         /// </summary>
         public object Point_ID { get; set; }
+
+        /// <summary>
+        /// 测点唯一编码
+        /// </summary>
+        public string OnlyCode { get; set; }
+
         /// <summary>
         /// 测点路径
         /// </summary>
