@@ -249,6 +249,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 var summary = p.HistorySummaryData = histories[0];
                 var timewave = p.TimewaveData = Context.GetTimewaveData(summary);
                 if (summary == null || timewave == null) continue;
+
+                if (summary.RotSpeed_NR <= 0) summary.RotSpeed_NR = p.DefaultRotSpeed;
                 var rev = summary.RotSpeed_NR;
                 if (rev <= 0) continue;
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -170,6 +170,26 @@ namespace AnalysisData.Dto
         ///     剩余电池电量百分比，范围：0 ~ 1。
         /// </summary>
         public float? BatteryPercent { get; set; }
+
+        /// <summary>
+        /// 峰值
+        /// </summary>
+        public double P { get; set; }
+
+        /// <summary>
+        /// 峰峰值
+        /// </summary>
+        public double PP { get; set; }
+
+        /// <summary>
+        /// 有效值
+        /// </summary>
+        public double RMS { get; set; }
+
+        /// <summary>
+        /// 峭度
+        /// </summary>
+        public double KurtoFactor { get; set; }
 
         #endregion
 

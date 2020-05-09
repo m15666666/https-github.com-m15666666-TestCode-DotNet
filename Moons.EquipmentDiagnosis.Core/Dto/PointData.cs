@@ -56,6 +56,12 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public int PositionNo { get; set; }
 
         /// <summary>
+        /// 默认转速
+        /// </summary>
+        public int DefaultRotSpeed { get; set; }
+
+
+        /// <summary>
         /// 超上限报警门限，目前最多2个，可以不填表示没有报警
         /// </summary>
         public double[] HighLimits { get; set; }

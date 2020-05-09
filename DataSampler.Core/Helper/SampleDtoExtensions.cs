@@ -1,9 +1,10 @@
-﻿using AnalysisData.SampleData;
+using AnalysisData.SampleData;
 using AnalysisData.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using Moons.Common20.ObjectMapper;
+using AnalysisData.Constants;
 
 namespace DataSampler.Core.Helper
 {
@@ -43,6 +44,27 @@ namespace DataSampler.Core.Helper
             //};
             var ret = new T();
             Config.ObjectMapper.MapTo(d, ret);
+            if( d.AdditionalFeatureID2Values != null )
+            {
+                foreach( var pair in d.AdditionalFeatureID2Values )
+                {
+                    switch(pair.Key)
+                    {
+                        case FeatureValueID.P:
+                            ret.P = pair.Value;
+                            break;
+                        case FeatureValueID.PP:
+                            ret.PP = pair.Value;
+                            break;
+                        case FeatureValueID.RMS:
+                            ret.RMS = pair.Value;
+                            break;
+                        case FeatureValueID.KurtoFactor:
+                            ret.KurtoFactor = pair.Value;
+                            break;
+                    }
+                }
+            }
             return ret;
         }
 
