@@ -1,5 +1,6 @@
 using AnalysisAlgorithm;
 using AnalysisAlgorithm.FFT;
+using AnalysisData.Constants;
 using MathNet.Numerics;
 using Moons.EquipmentDiagnosis.Core.Abstractions;
 using Moons.EquipmentDiagnosis.Core.Dto;
@@ -34,12 +35,23 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             {
                 CalcAccPoints();
 
+                var velPoints = _pointDatas.VelPoints_HasTimewave;
                 if(Moons.EquipmentDiagnosis.Core.EquipmentType.Motor.Belt_2Motor_001 == EquipmentType)
                 {
-                    Calc_MDEH_MNDEV(null,null); // todo
+                    {
+                        var h = velPoints.GetByPositionNoAndDirectionId(PositionNumber.No_1, PositionNumber.No_2, PntDirectionID.Horizontal);
+                        var v = velPoints.GetByPositionNoAndDirectionId(PositionNumber.No_1, PositionNumber.No_2, PntDirectionID.Vertical);
+                        Calc_MDEH_MNDEV(h, v);
+                    }
+                    {
+                        int maxPositionNo = velPoints.GetMaxPositionNo();
+                        var h = velPoints.GetByPositionNoAndDirectionId(maxPositionNo - 1, maxPositionNo, PntDirectionID.Horizontal);
+                        var v = velPoints.GetByPositionNoAndDirectionId(maxPositionNo - 1, maxPositionNo, PntDirectionID.Vertical);
+                        Calc_MDEH_MNDEV(h, v);
+                    }
                 }
 
-                CalcVelPoints();
+                CalcVelPoints(velPoints);
 
                 return GetEquipmentDiagnosisOutputDto();
             }
@@ -47,9 +59,9 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             /// <summary>
             /// 计算速度测点的诊断结果
             /// </summary>
-            private void CalcVelPoints()
+            private void CalcVelPoints(PointDataCollection velPoints)
             {
-                var velPoints = _pointDatas.VelPoints;
+                //var velPoints = _pointDatas.VelPoints;
                 double maxVelAlm = double.MinValue;
                 PointData velAlmPoint = null;
                 foreach (var p in velPoints)
@@ -148,13 +160,21 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 }
             }
 
+            private bool IsNoTimewaveData( PointData point)
+            {
+                return point == null || !point.HasTimewaveData();
+            }
+
             /// <summary>
+            /// 有可能驱动端(连轴端)和非驱动端(自由端)水平和垂直方向对换了，但第一个测点总是水平，第二个测点总是垂直。
             /// 如果MDEH大于2倍MNDEV，且MDEH主频大于总值的60%。结论：转子存在不平衡。须通过测量台板、水泥基础振动排除支撑水平刚度不足故障。（如果主频小于等于总值60% ，则结论轴承配合间隙不良） 
             /// B、如果MDEH小于2倍MNDEV且大于1.34倍MNDEV，且主频大于总值的60%。结论：转子存在不平衡且支撑刚度不足。（如果主频小于等于总值60% ，则轴承配合间隙不良）
             /// C、如果MNDEV大于0.75倍MDEH，且主频大于50%总值。结论：基础垂直刚度不足。检查台板、水泥基础以及垫铁等紧固松动或台板不平。（如果主频小于等于50% ，则轴承配合间隙不良）
             /// </summary>
             private void Calc_MDEH_MNDEV(  PointData mdeh, PointData mndev )
             {
+                if ( IsNoTimewaveData(mdeh) ||  IsNoTimewaveData(mndev) ) return;
+
                 var measureValue_h = mdeh.HistorySummaryData.MeasureValue;
                 var measureValue_v = mndev.HistorySummaryData.MeasureValue;
 
@@ -235,34 +255,47 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             _equipmentDiagnosisInput = equipmentDiagnosisInput;
             _equipmentData = Context.GetEquipmentData(equipmentId);
             _pointDatas.AddRange( Context.GetPointDatas(equipmentDiagnosisInput) );
-            foreach( var p in _pointDatas)
+            foreach (var p in _pointDatas.AccPoints)
+                InitPointData(p);
+            foreach (var p in _pointDatas.VelPoints)
+                InitPointData(p);
+        }
+        private void InitPointData(PointData p)
+        {
+            var summary = p.HistorySummaryData;
+            if (summary == null)
             {
-                var histories = Context.GetHistorySummaryData(p, new HistoryQueryConditionData {
+                var histories = Context.GetHistorySummaryData(p, new HistoryQueryConditionData
+                {
                     HistoryDataBegin = _equipmentDiagnosisInput.HistoryDataBegin,
                     HistoryDataEnd = _equipmentDiagnosisInput.HistoryDataEnd,
-                    MeasurementValueLowLimit = p.GetMeasurementValueLowLimit(),
+                    //MeasurementValueLowLimit = p.GetMeasurementValueLowLimit(),
                     Count = 1,
                     MustHasTimewave = true,
+                    MaxFirst = true,
                 });
 
-                if (0 == histories.Count) continue;
-                var summary = p.HistorySummaryData = histories[0];
-                var timewave = p.TimewaveData = Context.GetTimewaveData(summary);
-                if (summary == null || timewave == null) continue;
-
-                if (summary.RotSpeed_NR <= 0) summary.RotSpeed_NR = p.DefaultRotSpeed;
-                var rev = summary.RotSpeed_NR;
-                if (rev <= 0) continue;
-
-                SpectrumUtils spectrumUtils = new SpectrumUtils();
-                spectrumUtils.InitByTimewave(summary.SampleFreq_NR, rev / 60f, timewave.Timewave, true);
-
-                timewave.XFFT = spectrumUtils.XFFT;
-                timewave.XHalfFFT = spectrumUtils.XHalfFFT;
-                timewave.Overall = spectrumUtils.Overall;
-                timewave.HighestPeak = spectrumUtils.HighestPeak;
-                timewave.Hz100 = spectrumUtils.Hz100;
+                if (0 == histories.Count) return;
+                summary = p.HistorySummaryData = histories[0];
             }
+            var timewave = p.TimewaveData;
+            if (timewave == null)
+            {
+                timewave = p.TimewaveData = Context.GetTimewaveData(summary);
+            }
+            if (summary == null || timewave == null) return;
+            if (summary.RotSpeed_NR <= 0) summary.RotSpeed_NR = p.DefaultRotSpeed;
+            var rev = summary.RotSpeed_NR;
+            if (rev <= 0) return;
+
+            SpectrumUtils spectrumUtils = new SpectrumUtils();
+            spectrumUtils.InitByTimewave(summary.SampleFreq_NR, rev / 60f, timewave.Timewave, true);
+
+            timewave.XFFT = spectrumUtils.XFFT;
+            timewave.XHalfFFT = spectrumUtils.XHalfFFT;
+            timewave.Overall = spectrumUtils.Overall;
+            timewave.HighestPeak = spectrumUtils.HighestPeak;
+            timewave.Hz100 = spectrumUtils.Hz100;
         }
         protected IEquipmentDiagnosisContext Context => Config.Context;
 

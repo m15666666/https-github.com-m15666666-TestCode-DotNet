@@ -46,9 +46,17 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public int PntDim_NR { get; set; }
 
         /// <summary>
-        /// 旋转方向ID
+        /// 测点方向编号	tinyint		Not null	
+        /// 0-水平，1-垂直，2-轴向，3-45度，4-135度。
+        /// 对于一维测点表示测点方向；
+        /// 对于二维测点表示起始方向，即Chn1的方向，而Chn2方向按照“注”推测
         /// </summary>
-        public int Rotation_ID { get; set; }
+        public int PntDirect_NR { get; set; }
+
+        /// <summary>
+        /// 旋转方向编号	tinyint		Not null	0-逆时针，1-顺时针 默认为逆时针
+        /// </summary>
+        public int Rotation_NR { get; set; }
 
         /// <summary>
         /// 位置号
@@ -108,6 +116,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public TimewaveData TimewaveData { get; set; }
 
         public bool IsAlm => HistorySummaryData != null && 0 < HistorySummaryData.AlmLevel_ID;
+
+        public bool HasTimewaveData()
+        {
+            return HistorySummaryData != null && TimewaveData != null;
+        }
     }
     
     public class PointDataCollection : List<PointData>
@@ -146,6 +159,22 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
 
         public PointDataCollection AccPoints => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Acc));
         public PointDataCollection VelPoints => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Vel));
+        public PointDataCollection VelPoints_HasTimewave => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Vel && item.HasTimewaveData() ));
+
+        public int GetMaxPositionNo()
+        {
+            return this.Max(item => item.PositionNo);
+        }
+
+        public PointData GetByPositionNoAndDirectionId( int positionNo, int directionId)
+        {
+            return this.FirstOrDefault(item => item.PositionNo == positionNo && item.PntDirect_NR == directionId );
+        }
+        public PointData GetByPositionNoAndDirectionId( int positionNo, int positionNo2, int directionId)
+        {
+            var ret = GetByPositionNoAndDirectionId(positionNo, directionId);
+            return ret ?? GetByPositionNoAndDirectionId(positionNo2, directionId);
+        }
 
         private void CalcAlm(PointData p)
         {
@@ -193,6 +222,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 是否必须包含时间波形数据
         /// </summary>
         public bool MustHasTimewave { get; set; }
+
+        /// <summary>
+        /// 是否要测量值最大的数据
+        /// </summary>
+        public bool MaxFirst { get; set; }
     }
 
     /// <summary>

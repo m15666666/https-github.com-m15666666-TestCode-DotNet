@@ -1,4 +1,5 @@
-﻿using System;
+using AnalysisData.Constants;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -44,9 +45,9 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
 
     public enum SignalTypeIdEnum
     {
-        Vel = 102,
-        Acc = 103,
-        Temperature = 409,
+        Vel = SignalTypeID.Velocity,
+        Acc = SignalTypeID.Acceleration,
+        Temperature = SignalTypeID.Tempt,
     }
 
     public enum AlarmTypeIdEnum

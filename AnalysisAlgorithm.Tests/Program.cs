@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace AnalysisAlgorithm.Tests
 {
@@ -7,6 +7,8 @@ namespace AnalysisAlgorithm.Tests
         private static void Main( string[] args )
         {
             OutputUtils.OutputDir = @"D:\temp2";
+
+            new OverallTests().Overall_RMSTest();
 
             //new FftTests().InitAngleTest();
             //return;

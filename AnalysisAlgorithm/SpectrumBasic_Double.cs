@@ -160,7 +160,7 @@ namespace AnalysisAlgorithm
                 ret *= Window.PowerScale_Hanning;
             }
 // ReSharper disable RedundantCast
-            return (_ValueT)ret;
+            return (_ValueT)Math.Sqrt( ret );
 // ReSharper restore RedundantCast
         }
         #endregion

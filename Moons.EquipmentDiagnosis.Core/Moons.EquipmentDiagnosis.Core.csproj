@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AnalysisAlgorithm\AnalysisAlgorithm.csproj" />
+    <ProjectReference Include="..\AnalysisData\AnalysisData.csproj" />
     <ProjectReference Include="..\Moons.Common20\Moons.Common20.csproj" />
   </ItemGroup>
 
