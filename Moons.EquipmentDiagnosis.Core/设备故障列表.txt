@@ -1,0 +1,15 @@
+说明：每行是一个故障，半角冒号前面是编码，后面是描述。
+
+
+-Generic-Misalign001:轴承座或联轴器不同心
+-Generic-Rub001:摩擦故障
+-Generic-Rub002:轴承存在摩擦或轴瓦间隙不良
+-Generic-Loose001:轴承或轴上零部件存在松动摩擦，检查轴承等部位动静安装配合状态
+-Generic-Electric001:电气故障
+-Generic-Stator001:台板变形、不平等引起定子偏心
+-Generic-Imbalance001:转子存在不平衡。须通过测量台板、水泥基础振动排除支撑水平刚度不足故障
+-Generic-Imbalance002:转子存在不平衡且支撑刚度不足
+-Generic-Bearing001:轴承故障，建议加强监测或检查轴承
+-Generic-Bearing002:轴承配合间隙不良
+-Generic-Base001:基础垂直刚度不足。检查台板、水泥基础以及垫铁等紧固松动或台板不平
+-Generic-Unknown001:其他未知故障，需便携式振动分析仪全面测量数据
