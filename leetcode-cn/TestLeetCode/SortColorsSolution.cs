@@ -159,9 +159,7 @@ While curr <= p2 :
 
 
 class Solution {
-  /*
-  荷兰三色旗问题解
-  */
+  //荷兰三色旗问题解
   public void sortColors(int[] nums) {
     // 对于所有 idx < i : nums[idx < i] = 0
     // j是当前考虑元素的下标

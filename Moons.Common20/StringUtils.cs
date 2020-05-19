@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -806,6 +806,16 @@ namespace Moons.Common20
         ///// 将字节转换为字符串的代理
         ///// </summary>
         //private static readonly Converter<byte, string> _byte2HexStringConverter = value => value.ToString( "X2" );
+
+        /// <summary>
+        /// 转换为16进制字符串
+        /// </summary>
+        /// <param name="values">值集合</param>
+        /// <returns>16进制字符串</returns>
+        public static string ToHex(Span<byte> values)
+        {
+            return ToHex(values.ToArray());
+        }
 
         /// <summary>
         /// 转换为16进制字符串

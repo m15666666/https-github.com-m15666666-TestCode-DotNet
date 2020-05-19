@@ -1,4 +1,4 @@
-﻿namespace Moons.Common20.Serialization
+namespace Moons.Common20.Serialization
 {
     /// <summary>
     /// 命令消息类
@@ -35,6 +35,15 @@
                            StructTypeID = StructTypeIDs.EmptyCustomData,
                            Data = new EmptyCustomData()
                        };
+        }
+
+        #endregion
+
+        #region ToString
+
+        public override string ToString()
+        {
+            return $"{nameof(CommandID)}:{CommandID},{nameof(StructTypeID)}:{StructTypeID},Data: {Data}";
         }
 
         #endregion

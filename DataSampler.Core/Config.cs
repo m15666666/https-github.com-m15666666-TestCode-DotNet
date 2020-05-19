@@ -16,14 +16,14 @@ using SocketLib;
 namespace DataSampler
 {
     /// <summary>
-    /// ÅäÖÃ¹¤¾ßÀà
+    /// é…ç½®å·¥å…·ç±»
     /// </summary>
     public static class Config
     {
         #region mapper
 
         /// <summary>
-        /// datasampler ÅäÖÃÊı¾İ
+        /// datasampler é…ç½®æ•°æ®
         /// </summary>
         internal static IObjectMapper ObjectMapper => _objectMapper ??
             (_objectMapper = IocUtils.Instance.GetRequiredService<IObjectMapper>());
@@ -32,15 +32,15 @@ namespace DataSampler
 
         #endregion
 
-        #region ²âÊÔ²ÎÊı
+        #region æµ‹è¯•å‚æ•°
 
         /// <summary>
-        /// ÓÃÓÚ²âÊÔµÄ²É¼¯¹¤×÷Õ¾µÄIP
+        /// ç”¨äºæµ‹è¯•çš„é‡‡é›†å·¥ä½œç«™çš„IP
         /// </summary>
         internal static string TestSampleStationIP => "127.0.0.1";
 
         /// <summary>
-        /// ¼ÇÂ¼CommandMessage¶ÔÏó
+        /// è®°å½•CommandMessageå¯¹è±¡
         /// </summary>
         /// <param name="commandMessage">CommandMessage</param>
         internal static void LogCommandMessage( CommandMessage commandMessage )
@@ -54,7 +54,14 @@ namespace DataSampler
         }
 
         /// <summary>
-        ///     ³õÊ¼»¯µ÷ÊÔµÄ´úÀí
+        ///     åˆå§‹åŒ–è°ƒè¯•çš„ä»£ç†
+        /// </summary>
+        public static void InitFake4Test()
+        {
+            _datasamplerConfigDto = new DatasamplerConfigDto {  };
+        }
+        /// <summary>
+        ///     åˆå§‹åŒ–è°ƒè¯•çš„ä»£ç†
         /// </summary>
         public static void InitDebugHandler()
         {
@@ -69,7 +76,7 @@ namespace DataSampler
         }
 
         /// <summary>
-        ///     ÏìÓ¦½ÓÊÕÁË×Ö½ÚµÄÊÂ¼ş
+        ///     å“åº”æ¥æ”¶äº†å­—èŠ‚çš„äº‹ä»¶
         /// </summary>
         private static void SocketLibConfig_ReceiveBytesEvent(SocketWrapper socket, byte[] buffer, int offset, int size)
         {
@@ -80,7 +87,7 @@ namespace DataSampler
         }
 
         /// <summary>
-        ///     ÏìÓ¦·¢ËÍÁË×Ö½ÚµÄÊÂ¼ş
+        ///     å“åº”å‘é€äº†å­—èŠ‚çš„äº‹ä»¶
         /// </summary>
         private static void SocketLibConfig_SendBytesEvent(SocketWrapper socket, byte[] buffer, int offset, int size)
         {
@@ -92,15 +99,15 @@ namespace DataSampler
 
         #endregion
 
-        #region Ì½ÕëÊı¾İ¶ÔÏó
+        #region æ¢é’ˆæ•°æ®å¯¹è±¡
 
         /// <summary>
-        /// ²É¼¯¹¤×÷Õ¾µÄÌ½ÕëÊı¾İ¶ÔÏó
+        /// é‡‡é›†å·¥ä½œç«™çš„æ¢é’ˆæ•°æ®å¯¹è±¡
         /// </summary>
         private static readonly DataSamplerProbeData _probe = new DataSamplerProbeData();
 
         /// <summary>
-        /// ²É¼¯¹¤×÷Õ¾µÄÌ½ÕëÊı¾İ¶ÔÏó
+        /// é‡‡é›†å·¥ä½œç«™çš„æ¢é’ˆæ•°æ®å¯¹è±¡
         /// </summary>
         public static DataSamplerProbeData Probe
         {
@@ -113,26 +120,35 @@ namespace DataSampler
         public const string TcpLoggerName = "TcpLog";
 
         /// <summary>
-        /// ¼ÇÂ¼tcpÍ¨Ñ¶
+        /// è®°å½•tcpé€šè®¯
         /// </summary>
         public static ILogNet TcpLogger { get; set; }
 
         /// <summary>
-        /// ¼ÇÂ¼Ò»°ãÈÕÖ¾
+        /// è®°å½•ä¸€èˆ¬æ—¥å¿—
         /// </summary>
         public static ILogNet Logger { get; set; }
 
+        public static void LogTcp(string prefix, ArraySegment<byte> ioBuf)
+        {
+            TcpLogger.Info($"{prefix}: iobuf:offset:{ioBuf.Offset},count:{ioBuf.Count}.");
+        }
+        public static void LogTcp(string message)
+        {
+            TcpLogger.Info(message);
+        }
+
         #endregion
 
-        #region ¸ü¶àµÄÅäÖÃĞÅÏ¢
+        #region æ›´å¤šçš„é…ç½®ä¿¡æ¯
 
         /// <summary>
-        /// ²É¼¯²ÎÊıÅäÖÃÎÄ¼ş
+        /// é‡‡é›†å‚æ•°é…ç½®æ–‡ä»¶
         /// </summary>
         private const string DataSamplerConfigFileName = "DataSamplerConfig.xml";
 
         /// <summary>
-        /// ²É¼¯²ÎÊıÅäÖÃÎÄ¼şÂ·¾¶
+        /// é‡‡é›†å‚æ•°é…ç½®æ–‡ä»¶è·¯å¾„
         /// </summary>
         private static string DataSamplerConfigFilePath
         {
@@ -140,17 +156,17 @@ namespace DataSampler
         }
 
         /// <summary>
-        /// true£º²É¼¯²ÎÊıÅäÖÃÎÄ¼ş´æÔÚ£¬false£º²»´æÔÚ
+        /// trueï¼šé‡‡é›†å‚æ•°é…ç½®æ–‡ä»¶å­˜åœ¨ï¼Œfalseï¼šä¸å­˜åœ¨
         /// </summary>
         internal static bool DataSamplerConfigFileExists
         {
             get { return File.Exists( DataSamplerConfigFilePath ); }
         }
 
-        #region Êı¾İ²É¼¯Æ÷²ÎÊıÅäÖÃÎÄ¼şÏà¹Ø
+        #region æ•°æ®é‡‡é›†å™¨å‚æ•°é…ç½®æ–‡ä»¶ç›¸å…³
 
         /// <summary>
-        /// ¸üĞÂÊı¾İ²É¼¯Æ÷ÅäÖÃÎÄ¼ş
+        /// æ›´æ–°æ•°æ®é‡‡é›†å™¨é…ç½®æ–‡ä»¶
         /// </summary>
         /// <param name="samplerConfigData">SamplerConfigData</param>
         internal static void UpdateSamplerConfigFile( SamplerConfigData samplerConfigData )
@@ -159,7 +175,7 @@ namespace DataSampler
         }
 
         /// <summary>
-        /// É¾³ıÊı¾İ²É¼¯Æ÷ÅäÖÃÎÄ¼ş
+        /// åˆ é™¤æ•°æ®é‡‡é›†å™¨é…ç½®æ–‡ä»¶
         /// </summary>
         internal static void DeleteSamplerConfigFile()
         {
@@ -167,7 +183,7 @@ namespace DataSampler
         }
 
         /// <summary>
-        /// ¶ÁÈ¡Êı¾İ²É¼¯Æ÷ÅäÖÃĞÅÏ¢
+        /// è¯»å–æ•°æ®é‡‡é›†å™¨é…ç½®ä¿¡æ¯
         /// </summary>
         /// <returns>SamplerConfigData</returns>
         internal static SamplerConfigData ReadSamplerConfig()
@@ -179,7 +195,7 @@ namespace DataSampler
         internal static SamplerConfigData SamplerConfig { get; set; }
 
         /// <summary>
-        /// datasampler ÅäÖÃÊı¾İ
+        /// datasampler é…ç½®æ•°æ®
         /// </summary>
         internal static DatasamplerConfigDto DatasamplerConfigDto => _datasamplerConfigDto ??
             (_datasamplerConfigDto = IocUtils.Instance.GetRequiredService<IOptions<DatasamplerConfigDto>>().Value);
@@ -188,10 +204,10 @@ namespace DataSampler
 
         #endregion
 
-        #region ·¢ËÍÊı¾İ¶ÔÏó
+        #region å‘é€æ•°æ®å¯¹è±¡
 
         /// <summary>
-        /// ·¢ËÍÊı¾İ¶ÔÏó
+        /// å‘é€æ•°æ®å¯¹è±¡
         /// </summary>
         internal static ITaskSender SampleDataSender => _sampleDataSender ??
             (_sampleDataSender = IocUtils.Instance.GetRequiredService<ITaskSender>());
@@ -200,10 +216,10 @@ namespace DataSampler
 
         #endregion
 
-        #region json ĞòÁĞ»¯½Ó¿Ú
+        #region json åºåˆ—åŒ–æ¥å£
 
         /// <summary>
-        /// json ĞòÁĞ»¯½Ó¿Ú¶ÔÏó
+        /// json åºåˆ—åŒ–æ¥å£å¯¹è±¡
         /// </summary>
         internal static IJsonSerializer JsonSerializer => _jsonSerializer ??
             (_jsonSerializer = IocUtils.Instance.GetRequiredService<IJsonSerializer>());
@@ -212,10 +228,10 @@ namespace DataSampler
 
         #endregion
 
-        #region ÊÇ·ñÊ¹ÓÃÈí¼ş¼ÆËã×ªËÙ
+        #region æ˜¯å¦ä½¿ç”¨è½¯ä»¶è®¡ç®—è½¬é€Ÿ
 
         /// <summary>
-        /// True£º¼ÆËã×ªËÙ£¬False£º²»¼ÆËã
+        /// Trueï¼šè®¡ç®—è½¬é€Ÿï¼ŒFalseï¼šä¸è®¡ç®—
         /// </summary>
         internal static bool CalculateRev
         {
@@ -226,32 +242,32 @@ namespace DataSampler
 
         #endregion
 
-        #region ÓëSocketÏà¹Ø
+        #region ä¸Socketç›¸å…³
 
         /// <summary>
-        /// ±¾µØÕìÌıµÄ¶Ë¿Ú£¬ÓÃÓÚ½ÓÊÜÊı¾İ£¬Ä¬ÈÏ1283
+        /// æœ¬åœ°ä¾¦å¬çš„ç«¯å£ï¼Œç”¨äºæ¥å—æ•°æ®ï¼Œé»˜è®¤1283
         /// </summary>
         internal static int ListenPortOfData => DatasamplerConfigDto.ListenPortOfData;
 
         /// <summary>
-        /// ±¾µØÕìÌıµÄ¶Ë¿Ú£¬ÓÃÓÚ²É¼¯¹¤×÷Õ¾TCP¿ØÖÆÁ´½ÓµÄ½ÓÈë£¬Ä¬ÈÏ1284
+        /// æœ¬åœ°ä¾¦å¬çš„ç«¯å£ï¼Œç”¨äºé‡‡é›†å·¥ä½œç«™TCPæ§åˆ¶é“¾æ¥çš„æ¥å…¥ï¼Œé»˜è®¤1284
         /// </summary>
         internal static int ListenPortOfControl => DatasamplerConfigDto.ListenPortOfControl;
 
         /// <summary>
-        /// ·¢ËÍºÍ½ÓÊÕ³¬Ê±£¬ÒÔºÁÃë±íÊ¾£¬Ä¬ÈÏÎª20000£¨20Ãë£©
+        /// å‘é€å’Œæ¥æ”¶è¶…æ—¶ï¼Œä»¥æ¯«ç§’è¡¨ç¤ºï¼Œé»˜è®¤ä¸º20000ï¼ˆ20ç§’ï¼‰
         /// </summary>
         internal static int SendReceiveTimeoutInMs => DatasamplerConfigDto.SendReceiveTimeoutInMs;
 
         /// <summary>
-        /// Õı³£²É¼¯Ê±£¬¶ÓÁĞÖĞ¶ÔÏóÊıÁ¿µÄ×î´óÖµ
+        /// æ­£å¸¸é‡‡é›†æ—¶ï¼Œé˜Ÿåˆ—ä¸­å¯¹è±¡æ•°é‡çš„æœ€å¤§å€¼
         /// </summary>
         internal static int MaxQueueLength_NormalSample => DatasamplerConfigDto.MaxQueueLength_NormalSample;
 
         /// <summary>
-        /// ´´½¨SocketÁ¬½Ó
+        /// åˆ›å»ºSocketè¿æ¥
         /// </summary>
-        /// <param name="ipAddress">IPµØÖ·</param>
+        /// <param name="ipAddress">IPåœ°å€</param>
         /// <returns>SocketWrapper</returns>
         internal static SocketWrapper CreateSocket( IPAddressData ipAddress )
         {
@@ -277,10 +293,10 @@ namespace DataSampler
 
         #endregion
 
-        #region ³õÊ¼»¯¶ÁĞ´½á¹¹µÄ´úÀí
+        #region åˆå§‹åŒ–è¯»å†™ç»“æ„çš„ä»£ç†
 
         /// <summary>
-        ///     ³õÊ¼»¯¶ÁĞ´½á¹¹µÄ´úÀí£¬Õâ¸öº¯ÊıÔÚÓ²¼ş²âÊÔ¹¤¾ßÖĞÒ²±»µ÷ÓÃ
+        ///     åˆå§‹åŒ–è¯»å†™ç»“æ„çš„ä»£ç†ï¼Œè¿™ä¸ªå‡½æ•°åœ¨ç¡¬ä»¶æµ‹è¯•å·¥å…·ä¸­ä¹Ÿè¢«è°ƒç”¨
         /// </summary>
         public static void InitStructReadWriteHandler()
         {
@@ -297,15 +313,15 @@ namespace DataSampler
 
         #endregion
 
-        #region ³õÊ¼»¯¹Ì¼şÉı¼¶½á¹¹
+        #region åˆå§‹åŒ–å›ºä»¶å‡çº§ç»“æ„
 
         /// <summary>
-        /// ¹Ì¼şÎÄ¼şÃû¶Ô¹Ì¼şÎÄ¼şĞÅÏ¢¶ÔÏóµÄÓ³Éä
+        /// å›ºä»¶æ–‡ä»¶åå¯¹å›ºä»¶æ–‡ä»¶ä¿¡æ¯å¯¹è±¡çš„æ˜ å°„
         /// </summary>
         private static readonly IgnoreCaseKeyDictionary<FirmwareFileInfoData> _firmwareFileName2InfoDatas = new IgnoreCaseKeyDictionary<FirmwareFileInfoData>();
 
         /// <summary>
-        ///     ³õÊ¼»¯¹Ì¼şÉı¼¶½á¹¹
+        ///     åˆå§‹åŒ–å›ºä»¶å‡çº§ç»“æ„
         /// </summary>
         internal static void InitFirmware4Upgrade()
         {
@@ -356,10 +372,10 @@ namespace DataSampler
         }
 
         /// <summary>
-        /// ¸ù¾İ¹Ì¼şÎÄ¼şÃû»ñµÃ¹Ì¼şÎÄ¼şĞÅÏ¢¶ÔÏó
+        /// æ ¹æ®å›ºä»¶æ–‡ä»¶åè·å¾—å›ºä»¶æ–‡ä»¶ä¿¡æ¯å¯¹è±¡
         /// </summary>
-        /// <param name="firmwareFileName">¹Ì¼şÎÄ¼şÃû</param>
-        /// <returns>¹Ì¼şÎÄ¼şĞÅÏ¢¶ÔÏó</returns>
+        /// <param name="firmwareFileName">å›ºä»¶æ–‡ä»¶å</param>
+        /// <returns>å›ºä»¶æ–‡ä»¶ä¿¡æ¯å¯¹è±¡</returns>
         internal static FirmwareFileInfoData GetFirmwareFileInfoDataByName( string firmwareFileName )
         {
             lock( _firmwareFileName2InfoDatas )
@@ -370,20 +386,20 @@ namespace DataSampler
 
         #endregion
 
-        #region ÍÆËÍ¹Ì¼şµÄ·½Ê½
+        #region æ¨é€å›ºä»¶çš„æ–¹å¼
 
         /// <summary>
-        /// Ä¬ÈÏÖµ£¬ÍÆËÍ
+        /// é»˜è®¤å€¼ï¼Œæ¨é€
         /// </summary>
         internal static string PushFirmwareFileMode_Push = "Push";
 
         /// <summary>
-        /// ¹¤×÷Õ¾×÷Îª¿Í»§¶ËÖ÷¶¯»ñÈ¡
+        /// å·¥ä½œç«™ä½œä¸ºå®¢æˆ·ç«¯ä¸»åŠ¨è·å–
         /// </summary>
         internal static string PushFirmwareFileMode_Pull = "Pull";
 
         /// <summary>
-        /// Push£ºÄ¬ÈÏÖµ£¬ÍÆËÍ£¬Pull£º¹¤×÷Õ¾×÷Îª¿Í»§¶ËÖ÷¶¯»ñÈ¡
+        /// Pushï¼šé»˜è®¤å€¼ï¼Œæ¨é€ï¼ŒPullï¼šå·¥ä½œç«™ä½œä¸ºå®¢æˆ·ç«¯ä¸»åŠ¨è·å–
         /// </summary>
         internal static string PushFirmwareFileMode
         {

@@ -1,4 +1,6 @@
-﻿namespace Moons.Common20.CRC
+using System;
+
+namespace Moons.Common20.CRC
 {
     /// <summary>
     /// 只是简单地通过异或校验，不查表
@@ -35,6 +37,22 @@
         /// <param name="size">字节数</param>
         /// <param name="ret">输入和输出</param>
         public static void Crc( byte[] buffer, int offset, int size, ref byte ret )
+        {
+            int bound = offset + size;
+            for( int index = offset; index < bound; index++ )
+            {
+                ret ^= buffer[index];
+            }
+        }
+
+        /// <summary>
+        /// crc校验
+        /// </summary>
+        /// <param name="buffer">缓冲区</param>
+        /// <param name="offset">偏移量</param>
+        /// <param name="size">字节数</param>
+        /// <param name="ret">输入和输出</param>
+        public static void Crc( Span<byte> buffer, int offset, int size, ref byte ret )
         {
             int bound = offset + size;
             for( int index = offset; index < bound; index++ )

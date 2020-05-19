@@ -27,6 +27,16 @@ namespace Moons.Common20
         /// <typeparam name="T">元素类型</typeparam>
         /// <param name="array">数组</param>
         /// <returns>最后一个元素</returns>
+        public static T Last<T>( Span<T> array )
+        {
+            return array[array.Length - 1];
+        }
+        /// <summary>
+        /// 找到最后一个元素
+        /// </summary>
+        /// <typeparam name="T">元素类型</typeparam>
+        /// <param name="array">数组</param>
+        /// <returns>最后一个元素</returns>
         public static T Last<T>( T[] array )
         {
             return array[array.Length - 1];
@@ -181,6 +191,32 @@ namespace Moons.Common20
         #endregion
 
         #region 判断两个数组是否相等
+
+        /// <summary>
+        /// 判断两个数组是否相等
+        /// </summary>
+        /// <typeparam name="T">数组类型</typeparam>
+        /// <param name="a">数组1</param>
+        /// <param name="b">数组2</param>
+        /// <returns>true：相等，false：不相等</returns>
+        public static bool Equal<T>( Span<T> a, Span<T> b ) where T : IEquatable<T>
+        {
+            if( a == null || b == null || a.Length != b.Length )
+            {
+                return false;
+            }
+
+            int count = a.Length;
+            for( int index = 0; index < count; index++ )
+            {
+                if( !a[index].Equals( b[index] ) )
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// 判断两个数组是否相等

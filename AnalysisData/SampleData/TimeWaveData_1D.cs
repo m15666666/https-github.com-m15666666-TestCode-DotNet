@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace AnalysisData.SampleData
 {
@@ -31,5 +31,14 @@ namespace AnalysisData.SampleData
         /// 特征指标
         /// </summary>
         public FeatureData Feature { get; set; }
+
+        #region ToString
+
+        public override string ToString()
+        {
+            return $"Timewave1: {base.ToString()}";
+        }
+
+        #endregion
     }
 }

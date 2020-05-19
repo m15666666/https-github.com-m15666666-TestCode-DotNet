@@ -1,4 +1,4 @@
-﻿using AnalysisData.SampleData;
+using AnalysisData.SampleData;
 using DataSampler.Helper;
 using log4net;
 using log4net.Config;
@@ -7,6 +7,7 @@ using Moons.Common20;
 using Moons.Log4net;
 using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace DataSampler.Test
 {
@@ -25,15 +26,25 @@ namespace DataSampler.Test
 
             EnvironmentUtils.IsDebug = true;
 
+            Console.WriteLine("enter to start");
+            Console.ReadLine();
             try
             {
                 Config.InitStructReadWriteHandler();
                 Config.InitDebugHandler();
+                Config.InitFake4Test();
+                Config.TcpLogger = EnvironmentUtils.Logger;
 
                 var sampleStationProxy = new SampleStationProxy();
                 sampleStationProxy.SampleStationData.DataSamplerIP = "127.0.0.1";
 
-                Do("StartNormalSample", () => sampleStationProxy.StartNormalSample() );
+                StringBuilder builder = new StringBuilder();
+                builder.Append(0);
+                for (int i = 1; i < 10000; i++)
+                    builder.Append(',').Append(i);
+                Do("reset battery", () => sampleStationProxy.ResetBattery(builder.ToString()) );
+                //Do("StartNormalSample", () => sampleStationProxy.StartNormalSample() );
+                return;
                 Do("StopSample", () => sampleStationProxy.StopSample());
                 //Do("SendAlmEventData_Test", () => sampleStationProxy.SendAlmEventData_Test());
                 Do("GetSampleStationStatus", () => sampleStationProxy.GetSampleStationStatus());

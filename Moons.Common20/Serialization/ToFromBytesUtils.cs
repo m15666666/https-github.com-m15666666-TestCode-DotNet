@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -979,12 +979,25 @@ namespace Moons.Common20.Serialization
         /// </summary>
         /// <param name="byteBuffer">ByteBuffer</param>
         /// <returns>命令对象</returns>
-        public static CommandMessage ReadCommandMessage(byte[] bytes)
+        public static CommandMessage ReadCommandMessage(byte[] bytes, int offset, int size)
         {
-            using (MemoryStream stream = new MemoryStream(bytes))
+            using (MemoryStream stream = new MemoryStream(bytes, offset, size))
             {
                 return ReadCommandMessage(stream);
             }
+        }
+        /// <summary>
+        ///     解析命令对象
+        /// </summary>
+        /// <param name="byteBuffer">ByteBuffer</param>
+        /// <returns>命令对象</returns>
+        public static CommandMessage ReadCommandMessage(byte[] bytes)
+        {
+            return ReadCommandMessage(bytes, 0, bytes.Length);
+            //using (MemoryStream stream = new MemoryStream(bytes))
+            //{
+            //    return ReadCommandMessage(stream);
+            //}
         }
 
         /// <summary>

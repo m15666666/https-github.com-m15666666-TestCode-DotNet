@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Moons.Common20;
@@ -243,6 +243,15 @@ namespace AnalysisData.SampleData
                     _dataLength, _rev, _sampleFreq, _multiFreq
                 };
             }
+        }
+
+        #endregion
+
+        #region ToString
+
+        public override string ToString()
+        {
+            return $"TrendData: {SampleTime}, {nameof(DataUsageID)}:{DataUsageID},{nameof(PointID)}:{PointID},{nameof(DataLength)}:{DataLength}";
         }
 
         #endregion
