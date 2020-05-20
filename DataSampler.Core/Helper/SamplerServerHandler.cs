@@ -19,29 +19,31 @@ namespace DataSampler.Core.Helper
 
         protected override void ChannelRead0(IChannelHandlerContext context, IByteBuffer message)
         {
-            Config.LogTcp("read command messge begin...");
+            var contextInfo = Config.GetContextInfo(context);
+            Config.LogTcp($"{contextInfo}: read command messge begin...");
             ArraySegment<byte> ioBuf = message.GetIoBuffer();
             var bodyBytes = ioBuf.Array;
             int offset = ioBuf.Offset;
             int count = ioBuf.Count;
-            Config.LogTcp("SamplerServerHandler", ioBuf);
+            Config.LogTcp($"{contextInfo}: SamplerServerHandler", ioBuf);
 
             CommandMessage command = ToFromBytesUtils.ReadCommandMessage(bodyBytes, offset, count - PackageSendReceive.Count_Tail);
-            Config.LogTcp("read command messge end.");
-            Config.LogCommandMessage(command);
-            Config.LogTcp("log command messge end.");
+            //Config.LogTcp("read command messge end.");
+            Config.LogCommandMessage(command, contextInfo);
+            //Config.LogTcp("log command messge end.");
             Action<byte[]> sendHandler = bytes => context.WriteAsync(bytes);
             DataSamplerController.Instance.OnReceiveCommandMessage(command, sendHandler);
-            Config.LogTcp("on receive command messge end.");
+            Config.LogTcp($"{contextInfo}: on receive command messge end.");
             context.Flush();
-            Config.LogTcp("context.flush end.");
+            //Config.LogTcp("context.flush end.");
         }
 
         public override void ChannelReadComplete(IChannelHandlerContext context) => context.Flush();
 
         public override void ExceptionCaught(IChannelHandlerContext context, Exception exception)
         {
-            Config.TcpLogger.Error("SamplerServerHandler ExceptionCaught", exception);
+            var contextInfo = Config.GetContextInfo(context);
+            Config.TcpLogger.Error($"{contextInfo}: SamplerServerHandler ExceptionCaught", exception);
             Console.WriteLine("Exception: " + exception);
             context.CloseAsync();
         }

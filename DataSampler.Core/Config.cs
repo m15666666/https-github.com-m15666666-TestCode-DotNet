@@ -48,7 +48,20 @@ namespace DataSampler
             if (!DatasamplerConfigDto.PrintTcpMessage) return;
             //if (EnvironmentUtils.IsDebug)
             {
-                string info = string.Format( "commandMessage: {0}", commandMessage );
+                string info = commandMessage.ToString();
+                Config.TcpLogger.Debug( info );
+            }
+        }
+        /// <summary>
+        /// 记录CommandMessage对象
+        /// </summary>
+        /// <param name="commandMessage">CommandMessage</param>
+        internal static void LogCommandMessage( CommandMessage commandMessage, string prefix )
+        {
+            if (!DatasamplerConfigDto.PrintTcpMessage) return;
+            //if (EnvironmentUtils.IsDebug)
+            {
+                string info = $"{prefix}: {commandMessage}";
                 Config.TcpLogger.Debug( info );
             }
         }
@@ -129,13 +142,17 @@ namespace DataSampler
         /// </summary>
         public static ILogNet Logger { get; set; }
 
-        public static void LogTcp(string prefix, ArraySegment<byte> ioBuf)
+        public static void LogTcp(string prefix, ArraySegment<byte> ioBuf )
         {
             TcpLogger.Info($"{prefix}: iobuf:offset:{ioBuf.Offset},count:{ioBuf.Count}.");
         }
         public static void LogTcp(string message)
         {
             TcpLogger.Info(message);
+        }
+        public static string GetContextInfo(DotNetty.Transport.Channels.IChannelHandlerContext context)
+        {
+            return context.Channel.ToString();
         }
 
         #endregion

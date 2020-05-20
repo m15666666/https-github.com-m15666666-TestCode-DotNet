@@ -15,13 +15,14 @@ namespace DataSampler.Core.Helper
     {
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {
-            Config.LogTcp("sampler decoder begin...");
+            var contextInfo = Config.GetContextInfo(context);
+            Config.LogTcp($"{contextInfo}: sampler decoder begin...");
             int headCount = PackageSendReceive.Count_Head;
             int tailCount = PackageSendReceive.Count_Tail;
 
             if (input.ReadableBytes < headCount + tailCount)
             {
-                Config.LogTcp("if (input.ReadableBytes < headCount + tailCount).");
+                Config.LogTcp($"{contextInfo}: if (input.ReadableBytes < headCount + tailCount).");
                 return;
             }
             input.MarkReaderIndex();
@@ -40,7 +41,7 @@ namespace DataSampler.Core.Helper
                 int offset = ioBuf.Offset;
                 int count = ioBuf.Count;
                 PackageSendReceive.CheckPart1(headBytes.AsSpan(offset, count));
-                Config.LogTcp("checkpart1", ioBuf);
+                Config.LogTcp($"{contextInfo}: checkpart1", ioBuf);
 
                 PackageSendReceive.CheckPart2(headBytes, offset, count, out bodyLength);
             }
@@ -51,7 +52,7 @@ namespace DataSampler.Core.Helper
 
             if (input.ReadableBytes < bodyLength + tailCount )
             {
-                Config.LogTcp("if (input.ReadableBytes < bodyLength + tailCount ).");
+                Config.LogTcp($"{contextInfo}: if (input.ReadableBytes < bodyLength + tailCount ).");
                 input.ResetReaderIndex();
                 return;
             }
@@ -68,14 +69,14 @@ namespace DataSampler.Core.Helper
                 ArraySegment<byte> ioBuf = bodyBuffer.GetIoBuffer();
                 var bodyBytes = ioBuf.Array;
                 int offset = ioBuf.Offset;
-                Config.LogTcp("checkpart3",ioBuf);
+                Config.LogTcp($"{contextInfo}: checkpart3",ioBuf);
 
                 var tailBytes = bodyBytes.AsSpan(offset + bodyLength, tailCount);
                 PackageSendReceive.CheckPart3( bodyBytes.AsSpan(offset,bodyLength), tailBytes);
                 
                 output.Add(bodyBuffer);
             }
-            Config.LogTcp("sampler decoder end.");
+            Config.LogTcp($"{contextInfo}: sampler decoder end.");
 
             //output.Add(bodyBytes);
         }
