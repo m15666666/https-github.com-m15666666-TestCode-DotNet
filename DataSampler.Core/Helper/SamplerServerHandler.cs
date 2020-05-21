@@ -19,7 +19,7 @@ namespace DataSampler.Core.Helper
 
         protected override void ChannelRead0(IChannelHandlerContext context, IByteBuffer message)
         {
-            var contextInfo = Config.GetContextInfo(context);
+            var contextInfo = $"{Config.GetContextInfo(context)}, hanlder({GetHashCode()})";
             Config.LogTcp($"{contextInfo}: read command messge begin...");
             ArraySegment<byte> ioBuf = message.GetIoBuffer();
             var bodyBytes = ioBuf.Array;
@@ -27,7 +27,10 @@ namespace DataSampler.Core.Helper
             int count = ioBuf.Count;
             Config.LogTcp($"{contextInfo}: SamplerServerHandler", ioBuf);
 
-            CommandMessage command = ToFromBytesUtils.ReadCommandMessage(bodyBytes, offset, count - PackageSendReceive.Count_Tail);
+            Action<string> logHandler = m =>  Config.LogTcp($"{contextInfo}: {m}");
+            CommandMessage command = ToFromBytesUtils.ReadCommandMessage(bodyBytes, offset, count - PackageSendReceive.Count_Tail,
+                tofromUtils => tofromUtils.LogHandler = logHandler);
+
             //Config.LogTcp("read command messge end.");
             Config.LogCommandMessage(command, contextInfo);
             //Config.LogTcp("log command messge end.");

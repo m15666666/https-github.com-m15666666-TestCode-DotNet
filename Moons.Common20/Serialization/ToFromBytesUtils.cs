@@ -40,6 +40,11 @@ namespace Moons.Common20.Serialization
             Writer = writer;
         }
 
+        /// <summary>
+        /// 记录日志的代理
+        /// </summary>
+        public Action<string> LogHandler { get; set; } = (_) => { };
+
         #endregion
 
         #region 变量和属性
@@ -291,7 +296,10 @@ namespace Moons.Common20.Serialization
         /// <returns>int数据</returns>
         public int ReadInt32()
         {
-            return Reader.ReadInt32();
+            LogHandler("ReadInt32 begin");
+            var ret = Reader.ReadInt32();
+            LogHandler($"ReadInt32: {ret}");
+            return ret;
         }
 
         public long ReadInt64()
@@ -979,11 +987,11 @@ namespace Moons.Common20.Serialization
         /// </summary>
         /// <param name="byteBuffer">ByteBuffer</param>
         /// <returns>命令对象</returns>
-        public static CommandMessage ReadCommandMessage(byte[] bytes, int offset, int size)
+        public static CommandMessage ReadCommandMessage(byte[] bytes, int offset, int size, Action<ToFromBytesUtils> initHandler = null)
         {
             using (MemoryStream stream = new MemoryStream(bytes, offset, size))
             {
-                return ReadCommandMessage(stream);
+                return ReadCommandMessage(stream, initHandler);
             }
         }
         /// <summary>
@@ -1005,11 +1013,13 @@ namespace Moons.Common20.Serialization
         /// </summary>
         /// <param name="stream">Stream</param>
         /// <returns>命令对象</returns>
-        public static CommandMessage ReadCommandMessage(Stream stream)
+        public static CommandMessage ReadCommandMessage(Stream stream, Action<ToFromBytesUtils> initHandler = null)
         {
             using (var reader = new BinaryReader(stream))
             {
-                return ReadCommandMessage(new ToFromBytesUtils(reader) { ByteCountLeft2Read = (int)stream.Length });
+                var tofromUtils = new ToFromBytesUtils(reader) { ByteCountLeft2Read = (int)stream.Length };
+                initHandler?.Invoke(tofromUtils);
+                return ReadCommandMessage(tofromUtils);
             }
         }
 
@@ -1030,7 +1040,9 @@ namespace Moons.Common20.Serialization
                 throw new ArgumentOutOfRangeException( string.Format( "Unkown struct type ID({0}).", structTypeID ) );
             }
 
+            toFromBytesUtils.LogHandler("tofrombytes begin handle.");
             object data = handler( toFromBytesUtils );
+            toFromBytesUtils.LogHandler("tofrombytes end handle.");
             return new CommandMessage {CommandID = commandID, StructTypeID = structTypeID, Data = data};
         }
 
