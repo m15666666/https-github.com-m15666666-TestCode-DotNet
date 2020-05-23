@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,5 +18,10 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 测点编号
         /// </summary>
         public object Point_ID { get; set; }
+
+        public override string ToString()
+        {
+            return $"(PossbileFault:{FaultCode}-{Point_ID})";
+        }
     }
 }

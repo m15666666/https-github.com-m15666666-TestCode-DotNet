@@ -23,5 +23,10 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 使用的历史数据截止时间
         /// </summary>
         public DateTime HistoryDataEnd { get; set; }
+
+        public override string ToString()
+        {
+            return $"{EquipmentId}-{HistoryDataBegin}-{HistoryDataEnd}";
+        }
     }
 }
