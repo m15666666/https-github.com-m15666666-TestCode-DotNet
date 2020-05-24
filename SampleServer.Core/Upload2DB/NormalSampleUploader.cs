@@ -11,12 +11,12 @@ using TimeWaveData_1D = AnalysisData.Dto.TimeWaveDataDto;
 namespace SampleServer.Upload2DB
 {
     /// <summary>
-    /// Õı³£²É¼¯Êı¾İÉÏ´«Êı¾İ¿âÀà
+    /// æ­£å¸¸é‡‡é›†æ•°æ®ä¸Šä¼ æ•°æ®åº“ç±»
     /// </summary>
     public class NormalSampleUploader : UploaderBase
     {
         /// <summary>
-        /// ÉÏ´«Êı¾İ
+        /// ä¸Šä¼ æ•°æ®
         /// </summary>
         /// <param name="datas">List[TrendData]</param>
         public void UploadData( List<TrendData> datas )
@@ -36,22 +36,22 @@ namespace SampleServer.Upload2DB
             }
         }
 
-        #region ×Ô¶¨Òåº¯Êı
+        #region è‡ªå®šä¹‰å‡½æ•°
 
         /// <summary>
-        /// ÉÏ´«Êı¾İ
+        /// ä¸Šä¼ æ•°æ®
         /// </summary>
-        /// <param name="trendDatas">TrendData¶ÔÏó¼¯ºÏ</param>
+        /// <param name="trendDatas">TrendDataå¯¹è±¡é›†åˆ</param>
         private void UploadDatas( IEnumerable<TrendData> trendDatas )
         {
             //var save2DBDatas = new List<TrendData>();
             var sampleServerContext = Config.SampleServerContext;
             foreach ( TrendData trendData in trendDatas )
             {
-                //// ½«±¨¾¯µÈ¼¶IDÍ³Ò»
+                //// å°†æŠ¥è­¦ç­‰çº§IDç»Ÿä¸€
                 trendData.AlmLevelID = Config.GetRefAlmLevelIDByAlmLevelID( trendData.AlmLevelID );
 
-                // »º´æ¼à²âÊı¾İ
+                // ç¼“å­˜ç›‘æµ‹æ•°æ®
                 if( trendData.DataUsageID == DataUsageID.Monitor )
                 {
                     sampleServerContext.SendMonitorData(trendData);
@@ -59,7 +59,7 @@ namespace SampleServer.Upload2DB
                     continue;
                 }
 
-                // »ñµÃÍ¬²½ID
+                // è·å¾—åŒæ­¥ID
                 trendData.SyncID = Config.GetSyncIDBySyncUniqueID(trendData.SyncUniqueID);
 
                 sampleServerContext.SendSave2DBData(trendData);
@@ -91,12 +91,12 @@ namespace SampleServer.Upload2DB
     }
 
     /// <summary>
-    /// Õı³£²É¼¯±¨¾¯ÉÏ´«Êı¾İ¿âÀà
+    /// æ­£å¸¸é‡‡é›†æŠ¥è­¦ä¸Šä¼ æ•°æ®åº“ç±»
     /// </summary>
     public class NormalAlmUploader : UploaderBase
     {
         /// <summary>
-        /// ÉÏ´«±¨¾¯ÊÂ¼ş¶ÔÏó
+        /// ä¸Šä¼ æŠ¥è­¦äº‹ä»¶å¯¹è±¡
         /// </summary>
         /// <param name="datas">List[AlmEventData]</param>
         public void UploadAlm( List<AlmEventDataDto> datas )
@@ -111,14 +111,16 @@ namespace SampleServer.Upload2DB
                 var sampleServerContext = Config.SampleServerContext;
                 foreach ( var almData in datas )
                 {
-                    // ¼ÍĞã·¶¿ÉÄÜ°Ñ²âµãIDÎªÁãµÄ±¨¾¯ÊÂ¼ş´«ÉÏÀ´£¬ÕâÖÖ±¨¾¯ÊÂ¼şĞèÒª¹ıÂË£¬Å×Æúµô¡£
+                    // çºªç§€èŒƒå¯èƒ½æŠŠæµ‹ç‚¹IDä¸ºé›¶çš„æŠ¥è­¦äº‹ä»¶ä¼ ä¸Šæ¥ï¼Œè¿™ç§æŠ¥è­¦äº‹ä»¶éœ€è¦è¿‡æ»¤ï¼ŒæŠ›å¼ƒæ‰ã€‚
                     if( almData.PointID == 0 )
                     {
                         continue;
                     }
 
-                    // ½«±¨¾¯µÈ¼¶IDÍ³Ò»
+                    // å°†æŠ¥è­¦ç­‰çº§IDç»Ÿä¸€
                     almData.AlmLevel = Config.GetRefAlmLevelIDByAlmLevelID( almData.AlmLevel );
+
+                    TraceUtils.Debug($"almLevel: {almData.AlmLevel}");
 
                     sampleServerContext.SendAlmEvent(almData);
 
@@ -139,13 +141,13 @@ namespace SampleServer.Upload2DB
 
                     //if( Config.IsWineSteelCustomMode )
                     //{
-                    //    // ¾Æ¸ÖÄ£Ê½ÏÂ£¬Õë¶Ô²É¼¯Æ÷¹Ì¼şBugµÄ²¹¾È´ëÊ©¡£
-                    //    if( descTX.Contains( "·ÇÊı×Ö" ) ||
-                    //        ( descTX.Contains( "ÎÂ¶È" ) && descTX.Contains( "±¨¾¯Öµ£º0¡£" ) ) ||
-                    //        ( descTX.Contains( "µçÁ÷" ) && descTX.Contains( "±¨¾¯Öµ£º0¡£" ) )
+                    //    // é…’é’¢æ¨¡å¼ä¸‹ï¼Œé’ˆå¯¹é‡‡é›†å™¨å›ºä»¶Bugçš„è¡¥æ•‘æªæ–½ã€‚
+                    //    if( descTX.Contains( "éæ•°å­—" ) ||
+                    //        ( descTX.Contains( "æ¸©åº¦" ) && descTX.Contains( "æŠ¥è­¦å€¼ï¼š0ã€‚" ) ) ||
+                    //        ( descTX.Contains( "ç”µæµ" ) && descTX.Contains( "æŠ¥è­¦å€¼ï¼š0ã€‚" ) )
                     //        )
                     //    {
-                    //        TraceUtils.LogDebugInfo( $"ºöÂÔ±¨¾¯ÊÂ¼ş£º{descTX}." );
+                    //        TraceUtils.LogDebugInfo( $"å¿½ç•¥æŠ¥è­¦äº‹ä»¶ï¼š{descTX}." );
                     //        continue;
                     //    }
                     //}
@@ -154,12 +156,12 @@ namespace SampleServer.Upload2DB
                     //    descTX = almData.AlmTime + descTX;
                     //}
 
-                    //// Ê¹ÓÃ´æ´¢¹ı³ÌĞ´Èë±¨¾¯
+                    //// ä½¿ç”¨å­˜å‚¨è¿‡ç¨‹å†™å…¥æŠ¥è­¦
                     //var queryInfoBagSp = new QueryInfoBagSp { SpName = "ZXSamplePackage.InsertAlmRecord" };
 
                     //queryInfoBagSp.AddQueryParameter( "P_PartitionID", PartitionIDUtils.Time2LongID( almData.AlmTime ) );
 
-                    //// À´Ô´Ò²ÊÇInt32£¬ËùÒÔÕâÀïÇ¿ÖÆ×ª»»Ã»ÓĞÎÊÌâ
+                    //// æ¥æºä¹Ÿæ˜¯Int32ï¼Œæ‰€ä»¥è¿™é‡Œå¼ºåˆ¶è½¬æ¢æ²¡æœ‰é—®é¢˜
                     //queryInfoBagSp.AddQueryParameter( "P_AlmID", Convert.ToInt32( almData.AlmID ) );
 
                     //queryInfoBagSp.AddQueryParameter( "P_FeatureValueID", almSourceID );
@@ -172,7 +174,7 @@ namespace SampleServer.Upload2DB
                     //queryInfoBagSp.AddQueryParameter( "P_OwnerPostID", postID );
                     //queryInfoBagSp.AddQueryParameter( "P_MobSpecID", specID );
 
-                    //// ÔÚÏßµÄÓÃ»§Ö¸¶¨ÎªÏµÍ³ÓÃ»§
+                    //// åœ¨çº¿çš„ç”¨æˆ·æŒ‡å®šä¸ºç³»ç»Ÿç”¨æˆ·
                     //queryInfoBagSp.AddQueryParameter( "P_UserID", checkUserID );
 
                     //Context.QueryDataSp.ExecuteNonQuery( queryInfoBagSp );
@@ -181,14 +183,14 @@ namespace SampleServer.Upload2DB
                     //{
                     //    try
                     //    {
-                    //        // ¾Æ¸ÖÄ£Ê½ÏÂ£¬Õë¶Ô²É¼¯Æ÷¹Ì¼şBugµÄ²¹¾È´ëÊ©¡£
-                    //        // ÉÏÃæµÄ²¹¾È´ëÊ©²»ÖªÊ²Ã´Ô­Òò»áÓĞÉÙÁ¿µÄ´íÎó±¨¾¯¼ÇÂ¼Èë¿â£¬ËùÒÔÖ´ĞĞÏÂÃæµÄSQLÓï¾ä¡£
+                    //        // é…’é’¢æ¨¡å¼ä¸‹ï¼Œé’ˆå¯¹é‡‡é›†å™¨å›ºä»¶Bugçš„è¡¥æ•‘æªæ–½ã€‚
+                    //        // ä¸Šé¢çš„è¡¥æ•‘æªæ–½ä¸çŸ¥ä»€ä¹ˆåŸå› ä¼šæœ‰å°‘é‡çš„é”™è¯¯æŠ¥è­¦è®°å½•å…¥åº“ï¼Œæ‰€ä»¥æ‰§è¡Œä¸‹é¢çš„SQLè¯­å¥ã€‚
                     //        const string DeleteErrorRecordsSql =
-                    //            "delete from ZT_MobjectWarning where (Content_TX like '%ÎÂ¶È%±¨¾¯Öµ£º0¡£%') or (Content_TX like '%µçÁ÷%±¨¾¯Öµ£º0¡£%') or (Content_TX like '%·ÇÊı×Ö%');";
+                    //            "delete from ZT_MobjectWarning where (Content_TX like '%æ¸©åº¦%æŠ¥è­¦å€¼ï¼š0ã€‚%') or (Content_TX like '%ç”µæµ%æŠ¥è­¦å€¼ï¼š0ã€‚%') or (Content_TX like '%éæ•°å­—%');";
                     //        Context.ExecuteSQLCommandNonQuery( DeleteErrorRecordsSql );
 
                     //        const string DeleteErrorRecordsSql2 =
-                    //            "delete from ZX_History_Alm where (AlmDesc_TX like '%ÎÂ¶È%±¨¾¯Öµ£º0¡£%') or (AlmDesc_TX like '%µçÁ÷%±¨¾¯Öµ£º0¡£%') or (AlmDesc_TX like '%·ÇÊı×Ö%');";
+                    //            "delete from ZX_History_Alm where (AlmDesc_TX like '%æ¸©åº¦%æŠ¥è­¦å€¼ï¼š0ã€‚%') or (AlmDesc_TX like '%ç”µæµ%æŠ¥è­¦å€¼ï¼š0ã€‚%') or (AlmDesc_TX like '%éæ•°å­—%');";
                     //        Context.ExecuteSQLCommandNonQuery( DeleteErrorRecordsSql2 );
                     //    }
                     //    catch( Exception ex )
@@ -205,14 +207,14 @@ namespace SampleServer.Upload2DB
         }
 
         ///// <summary>
-        ///// »ñÈ¡±¨¾¯ÃèÊö
+        ///// è·å–æŠ¥è­¦æè¿°
         ///// </summary>
-        ///// <param name="pointID">²âµãID</param>
-        ///// <param name="mobjectID">Êä³ö£¬Éè±¸ID</param>
-        ///// <param name="postID">Êä³ö£¬¸ÚÎ»ID</param>
-        ///// <param name="checkUserID">¼ì²éÈËID</param>
-        ///// <param name="specID">Êä³ö£¬Éè±¸×¨ÒµID</param>
-        ///// <returns>±¨¾¯ÃèÊö</returns>
+        ///// <param name="pointID">æµ‹ç‚¹ID</param>
+        ///// <param name="mobjectID">è¾“å‡ºï¼Œè®¾å¤‡ID</param>
+        ///// <param name="postID">è¾“å‡ºï¼Œå²—ä½ID</param>
+        ///// <param name="checkUserID">æ£€æŸ¥äººID</param>
+        ///// <param name="specID">è¾“å‡ºï¼Œè®¾å¤‡ä¸“ä¸šID</param>
+        ///// <returns>æŠ¥è­¦æè¿°</returns>
         //private static string GetAlmDescTX( int pointID, out int mobjectID, out int postID, out int checkUserID,
         //                                    out int specID )
         //{
@@ -237,13 +239,13 @@ namespace SampleServer.Upload2DB
         //    Mob_MObject mobject = mobjectService.GetMObjectByID( mobjectID, ref msg );
         //    if( msg.IsError )
         //    {
-        //        TraceUtils.Error( string.Format( "GetAlmDescTX»ñÈ¡Éè±¸ĞÅÏ¢({0})³ö´í({1})£¡", mobjectID, msg.ErrorMessage ) );
+        //        TraceUtils.Error( string.Format( "GetAlmDescTXè·å–è®¾å¤‡ä¿¡æ¯({0})å‡ºé”™({1})ï¼", mobjectID, msg.ErrorMessage ) );
         //        return null;
         //    }
             
         //    if ( mobject == null )
         //    {
-        //        TraceUtils.Error( string.Format( "GetAlmDescTX,Éè±¸({0})²»´æÔÚ", mobjectID ) );
+        //        TraceUtils.Error( string.Format( "GetAlmDescTX,è®¾å¤‡({0})ä¸å­˜åœ¨", mobjectID ) );
         //        return null;
         //    }
 
@@ -254,7 +256,7 @@ namespace SampleServer.Upload2DB
         //        var pathIds = mObjectStructureService.GetMObjectPathIDs( mobjectID, ref msg);
 
         //        List< Mob_MObject> mObjectsInPath = new List<Mob_MObject>();
-        //        // 0 ÊÇOrgId
+        //        // 0 æ˜¯OrgId
         //        for ( int index = 1; index < pathIds.Length; index++ )
         //        {
         //            Mob_MObject mobjectInPath = mobjectService.GetMObjectByID(pathIds[index], ref msg);
@@ -262,7 +264,7 @@ namespace SampleServer.Upload2DB
         //            var cd = mobjectInPath.Mobject_CD ?? string.Empty;
         //            if( cd.StartsWith( Config.WEPEC_Prefix_FirstParent ) )
         //            {
-        //                // ÕÒµ½ÁË¿ªÊ¼µÄÉè±¸½Úµã£¬É¾³ı¿ªÊ¼½ÚµãÖ®Ç°µÄ½Úµã¡£
+        //                // æ‰¾åˆ°äº†å¼€å§‹çš„è®¾å¤‡èŠ‚ç‚¹ï¼Œåˆ é™¤å¼€å§‹èŠ‚ç‚¹ä¹‹å‰çš„èŠ‚ç‚¹ã€‚
         //                mObjectsInPath.Clear();
         //            }
 
@@ -270,7 +272,7 @@ namespace SampleServer.Upload2DB
 
         //            if( cd.StartsWith( Config.WEPEC_Prefix_Machine ) )
         //            {
-        //                // ÕÒµ½ÁË¹Ø¼üµÄÉè±¸½Úµã¡£
+        //                // æ‰¾åˆ°äº†å…³é”®çš„è®¾å¤‡èŠ‚ç‚¹ã€‚
         //                mobject = mobjectInPath;
         //            }
         //        }
@@ -278,13 +280,13 @@ namespace SampleServer.Upload2DB
         //        mobjectName = StringUtils.Join( mObjectsInPath.Select( m => m.MobjectName_TX ), StringUtils.Slash );
         //    } // if( Config.IsWEPECCustomMode )
 
-        //    // Êä³ö×¨ÒµID
+        //    // è¾“å‡ºä¸“ä¸šID
         //    if ( mobject.Spec_ID.HasValue )
         //    {
         //        specID = mobject.Spec_ID.Value;
         //    }
 
-        //    // µã¼ì·½µÄ¸ÚÎ»ID
+        //    // ç‚¹æ£€æ–¹çš„å²—ä½ID
         //    int? djOwnerID = mobject.DJOwner_ID;
         //    TraceUtils.LogDebugInfo( string.Format( "GetAlmDescTX mobject.DJOwner_ID: {0}", mobject.DJOwner_ID ) );
         //    if( djOwnerID.HasValue )
@@ -315,7 +317,7 @@ namespace SampleServer.Upload2DB
         //    StationChannel channel = pntChannelService.GetPntChnlDetailByPointIDAndChnNo( point.Point_ID, 1, ref msg );
         //    if( msg.IsError )
         //    {
-        //        TraceUtils.Error( string.Format( "GetAlmDescTX»ñÈ¡²âµãÍ¨µÀĞÅÏ¢({0})³ö´í({1})£¡", point.Point_ID, msg.ErrorMessage ) );
+        //        TraceUtils.Error( string.Format( "GetAlmDescTXè·å–æµ‹ç‚¹é€šé“ä¿¡æ¯({0})å‡ºé”™({1})ï¼", point.Point_ID, msg.ErrorMessage ) );
         //        return null;
         //    }
         //    if( channel != null )

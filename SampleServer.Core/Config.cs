@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using AnalysisData.Constants;
 using AnalysisData.SampleData;
@@ -108,7 +108,7 @@ namespace SampleServer
             {
                 case 0: return 0;
                 case 1: return 2;
-                case 4: return 4;
+                case 2: return 4;
             }
             return almLevelID;
         }
