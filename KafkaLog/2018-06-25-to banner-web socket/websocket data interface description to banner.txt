@@ -1,0 +1,11 @@
+
+
+1. websocket url : ws://127.0.0.1:8082/sensor?apiKey=a94f88f1-d5ae-467c-b36c-5357774c7dff&sourceId=banner
+	"127.0.0.1:8082" part may change.
+
+2. send data steps
+	step1: Create websocket connection.
+	step2: Send data and receive 'receive data succeed' message if succeed.
+	
+3. demo html test code: websocketJsClient-banner.html.
+

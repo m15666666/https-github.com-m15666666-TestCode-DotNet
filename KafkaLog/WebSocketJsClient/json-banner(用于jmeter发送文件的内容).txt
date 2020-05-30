@@ -1,0 +1,36 @@
+{
+        "serial_number": "MOONS123",
+        "battery_levels": "6772",
+        "last_measurement_time": "2017-10-06 00-53-11",
+        "rms_z_accel": "0.0",
+        "rms_z_vel": "0.0",
+        "pp_z_accel": "0.0",
+        "pp_z_vel": "0.0",
+        "amplitude_units": "g",
+        "measurement_id": "123",
+        "lines_of_resolution": "10",
+        "z_axis_acc_wfm_sampling_rate": "51200",
+        "z_axis_vel_wfm_sampling_rate": "51200",
+        "z_axis_acc_wfm_no_of_samples": "1024",
+        "z_axis_vel_wfm_no_of_samples": "1024",
+        "timestamp": "2017-10-06 01-13-11",
+        "fmax": "1",
+        "interval": "15",
+        "waveform_z_accel": [
+            0.0,
+            0.0
+        ],
+        "waveform_z_vel": [
+            0.0,
+            0.0
+        ],
+        "fft_z_accel": [
+            0.0,
+            0.0
+        ],
+        "fft_z_vel": [
+            0.0,
+            0.0
+        ],
+        "temperature": "70"
+}

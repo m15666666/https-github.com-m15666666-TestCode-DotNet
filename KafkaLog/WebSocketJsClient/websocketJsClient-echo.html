@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>websocketJsClient-molex</title>
+</head>
+<body>
+<script>
+    var wsServer = 'ws://127.0.0.1:8082/echo';
+    var  websocket = new WebSocket(wsServer); 
+    websocket.onopen = function (evt) { onOpen(evt) }; 
+    websocket.onclose = function (evt) { onClose(evt) }; 
+    websocket.onmessage = function (evt) { onMessage(evt) }; 
+    websocket.onerror = function (evt) { onError(evt) };
+
+    var content = {
+        "serial_number": "MOONS123",
+        "battery_levels": "6772",
+        "last_measurement_time": "2017-10-06 00-53-11",
+        "rms_z_accel": "0.0",
+        "rms_z_vel": "0.0",
+        "pp_z_accel": "0.0",
+        "pp_z_vel": "0.0",
+        "amplitude_units": "g",
+        "measurement_id": "123",
+        "lines_of_resolution": "10",
+        "z_axis_acc_wfm_sampling_rate": "51200",
+        "z_axis_vel_wfm_sampling_rate": "51200",
+        "z_axis_acc_wfm_no_of_samples": "1024",
+        "z_axis_vel_wfm_no_of_samples": "1024",
+        "timestamp": "2017-10-06 01-13-11",
+        "fmax": "1",
+        "interval": "15",
+        "waveform_z_accel": [
+            0.0,
+            0.0
+        ],
+        "waveform_z_vel": [
+            0.0,
+            0.0
+        ],
+        "fft_z_accel": [
+            0.0,
+            0.0
+        ],
+        "fft_z_vel": [
+            0.0,
+            0.0
+        ],
+        "temperature": "70"
+    };
+    function onOpen(evt) { 
+        console.log("onOpen Connected to WebSocket server.");
+		//JSON.
+        websocket.send( JSON.stringify(content) );
+		
+		websocket.send( 'echo1' );
+		
+		websocket.send( 'echo2' );
+    } 
+    function onClose(evt) { 
+        console.log("onClose Disconnected"); 
+    } 
+    function onMessage(evt) { 
+        console.log('onMessage Retrieved data from server: ' + evt.data); 
+    } 
+    function onError(evt) { 
+        console.log('onError Error occured: ' + evt.data); 
+    }
+</script>
+</body>
+</html>

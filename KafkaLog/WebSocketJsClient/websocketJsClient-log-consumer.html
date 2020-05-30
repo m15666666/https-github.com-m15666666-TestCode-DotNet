@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>websocketJsClient-molex</title>
+</head>
+<body>
+<script>
+    var wsServer = 'ws://127.0.0.1:8082/logconsumer?apiKey=a94f88f1-d5ae-467c-b36c-5357774c7dff&sourceId=test';
+    var  websocket = new WebSocket(wsServer); 
+    websocket.onopen = function (evt) { onOpen(evt) }; 
+    websocket.onclose = function (evt) { onClose(evt) }; 
+    websocket.onmessage = function (evt) { onMessage(evt) }; 
+    websocket.onerror = function (evt) { onError(evt) };
+
+    function onOpen(evt) { 
+        console.log("onOpen Connected to WebSocket server.");
+		//websocket.send( 'echo1' );
+		//websocket.send( 'echo2' );
+    } 
+    function onClose(evt) { 
+        console.log("onClose Disconnected"); 
+    } 
+    function onMessage(evt) { 
+        console.log('log: ' + evt.data); 
+    } 
+    function onError(evt) { 
+        console.log('onError Error occured: ' + evt.data); 
+    }
+</script>
+</body>
+</html>
