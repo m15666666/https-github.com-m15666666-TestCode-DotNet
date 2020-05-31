@@ -14,32 +14,39 @@
     ws.onmessage = function (evt) { onMessage(evt) }; 
     ws.onerror = function (evt) { onError(evt) };
 
+    var isOpen = false;
     var globalcount = 0;
     function clock(max) {
         var count = 0;
         while (count < max) {
-
-            ws.send(`echo: ${globalcount++}`);
+            if(isOpen) ws.send(`echo: ${globalcount++}`);
             count++;
         }
         setTimeout(function () { clock(max); }, max);
     }
     function onOpen(evt) { 
+        //debugger
         console.log("onOpen Connected to WebSocket server.");
         console.log(ws.readyState);
-        var max = 60;
-        setTimeout(function () { clock(max); }, max);
+        isOpen = true;
+        //var max = 60;
+        //setTimeout(function () { clock(max); }, max);
         //debugger
         //if(ws.readyState === 1) ws.send("abc");
     } 
-    function onClose(e) { 
-        console.log('websocket 断开: ' + e.code + ' ' + e.reason + ' ' + e.wasClean)
+    function onClose(e) {
+        //debugger
+        isOpen = false;
+        console.log('websocket closed: ' + e.code + ' ' + e.reason + ' ' + e.wasClean)
         console.log("onClose Disconnected"); 
     } 
     function onMessage(evt) { 
+        //debugger
         console.log('log: ' + evt.data); 
+        clock(1);
     } 
     function onError(evt) { 
+        //debugger
         console.log('onError Error occured: ' + evt.data); 
     }
 </script>

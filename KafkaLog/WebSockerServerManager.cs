@@ -148,6 +148,7 @@ namespace KafkaLog
             if (!IsValidConnecton) return;
 
             _producer = KafkaManager.CreateProducer<Null, string>();
+            Send("LogProducer");
         }
 
         protected override void OnMessage(MessageEventArgs e)
