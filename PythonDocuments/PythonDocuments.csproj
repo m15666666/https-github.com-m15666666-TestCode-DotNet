@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="PythonCode\2020-06-01_16_36_11.wav" />
+    <None Remove="PythonCode\2020-06-01_16_44_24.wav" />
+    <None Remove="PythonCode\2020-06-01_16_46_36.wav" />
+  </ItemGroup>
+
+</Project>
