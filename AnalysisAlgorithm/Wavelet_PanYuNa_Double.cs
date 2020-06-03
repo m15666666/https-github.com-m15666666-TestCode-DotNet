@@ -163,8 +163,10 @@ namespace AnalysisAlgorithm
             Double sumw = NumbersUtils.SumArray( w );
             for( int i = 0; i < sizew; i++ )
             {
-                w[i] = w[i] / sumw;
-                filter0[i] = MathConst.SqrtTwo * w[i]; //低通滤波器系数
+                //w[i] = w[i] / sumw;
+                //filter0[i] = MathConst.SqrtTwo * w[i]; //低通滤波器系数
+                var wI = w[i] / sumw;
+                filter0[i] = MathConst.SqrtTwo * wI; //低通滤波器系数
             }
 
             filter0.CopyTo( filter1, 0 );
@@ -193,8 +195,10 @@ namespace AnalysisAlgorithm
             Double sumw = NumbersUtils.SumArray( w );
             for( int i = 0; i < sizew; i++ )
             {
-                w[i] = w[i] / sumw;
-                filter0[i] = MathConst.SqrtTwo * w[i]; //低通滤波器系数
+                //w[i] = w[i] / sumw;
+                //filter0[i] = MathConst.SqrtTwo * w[i]; //低通滤波器系数
+                var wI = w[i] / sumw;
+                filter0[i] = MathConst.SqrtTwo * wI; //低通滤波器系数
             }
 
             filter0.CopyTo( filter1, 0 );

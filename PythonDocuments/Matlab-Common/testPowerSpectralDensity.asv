@@ -1,0 +1,53 @@
+warning('off','MATLAB:dispatcher:InexactCaseMatch');
+% testPowerSpectralDensity 测试功率谱密度函数
+
+% 1、直接法又称周期图法，它是把随机序列x(n)的N个观测数据视为一能量有限的序列，直接计算x(n)的离散傅立叶变换，得X(k)，然后再取其幅值的平
+% 方，并除以N，作为序列x(n)真实功率谱的估计。 
+% clear;
+% Fs=1000; %采样频率
+% n=0:1/Fs:1;
+% 
+% %产生含有噪声的序列
+% xn=cos(2*pi*40*n)+3*cos(2*pi*100*n)+randn(size(n));
+% 
+% subplot(3,1,1);
+% plot(xn); 
+% 
+% window=boxcar(length(xn)); %矩形窗
+% nfft=1024;
+% [Pxx,f]=periodogram(xn,window,nfft,Fs); %直接法
+% 
+% subplot(3,1,2);
+% plot(f,Pxx); 
+% 
+% subplot(3,1,3);
+% plot(f,10*log10(Pxx)); 
+
+
+% 2、间接法：
+% 间接法先由序列x(n)估计出自相关函数R(n)，然后对R(n)进行傅立叶变换，便得到x(n)的功率谱估计。 
+clear;
+Fs=1000; %采样频率
+n=0:1/Fs:1;
+
+%产生含有噪声的序列
+xn=cos(2*pi*40*n)+3*cos(2*pi*100*n)+randn(size(n));
+
+subplot(3,1,1);
+plot(xn); 
+
+nfft=1024;
+cxn=xcorr(xn,'unbiased'); %计算序列的自相关函数
+CXk=fft(cxn,nfft);
+Pxx=abs(CXk);
+index=0:round(nfft/2-1);
+Pxx
+k=index*Fs/nfft;
+plot_Pxx=10*log10(Pxx(index+1));
+%plot(k,plot_Pxx); 
+
+% subplot(3,1,2);
+% plot(k,Pxx); 
+
+subplot(3,1,3);
+plot(k,plot_Pxx); 

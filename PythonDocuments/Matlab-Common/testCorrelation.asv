@@ -1,0 +1,52 @@
+warning('off','MATLAB:dispatcher:InexactCaseMatch');
+% testCorrelation 测试相关
+
+% 例子1
+% dt=.1;
+% t=[0:dt:100];
+% x=cos(t);
+% [a,b]=xcorr(x,'unbiased');
+% plot(b*dt,a)
+
+% 例子2
+f0 = 51;%设定正弦信号频率
+fs = f0 * 32;%设定采样频率
+N = 1024;
+t = CreateDTs( fs, N );
+sinWave = 3 * cos( 2 * pi * f0 * t );
+
+dt=1/fs;
+% t=[0:dt:10];
+% x=3*sin(t);
+x = 3 * cos( 2 * pi * f0 * t );
+%y=cos(3*t);
+% y=3*sin(t);
+y = ;
+
+xLength = length(x);
+%端点效应修正时除的数组
+divLengths = [1:1:xLength xLength-1:-1:1]
+
+% x,y的标准差
+xStdDeviation = std(x);
+yStdDeviation = std(y);
+
+subplot(3,1,1);
+plot(t,x);
+subplot(3,1,2);
+plot(t,y);
+%[a,b]=xcorr(x,y, 'coeff');
+[a,b]=xcorr(x,y);
+subplot(3,1,3);
+plot(b*dt,a ./ divLengths  / ( xStdDeviation * yStdDeviation ) );
+
+% yy=cos(3*fliplr(t)); % or use: yy=fliplr(y);
+% 翻转（倒序）
+yy=fliplr(y);
+
+% 进行卷积
+z=conv(x,yy) ./ divLengths / ( xStdDeviation * yStdDeviation );
+
+% pause;
+% subplot(3,1,3);
+% plot(b*dt,z,'r');

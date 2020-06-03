@@ -15,4 +15,10 @@
     <ProjectReference Include="..\AnalysisAlgorithm\AnalysisAlgorithm.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="rsignal_vc.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,36 @@
+warning('off','MATLAB:dispatcher:InexactCaseMatch');
+% testOverall
+
+CloseFigures();
+
+%***************1.正弦波****************%
+% fs = 4096;%设定采样频率
+% N = 8192;
+% t = CreateDTs( fs, N );
+% f0 = 50;%设定正弦信号频率
+% 
+% %生成正弦信号
+% sinWave = sin( 2 * pi * f0 * t );
+% 
+% DrawTimeWave( sinWave, fs );
+% 
+% DrawSingleFFT( sinWave, fs );
+
+f0 = 4;%设定正弦信号频率
+fs = 16;%设定采样频率
+N = 4;
+t = CreateDTs( fs, N );
+% for iN = N1 + 1 : N
+%     t(iN) = 0;
+% end
+
+%生成正弦信号
+initPhase = pi / 4;
+sinWave = cos( 2 * pi * f0 * t + initPhase );
+%sinWave = sin( 2 * pi * f0 * t + initPhase + pi / 2  );
+angles = angle( ifft( sinWave, N ) );
+for index = 1 : N
+    angles(index) = Rad2Degree( angles(index) );
+end
+
+angles

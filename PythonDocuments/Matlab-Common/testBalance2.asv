@@ -1,0 +1,10 @@
+warning('off','MATLAB:dispatcher:InexactCaseMatch');
+% testBalance
+
+degreeOffset = 97;
+Xa0 = AmpDegree2Complex( 0.78, 311);
+Xa1 = AmpDegree2Complex( 1.28, 270 );
+U1 = AmpDegree2Complex( 1.6, 45 );
+
+[amp, degree] = Complex2AmpDegree( Xa0 / ( Xa1 - Xa0 ) * U1 ) %#ok<NOPTS>
+[a1amp, a1degree] = Complex2AmpDegree( ( Xa1 - Xa0 ) / U1 ) %#ok<NOPTS>

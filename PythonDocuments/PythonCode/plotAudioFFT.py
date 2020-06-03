@@ -1,4 +1,4 @@
-#!usr/bin/env python
+ï»¿#!usr/bin/env python
 #coding=utf-8
  
 import wave
@@ -29,8 +29,8 @@ def read_wave_data(file_path):
 	return wave_data, time
  
 def data_fft(data, time, time_start, time_end):
-        #¶ÌÊ±fft¡£½ØÈ¡Ò»¶ÎÊ±¼äÄÚµÄÊý¾ÝÏÈ
-        #time_startÊÇ¿ªÊ¼Ê±¼ä£¬time_endÊÇ½áÊøÊ±¼ä
+        #çŸ­æ—¶fftã€‚æˆªå–ä¸€æ®µæ—¶é—´å†…çš„æ•°æ®å…ˆ
+        #time_startæ˜¯å¼€å§‹æ—¶é—´ï¼Œtime_endæ˜¯ç»“æŸæ—¶é—´
         t = []
         y = []
         count = 0
@@ -39,21 +39,21 @@ def data_fft(data, time, time_start, time_end):
                 if((time[i] >= time_start) & (time[i] <= time_end)):
                         count = count + 1
                         t = np.append(t, time[i])
-                        y = np.append(y, data[0][i])    #Ö»ÌáÈ¡×óÉùµÀ
+                        y = np.append(y, data[0][i])    #åªæå–å·¦å£°é“
         #print (count)
                         
-        yy=fft(y)                  #¿ìËÙ¸µÀïÒ¶±ä»»
-        yreal = yy.real               # »ñÈ¡ÊµÊý²¿·Ö
-        yimag = yy.imag               # »ñÈ¡ÐéÊý²¿·Ö
+        yy=fft(y)                  #å¿«é€Ÿå‚…é‡Œå¶å˜æ¢
+        yreal = yy.real               # èŽ·å–å®žæ•°éƒ¨åˆ†
+        yimag = yy.imag               # èŽ·å–è™šæ•°éƒ¨åˆ†
  
                 
-        yf=abs(fft(y))                # È¡¾ø¶ÔÖµ
-        yf1=abs(fft(y))/len(t)           #¹éÒ»»¯´¦Àí
-        yf2 = yf1[range(int(len(t)/2))]  #ÓÉÓÚ¶Ô³ÆÐÔ£¬Ö»È¡Ò»°ëÇø¼ä
+        yf=abs(fft(y))                # å–ç»å¯¹å€¼
+        yf1=abs(fft(y))/len(t)           #å½’ä¸€åŒ–å¤„ç†
+        yf2 = yf1[range(int(len(t)/2))]  #ç”±äºŽå¯¹ç§°æ€§ï¼Œåªå–ä¸€åŠåŒºé—´
  
-        xf = np.arange(len(y))        # ÆµÂÊ
+        xf = np.arange(len(y))        # é¢‘çŽ‡
         xf1 = xf
-        xf2 = xf[range(int(len(t)/2))]  #È¡Ò»°ëÇø¼ä
+        xf2 = xf[range(int(len(t)/2))]  #å–ä¸€åŠåŒºé—´
  
         plt.figure()
         
@@ -63,7 +63,7 @@ def data_fft(data, time, time_start, time_end):
  
         plt.subplot(222)
         plt.plot(xf,yf,'r')
-        plt.title('FFT of Mixed wave(two sides frequency range)',fontsize=7,color='#7A378B')  #×¢ÒâÕâÀïµÄÑÕÉ«¿ÉÒÔ²éÑ¯ÑÕÉ«´úÂë±í
+        plt.title('FFT of Mixed wave(two sides frequency range)',fontsize=7,color='#7A378B')  #æ³¨æ„è¿™é‡Œçš„é¢œè‰²å¯ä»¥æŸ¥è¯¢é¢œè‰²ä»£ç è¡¨
  
         plt.subplot(223)
         plt.plot(xf1,yf1,'g')
@@ -86,4 +86,4 @@ def main():
 if __name__ == "__main__":
 	main()
 
-#Ô­ÎÄÁ´½Ó£ºhttps://blog.csdn.net/qq_27158179/java/article/details/81102483
+#åŽŸæ–‡é“¾æŽ¥ï¼šhttps://blog.csdn.net/qq_27158179/java/article/details/81102483

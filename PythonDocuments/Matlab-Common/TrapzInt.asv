@@ -1,0 +1,12 @@
+function wave = TrapzInt( timeWave, dt )
+% 使用matlab的trapz函数进行积分
+
+wave = timeWave - mean( timeWave );
+
+timeWave = ACCoupling(timeWave);
+
+intRet = zeros(1, N);
+intRet(1) = 0; 
+for k = 1:N-1
+intRet(k+1) = trapz(t(k:k+1),sinWave(k:k+1))+intRet(k); 
+end

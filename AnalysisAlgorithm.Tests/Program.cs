@@ -8,7 +8,8 @@ namespace AnalysisAlgorithm.Tests
         {
             OutputUtils.OutputDir = @"D:\temp2";
 
-            new OverallTests().Overall_RMSTest();
+            new WaveletsTests().Wavelet_DB8_Test();
+            //new OverallTests().Overall_RMSTest();
 
             //new FftTests().InitAngleTest();
             //return;
