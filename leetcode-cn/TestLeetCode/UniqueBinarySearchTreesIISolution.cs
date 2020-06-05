@@ -43,7 +43,7 @@ using System.Text;
 /// https://blog.csdn.net/happyaaaaaaaaaaa/article/details/51635367
 /// https://blog.csdn.net/OneDeveloper/article/details/80169460
 /// </summary>
-class GenerateTreesSolution
+class UniqueBinarySearchTreesIISolution
 {
     public void Test()
     {
