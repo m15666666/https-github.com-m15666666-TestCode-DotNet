@@ -16,3 +16,14 @@ wave=s;
 t1=wpdec(wave,3,'dmey');
 plot(t1);
 t2 = wpjoin(t1,[3;4;5;6]);
+sNod = read(t1,'sizes',[3,4,5,6]);
+
+cfs3  = zeros(sNod(1,:));
+cfs4  = zeros(sNod(2,:));
+cfs5  = zeros(sNod(3,:));
+cfs6  = zeros(sNod(4,:));
+
+
+t3 = write(t2,'cfs',3,cfs3,'cfs',4,cfs4,'cfs',5,cfs5,'cfs',6,cfs6);
+
+wave2=wprec(t3);
