@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!--
+https://juejin.im/post/5c557ab451882562e747e2a4    
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/fabric.js/4.0.0-beta.12/fabric.js"></script>
+    <title>test fabric.js 1</title>
+</head>
+<body>
+
+    <canvas id="canvas" width="350" height="200"></canvas>
+
+    <script>
+        window.onload = function() {
+
+            console.log('onload');
+            this.InitCanvas();
+
+        };
+        var card;
+        function InitCanvas() {
+            console.log('Init canvas');
+
+            card = new fabric.Canvas('canvas');
+            card.backgroundColor = 'blue';
+            card.setWidth(800);
+            card.setHeight(600);
+
+
+            // 在canvas对象初始化后，通过以下方式监听
+            // 比如监听画布的图层编辑事件
+            card.on('object:modified', (e) => {
+                console.log(e.target) // e.target为当前编辑的Object
+                // ...旋转，缩放，移动等编辑图层的操作都监听到
+                // 所以如果有撤销/恢复的场景，这里可以保存编辑状态
+            });
+
+            // 读取图片地址，设置画布背景
+            fabric.Image.fromURL('citybg.jpg', (img) => {
+              img.set({
+               // 通过scale来设置图片大小，这里设置和画布一样大
+                scaleX: 0.3 * card.width / img.width,
+                  scaleY: 0.3 * card.height / img.height,
+                    hasControls: true, // 是否开启图层的控件
+                    borderColor: 'orange', // 图层控件边框的颜色
+              });
+              // 设置背景
+              //card.setBackgroundImage(img, card.renderAll.bind(card));
+              //card.renderAll();
+                card.add(img);
+            });
+
+        }
+    </script>
+</body>
+</html>
