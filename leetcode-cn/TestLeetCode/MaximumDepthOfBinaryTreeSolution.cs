@@ -61,7 +61,6 @@ internal class MaximumDepthOfBinaryTreeSolution
 首先，给出我们将要使用的树的结点 TreeNode 的定义。
 
 
-  /* Definition for a binary tree node. */
   public class TreeNode {
     int val;
     TreeNode left;
