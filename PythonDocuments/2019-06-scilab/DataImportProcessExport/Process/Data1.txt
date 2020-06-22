@@ -1,0 +1,6 @@
+My data file
+Contains double and string data
+Let's say for example that we list a set of data regarding some sensors
+SENSOR ID NAME POSITION
+%SENSOR 2341 MyFirstSensor (3 2 1)
+%SENSOR 453 MySecondSensor (-22 3 1)
