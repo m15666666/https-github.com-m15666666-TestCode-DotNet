@@ -454,5 +454,16 @@ public class Solution {
 
     }
 }
-
+public class Solution {
+    private TreeNode pre = null;
+    public void Flatten(TreeNode root) {
+        if(root == null) return ;
+        Flatten(root.right);
+        Flatten(root.left);
+        root.right = pre;
+        root.left = null;
+        pre = root;
+      
+    }
+}
 */

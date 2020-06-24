@@ -40,3 +40,10 @@ subplot(212);plot(f0,abs(xk));
 xlabel('f');
 ylabel('value');
 title('利用CZT变换后的细化频谱');
+
+a = [1 2 3];
+b = [4 5 6];
+c = [7 8 9];
+A = [a' b' c'];
+rref(A);
+
