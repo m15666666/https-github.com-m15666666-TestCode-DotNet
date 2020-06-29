@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Xml.Serialization;
 using AnalysisData.ToFromBytes;
 using Moons.Common20;
@@ -472,6 +472,12 @@ namespace AnalysisData.SampleData
         #endregion
 
         #endregion
+
+
+        /// <summary>
+        ///     传感器轴ID，0:不使用，1:主轴，2:副轴1,3:副轴2，用于无线三轴传感器
+        /// </summary>
+        public int SensorAxisID { get; set; }
 
         #endregion
     }
