@@ -10,6 +10,13 @@ namespace TestFluentMigrator
     /// https://fluentmigrator.github.io/articles/fluent-interface.html
     /// https://fluentmigrator.github.io/
     /// https://fluentmigrator.github.io/articles/quickstart.html?tabs=runner-dotnet-fm
+    /// https://docs.microsoft.com/en-us/ef/ef6/modeling/code-first/fluent/types-and-properties/
+    /// https://fluentmigrator.github.io/articles/quickstart.html?tabs=runner-in-process
+    /// https://bitbucket.org/quentin-starin/easymigrator/wiki/Home
+    /// https://volkanceylan.gitbooks.io/serenity-zh-cn/tutorials/movies/creating_movie_table.html
+    /// https://www.cnblogs.com/Leo_wl/p/9958495.html
+    /// https://www.cnblogs.com/lwqlun/p/10649949.html
+    /// EFCore.Sharding(EFCore开源分表框架):https://www.cnblogs.com/coldairarrow/p/12733886.html
     ///
     ///
     ///
