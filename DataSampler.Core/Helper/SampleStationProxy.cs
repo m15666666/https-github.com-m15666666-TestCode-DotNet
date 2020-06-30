@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using AnalysisData.SampleData;
@@ -152,7 +152,8 @@ namespace DataSampler.Helper
                 int structTypeId;
                 switch( SampleStationData.StationType )
                 {
-                    case SampleStationType.Wg100_2Generation:
+                    case SampleStationType.Ms2000:
+                    case SampleStationType.Wg200:
                         structTypeId = StructTypeIDs.VarStringOfJson;
                         data = Config.JsonSerializer.SerializeObject(
                             SampleStationData.ToSampleStationDataDto()

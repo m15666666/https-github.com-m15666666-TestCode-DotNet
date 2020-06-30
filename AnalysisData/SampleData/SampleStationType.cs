@@ -1,4 +1,4 @@
-﻿namespace AnalysisData.SampleData
+namespace AnalysisData.SampleData
 {
     /// <summary>
     ///     采集工作站类型（型号）
@@ -15,6 +15,11 @@
         Ms1000 = 100,
 
         /// <summary>
+        ///     有线采集工作站MS2000
+        /// </summary>
+        Ms2000 = 101,
+
+        /// <summary>
         ///     无线网关WG100(无线网关的2.4G版本)
         /// </summary>
         Wg100 = 200,
@@ -27,6 +32,6 @@
         /// <summary>
         ///     无线网关WG100，第二代，2020-03-26
         /// </summary>
-        Wg100_2Generation = 202,
+        Wg200 = 202,
     }
 }
