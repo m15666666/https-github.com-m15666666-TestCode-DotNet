@@ -187,7 +187,7 @@ namespace DataSampler.Helper
             }
             catch( Exception ex )
             {
-                TraceUtils.Error( "下载采集配置参数出错！", ex );
+                TraceUtils.Error( "DownloadSampleConfig error.", ex );
                 throw;
             }
         }
@@ -211,7 +211,7 @@ namespace DataSampler.Helper
             }
             catch( Exception ex )
             {
-                TraceUtils.Error( "采集器校时出错！", ex );
+                TraceUtils.Error( "Timing error.", ex );
                 throw;
             }
         }
@@ -275,6 +275,47 @@ namespace DataSampler.Helper
             catch (Exception ex)
             {
                 TraceUtils.Error("ResetBattery error.", ex);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 通知采集站固件升级，这个命令只适用于SampleStationType.Ms2000,SampleStationType.Wg200及以后
+        /// </summary>
+        public void UpgradeFirewave()
+        {
+            try
+            {
+                int structTypeId = StructTypeIDs.VarStringOfJson;
+                object data = Config.JsonSerializer.SerializeObject(
+                    SampleStationData.ToSampleStationDataDto()
+                    );
+                switch( SampleStationData.StationType )
+                {
+                    case SampleStationType.Ms2000:
+                    case SampleStationType.Wg200:
+                        break;
+
+                    default:
+                    case SampleStationType.Default:
+                    case SampleStationType.Wg100:
+                    case SampleStationType.Ms1000:
+                    case SampleStationType.Wg100_780M:
+                        return;
+                }
+
+                var sendCommand = new CommandMessage
+                                      {
+                                          CommandID = CommandID.PushFileVersion,
+                                          StructTypeID = structTypeId,
+                                          Data = data
+                };
+
+                SendReceiveCommand( sendCommand );
+            }
+            catch( Exception ex )
+            {
+                TraceUtils.Error( "Upgradefireware error.", ex );
                 throw;
             }
         }

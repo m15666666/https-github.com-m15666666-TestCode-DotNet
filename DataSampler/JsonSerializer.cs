@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 
 namespace DataSampler
 {
@@ -19,7 +19,7 @@ namespace DataSampler
 
         public T DeserializeObject<T>(string json)
         {
-            return (T)JsonConvert.DeserializeObject(json); ;
+            return (T)JsonConvert.DeserializeObject(json,typeof(T));
         }
 
         public object DeserializeObject(string json)

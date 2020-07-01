@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +14,7 @@ using DataSampler.Core.Helper;
 using Moons.Common20.IOC;
 using Moons.Common20.ObjectMapper;
 using AnalysisData.Dto;
+using System.Runtime.CompilerServices;
 
 namespace DataSampler
 {
@@ -189,6 +190,21 @@ namespace DataSampler
 
                 var v = data.ToAlmEventDataDto();
             }
+        }
+
+        /// <summary>
+        /// 测试转换TrendData
+        /// </summary>
+        public void TestConvertJsonRequstResponseData()
+        {
+            var jsonSerializer = Config.JsonSerializer;
+            RequestDto requestDto = new RequestDto { Name = "Upgradefirmware" };
+            requestDto.Datas = new Dictionary<string, object>{ { "url", "http://localhost/abc" } };
+            var json =  jsonSerializer.SerializeObject(requestDto);
+
+            Console.WriteLine(json);
+            var response = jsonSerializer.DeserializeObject<ResponseDto>(json);
+            Console.WriteLine(response.ToString());
         }
 
         #endregion

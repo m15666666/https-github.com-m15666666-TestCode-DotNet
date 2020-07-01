@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -34,6 +34,7 @@ namespace DataSampler
                 var host = CreateWebHostBuilder(args).Build();
                 IocUtils.Instance.ServiceProvider = host.Services;
 
+                DataSamplerController.Instance.TestConvertJsonRequstResponseData();
                 DataSamplerController.Instance.TestConvertTrendData();
                 var json = DataSamplerController.Instance.TestJson();
                 

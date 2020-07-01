@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Xml.Serialization;
 using Moons.Common20;
 using Moons.Common20.ValueWrapper;
@@ -80,6 +80,16 @@ namespace AnalysisData.SampleData
         ///     采集工作站类型（型号）
         /// </summary>
         public SampleStationType StationType { get; set; }
+
+        /// <summary>
+        ///     固件文件的网址，例如：http://10.3.2.123/fireware/
+        /// </summary>
+        public string FirewareUrl { get; set; }
+
+        /// <summary>
+        ///     写日志的websocket网址，例如：ws://10.3.2.123:8082/logproducer，拼完整之后：ws://10.3.2.123:8082/logproducer?apiKey=a94f88f1-d5ae-467c-b36c-5357774c7dff&sourceId=test
+        /// </summary>
+        public string LogWsUrl { get; set; }
 
         /// <summary>
         /// 测点数据集合
