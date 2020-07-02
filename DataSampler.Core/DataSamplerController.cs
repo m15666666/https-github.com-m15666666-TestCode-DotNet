@@ -607,6 +607,17 @@ namespace DataSampler
                         break;
                     }
 
+                case CommandID.UploadWirelessGateStatus:
+                    {
+                        var data = commandMessage.Data as JsonCustomData;
+                        break;
+                    }
+                case CommandID.UploadWireGateStatus:
+                    {
+                        var data = commandMessage.Data as JsonCustomData;
+                        break;
+                    }
+
                 case CommandID.Timing:
                     {
                         var sendCommand = new CommandMessage

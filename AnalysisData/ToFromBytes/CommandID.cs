@@ -1,4 +1,4 @@
-﻿using Moons.Common20.Serialization;
+using Moons.Common20.Serialization;
 
 namespace AnalysisData.ToFromBytes
 {
@@ -156,6 +156,26 @@ namespace AnalysisData.ToFromBytes
         ///     重置电池状态（用于无线传感器+无线网关）
         /// </summary>
         public const int ResetBattery = CommandIDBase + 202;
+
+        /// <summary>
+        ///     上传无线网关状态信息
+        /// </summary>
+        public const int UploadWirelessGateStatus = CommandIDBase + 211;
+
+        /// <summary>
+        ///     上传有线网关状态信息
+        /// </summary>
+        public const int UploadWireGateStatus = CommandIDBase + 212;
+
+        /// <summary>
+        ///     使用json request格式发送的命令请求
+        /// </summary>
+        public const int JsonRequestCmd = CommandIDBase + 221;
+
+        /// <summary>
+        ///     针对使用json request格式发送的命令请求的响应
+        /// </summary>
+        public const int JsonResponseCmd = CommandIDBase + 222;
 
         /// <summary>
         ///     报警灯复位
