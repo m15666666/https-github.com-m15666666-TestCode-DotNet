@@ -610,11 +610,13 @@ namespace DataSampler
                 case CommandID.UploadWirelessGateStatus:
                     {
                         var data = commandMessage.Data as JsonCustomData;
+                        _taskSender.Add( data );
                         break;
                     }
                 case CommandID.UploadWireGateStatus:
                     {
                         var data = commandMessage.Data as JsonCustomData;
+                        _taskSender.Add( data );
                         break;
                     }
 

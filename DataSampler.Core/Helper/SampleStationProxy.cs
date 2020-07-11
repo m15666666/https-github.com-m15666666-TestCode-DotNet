@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using AnalysisData.Dto;
 using AnalysisData.SampleData;
 using AnalysisData.ToFromBytes;
 using DataSampler.Core.Helper;
@@ -280,38 +281,19 @@ namespace DataSampler.Helper
         }
 
         /// <summary>
-        /// 通知采集站固件升级，这个命令只适用于SampleStationType.Ms2000,SampleStationType.Wg200及以后
+        /// 通知网关固件升级，这个命令只适用于SampleStationType.Ms2000,SampleStationType.Wg200及以后
         /// </summary>
-        public void UpgradeFirewave()
+        public ResponseDto UpgradeFirewave()
         {
             try
             {
-                int structTypeId = StructTypeIDs.VarStringOfJson;
-                object data = Config.JsonSerializer.SerializeObject(
-                    SampleStationData.ToSampleStationDataDto()
-                    );
-                switch( SampleStationData.StationType )
-                {
-                    case SampleStationType.Ms2000:
-                    case SampleStationType.Wg200:
-                        break;
+                if (!CheckGreatEqualWg200Ms2000()) return null;
 
-                    default:
-                    case SampleStationType.Default:
-                    case SampleStationType.Wg100:
-                    case SampleStationType.Ms1000:
-                    case SampleStationType.Wg100_780M:
-                        return;
-                }
+                RequestDto requestDto = new RequestDto { Name = "UpgradeFirmware" };
+                requestDto.Datas = new Dictionary<string, object>{ { "FirewareUrl", SampleStationData.FirewareUrl } };
+                var sendCommand = CreateCommand(requestDto);
 
-                var sendCommand = new CommandMessage
-                                      {
-                                          CommandID = CommandID.PushFileVersion,
-                                          StructTypeID = structTypeId,
-                                          Data = data
-                };
-
-                SendReceiveCommand( sendCommand );
+                return UnwrapResponse(SendReceiveCommand( sendCommand ));
             }
             catch( Exception ex )
             {
@@ -319,6 +301,154 @@ namespace DataSampler.Helper
                 throw;
             }
         }
+        /// <summary>
+        /// 通知网关重启，这个命令只适用于SampleStationType.Ms2000,SampleStationType.Wg200及以后
+        /// </summary>
+        public ResponseDto Reboot()
+        {
+            try
+            {
+                if (!CheckGreatEqualWg200Ms2000()) return null;
+
+                RequestDto requestDto = new RequestDto { Name = "RebootGate" };
+                var sendCommand = CreateCommand(requestDto);
+
+                return UnwrapResponse(SendReceiveCommand( sendCommand ));
+            }
+            catch( Exception ex )
+            {
+                TraceUtils.Error( "Reboot error.", ex );
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 配置网络参数，这个命令只适用于SampleStationType.Ms2000,SampleStationType.Wg200及以后
+        /// </summary>
+        /// <param name="datas">额外的参数</param>
+        public ResponseDto ConfigNetwork(Dictionary<string,object> datas)
+        {
+            try
+            {
+                if (!CheckGreatEqualWg200Ms2000()) return null;
+
+                RequestDto requestDto = new RequestDto { Name = "ConfigNetwork" };
+                requestDto.Datas = new Dictionary<string, object>(datas);
+                var sendCommand = CreateCommand(requestDto);
+
+                return UnwrapResponse(SendReceiveCommand( sendCommand ));
+            }
+            catch( Exception ex )
+            {
+                TraceUtils.Error("ConfigNetwork error.", ex );
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 配置无线网关射频参数，这个命令只适用于SampleStationType.Ms2000,SampleStationType.Wg200及以后
+        /// </summary>
+        /// <param name="datas">额外的参数</param>
+        public ResponseDto ConfigRadio(Dictionary<string,object> datas)
+        {
+            try
+            {
+                if (!CheckGreatEqualWg200Ms2000()) return null;
+
+                RequestDto requestDto = new RequestDto { Name = "ConfigRadio" };
+                requestDto.Datas = new Dictionary<string, object>(datas);
+                var sendCommand = CreateCommand(requestDto);
+
+                return UnwrapResponse(SendReceiveCommand( sendCommand ));
+            }
+            catch( Exception ex )
+            {
+                TraceUtils.Error("ConfigRadio error.", ex );
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 请求网关扫描一次指定的传感器，这个命令只适用于SampleStationType.Wg200及以后
+        /// </summary>
+        /// <param name="identifiers">需要扫描的传感器id，用半角逗号分割</param>
+        public ResponseDto ScanSensor(string identifiers)
+        {
+            try
+            {
+                if (!CheckGreatEqualWg200Ms2000()) return null;
+
+                RequestDto requestDto = new RequestDto { Name = "ScanSensor" };
+                requestDto.Datas = new Dictionary<string, object>{ { "SensorIds", identifiers } };
+                var sendCommand = CreateCommand(requestDto);
+
+                return UnwrapResponse(SendReceiveCommand( sendCommand ));
+            }
+            catch( Exception ex )
+            {
+                TraceUtils.Error("ScanSensor error.", ex );
+                throw;
+            }
+        }
+
+        #region RequestDto, ResponseDto 辅助函数
+
+        /// <summary>
+        /// 检查网关类型是否大于等于Wg200，MS2000
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckGreatEqualWg200Ms2000()
+        {
+            switch( SampleStationData.StationType )
+            {
+                default:
+                case SampleStationType.Ms2000:
+                case SampleStationType.Wg200:
+                    return true;
+
+                case SampleStationType.Default:
+                case SampleStationType.Wg100:
+                case SampleStationType.Ms1000:
+                case SampleStationType.Wg100_780M:
+                    return false;
+            }
+        }
+
+        /// <summary>
+        /// 根据RequestDto创建CommandMessage对象
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        private CommandMessage CreateCommand(RequestDto request)
+        {
+            var jsonSerializer = Config.JsonSerializer;
+            var json = jsonSerializer.SerializeObject(request);
+            return new CommandMessage
+            {
+                CommandID = CommandID.JsonRequestCmd,
+                StructTypeID = StructTypeIDs.VarStringOfJson,
+                Data = json
+            };
+        }
+
+        /// <summary>
+        /// 解包json返回值
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        private ResponseDto UnwrapResponse(CommandMessage message)
+        {
+            var data = message.Data;
+            if(data is JsonCustomData json)
+            {
+                var jsonSerializer = Config.JsonSerializer;
+                var response = jsonSerializer.DeserializeObject<ResponseDto>(json.Text);
+                return response;
+            }
+
+            return null;
+        }
+        #endregion
 
         #region 用于：现场实施工具
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -159,7 +159,7 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
         /// <param name="value"></param>
         /// <returns></returns>
         [HttpPost]
-        public SampleStationCmdOutputDto<SampleStationParameterErrorDataCollection> DownloadSampleConfi([FromBody] SampleStationCmdInputDto value)
+        public SampleStationCmdOutputDto<SampleStationParameterErrorDataCollection> DownloadSampleConfig([FromBody] SampleStationCmdInputDto value)
         {
             SampleStationParameterErrorDataCollection parameterErrorDatas = null;
             void Cmd()
