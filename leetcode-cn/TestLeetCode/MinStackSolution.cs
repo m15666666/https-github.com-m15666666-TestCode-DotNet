@@ -194,7 +194,6 @@ public class MinStack
 
 	private Node head;//头节点
 	private int minimum;
-	/** initialize your data structure here. */
 	public MinStack()
 	{
 		minimum = int.MaxValue;
