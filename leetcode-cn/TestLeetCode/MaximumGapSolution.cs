@@ -134,7 +134,6 @@ int maximumGap(vector<int>& nums)
 
     vector<int> aux(nums.size());
 
-    /* LSD Radix Sort */
     while (maxVal / exp > 0) {                   // Go through all digits from LSD to MSD
         vector<int> count(radix, 0);
 
