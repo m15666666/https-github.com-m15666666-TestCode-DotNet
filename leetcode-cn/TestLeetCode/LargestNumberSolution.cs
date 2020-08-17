@@ -1,9 +1,23 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 
+/*
+给定一组非负整数，重新排列它们的顺序使之组成一个最大的整数。
+
+示例 1:
+
+输入: [10,2]
+输出: 210
+示例 2:
+
+输入: [3,30,34,5,9]
+输出: 9534330
+
+ 
+*/
 /// <summary>
 /// https://leetcode-cn.com/problems/largest-number/
 /// 179. 最大数 LargestNumber
@@ -27,7 +41,8 @@ class LargestNumberSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
-    private readonly static Comparison<string> comparison = (x, y) => {
+    private readonly static Comparison<string> comparison = (x, y) =>
+    {
         if (x[0] == '0') return -1;
         if (y[0] == '0') return 1;
 
@@ -37,14 +52,14 @@ class LargestNumberSolution
         var array2 = y;
         int array1Index = 0;
         int array2Index = 0;
-        while( true)
+        while (true)
         {
             var c1 = array1[array1Index++];
             var c2 = array2[array2Index++];
             if (c2 < c1) return 1;
             if (c1 < c2) return -1;
 
-            if(array1Index == array1.Length)
+            if (array1Index == array1.Length)
             {
                 if (array1 == y) break;
                 array1 = y;
@@ -61,20 +76,39 @@ class LargestNumberSolution
         return 0;
     };
 
+    // error
+    //private readonly static Comparison<string> comparison = (x, y) => {
+    //    if (x[0] == '0') return -1;
+    //    if (y[0] == '0') return 1;
+
+    //    var array1 = x;
+    //    var array2 = y;
+    //    int array1Index = 0;
+    //    int array2Index = 0;
+    //    while(array1Index < x.Length && array2Index < y.Length)
+    //    {
+    //        var c1 = array1[array1Index++];
+    //        var c2 = array2[array2Index++];
+    //        if (c2 < c1) return 1;
+    //        if (c1 < c2) return -1;
+    //    }
+
+    //    if (array1Index == x.Length && array2Index == y.Length) return 0;
+    //    return array1Index == x.Length ? 1 : -1;
+    //};
     public string LargestNumber(int[] nums)
     {
         if (nums == null || nums.Length == 0) return "";
         if (nums.Length == 1) return nums[0].ToString();
 
-        string[] numTexts = nums.Select(item => item.ToString()).ToArray();
+        string[] texts = nums.Select(item => item.ToString()).ToArray();
         
-        Array.Sort(numTexts, comparison);
-        StringBuilder sb = new StringBuilder();
-        for (int i = numTexts.Length - 1; -1 < i; i--)
-            sb.Append(numTexts[i]);
-        var ret = sb.ToString();
-        if (ret[0] == '0') return "0";
-        return ret;
+        Array.Sort(texts, comparison);
+        if (texts[texts.Length - 1][0] == '0') return "0";
+
+        StringBuilder builder = new StringBuilder();
+        for (int i = texts.Length - 1; -1 < i; i--) builder.Append(texts[i]);
+        return builder.ToString();
     }
 
 }
@@ -115,4 +149,7 @@ class LargestNumberSolution
         }
         return true;
     }
+
+
+
 */
