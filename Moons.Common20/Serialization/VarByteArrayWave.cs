@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Moons.Common20.Serialization
 {
@@ -14,9 +14,23 @@ namespace Moons.Common20.Serialization
         public float WaveScale { get; set; }
 
         /// <summary>
-        /// 数组每项字节长度，目前有：2，4两个选项，分别表示Int16、Int32类型的数组。
+        /// 数组每项字节长度，目前选项有：2:表示Int16类型的字节数组, 
+        /// 4: 表示Int32类型的字节数组, 101: 表示float类型4个字节的单精度浮点型的字节数组.
         /// </summary>
         public int ItemLength { get; set; }
+
+        /// <summary>
+        /// 数组每项字节长度，目前选项有：2:表示Int16类型的字节数组, 4: 表示Int32类型的字节数组, 101: 表示float类型4个字节的单精度浮点型的字节数组.
+        /// </summary>
+        public const int ItemType_Int16 = 2;
+        /// <summary>
+        /// 数组每项字节长度，目前选项有：2:表示Int16类型的字节数组, 4: 表示Int32类型的字节数组, 101: 表示float类型4个字节的单精度浮点型的字节数组.
+        /// </summary>
+        public const int ItemType_Int32 = 4;
+        /// <summary>
+        /// 数组每项字节长度，目前选项有：2:表示Int16类型的字节数组, 4: 表示Int32类型的字节数组, 101: 表示float类型4个字节的单精度浮点型的字节数组.
+        /// </summary>
+        public const int ItemType_Float32 = 101;
 
         /// <summary>
         /// 波形数据
@@ -27,6 +41,10 @@ namespace Moons.Common20.Serialization
         /// 内部的Int32类型数组
         /// </summary>
         private int[] InnerInt32Data { get; set; }
+        /// <summary>
+        /// 内部的float类型数组
+        /// </summary>
+        private float[] InnerFloatData { get; set; }
 
         /// <summary>
         /// 转换为double类型的波形数组
@@ -36,17 +54,24 @@ namespace Moons.Common20.Serialization
             get
             {
                 int[] intData = InnerInt32Data;
-                if( intData == null )
+                if( intData != null )
                 {
-                    return null;
+                    var ret = new double[intData.Length];
+                    for( int index = 0; index < ret.Length; index++ )
+                    {
+                        ret[index] = intData[index] * WaveScale;
+                    }
+                    return ret;
                 }
 
-                var ret = new double[intData.Length];
-                for( int index = 0; index < ret.Length; index++ )
+                var floatData = InnerFloatData;
+                if (floatData != null)
                 {
-                    ret[index] = intData[index] * WaveScale;
+                    var ret = new double[floatData.Length];
+                    floatData.CopyTo(ret, 0);
+                    return ret;
                 }
-                return ret;
+                return null;
             }
         }
 
@@ -56,17 +81,22 @@ namespace Moons.Common20.Serialization
         public void InitInnerIntData()
         {
             InnerInt32Data = null;
+            InnerFloatData = null;
 
             switch( ItemLength )
             {
-                case 2:
+                case ItemType_Int16:
                     short[] int16Data = ByteUtils.Bytes2Int16Array( WaveData );
                     InnerInt32Data = new int[int16Data.Length];
                     int16Data.CopyTo( InnerInt32Data, 0 );
                     return;
 
-                case 4:
+                case ItemType_Int32:
                     InnerInt32Data = ByteUtils.Bytes2Int32Array( WaveData );
+                    return;
+
+                case ItemType_Float32:
+                    InnerFloatData = ByteUtils.Bytes2SingleArray( WaveData );
                     return;
             }
             throw new ArgumentOutOfRangeException( string.Format( "Invalid ItemLength({0})", ItemLength ) );
