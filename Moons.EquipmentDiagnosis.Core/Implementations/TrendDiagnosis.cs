@@ -1,4 +1,4 @@
-﻿using Moons.EquipmentDiagnosis.Core.Dto;
+using Moons.EquipmentDiagnosis.Core.Dto;
 using Moons.EquipmentDiagnosis.Core.Utils;
 using System;
 using System.Collections.Generic;
@@ -71,9 +71,9 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         private void CalcAlarm(SignalTypeIdEnum signalTypeId, AlarmTypeIdEnum alarmTypeId, double[] yData, TrendAlarmSetting alarmSetting,TrendDiagnosisOutputDto output )
         {
             Debug.WriteLine($"signalTypeId:{signalTypeId}");
-            if (yData == null || yData.Length == 0)
+            if (yData == null || yData.Length < 2)
             {
-                Debug.WriteLine("yData == null || yData.Length == 0");
+                Debug.WriteLine("yData == null || yData.Length < 2");
                 return;
             }
 
