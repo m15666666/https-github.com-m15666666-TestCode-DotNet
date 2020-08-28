@@ -1,4 +1,4 @@
-﻿using AnalysisData.SampleData;
+using AnalysisData.SampleData;
 
 namespace AnalysisData.Constants
 {
@@ -103,6 +103,35 @@ namespace AnalysisData.Constants
                                                               };
 
         #region 异常代码常量
+
+        #region 趋势报警
+
+        /// <summary>
+        /// 月趋势报警
+        /// </summary>
+        public const int Alm_Trend_30Day = 101;
+        /// <summary>
+        /// 10天趋势报警
+        /// </summary>
+        public const int Alm_Trend_10Day = 102;
+        /// <summary>
+        /// 5天趋势报警
+        /// </summary>
+        public const int Alm_Trend_5Day = 103;
+        /// <summary>
+        /// 24小时趋势报警
+        /// </summary>
+        public const int Alm_Trend_24Hour = 104;
+        /// <summary>
+        /// 2小时趋势报警
+        /// </summary>
+        public const int Alm_Trend_2Hour = 105;
+        /// <summary>
+        /// 瞬时趋势报警
+        /// </summary>
+        public const int Alm_Trend_Impulse = 111;
+
+        #endregion
 
         #region 用于无线传感器的常量
 

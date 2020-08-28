@@ -52,11 +52,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
 
     public enum AlarmTypeIdEnum
     {
-        Alm_Trend_30Day = 101,
-        Alm_Trend_10Day = 102,
-        Alm_Trend_5Day = 103,
-        Alm_Trend_24Hour = 104,
-        Alm_Trend_2Hour = 105,
-        Alm_Trend_Impulse = 111,
+        Alm_Trend_30Day = FeatureValueID.Alm_Trend_30Day,// 101,
+        Alm_Trend_10Day = FeatureValueID.Alm_Trend_10Day,// 102,
+        Alm_Trend_5Day = FeatureValueID.Alm_Trend_5Day,// 103,
+        Alm_Trend_24Hour = FeatureValueID.Alm_Trend_24Hour,// 104,
+        Alm_Trend_2Hour = FeatureValueID.Alm_Trend_2Hour,// 105,
+        Alm_Trend_Impulse = FeatureValueID.Alm_Trend_Impulse,// 111,
     }
 }
