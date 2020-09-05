@@ -178,6 +178,21 @@ namespace AnalysisData.Dto
         /// </summary>
         public int SensorAxisID { get; set; }
 
+        /// <summary>
+        /// 高通滤波截止频率，目前用于二代在线速度通道，可以设置为2HZ,5HZ,10HZ
+        /// </summary>
+        public float HighPassFreq { get; set; }
+
+        /// <summary>
+        /// 冲击测量参数: 带宽：3: 1k~2k, 5: 2K~4K, 11: 高通5Khz, 15: 高通12Khz
+        /// </summary>
+        public int ShockBandPassID { get; set; }
+
+        /// <summary>
+        /// 等角度采样: 跟踪转速范围: 3: 5HZ~100HZ 5: 跟踪转速:50HZ~1000HZ
+        /// </summary>
+        public int MultiFreqRevRangeID { get; set; }
+
         #endregion
 
         #region 连续报警次数（超过这个次数才报警，次数为0则不报警）
