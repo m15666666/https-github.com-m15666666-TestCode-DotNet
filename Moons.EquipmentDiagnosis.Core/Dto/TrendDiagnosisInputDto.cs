@@ -16,11 +16,13 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 30天趋势数据
         /// </summary>
         public double[] TrendData_30Day { get; set; }
+        public double[] TrendData_30Day_XAxis { get; set; }
 
         /// <summary>
         /// 10天趋势数据
         /// </summary>
         public double[] TrendData_10Day { get; set; }
+        public double[] TrendData_10Day_XAxis { get; set; }
 
         /// <summary>
         /// 5天趋势数据
@@ -31,11 +33,13 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 24小时趋势数据
         /// </summary>
         public double[] TrendData_24Hour { get; set; }
+        public double[] TrendData_24Hour_XAxis { get; set; }
 
         /// <summary>
         /// 2小时趋势数据
         /// </summary>
         public double[] TrendData_2Hour { get; set; }
+        public double[] TrendData_2Hour_XAxis { get; set; }
 
         /// <summary>
         /// 	单次突变趋势数据

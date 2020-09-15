@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -9,8 +9,15 @@ namespace Moons.EquipmentDiagnosis.Core.Utils
     {
         public static LineFitUtils CreateByYData(double[] yData)
         {
-            double[] xData = new double[yData.Length];
+            var xData = new double[yData.Length];
             for (int i = 0; i < xData.Length; i++) xData[i] = i;
+            var ret = new LineFitUtils();
+            ret.InitByXY(xData, yData);
+            return ret;
+        }
+
+        public static LineFitUtils CreateByXYData(double[] xData, double[] yData)
+        {
             var ret = new LineFitUtils();
             ret.InitByXY(xData, yData);
             return ret;
@@ -18,6 +25,11 @@ namespace Moons.EquipmentDiagnosis.Core.Utils
 
         public double[] X { get; set; }
         public double[] Y { get; set; }
+
+        /// <summary>
+        /// 返回拟和曲线的斜率
+        /// </summary>
+        public double K => LineCoef != null ? LineCoef.Item2 : 0;
 
         public Tuple<double, double> LineCoef { get; set; }
 
@@ -35,6 +47,5 @@ namespace Moons.EquipmentDiagnosis.Core.Utils
             Debug.WriteLine($"LineFitUtils.CalcY:x={x},y={ret}");
             return ret;
         }
-
     }
 }
