@@ -13,7 +13,8 @@ namespace TestLeetCode
             var classname = $"{StringUtils.Capitalize("substring-with-concatenation-of-all-words", "-")}Solution";
             Debug.WriteLine(classname);
 
-            new WordSearchIISolution().Test();
+            new CountSquareSubmatricesWithAllOneSolution().Test();
+            //new WordSearchIISolution().Test();
             //new MaxPointsOnALineSolution().Test();
             //new WordBreakIISolution().Test();
             //new LongestConsecutiveSequenceSolution().Test();
