@@ -157,6 +157,26 @@ namespace Moons.Common20
         public static readonly string UnderScore = UnderScoreChar.ToString();
 
         /// <summary>
+        /// 半角单引号字符
+        /// </summary>
+        public static readonly char SingleQuotationMarkChar = '\'';
+
+        /// <summary>
+        /// 半角单引号字符串
+        /// </summary>
+        public static readonly string SingleQuotationMark = SingleQuotationMarkChar.ToString();
+
+        /// <summary>
+        /// 半角双引号字符
+        /// </summary>
+        public static readonly char DoubleQuotationMarkChar = '"';
+
+        /// <summary>
+        /// 半角双引号字符串
+        /// </summary>
+        public static readonly string DoubleQuotationMark = DoubleQuotationMarkChar.ToString();
+
+        /// <summary>
         /// 半角逗号字符
         /// </summary>
         public static readonly char CommaChar = ',';
@@ -1095,6 +1115,51 @@ namespace Moons.Common20
             }
             return builder.ToString();
         }
+        #endregion
+
+        # region json
+
+        /// <summary>
+        /// 从json字符串中查询对应key的字符串类型的值，主要用于快速获得json对应的数据包的类型和版本号。
+        /// </summary>
+        /// <param name="json">json字符串</param>
+        /// <param name="startIndex">查找的起始下标</param>
+        /// <param name="key">查找的key</param>
+        /// <returns>(字符串值,字符串值对应的起始下标)，如果未找到则返回(null,-1)，
+        /// 如果找到了但值为空则返回(string.Empty,第二个"对应的下标)</returns>
+        public static (string,int) GetJsonStringValueByKey(string json, int startIndex, string key)
+        {
+            if (string.IsNullOrEmpty(json) 
+                || startIndex < 0 || json.Length <= startIndex 
+                || string.IsNullOrEmpty(key)) return (null, -1);
+
+            int index;
+            // 查找key
+            index = json.IndexOf(key, startIndex);
+            if (index == -1) return (null, -1);
+            startIndex += key.Length;
+
+            // 查找分号
+            index = json.IndexOf(Colon, startIndex);
+            if (index == -1) return (null, -1);
+            startIndex += Colon.Length;
+
+            // 查找双引号
+            index = json.IndexOf(DoubleQuotationMark, startIndex);
+            if (index == -1) return (null, -1);
+            startIndex += DoubleQuotationMark.Length;
+
+            // 查找配对的双引号
+            index = json.IndexOf(DoubleQuotationMark, startIndex);
+            if (index == -1) return (null, -1);
+
+            int vIndex = startIndex;
+            // 值为空字符串
+            if (index == vIndex) return (string.Empty, vIndex);
+
+            return (json.Substring(vIndex, index - vIndex), vIndex);
+        }
+
         #endregion
     }
 }

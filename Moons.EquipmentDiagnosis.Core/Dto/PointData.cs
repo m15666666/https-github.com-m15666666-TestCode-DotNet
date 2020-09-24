@@ -121,6 +121,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         {
             return HistorySummaryData != null && TimewaveData != null;
         }
+
+        /// <summary>
+        /// 引用的代表数据库记录的测点对象
+        /// </summary>
+        public object RefPointOfDb { get; set; }
     }
     
     public class PointDataCollection : List<PointData>
