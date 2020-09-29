@@ -240,11 +240,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
     [Serializable]
     public class HistorySummaryData
     {
-        public object Id { get; set; }
+        //public object Id { get; set; }
 
         public object PartitionId { get; set; }
 
-        public string PointOnlyCode { get; set; }
+        //public string PointOnlyCode { get; set; }
 
         /// <summary>
         /// 是MongoDB的外键
@@ -252,9 +252,9 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public string HistoryDataRef_Id { get; set; }
 
 
-        public object Point_ID { get; set; }
+        //public object Point_ID { get; set; }
 
-        public DateTime SampTime_DT { get; set; }
+        //public DateTime SampTime_DT { get; set; }
 
         public DateTime SampTimeGMT_DT { get; set; }
 
@@ -263,80 +263,80 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// </summary>
         public double SampleFreq_NR { get; set; }
 
-        /// <summary>
-        ///     倍频系数
-        /// </summary>
-        public int SampMod_NR { get; set; }
+        ///// <summary>
+        /////     倍频系数
+        ///// </summary>
+        //public int SampMod_NR { get; set; }
 
-        /// <summary>
-        ///     数据类型编号
-        /// </summary>
-        public byte DatType_NR { get; set; }
+        ///// <summary>
+        /////     数据类型编号
+        ///// </summary>
+        //public byte DatType_NR { get; set; }
 
-        /// <summary>
-        ///     信号类型编号
-        /// </summary>
-        public int SigType_NR { get; set; }
+        ///// <summary>
+        /////     信号类型编号
+        ///// </summary>
+        //public int SigType_NR { get; set; }
 
-        /// <summary>
-        ///     数据长度
-        /// </summary>
-        public int DatLen_NR { get; set; }
+        ///// <summary>
+        /////     数据长度
+        ///// </summary>
+        //public int DatLen_NR { get; set; }
 
         public int RotSpeed_NR { get; set; }
 
-        public double MinFreq_NR { get; set; }
+        //public double MinFreq_NR { get; set; }
 
         public int AlmLevel_ID { get; set; }
 
-        public int DataGroup_NR { get; set; }
+        //public int DataGroup_NR { get; set; }
 
-        public int AvgNum_NR { get; set; }
+        //public int AvgNum_NR { get; set; }
 
-        public long Alm_ID { get; set; }
+        //public long Alm_ID { get; set; }
 
-        public int EngUnit_ID { get; set; }
+        //public int EngUnit_ID { get; set; }
 
-        public long Synch_NR { get; set; }
+        //public long Synch_NR { get; set; }
 
-        public int OrbitAxis_ID { get; set; }
+        //public int OrbitAxis_ID { get; set; }
 
-        public int MasterSlave_ID { get; set; }
+        //public int MasterSlave_ID { get; set; }
 
         /// <summary>
         /// 测量值
         /// </summary>
         public double MeasureValue { get; set; }
 
-        /// <summary>
-        /// 峰值
-        /// </summary>
-        public double P { get; set; }
+        ///// <summary>
+        ///// 峰值
+        ///// </summary>
+        //public double P { get; set; }
 
-        /// <summary>
-        /// 峰峰值
-        /// </summary>
-        public double PP { get; set; }
+        ///// <summary>
+        ///// 峰峰值
+        ///// </summary>
+        //public double PP { get; set; }
 
-        /// <summary>
-        /// 有效值
-        /// </summary>
-        public double RMS { get; set; }
+        ///// <summary>
+        ///// 有效值
+        ///// </summary>
+        //public double RMS { get; set; }
 
-        /// <summary>
-        /// 均值
-        /// </summary>
-        public double Mean { get; set; }
+        ///// <summary>
+        ///// 均值
+        ///// </summary>
+        //public double Mean { get; set; }
 
-        /// <summary>
-        /// 波形指标
-        /// </summary>
-        public double ShapeFactor { get; set; }
+        ///// <summary>
+        ///// 波形指标
+        ///// </summary>
+        //public double ShapeFactor { get; set; }
 
-        /// <summary>
-        /// 峭度
-        /// </summary>
-        public double KurtoFactor { get; set; }
+        ///// <summary>
+        ///// 峭度
+        ///// </summary>
+        //public double KurtoFactor { get; set; }
 
     }
 
