@@ -21,10 +21,7 @@ namespace SampleServer.Upload2DB
         /// <param name="datas">List[TrendData]</param>
         public void UploadData( List<TrendData> datas )
         {
-            if( CollectionUtils.IsNullOrEmptyG( datas ) )
-            {
-                return;
-            }
+            if( CollectionUtils.IsNullOrEmptyG( datas ) ) return;
 
             try
             {

@@ -1,10 +1,11 @@
-﻿using AnalysisAlgorithm;
+using AnalysisAlgorithm;
 using AnalysisData.Constants;
 using AnalysisData.Dto;
 using AnalysisData.Helper;
 using Moons.Common20;
 using SocketLib;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -50,10 +51,14 @@ namespace SampleServer.Upload2DB
         /// </summary>
         private readonly LockQueue<List<TrendData>> _dataBuffer = new LockQueue<List<TrendData>>();
 
+        ///// <summary>
+        ///// 监测数据缓存
+        ///// </summary>
+        //private readonly LockQueue<List<TrendData>> _monitorDataBuffer = new LockQueue<List<TrendData>>();
         /// <summary>
-        /// 监测数据缓存
+        /// 使用BlockingCollection同步实时数据的消费
         /// </summary>
-        private readonly LockQueue<List<TrendData>> _monitorDataBuffer = new LockQueue<List<TrendData>>();
+        private readonly BlockingCollection<List<TrendData>> _monitorDataBuffer = new BlockingCollection<List<TrendData>>();
 
         #endregion
 
@@ -102,6 +107,11 @@ namespace SampleServer.Upload2DB
         /// 上传数据到数据库线程
         /// </summary>
         private readonly Thread _uploadData2DBThread;
+
+        /// <summary>
+        /// 上传数据到监测缓存的线程
+        /// </summary>
+        private readonly Thread _uploadData2MonitorThread;
 
         /// <summary>
         /// 上传数据到数据库线程事件
@@ -153,19 +163,9 @@ namespace SampleServer.Upload2DB
                 _almBuffer.Add( alms );
                 _uploadAlm2DBThreadEvent.Set();
             }
-            else if( data is List<TrendData> )
+            else if( data is List<TrendData> trendDatas )
             {
-                var trendDatas = data as List<TrendData>;
-
-                bool isMonitorData = false;
-                foreach ( var trendData in trendDatas )
-                {
-                    if( trendData.DataUsageID == DataUsageID.Monitor )
-                    {
-                        isMonitorData = true;
-                        break;
-                    }
-                }
+                bool isMonitorData = trendDatas[0].DataUsageID == DataUsageID.Monitor;
 
                 #region 酒钢模式处理
 
@@ -179,6 +179,7 @@ namespace SampleServer.Upload2DB
 
                 if( isMonitorData )
                 {
+                    //int count = _monitorDataBuffer.Count;
                     int count = _monitorDataBuffer.Count;
                     if( maxNormalSampleQueue <= count )
                     {
@@ -186,7 +187,15 @@ namespace SampleServer.Upload2DB
                         return;
                     }
 
-                    _monitorDataBuffer.Add( trendDatas );
+                    try
+                    {
+                        if(!_monitorDataBuffer.IsAddingCompleted) _monitorDataBuffer.Add(trendDatas);
+                    }
+                    catch
+                    {
+                        // 线程停止
+                    }
+                    //_monitorDataBuffer.Add( trendDatas );
                 }
                 else
                 {
@@ -198,9 +207,10 @@ namespace SampleServer.Upload2DB
                     }
 
                     _dataBuffer.Add( trendDatas );
+                    _uploadData2DBThreadEvent.Set();
                 }
                 
-                _uploadData2DBThreadEvent.Set();
+                //_uploadData2DBThreadEvent.Set();
             } // else if( data is List<TrendData> )
         }
 
@@ -412,9 +422,10 @@ namespace SampleServer.Upload2DB
         {
             _deserializeThread = ThreadUtils.CreateThread( DeserializeBytes, "NormalSampleQueue_DeserializeBytes" );
             _uploadData2DBThread = ThreadUtils.CreateThread( UploadData2DB, "NormalSampleQueue_UploadData2DB" );
+            _uploadData2MonitorThread = ThreadUtils.CreateThread(UploadData2Monitor, "NormalSampleQueue_UploadData2Monitor" );
             _uploadAlm2DBThread = ThreadUtils.CreateThread( UploadAlm2DB, "NormalSampleQueue_UploadAlm2DB" );
 
-            ThreadUtils.Start( _deserializeThread, _uploadData2DBThread, _uploadAlm2DBThread );
+            ThreadUtils.Start( _deserializeThread, _uploadData2DBThread, _uploadData2MonitorThread, _uploadAlm2DBThread );
         }
 
         /// <summary>
@@ -424,20 +435,20 @@ namespace SampleServer.Upload2DB
         {
             TraceUtils.Info("StopUpload2DB...");
 
-            if( _uploadData2DBThread != null )
-            {
-                _threadStatus.Stop();
+            _threadStatus.Stop();
+            ThreadUtils.SetEvents2Signaled(
+                _deserializeThreadEvent,
+                _uploadData2DBThreadEvent,
+                _uploadAlm2DBThreadEvent );
 
-                ThreadUtils.SetEvents2Signaled(
-                    _deserializeThreadEvent,
-                    _uploadData2DBThreadEvent,
-                    _uploadAlm2DBThreadEvent );
+            _monitorDataBuffer.CompleteAdding();
 
-                ThreadUtils.Join(
-                    _deserializeThread,
-                    _uploadData2DBThread,
-                    _uploadAlm2DBThread );
-            }
+            ThreadUtils.Join(
+                _deserializeThread,
+                _uploadData2DBThread,
+                _uploadAlm2DBThread,
+                _uploadData2MonitorThread
+                );
 
             _dataUploader.Dispose();
             _almUploader.Dispose();
@@ -459,6 +470,7 @@ namespace SampleServer.Upload2DB
                 }
 
                 var trendDatas = new List<TrendData>();
+                var monitorDatas = new List<TrendData>();
                 var almEventDatas = new List<AlmEventDataDto>();
 
                 var datas = _bytesBuffer.PopAll();
@@ -474,7 +486,7 @@ namespace SampleServer.Upload2DB
                         var trendData = obj as TrendData;
                         if( trendData != null )
                         {
-                            if(trendData.DataUsageID == DataUsageID.Save2DB)
+                            if (trendData.DataUsageID == DataUsageID.Save2DB)
                             {
                                 var time = PartitionIDUtils.Time2LongID(trendData.SampleTime);
                                 var pointId = trendData.PointID;
@@ -484,10 +496,11 @@ namespace SampleServer.Upload2DB
                                     continue;
                                 }
                                 _pointId2TimeForAvoidingSameData[pointId] = time;
+                                //trendData.AlmID = Config.GetAlmIDByAlmEventUniqueID( trendData.AlmEventUniqueID );
+                                trendDatas.Add(trendData);
                             }
+                            else monitorDatas.Add(trendData);
 
-                            trendData.AlmID = Config.GetAlmIDByAlmEventUniqueID( trendData.AlmEventUniqueID );
-                            trendDatas.Add( trendData );
                             continue;
                         }
 
@@ -524,18 +537,34 @@ namespace SampleServer.Upload2DB
                     }
                 }
 
-                if( CollectionUtils.IsNotEmptyG( trendDatas ) )
-                {
-                    Add( trendDatas );
-                }
+                if( 0 < trendDatas.Count ) Add( trendDatas );
+                if( 0 < monitorDatas.Count ) Add( monitorDatas );
 
-                if( CollectionUtils.IsNotEmptyG( almEventDatas ) )
-                {
-                    Add( almEventDatas );
-                }
+                if( 0 < almEventDatas.Count ) Add( almEventDatas );
             } // while( _threadStatus.IsStarted )
         }
 
+        /// <summary>
+        /// 上传采集的数据到监测缓存
+        /// </summary>
+        private void UploadData2Monitor()
+        {
+            var monitorDataBuffer = _monitorDataBuffer;
+            while( _threadStatus.IsStarted )
+            {
+                try
+                {
+                    var trendDatas = monitorDataBuffer.Take();
+                    _dataUploader.UploadData( trendDatas );
+                }
+                catch(Exception ex)
+                {
+                    if(!monitorDataBuffer.IsAddingCompleted) TraceUtils.Error( "UploadData2Monitor error.",  ex );
+                }
+            } // while( _threadStatus.IsStarted )
+
+            monitorDataBuffer.Dispose();
+        }
         /// <summary>
         /// 上传采集的数据到数据库
         /// </summary>
@@ -545,20 +574,20 @@ namespace SampleServer.Upload2DB
             {
                 Config.Probe.SetNormalDataQueueCount( _dataBuffer.Count );
 
-                if( !_dataBuffer.HasData && !_monitorDataBuffer.HasData )
+                if( !_dataBuffer.HasData )
                 {
                     _uploadData2DBThreadEvent.WaitOne();
                     continue;
                 }
 
-                if( _monitorDataBuffer.HasData )
-                {
-                    // 先处理全部的监测数据
-                    foreach( var trendDatas in _monitorDataBuffer.PopAll() )
-                    {
-                        _dataUploader.UploadData( trendDatas );
-                    }
-                }
+                //if( _monitorDataBuffer.HasData )
+                //{
+                //    // 先处理全部的监测数据
+                //    foreach( var trendDatas in _monitorDataBuffer.PopAll() )
+                //    {
+                //        _dataUploader.UploadData( trendDatas );
+                //    }
+                //}
 
                 if( _dataBuffer.HasData )
                 {
