@@ -1,4 +1,4 @@
-﻿using Moons.Plugin.Infra;
+using Moons.Plugin.Infra;
 using NLua;
 using System;
 using System.Collections.Generic;
@@ -28,6 +28,8 @@ namespace Moons.Common20.Test
         
         static void Main(string[] args)
         {
+            TestAsyncConsumerQueue();
+            Console.Read();
             #region 为了调用roslyn时，能从默认的程序域中加载所有需要的程序集，需要先预先调用“需要的程序集”一下
 
             Console.WriteLine("Test_Roslyn");
@@ -42,6 +44,26 @@ namespace Moons.Common20.Test
             Test_Roslyn();
             
             Test_SingletonOfExe(args);
+        }
+
+        /// <summary>
+        /// 测试如何将同步调用传递的数据放到队列，然后异步消费队列中的数据
+        /// </summary>
+        static void TestAsyncConsumerQueue()
+        {
+            Console.WriteLine($"TestAsyncConsumerQueue begin thread: {Thread.CurrentThread.ManagedThreadId}");
+            var t = new TestAsyncQueueConsumer();
+            //t.Test_Task_Factory();
+            t.Test_Tread();
+            int i = 1;
+            string s;
+            while((s = Console.ReadLine()) != "quit")
+            {
+                Console.WriteLine($"{s} thread: {Thread.CurrentThread.ManagedThreadId}");
+                t.Queue.Add(i++);
+            }
+
+            Console.WriteLine($"TestAsyncConsumerQueue end thread: {Thread.CurrentThread.ManagedThreadId}");
         }
 
         /// <summary>
