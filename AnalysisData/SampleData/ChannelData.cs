@@ -310,6 +310,11 @@ namespace AnalysisData.SampleData
         }
 
         /// <summary>
+        ///     数据类型ID，1：时间波形、101：长数据类型、102：高频段数据类型
+        /// </summary>
+        public int DataTypeID { get; set; }
+
+        /// <summary>
         /// 信号类型ID（测量参量），102：加速度、101：速度、119：冲击、103：位移
         /// </summary>
         public int SignalTypeID

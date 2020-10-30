@@ -1,4 +1,4 @@
-﻿namespace AnalysisData.Constants
+namespace AnalysisData.Constants
 {
     /// <summary>
     ///     数据类型编号
@@ -44,6 +44,11 @@
         ///     长数据类型(频谱波形)
         /// </summary>
         public const int LongSpectrum = 101;
+
+        /// <summary>
+        ///     高频段数据类型(频谱波形)
+        /// </summary>
+        public const int HighFreqSpectrum = 102;
 
         /// <summary>
         ///     启停机类型(频谱波形)
