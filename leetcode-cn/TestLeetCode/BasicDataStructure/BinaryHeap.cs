@@ -15,24 +15,24 @@ namespace TestLeetCode.BasicDataStructure
     /// 二叉堆详解实现优先级队列
     /// </summary>
     /// <typeparam name="Key"></typeparam>
-    public class MaxPQ<Key> where Key : IComparable<Key>
+    public class MaxPQ<Key> where Key : System.IComparable<Key>
     {
         // 存储元素的数组
         private Key[] pq;
 
         // 当前 Priority Queue 中的元素个数
         private int N = 0;
+        /// <summary>
+        /// 是最大堆还是最小堆，默认最大堆
+        /// </summary>
+        private readonly bool _maxOrMin = true;
 
-        public MaxPQ(int cap)
+        public MaxPQ(int cap, bool maxOrMin = true)
         {
             // 索引 0 不用，所以多分配一个空间
             pq = new Key[cap + 1];
-        }
 
-        // 返回当前队列中最大元素
-        public Key Max()
-        {
-            return pq[1];
+            _maxOrMin = maxOrMin;
         }
 
         // 上浮第 k 个元素，以维护最大堆性质
@@ -76,25 +76,13 @@ namespace TestLeetCode.BasicDataStructure
         }
 
         // pq[i] 是否比 pq[j] 小？
-        private bool Less(int i, int j)
-        {
-            return pq[i].CompareTo(pq[j]) < 0;
-        }
+        private bool Less(int i, int j) => (_maxOrMin ? pq[i].CompareTo(pq[j]) : pq[j].CompareTo(pq[i])) < 0;
 
-        private int Parent(int i)
-        {
-            return i / 2;
-        }
+        private int Parent(int i) => i / 2;
 
-        private int Left(int i)
-        {
-            return i * 2;
-        }
+        private int Left(int i) => i * 2;
 
-        private int Right(int i)
-        {
-            return i * 2 + 1;
-        }
+        private int Right(int i) => i * 2 + 1;
 
         public void Insert(Key e)
         {
@@ -117,5 +105,9 @@ namespace TestLeetCode.BasicDataStructure
             Sink(1);
             return max;
         }
+
+        // 返回当前队列中最大元素
+        public Key Max => pq[1];
+        public int Count => N;
     }
 }
