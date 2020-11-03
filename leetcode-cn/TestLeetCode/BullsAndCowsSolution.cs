@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,6 +45,39 @@ class BullsAndCowsSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
+    ///// <summary>
+    ///// 这种解法不对,无法处理测试用例："1122" "1222"
+    ///// </summary>
+    ///// <param name="secret"></param>
+    ///// <param name="guess"></param>
+    ///// <returns></returns>
+    //public string GetHint(string secret, string guess)
+    //{
+    //    if (string.IsNullOrEmpty(secret)) return string.Empty;
+
+    //    int[] counts = new int[10];
+    //    int len = secret.Length;
+    //    int count1 = 0, count2 = 0;
+
+    //    foreach(var c in secret) ++counts[c - '0'];
+    //    for( int i = 0; i < len; i++)
+    //    {
+    //        var v1 = secret[i] - '0';
+    //        var v2 = guess[i] - '0';
+    //        if(v1 == v2)
+    //        {
+    //            ++count1;
+    //            --counts[v2];
+    //            continue;
+    //        }
+    //        if(0 < counts[v2])
+    //        {
+    //            --counts[v2];
+    //            ++count2;
+    //        }
+    //    }
+    //    return $"{count1}A{count2}B";
+    //}
     public string GetHint(string secret, string guess)
     {
         if (string.IsNullOrEmpty(secret)) return string.Empty;
@@ -52,11 +85,11 @@ class BullsAndCowsSolution
         int[] secrets = new int[10];
         Queue<int> queue = new Queue<int>();
         int count1 = 0, count2 = 0;
-        for(int index1 = 0; index1 < secret.Length; index1++)
+        for (int index1 = 0; index1 < secret.Length; index1++)
         {
             var v1 = secret[index1] - '0';
             var v2 = guess[index1] - '0';
-            if ( v1 == v2 )
+            if (v1 == v2)
             {
                 ++count1;
                 continue;
@@ -65,10 +98,10 @@ class BullsAndCowsSolution
             ++secrets[v1];
             queue.Enqueue(v2);
         }
-        while( 0 < queue.Count)
+        while (0 < queue.Count)
         {
             var v = queue.Dequeue();
-            if(0 < secrets[v])
+            if (0 < secrets[v])
             {
                 --secrets[v];
                 ++count2;
@@ -79,98 +112,80 @@ class BullsAndCowsSolution
     }
 }
 /*
-//别人的算法
 public class Solution {
     public string GetHint(string secret, string guess) {
-        Dictionary<char,int> s=new Dictionary<char,int>();
-        for(int i=0;i<secret.Length;i++)
-        {
-            if(s.ContainsKey(secret[i]))s[secret[i]]++;
-               else s.Add(secret[i],1);
-        }
-        int a=0,b=0;
-        
-        for(int i=0;i<guess.Length;i++)
-        {
-            if(secret[i]==guess[i]){a++;s[secret[i]]--;}
-        }
-        
-        for(int i=0;i<guess.Length;i++)
-        {
-            if(secret[i]==guess[i]){}
-            else
+            int[] cnt = new int[10];
+            bool[] visited = new bool[secret.Length];
+            int a = 0, b = 0;
+            for(int i=0;i<secret.Length;i++)
             {
-                if(s.ContainsKey(guess[i]))
+                cnt[secret[i] - '0']++;
+            }
+            for(int i=0;i<guess.Length;i++)
+            {
+                if (secret[i] == guess[i])
                 {
-                    if(s[guess[i]]>0){
-                    b++;s[guess[i]]--;
-                    }
+                    a++;
+                    cnt[guess[i] - '0']--;
+                    visited[i] = true;
                 }
             }
-        }
-        
-        return String.Format("{0}A{1}B",a,b);
+            for (int i = 0; i < guess.Length; i++)
+            {
+                if (cnt[guess[i] - '0'] > 0 && !visited[i])
+                {
+                    b++;
+                    cnt[guess[i] - '0']--;
+                }
+            }
+
+            return $"{a}A{b}B";
     }
 }
+
+public class Solution {
+    public string GetHint(string secret, string guess) 
+    {
+       int aa = 0, bb = 0;//A，B 的次数变量
+        int[] num = new int[10];//10个数字出现的状态数组
+        for (int i = 0; i < secret.Length; i++)
+        {
+            if (secret[i] == guess[i]) aa++; //相等计公牛
+            else
+            {
+                if (num[secret[i] - '0']++ < 0) bb++; //secret中的这个数字状态++, 负数代表以前在guess出现过，这时母牛次数+1
+                if (num[guess[i] - '0']-- > 0) bb++; //guess中的这个数字状态--, 正数代表以前在secret出现过，这时母牛次数+1
+            }
+        }
+        return aa + "A" + bb + "B";
+    }
+}
+
 public class Solution {
     public string GetHint(string secret, string guess) {
-        int len = secret.Length;
-        int retA = 0;
-        int retB = 0;
-        Dictionary<int,int> compareS = new Dictionary<int,int>();
-        Dictionary<int,int> compareG = new Dictionary<int,int>();
-        for (int i = 0; i < len; ++i)
-        {
-            if (secret[i] == guess[i])
-            {
-                ++retA;
-            }
-            else
-            {
-                if (compareS.ContainsKey(guess[i]))
-                {
-                    --compareS[guess[i]];
-                    ++retB;
-                    if (compareS[guess[i]] == 0)
-                        compareS.Remove(guess[i]);
-                }
-                else
-                {
-                    if (compareG.ContainsKey(guess[i]))
-                    {
-                        ++compareG[guess[i]];
-                    }
-                    else
-                    {
-                        compareG.Add(guess[i],1);
-                    }
-                }
-                
-                if (compareG.ContainsKey(secret[i]))
-                {
-                    --compareG[secret[i]];
-                    ++retB;
-                    if (compareG[secret[i]] == 0)
-                        compareG.Remove(secret[i]);
-                }
-                else
-                {
-                    if (compareS.ContainsKey(secret[i]))
-                    {
-                        ++compareS[secret[i]];
-                    }
-                    else
-                    {
-                        compareS.Add(secret[i],1);
-                    }
-                }
+        int n = secret.Length;
+        int[] cnt = new int[10];
+        foreach (char c in secret) {
+            cnt[c - '0']++;
+        }
+
+        int shoot = 0;
+        int match = 0;
+        for (int i = 0; i < n; i++) {
+            if (secret[i] == guess[i]) {
+                match++;
             }
         }
-        
-        string ret = string.Format("{0}A{1}B",retA,retB);
-        return ret;
-        
+        for (int i = 0; i < n; i++) {
+            if (cnt[guess[i] - '0'] > 0) {
+                cnt[guess[i] - '0']--;
+                shoot++;
+            }
+        }
+        shoot -= match;
+        return match.ToString() + "A" + shoot.ToString() + "B";
     }
 }
+
      
 */
