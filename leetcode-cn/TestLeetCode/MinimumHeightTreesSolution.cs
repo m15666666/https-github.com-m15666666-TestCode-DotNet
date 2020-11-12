@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -106,6 +106,118 @@ class MinimumHeightTreesSolution
     }
 }
 /*
+public class Solution {
+	public IList<int> FindMinHeightTrees(int n, int[][] edges)
+	{
+		if(n==1)
+		{
+			return new[]{0};
+		}
+		var graph = new Dictionary<int, List<int>>();
+		var degree = new int[n];
+		foreach (var edge in edges)
+		{
+			degree[edge[0]]++;
+			degree[edge[1]]++;
+			if (!graph.TryGetValue(edge[0], out var points))
+			{
+				points = new List<int>();
+				graph[edge[0]] = points;
+			}
+
+			points.Add(edge[1]);
+			if (!graph.TryGetValue(edge[1], out points))
+			{
+				points = new List<int>();
+				graph[edge[1]] = points;
+			}
+
+			points.Add(edge[0]);
+		}
+
+		var result = new List<int>();
+		var queue = new Queue<int>();
+		for (var i = 0; i < n; i++)
+		{
+			if (degree[i] == 1)
+			{
+				queue.Enqueue(i);
+			}
+		}
+
+		while (queue.Count > 0)
+		{
+			result.Clear();
+			for (int s = 0, l = queue.Count; s < l; s++)
+			{
+				var start = queue.Dequeue();
+				result.Add(start);
+				if (graph.TryGetValue(start, out var points))
+				{
+					foreach (var point in points)
+					{
+						degree[point]--;
+						if (degree[point] == 1)
+						{
+							queue.Enqueue(point);
+						}
+					}
+				}
+			}
+		}
+
+		return result;
+    }
+}
+
+public class Solution {
+    public IList<int> FindMinHeightTrees(int n, int[][] edges) {
+        if(n == 0)
+            return new List<int>();
+        if(n == 1)
+            return new List<int>{ 0 };
+        List<List<int>> graph = new List<List<int>>();
+        for(int i = 0; i < n; i++)
+            graph.Add(new List<int>());
+        int[] degrees = new int[n];
+        foreach(var edge in edges)
+        {
+            degrees[edge[0]]++;
+            degrees[edge[1]]++;
+            graph[edge[0]].Add(edge[1]);
+            graph[edge[1]].Add(edge[0]);
+        }
+        
+        int remains = n;
+        Queue<int> queue = new Queue<int>();
+        for(int i = 0; i < n; i++)
+        {
+            if(degrees[i] == 1)
+                queue.Enqueue(i);
+        }
+
+        while(remains > 2)
+        {
+            int count = queue.Count;
+            remains -= count;
+            while(count > 0)
+            {
+                int i = queue.Dequeue();
+                foreach(var j in graph[i])
+                {
+                    degrees[j]--;
+                    if(degrees[j] == 1)
+                        queue.Enqueue(j);
+                }
+                count--;
+            }
+        }
+
+        return queue.ToList();
+    }
+}
+
+
 public class Solution {
     public IList<int> FindMinHeightTrees(int n, int[,] edges) {
             IList<int> ret = new List<int>();
