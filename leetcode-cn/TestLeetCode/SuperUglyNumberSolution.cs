@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -68,56 +68,96 @@ class SuperUglyNumberSolution
 /*
 public class Solution {
     public int NthSuperUglyNumber(int n, int[] primes) {
-          var arr = new int[n];
-            arr[0] = 1;
-            var indexs = new int[primes.Length];
-            for (var i = 1; i < n; i++)
+            var array = new int[n];
+            var counts = new int[primes.Length];
+            array[0] = 1;
+            for (int i = 1; i < array.Length; i++)
             {
-                var index = 0;
-                var min = arr[indexs[0]] * primes[0];
-                for (var j = 0; j < primes.Length; j++)
-                {
-                    var temp = arr[indexs[j]] * primes[j];
-                    if (min > temp)
-                    {
-                        min = temp;
-                        index = j;
-                    }
-                }
-                for (var j = 0; j < primes.Length; j++)
-                {
-                    if (min == arr[indexs[j]] * primes[j])
-                        indexs[j]++;
-                }
-                arr[i] = min;
+                var min = GetMin(array, primes, counts);
+                array[i] = min;
+                CountPlus(min, array, counts, primes);
             }
-            return arr[n - 1];
+            return array[n - 1];
+    }
+
+	private int GetMin(int[] array, int[] primes, int[] counts)
+	{
+		var min = int.MaxValue;
+		for (int i = 0; i < primes.Length; i++)
+		{
+			var num = array[counts[i]] * primes[i];
+			if (num < min) min = num;
+		}
+		return min;
+	}
+
+	private void CountPlus(int min, int[] array, int[] counts, int[] primes)
+	{
+		for (int i = 0; i < counts.Length; i++)
+		{
+			if (min == array[counts[i]] * primes[i]) {
+				counts[i]++;
+
+			}
+		}
+	}
+}
+
+public class Solution {
+    public int NthSuperUglyNumber(int n, int[] primes)
+    {
+        int len = primes.Length;
+        int[] dp = new int[n];
+        dp[0] = 1;
+        int[] index = new int[len];
+        for (int i = 1; i < n; i++)
+        {
+            int min = int.MaxValue;
+            for (int j = 0; j < len; j++)
+            {
+                var num = primes[j] * dp[index[j]];
+                min = Math.Min(min, num);
+            }
+
+            dp[i] = min;
+
+            for (int j = 0; j < len; j++)
+            {
+                if (min == primes[j] * dp[index[j]])
+                {
+                    index[j]++;
+                }
+            }
+        }
+
+        return dp[n - 1];
     }
 }
+
 public class Solution {
     public int NthSuperUglyNumber(int n, int[] primes) {
-            int[] pointers = new int[primes.Length];
-            int[] values = new int[primes.Length];
-            int[] uglyBag = new int[n];
-            uglyBag[0] = 1;
+        int[] dp = new int[n + 1];
+        int m = primes.Length;
+        int[] idx = new int[m];
+        Array.Fill(idx, 1);
 
-            for(int i = 1; i < n; i++)
-            {
-                for(int j = 0; j < primes.Length; j++)
-                {
-                    values[j] = uglyBag[pointers[j]] * primes[j];
-                }
-                int min = values.Min();
-                for(int j = 0; j < primes.Length; j++)
-                {
-                    if(min == values[j])
-                    {
-                        pointers[j]++;
-                    }
-                }
-                uglyBag[i] = min;
+        dp[1] = 1;
+        for (int k = 2; k <= n; k++) {
+            int min = Int32.MaxValue;
+            for (int i = 0; i < m; i++) {
+                int x = dp[idx[i]] * primes[i];
+                min = Math.Min(min, x);
             }
-            return uglyBag[n - 1];
+            dp[k] = min;
+            for (int i = 0; i < m; i++) {
+                if (dp[idx[i]] * primes[i] == min) {
+                    idx[i]++;
+                }
+            }
+        }
+
+        return dp[n];
     }
 }
+
 */
