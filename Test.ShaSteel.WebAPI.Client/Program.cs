@@ -1,4 +1,4 @@
-﻿using log4net;
+using log4net;
 using log4net.Config;
 using log4net.Repository;
 using Moons.Common20;
@@ -22,7 +22,7 @@ namespace Test.ShaSteel.WebAPI.Client
     {
         const string TimePattern = "yyyy-MM-dd HH:mm:ss";
 
-        private static bool UseRefit = true;
+        private static bool UseRefit = false;//true;
 
         static async Task Main(string[] args)
         {
@@ -177,6 +177,16 @@ namespace Test.ShaSteel.WebAPI.Client
                 {
                     // error
                 }
+
+                VibAlarmInput vibAlarmInput = new VibAlarmInput
+                {
+                    Code = "01030200061410152",
+                    FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                    AlarmDate = DateTime.Now.ToString(TimePattern),
+                    AlarmDec = "alarm come",
+                    AlarmLevel = 3
+                };
+                var alarmResult = await client.AddOtherAlarmAsync(vibAlarmInput);
             }
             catch (Exception ex)
             {
@@ -240,6 +250,15 @@ namespace Test.ShaSteel.WebAPI.Client
                 {
                     // error
                 }
+                VibAlarmInput vibAlarmInput = new VibAlarmInput
+                {
+                    Code = "01030200061410152",
+                    FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                    AlarmDate = DateTime.Now.ToString(TimePattern),
+                    AlarmDec = "alarm come",
+                    AlarmLevel = 3
+                };
+                var alarmResult = await client.AddOtherAlarmAsync(vibAlarmInput);
             }
             catch (Exception ex)
             {

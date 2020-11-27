@@ -1,0 +1,1 @@
+{"Code":"010201000106000141","FullPath":"沙钢集团\\润忠高线厂棒线三车间\\1#线\\加热炉鼓风机电机（2）\\电机\\自由侧轴承振动\\2K速度波形(0~1000)","MeasDate":"2019-11-19 10:35:29","MeasValue":0.0644,"WaveLength":1024,"SignalType":1,"SampleRate":5120.0,"RPM":0.0,"Unit":"mm/s","ConvertCoef":3.988657E-06,"Resolver":1}

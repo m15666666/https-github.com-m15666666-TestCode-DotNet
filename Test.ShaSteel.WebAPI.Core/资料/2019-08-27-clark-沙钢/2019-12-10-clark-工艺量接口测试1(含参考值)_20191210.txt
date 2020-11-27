@@ -1,0 +1,53 @@
+    <DataA>1线1齿轮箱温度</DataA>	28.5
+    <DataB>01020100100220030</DataB>
+
+    <DataA>1线3齿轮箱温度</DataA>	29.7
+    <DataB>01020100140220030</DataB>
+
+    <DataA>1线5齿轮箱温度</DataA>	240.7
+    <DataB>01020100180220030</DataB>
+
+    <DataA>1线7齿轮箱温度</DataA>	27.5
+    <DataB>01020100220220030</DataB>
+
+    <DataA>1线9齿轮箱温度</DataA>	36.3
+    <DataB>01020100260220030</DataB>
+
+    <DataA>1线11齿轮箱温度</DataA>	27.4
+    <DataB>01020100300220030</DataB>
+
+    <DataA>1线11风机驱动轴承温度</DataA>	-20
+    <DataB>01020100640620030</DataB>
+
+    <DataA>1线11风机自由轴承温度</DataA>	-20
+    <DataB>01020100640620040</DataB>
+
+    <DataA>1线12风机驱动轴承温度</DataA>	-20
+    <DataB>01020100650620030</DataB>
+
+    <DataA>1线12风机自由轴承温度</DataA>	-20
+    <DataB>01020100650620040</DataB>
+
+    <DataA>1线13风机驱动轴承温度</DataA>	-20
+    <DataB>01020100660620030</DataB>
+
+    <DataA>1线13风机自由轴承温度</DataA>	-20
+    <DataB>01020100660620040</DataB>
+
+    <DataA>1线14风机驱动轴承温度</DataA>	-20
+    <DataB>01020100670620030</DataB>
+
+    <DataA>1线14风机自由轴承温度</DataA>	-20
+    <DataB>01020100670620040</DataB>
+
+    <DataA>1线15风机驱动轴承温度</DataA>	-20
+    <DataB>01020100680620030</DataB>
+
+    <DataA>1线15风机自由轴承温度</DataA>	-20
+    <DataB>01020100680620040</DataB>
+
+    <DataA>1线16风机驱动轴承温度</DataA>	-20
+    <DataB>01020100690620030</DataB>
+
+    <DataA>1线16风机自由轴承温度</DataA>	-20
+    <DataB>01020100690620040</DataB>

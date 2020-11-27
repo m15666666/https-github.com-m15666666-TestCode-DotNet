@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,5 +21,8 @@ namespace Test.ShaSteel.WebAPI.Client.refit_proxy
 
         [Post("/VibMetaData")]
         Task<ProcessDatasOutputDto> ProcessDatasAsync([Body] ProcessDatasInput value);
+
+        [Post("/AddOtherAlarm")]
+        Task<string> AddOtherAlarmAsync([Body] VibAlarmInput value);
     }
 }

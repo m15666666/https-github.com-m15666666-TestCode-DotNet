@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -78,6 +78,14 @@ namespace Test.ShaSteel.WebAPI.Server.Controllers
                     Success = true
                 }
             };
+        }
+        [HttpPost]
+        public string AddOtherAlarm([FromBody] VibAlarmInput value)
+        {
+            var content = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            TraceUtils.Info($"AddOtherAlarm value:{content}");
+
+            return "1";
         }
     }
 }

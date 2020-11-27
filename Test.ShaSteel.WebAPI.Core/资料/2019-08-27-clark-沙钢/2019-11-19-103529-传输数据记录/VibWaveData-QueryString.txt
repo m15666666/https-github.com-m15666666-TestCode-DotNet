@@ -1,0 +1,1 @@
+VibWaveData?WaveTag=4c0b133b-e15a-43d2-9d20-7bfab09b441f&Length=2048&CurrIndex=0&BlockSize=2048
