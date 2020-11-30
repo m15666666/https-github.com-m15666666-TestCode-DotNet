@@ -78,6 +78,11 @@ internal class FindMedianFromDataStreamSolution
         private int N = 0;
         private readonly bool _maxOrMin = true;
 
+        /// <summary>
+        /// 最大堆或者最小堆
+        /// </summary>
+        /// <param name="cap">容量</param>
+        /// <param name="maxOrMin">true:最大堆，false:最小堆</param>
         public MaxPQ(int cap, bool maxOrMin = true)
         {
             pq = new Key[cap + 1];
