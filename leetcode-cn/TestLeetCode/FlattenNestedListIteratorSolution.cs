@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,11 +35,11 @@ class NestedIterator
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
-    private Stack<NestedInteger> _stack = new Stack<NestedInteger>();
+    private readonly Stack<NestedInteger> _stack = new Stack<NestedInteger>();
     public NestedIterator(IList<NestedInteger> nestedList)
     {
-        if (nestedList != null && 0 < nestedList.Count )
-            for (int i = nestedList.Count - 1; -1 < i; --i ) _stack.Push(nestedList[i]);
+        if (nestedList == null || 0 == nestedList.Count) return;
+        for (int i = nestedList.Count - 1; -1 < i; --i ) _stack.Push(nestedList[i]);
     }
 
     public bool HasNext()
@@ -50,7 +50,7 @@ class NestedIterator
             if (t.IsInteger()) return true;
 
             var list = _stack.Pop().GetList();
-            for ( int i = list.Count - 1; -1 < i; --i) _stack.Push(list[i] );
+            for ( int i = list.Count - 1; -1 < i; --i) _stack.Push( list[i] );
         }
         return false;
     }
