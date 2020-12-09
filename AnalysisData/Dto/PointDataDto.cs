@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -25,10 +25,10 @@ namespace AnalysisData.Dto
         /// </summary>
         public int Dimension { get; set; }
 
-        ///// <summary>
-        ///// 测点名
-        ///// </summary>
-        //public string PointName { get; set; }
+        /// <summary>
+        /// 测点名
+        /// </summary>
+        public string PointName { get; set; }
 
         /// <summary>
         /// 工程单位ID

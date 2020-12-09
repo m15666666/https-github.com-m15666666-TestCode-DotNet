@@ -875,14 +875,18 @@ namespace Moons.Common20.Serialization
                         {
                             StructTypeIDs.VarString,
                             ( object data, ToFromBytesUtils toFromBytesUtils ) => 
-                            toFromBytesUtils.WriteVarString(data as string, StringEncodingID.ASCII)
+                            //toFromBytesUtils.WriteVarString(data as string, StringEncodingID.ASCII)
+                            // 为了下发中文设备测点名，使用utf8替代ascii码，utf8兼容ascii码
+                            toFromBytesUtils.WriteVarString(data as string, StringEncodingID.UTF8)
                         },
 
                         // 变长字符串包含json
                         {
                             StructTypeIDs.VarStringOfJson,
                             ( object data, ToFromBytesUtils toFromBytesUtils ) =>
-                            toFromBytesUtils.WriteVarString(data as string, StringEncodingID.ASCII)
+                            //toFromBytesUtils.WriteVarString(data as string, StringEncodingID.ASCII)
+                            // 为了下发中文设备测点名，使用utf8替代ascii码，utf8兼容ascii码
+                            toFromBytesUtils.WriteVarString(data as string, StringEncodingID.UTF8)
                         },
 
                         // 不带长度标识的字节数组
