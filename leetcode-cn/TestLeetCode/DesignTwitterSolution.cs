@@ -1,7 +1,6 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 /*
 设计一个简化版的推特(Twitter)，可以让用户实现发送推文，关注/取消关注其他用户，能够看见关注人（包括自己）的最近十条推文。你的设计需要支持以下的几个功能：
@@ -228,6 +227,148 @@ class DesignTwitterSolution
     }
 }
 /*
+设计推特
+力扣官方题解
+发布于 2020-04-12
+17.3k
+📺 视频题解
+
+📖 文字题解
+方法一：哈希表 + 链表
+思路和算法
+
+根据题意我们知道，对于每个推特用户，我们需要存储他关注的用户 Id，以及自己发的推文 Id 的集合，为了使每个操作的复杂度尽可能的低，我们需要根据操作来决定存储这些信息的数据结构。注意，由于题目中没有说明用户的 Id 是否连续，所以我们需要用一个以用户 Id 为索引的哈希表来存储用户的信息。
+
+对于操作 3 和操作 4，我们只需要用一个哈希表存储，即可实现插入和删除的时间复杂度都为 O(1)O(1)。
+
+对于操作 1 和操作 2，由于操作 2 要知道此用户关注的人和用户自己发出的最近十条推文，因此我们可以考虑对每个用户用链表存储发送的推文。每次创建推文的时候我们在链表头插入，这样能保证链表里存储的推文的时间是从最近到最久的。那么对于操作 2，问题其实就等价于有若干个有序的链表，我们需要找到它们合起来最近的十条推文。由于链表里存储的数据都是有序的，所以我们将这些链表进行线性归并即可得到最近的十条推文。这个操作与 23. 合并K个排序链表 基本等同。
+
+fig1
+
+如果我们直接照搬「合并K个排序链表」的解法来进行合并，那么无疑会造成空间的部分浪费，因为这个题目不要求你展示用户的所有推文，所以我们只要动态维护用户的链表，存储最近的 recentMax 个推文 Id 即可（题目中的 recentMax 为 10）。那么对于操作 1，当发现链表的节点数等于 recentMax 时，我们按题意删除链表末尾的元素，再插入最新的推文 Id。对于操作 2，在两个链表进行线性归并的时候，只要已合并的数量等于 recentMax，代表已经找到这两个链表合起来后最近的 recentMax 条推文，直接结束合并即可。
+
+
+class Twitter {
+    private class Node {
+        // 哈希表存储关注人的 Id
+        Set<Integer> followee;
+        // 用链表存储 tweetId
+        LinkedList<Integer> tweet;
+
+        Node() {
+            followee = new HashSet<Integer>();
+            tweet = new LinkedList<Integer>();
+        }
+    }
+
+    // getNewsFeed 检索的推文的上限以及 tweetId 的时间戳
+    private int recentMax, time;
+    // tweetId 对应发送的时间
+    private Map<Integer, Integer> tweetTime;
+    // 每个用户存储的信息
+    private Map<Integer, Node> user;
+
+    public Twitter() {
+        time = 0;
+        recentMax = 10;
+        tweetTime = new HashMap<Integer, Integer>();
+        user = new HashMap<Integer, Node>();
+    }
+
+    // 初始化
+    public void init(int userId) {
+        user.put(userId, new Node());
+    }
+
+    public void postTweet(int userId, int tweetId) {
+        if (!user.containsKey(userId)) {
+            init(userId);
+        }
+        // 达到限制，剔除链表末尾元素
+        if (user.get(userId).tweet.size() == recentMax) {
+            user.get(userId).tweet.remove(recentMax - 1);
+        }
+        user.get(userId).tweet.addFirst(tweetId);
+        tweetTime.put(tweetId, ++time);
+    }
+    
+    public List<Integer> getNewsFeed(int userId) {
+        LinkedList<Integer> ans = new LinkedList<Integer>();
+        for (int it : user.getOrDefault(userId, new Node()).tweet) {
+            ans.addLast(it);
+        }
+        for (int followeeId : user.getOrDefault(userId, new Node()).followee) {
+            if (followeeId == userId) { // 可能出现自己关注自己的情况
+                continue;
+            }
+            LinkedList<Integer> res = new LinkedList<Integer>();
+            int tweetSize = user.get(followeeId).tweet.size();
+            Iterator<Integer> it = user.get(followeeId).tweet.iterator();
+            int i = 0;
+            int j = 0;
+            int curr = -1;
+            // 线性归并
+            if (j < tweetSize) {
+                curr = it.next();
+                while (i < ans.size() && j < tweetSize) {
+                    if (tweetTime.get(curr) > tweetTime.get(ans.get(i))) {
+                        res.addLast(curr);
+                        ++j;
+                        if (it.hasNext()) {
+                            curr = it.next();
+                        }
+                    } else {
+                        res.addLast(ans.get(i));
+                        ++i;
+                    }
+                    // 已经找到这两个链表合起来后最近的 recentMax 条推文
+                    if (res.size() == recentMax) {
+                        break;
+                    }
+                }
+            }
+            for (; i < ans.size() && res.size() < recentMax; ++i) {
+                res.addLast(ans.get(i));
+            }
+            if (j < tweetSize && res.size() < recentMax) {
+                res.addLast(curr);
+                for (; it.hasNext() && res.size() < recentMax;) {
+                    res.addLast(it.next());
+                }
+            }
+            ans = new LinkedList<Integer>(res);
+        }
+        return ans;
+    }
+    
+    public void follow(int followerId, int followeeId) {
+        if (!user.containsKey(followerId)) {
+            init(followerId);
+        }
+        if (!user.containsKey(followeeId)) {
+            init(followeeId);
+        }
+        user.get(followerId).followee.add(followeeId);
+    }
+    
+    public void unfollow(int followerId, int followeeId) {
+        user.getOrDefault(followerId, new Node()).followee.remove(followeeId);
+    }
+}
+复杂度分析
+
+时间复杂度：
+
+操作 1 ： O(1)O(1)，链表的插入删除为 O(1)O(1) 的复杂度。
+
+操作 2 ： O(\textit{recentMax}*num)O(recentMax∗num)，其中 recentMax = 10， num 为用户关注的人加上自己的数量和。因为链表里最多存储 recentMax 个节点，因此每次合并两个链表最多比较 recentMax 次后能得到两个链表最近的 recentMax 个推文，一共需要合并 num 次，因此总时间复杂度为 O(\textit{recentMax}*num)O(recentMax∗num)。
+
+操作 3 ： O(1)O(1)，哈希表插入为 O(1)O(1) 的复杂度。
+
+操作 4 ： O(1)O(1)，哈希表插入为 O(1)O(1) 的复杂度。
+
+空间复杂度：O(\textit{recentMax}*tot)O(recentMax∗tot)，其中 recentMax = 10，tot 为推特总用户数。即对于每个用户我们不会存储超过 recentMax 个推特 Id，所以空间上限为 O(\textit{recentMax}*tot)O(recentMax∗tot)。
+
 public class Twitter {
     public class User
     {
