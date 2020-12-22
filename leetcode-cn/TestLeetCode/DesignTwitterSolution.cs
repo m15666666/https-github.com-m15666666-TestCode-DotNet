@@ -39,6 +39,8 @@ twitter.getNewsFeed(1);
 /// <summary>
 /// https://leetcode-cn.com/problems/design-twitter/
 /// 355. 设计推特
+/// 
+/// 参考:https://leetcode-cn.com/problems/merge-k-sorted-lists/，基于堆排序，时间复杂度：N*log(m)，N为10，m为1+followees.Count
 /// </summary>
 class DesignTwitterSolution
 {
