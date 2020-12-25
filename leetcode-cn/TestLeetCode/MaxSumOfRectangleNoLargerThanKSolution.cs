@@ -14,6 +14,7 @@
 */
 
 using System;
+using System.Collections.Generic;
 
 /// <summary>
 /// https://leetcode-cn.com/problems/max-sum-of-rectangle-no-larger-than-k/
@@ -32,6 +33,7 @@ internal class MaxSumOfRectangleNoLargerThanKSolution
 
     public int MaxSumSubmatrix(int[][] matrix, int k)
     {
+        //SortedDictionary
         if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0) return 0;
         int rows = matrix.Length;
         int cols = matrix[0].Length;

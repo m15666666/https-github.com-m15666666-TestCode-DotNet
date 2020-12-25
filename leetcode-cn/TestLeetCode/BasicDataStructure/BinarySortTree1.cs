@@ -14,6 +14,8 @@ namespace TestLeetCode.BasicDataStructure
     {
         private Node Root;
 
+        public void Add(int value) => Add(new Node { Value = value });
+
         public void Add(Node node)
         {
             if (Root == null) Root = node;
