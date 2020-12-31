@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,20 +34,68 @@ class SuperPowSolution
 
     public int SuperPow(int a, int[] b)
     {
+        const int Mod = 1337;
         if (a == 0) return 0;
-        if (b == null || b.Length == 0) return 1;
+        if (a == 1 || b == null || b.Length == 0 || b[0] == 0) return 1;
 
-        long res = 1;
-        for (int i = 0; i < b.Length; ++i)
+        var cache = new Dictionary<int,int>();
+        int ret = 1;
+        foreach (var p in b) ret = Pow(ret, 10, cache) * Pow(a, p, cache) % Mod;
+        return ret;
+
+        static int Pow(int x, int n, Dictionary<int,int> cache)
         {
-            res = Pow(res, 10) * Pow(a, b[i]) % 1337;
+            if (x == 1) return 1;
+            if (n == 0) return 1;
+            if (n == 1) return x % Mod;
+            int key = n * Mod + x;
+            if (cache.ContainsKey(key)) return cache[key];
+            x %= Mod;
+            int half = n / 2;
+            var ret = Pow(x, half, cache) * Pow(x, n - half, cache) % Mod;
+            cache[key] = ret;
+            return ret;
         }
-        return (int)res;
     }
-    private long Pow(long x, int n)
-    {
-        if (n == 0) return 1;
-        if (n == 1) return x % 1337;
-        return Pow(x % 1337, n / 2) * Pow(x % 1337, n - n / 2) % 1337;
-    }
+
 }
+/*
+public class Solution {
+    public int SuperPow(int a, int[] b)
+	{
+		if (a == 1) return 1;
+		int[] dp = new int[b.Length];
+		a %= 1337;
+		dp[0] = a;
+		for (int i = 1; i < b.Length; i++)
+		{
+			dp[i] = FastPower(dp[i - 1], 10);
+		}
+		int result = 1;
+		for (int i = 0; i < b.Length; i++)
+		{
+			if (b[i] != 0)
+			{
+				result = result * FastPower(dp[b.Length - 1 - i], b[i]) % 1337;
+			}
+		}
+		return result;
+	}
+
+	//快速幂
+	public static int FastPower(int baseNum, int power)
+	{
+		int result = 1;
+		while (power > 0)
+		{
+			if ((power & 1) == 1)
+			{//此处等价于if(power%2==1)
+				result = result * baseNum % 1337;
+			}
+			power >>= 1;//此处等价于power=power/2
+			baseNum = (baseNum * baseNum) % 1337;
+		}
+		return result;
+	}
+}
+*/
