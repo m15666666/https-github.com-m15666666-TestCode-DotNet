@@ -84,10 +84,6 @@ class GuessNumberHigherOrLowerSolution
 我们从 1 到 n-1 检查每一个数字，并调用 guessguess 函数。如果输入数字返回 0 说明它是答案。
 
 
-/* The guess API is defined in the parent class GuessGame.
-   @param num, your guess
-   @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
-      int guess(int num); */
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
@@ -107,10 +103,6 @@ public class Solution extends GuessGame {
 我们可以直接使用二分查找来找到需要的数字。我们从中间的数字开始，将数字传递到 guessguess 函数里。如果返回 -1, ，说明中间数字比答案大，就查找更小的那一半。类似的，如果返回 1 ，我们查找更大的一半，直到找到答案。
 
 
-/* The guess API is defined in the parent class GuessGame.
-   @param num, your guess
-   @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
-      int guess(int num); */
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
@@ -141,11 +133,6 @@ public class Solution extends GuessGame {
 
 在二分查找中，我们选择中间元素作为分隔点。而在三分查找中，我们选择两个分隔点（比方记作 m1m1 和 m2m2），那么给定范围会被分成 3 个相等长度的部分。如果答案 numnum 比 m1m1 小，那么我们对 m1m1 左边的区间做三分查找。如果 numnum 在 m1m1 和 m2m2 中间，我们对中间区域进行三分查找。否则我们对 m2m2 右边的区域进行三分查找。
 
-
-/* The guess API is defined in the parent class GuessGame.
-   @param num, your guess
-   @return -1 if my number is lower, 1 if my number is higher, otherwise return 0
-      int guess(int num); */
 
 public class Solution extends GuessGame {
     public int guessNumber(int n) {
