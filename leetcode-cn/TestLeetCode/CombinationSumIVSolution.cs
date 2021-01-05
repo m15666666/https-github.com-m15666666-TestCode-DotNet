@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,10 +70,8 @@ class CombinationSumIVSolution
 public class Solution
 {
     Dictionary<int, int> _dict;
-
     public int CombinationSum4(int[] nums, int target)
     {
-        // return 0;
         _dict = new Dictionary<int, int>();
         Array.Sort(nums);
         return Down(nums, target);
@@ -81,30 +79,43 @@ public class Solution
     private int Down(int[] nums, int target)
     {
         if (target <= 0) return 0;
-        if (_dict.ContainsKey(target))
-        {
-        return _dict[target];
-        }
+        if (_dict.ContainsKey(target)) return _dict[target];
         int _len = nums.Length;
         int _res = 0;
         for (int i = 0; i < _len; i++)
         {
-        if (nums[i] > target)
-        {
-            break;
+            if (nums[i] > target) break;
+            else if (target == nums[i]) _res++;
+            else _res += Down(nums, target - nums[i]);
         }
-        else if (target == nums[i])
-        {
-            _res++;
-        }
-        else
-        {
-            _res += Down(nums, target - nums[i]);
-        }
-        }
-                _dict[target]=_res;
-
+        _dict[target]=_res;
         return _res;
     }
 }
+
+public class Solution {
+    public int CombinationSum4(int[] nums, int target) {
+        Array.Sort(nums);
+        if(target==0) return 1;
+        if(nums.Length==0) return 0;
+        int[] result=new int[target+1];
+        result[0]=1;
+        for(int i=1;i<=target;i++)
+        {
+            for(int j=0;j<nums.Length;j++)
+            {
+                if(nums[j]>i) break;
+                
+                int preResultIndex=i-nums[j];
+                if(result[preResultIndex]!=0)
+                {
+                    result[i]+=result[preResultIndex];
+                }
+            }
+        }
+        return result[target];
+    }
+}
+
+
 */
