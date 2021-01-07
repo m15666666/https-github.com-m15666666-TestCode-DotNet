@@ -56,11 +56,13 @@ namespace TestLeetCode.BasicDataStructure
             {
                 // 先假设左边节点较大
                 int older = Left(k);
+
                 // 如果右边节点存在，比一下大小
-                if (Right(k) <= N && Less(older, Right(k)))
-                    older = Right(k);
+                if (Right(k) <= N && Less(older, Right(k))) older = Right(k);
+
                 // 结点 k 比俩孩子都大，就不必下沉了
                 if (Less(older, k)) break;
+                
                 // 否则，不符合最大堆的结构，下沉 k 结点
                 Exchange(k, older);
                 k = older;
@@ -97,12 +99,15 @@ namespace TestLeetCode.BasicDataStructure
         {
             // 最大堆的堆顶就是最大元素
             Key max = pq[1];
+
             // 把这个最大元素换到最后，删除之
             Exchange(1, N);
             pq[N] = default(Key);
             N--;
+            
             // 让 pq[1] 下沉到正确位置
             Sink(1);
+
             return max;
         }
 
