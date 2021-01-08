@@ -161,7 +161,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "testORMML.ConsoleApp", "tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebSocket", "WebSocket", "{79D1C177-F442-4DCC-930C-6955A36B3588}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebSocketDocuments", "WebSocketDocuments\WebSocketDocuments.csproj", "{F6339C22-E038-4183-B2EE-3742F385C108}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketDocuments", "WebSocketDocuments\WebSocketDocuments.csproj", "{F6339C22-E038-4183-B2EE-3742F385C108}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProtobuf", "TestProtobuf\TestProtobuf.csproj", "{771B641B-A595-492D-BCA6-D01350F86C98}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -457,6 +459,10 @@ Global
 		{F6339C22-E038-4183-B2EE-3742F385C108}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6339C22-E038-4183-B2EE-3742F385C108}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6339C22-E038-4183-B2EE-3742F385C108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{771B641B-A595-492D-BCA6-D01350F86C98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{771B641B-A595-492D-BCA6-D01350F86C98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{771B641B-A595-492D-BCA6-D01350F86C98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{771B641B-A595-492D-BCA6-D01350F86C98}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
