@@ -1,5 +1,6 @@
 using ProtoBuf;
 using System.IO;
+using INT = System.Int32;
 
 namespace TestProtobuf
 {
@@ -14,6 +15,8 @@ namespace TestProtobuf
     {
         public void Test()
         {
+            var b = new INT[1024];
+            System.Array.Fill(b, (INT)1);
             var person = new Person
             {
                 Id = 12345,
@@ -22,7 +25,7 @@ namespace TestProtobuf
                 {
                     Line1 = "Flat 1",
                     Line2 = "The Meadows",
-                    Bytes = new byte[16384],
+                    Bytes = b,
                 }
             };
             //using (var file = File.Create("person.bin"))
@@ -63,6 +66,6 @@ namespace TestProtobuf
         public string Line2 { get; set; }
 
         [ProtoMember(3)]
-        public byte[] Bytes { get; set; }
+        public INT[] Bytes { get; set; }
     }
 }
