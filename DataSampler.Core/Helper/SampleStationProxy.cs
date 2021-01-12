@@ -855,19 +855,25 @@ namespace DataSampler.Helper
         /// </summary>
         private SocketWrapper CreateSocket()
         {
-            var ip = IPAddress.IP;
-            if( ip != "127.0.0.1" && ip.StartsWith( "127." ) )
+            string id = SampleStationData.Identifier;
+            if (string.IsNullOrEmpty(id))
+            {
+                var ip = IPAddress.IP;
+                if ( ip.StartsWith("127.") && ip != "127.0.0.1" ) id = ip;
+            }
+            if (!string.IsNullOrEmpty(id))
             {
                 var map = DataSamplerController.Instance._ip2SocketOfControl;
                 lock (map)
                 {
-                    if ( map.ContainsKey( ip ) ) {
-                        var socket = map[ip];
+                    if (map.ContainsKey(id))
+                    {
+                        var socket = map[id];
                         socket.UseSocket();
                         return socket;
                     }
                 }
-                throw new ApplicationException( $"No tcp connection({ip})." );
+                throw new ApplicationException($"No tcp connection({id}).");
             }
 
             return Config.CreateSocket( IPAddress );

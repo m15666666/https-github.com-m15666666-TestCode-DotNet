@@ -92,6 +92,11 @@ namespace AnalysisData.SampleData
         public string LogWsUrl { get; set; }
 
         /// <summary>
+        /// 以字符串表示的网关标识符，用于标示下载命令的tcp连接
+        /// </summary>
+        public string Identifier { get; set; }
+
+        /// <summary>
         /// 测点数据集合
         /// </summary>
         [XmlElement(ElementName = "PointData")]
