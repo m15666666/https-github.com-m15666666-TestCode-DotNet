@@ -69,6 +69,42 @@ namespace AnalysisAlgorithm
         }
 
         /// <summary>
+        /// 计算数组的皮尔逊相关系数
+        /// https://baike.baidu.com/item/皮尔逊相关系数
+        /// </summary>
+        /// <param name="x">数组1</param>
+        /// <param name="y">数组2</param>
+        /// <returns>皮尔逊相关系数</returns>
+        public static _ValueT PearsonCorrelationCoefficient(_ValueT[] x, _ValueT[] y)
+        {
+            if (x == null || y == null || x.Length != y.Length) throw new ArgumentNullException(nameof(x));
+
+            _ValueT stdX = StdDeviation(x);
+            _ValueT stdY = StdDeviation(y);
+            return (_ValueT)(Covariance(x,y) / (stdX * stdY));
+        }
+
+        /// <summary>
+        /// 计算数组的协方差
+        /// https://baike.baidu.com/item/协方差
+        /// https://baike.baidu.com/item/标准差
+        /// </summary>
+        /// <param name="x">数组1</param>
+        /// <param name="y">数组2</param>
+        /// <returns>协方差</returns>
+        public static _ValueT Covariance(_ValueT[] x, _ValueT[] y)
+        {
+            if (x == null || y == null || x.Length != y.Length) throw new ArgumentNullException(nameof(x));
+
+            int count = x.Length;
+            _ValueT averageX = Mean(x);
+            _ValueT averageY = Mean(y);
+            Double ret = 0;
+            for (int i = 0; i < count; i++) ret += (x[i] - averageX) * (y[i] - averageY) / count;
+            return (_ValueT)ret;
+        }
+
+        /// <summary>
         /// 计算数组的方差
         /// </summary>
         /// <param name="array">数组</param>

@@ -38,10 +38,7 @@ namespace AnalysisAlgorithm
         public static _ValueT SquareSum( Span<_ValueT> values )
         {
             _ValueT sum = 0;
-            foreach( _ValueT value in values )
-            {
-                sum += ( value * value );
-            }
+            foreach( _ValueT value in values ) sum += ( value * value );
             return sum;
         }
 
@@ -55,16 +52,10 @@ namespace AnalysisAlgorithm
         /// <returns>指定数字的指定次幂</returns>
         public static _ValueT PositivePow( _ValueT x, int power )
         {
-            if( power <= 0 )
-            {
-                throw new ArgumentOutOfRangeException( String.Format( "power({0})必须是正整数！", power ) );
-            }
+            if( power <= 0 ) throw new ArgumentOutOfRangeException( String.Format( "power({0}) must be positive.", power ) );
 
             _ValueT ret = 1;
-            while( 0 < power-- )
-            {
-                ret *= x;
-            }
+            while( 0 < power-- ) ret *= x;
             return ret;
         }
 
@@ -76,22 +67,10 @@ namespace AnalysisAlgorithm
         /// <returns>指定数字的指定次幂</returns>
         public static _ValueT IntegerPow( _ValueT x, int power )
         {
-            if( power == 0 )
-            {
-                return 1;
-            }
+            if( x == 0 ) return 0;
+            if( power == 0 ) return 1;
 
-            if( 0 < power )
-            {
-                return PositivePow( x, power );
-            }
-
-            if( x == 0 )
-            {
-                return 0;
-            }
-
-            return PositivePow( 1 / x, -power );
+            return 0 < power ? PositivePow( x, power ) : PositivePow( 1 / x, -power );
         }
 
         #endregion
