@@ -81,7 +81,8 @@ namespace AnalysisAlgorithm
 
             _ValueT stdX = StdDeviation(x);
             _ValueT stdY = StdDeviation(y);
-            return (_ValueT)(Covariance(x,y) / (stdX * stdY));
+            _ValueT stdXY = stdX * stdY;
+            return stdXY == 0 ? 1 : (_ValueT)(Covariance(x,y) / stdXY);
         }
 
         /// <summary>
