@@ -13,8 +13,9 @@ namespace TestLeetCode
             var classname = $"{StringUtils.Capitalize("substring-with-concatenation-of-all-words", "-")}Solution";
             Debug.WriteLine(classname);
 
-            BasicMath.GcdLcm.Test();
-            BasicMath.Newton.Test();
+            new LongestAbsoluteFilePathSolution().Test();
+            //BasicMath.GcdLcm.Test();
+            //BasicMath.Newton.Test();
             //new MaxSumOfRectangleNoLargerThanKSolution().Test();
             //RangeModuleSolution.Test();
             //new LongestIncreasingPathInAMatrixSolution().Test();
