@@ -289,13 +289,9 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             if (rev <= 0) return;
 
             SpectrumUtils spectrumUtils = new SpectrumUtils();
-            spectrumUtils.InitByTimewave(summary.SampleFreq_NR, rev / 60f, timewave.Timewave, true);
+            spectrumUtils.InitByTimewave(summary.SampleFreq_NR, summary.F0, timewave.Timewave, true);
 
-            timewave.XFFT = spectrumUtils.XFFT;
-            timewave.XHalfFFT = spectrumUtils.XHalfFFT;
-            timewave.Overall = spectrumUtils.Overall;
-            timewave.HighestPeak = spectrumUtils.HighestPeak;
-            timewave.Hz100 = spectrumUtils.Hz100;
+            timewave.Init(spectrumUtils);
         }
         protected IEquipmentDiagnosisContext Context => Config.Context;
 

@@ -1,3 +1,4 @@
+using AnalysisAlgorithm.FFT;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -284,6 +285,7 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         //public int DatLen_NR { get; set; }
 
         public int RotSpeed_NR { get; set; }
+        public float F0 => RotSpeed_NR / 60f;
 
         //public double MinFreq_NR { get; set; }
 
@@ -350,6 +352,13 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
     /// </summary>
     public class TimewaveData
     {
+        public void Init(AnalysisAlgorithm.FFT.SpectrumUtils spectrumUtils)
+        {
+            SpectrumUtils = spectrumUtils;
+        }
+
+        public SpectrumUtils SpectrumUtils { get; private set; }
+
         /// <summary>
         /// 时间波形
         /// </summary>
@@ -358,35 +367,41 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// <summary>
         /// 幅值谱或有效值谱中的整数分频，下标为0对应1X
         /// </summary>
-        public double[] XFFT { get; set; }
+        public double[] XFFT => SpectrumUtils.XFFT;
 
         /// <summary>
         /// 幅值谱或有效值谱中的0.5整数分频，下标为0对应0.5X
         /// </summary>
-        public double[] XHalfFFT { get; set; }
+        public double[] XHalfFFT => SpectrumUtils.XHalfFFT;
 
+        /// <summary>
+        /// 幅值谱或有效值谱中的100hz整数分频，下标为0对应100hz
+        /// </summary>
+        public double[] XHz100 => SpectrumUtils.XHz100;
 
         /// <summary>
         /// 100Hz分量
         /// </summary>
-        public double Hz100 { get; set; }
+        public double Hz100 => SpectrumUtils.Hz100;
 
         /// <summary>
         /// 
         /// </summary>
-        public double Overall { get; set; }
-        public double HighestPeak { get; set; }
-        public double X0_5 => XHalfFFT != null && 0 < XHalfFFT.Length ? XHalfFFT[0] : 0;
-        public double X1_5 => XHalfFFT != null && 1 < XHalfFFT.Length ? XHalfFFT[1] : 0;
-        public double X2_5 => XHalfFFT != null && 2 < XHalfFFT.Length ? XHalfFFT[2] : 0;
-        public double X3_5 => XHalfFFT != null && 3 < XHalfFFT.Length ? XHalfFFT[3] : 0;
-        public double X4_5 => XHalfFFT != null && 4 < XHalfFFT.Length ? XHalfFFT[4] : 0;
-        public double X5_5 => XHalfFFT != null && 5 < XHalfFFT.Length ? XHalfFFT[5] : 0;
-        public double X1 => XFFT != null && 0 < XFFT.Length ? XFFT[0] : 0;
-        public double X2 => XFFT != null && 1 < XFFT.Length ? XFFT[1] : 0;
-        public double X3 => XFFT != null && 2 < XFFT.Length ? XFFT[2] : 0;
-        public double X4 => XFFT != null && 3 < XFFT.Length ? XFFT[3] : 0;
-        public double X5 => XFFT != null && 4 < XFFT.Length ? XFFT[4] : 0;
-        public double X6 => XFFT != null && 5 < XFFT.Length ? XFFT[5] : 0;
+        public double Overall => SpectrumUtils.Overall;
+        public double HighestPeak => SpectrumUtils.HighestPeak;
+
+        public double X0_5 => SpectrumUtils.X0_5;
+        public double X1_5 => SpectrumUtils.X1_5;
+        public double X2_5 => SpectrumUtils.X2_5;
+        public double X3_5 => SpectrumUtils.X3_5;
+        public double X4_5 => SpectrumUtils.X4_5;
+        public double X5_5 => SpectrumUtils.X5_5;
+
+        public double X1 => SpectrumUtils.X1;
+        public double X2 => SpectrumUtils.X2;
+        public double X3 => SpectrumUtils.X3;
+        public double X4 => SpectrumUtils.X4;
+        public double X5 => SpectrumUtils.X5;
+        public double X6 => SpectrumUtils.X6;
     }
 }

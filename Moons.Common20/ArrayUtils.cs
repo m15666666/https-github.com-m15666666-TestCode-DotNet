@@ -126,6 +126,23 @@ namespace Moons.Common20
         }
 
         /// <summary>
+        /// 计算Count
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="array">数组</param>
+        /// <param name="startIndex">起始下标</param>
+        /// <param name="count">长度</param>
+        /// <returns>满足的数量</returns>
+        public static int Count<T>( T[] array, int startIndex, int count, Func<T, bool> predicate )
+        {
+            int len = array.Length;
+            int ret = 0;
+            for (int i = startIndex; i < len && 0 < count; i++, count--)
+                if (predicate(array[i])) ret++;
+            return ret;
+        }
+
+        /// <summary>
         /// 获得分片数组
         /// </summary>
         /// <typeparam name="T">类型</typeparam>
@@ -135,6 +152,7 @@ namespace Moons.Common20
         /// <returns>分片数组</returns>
         public static T[] Slice<T>( T[] array, int startIndex, int count )
         {
+            count = Math.Min(count, array.Length - startIndex);
             var ret = new T[count];
             Array.Copy( array, startIndex, ret, 0, ret.Length );
             return ret;
@@ -149,6 +167,7 @@ namespace Moons.Common20
         /// <returns>分片数组</returns>
         public static Span<T> SliceSpan<T>( T[] array, int startIndex, int count )
         {
+            count = Math.Min(count, array.Length - startIndex);
             return array.AsSpan(startIndex, count);
         }
 
