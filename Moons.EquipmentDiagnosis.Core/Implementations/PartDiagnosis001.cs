@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using AnalysisData.FeatureFreq;
+using AnalysisData.Constants;
 
 namespace Moons.EquipmentDiagnosis.Core.Implementations
 {
@@ -125,6 +126,147 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             }
         }
 
+        /// <summary>
+        /// 计算轴承配合间隙不良CLEARANCE
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcCLEARANCE()
+        {
+            /*
+            1）CLEARANCE1--泵、风机（测点 X 与（1）、（2）对号入座） 
+（1）如果 FDE-H-VEL、FDE-V-VEL、FDE-A-VEL 的最大值的频谱中 1X、2X、3X、4X、5X 之和
+大于 80%总值，且至少有 4 个分量幅值都大于 10%总值。结论：联轴端轴承配合间隙不良，
+检查联轴端轴承等部位动静安装配合状态。 
+（2）如果 FNDE-H-VEL、FNDE-V-VEL、FNDE-A-VEL 的最大值的频谱中 1X、2X、3X、4X、5X
+之和大于 80%总值，且至少有 4 个分量幅值都大于 10%总值。结论：非联轴端轴承配合间隙
+不良，检查非联轴端轴承等部位动静安装配合状态。 
+             */
+            bool found = false;
+            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Generic.Loose004)) found = true;
+            if (Calc(NDEPoints.VelPoints,EquipmentFaultType.Generic.Loose005)) found = true;
+            return found;
+
+            bool Calc(PointDataCollection velPoints, string code)
+            {
+                if (0 == velPoints.Count) return false;
+                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var summary = point.HistorySummaryData;
+                var timewave = point.TimewaveData;
+
+                double limit_0p8_Overall = 0.8 * timewave.Overall;
+                double limit_0p1_Overall = 0.1 * timewave.Overall;
+                int xFFTStartIndex = 0;
+                int xFFTCount = 5;
+                var xFFT = timewave.XFFT;
+                var partialOverall = timewave.SpectrumUtils.GetOverallByXFFT(xFFTStartIndex, xFFTCount);
+                var count = ArrayUtils.Count(xFFT, xFFTStartIndex, xFFTCount, v => limit_0p1_Overall < v);
+                if (4 <= count && limit_0p8_Overall < partialOverall)
+                {
+                    Config.Logger.Info(code);
+                    AddPossibleFault(point, code);
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 计算 FDLOOSE 基础松动、软脚等故障 
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcFDLOOSE()
+        {
+            /*
+            1）FDLOOSE1--泵、风机--刚性支撑 
+  如果 FDEV、FNDEV 至少一个有效，则这两个的最大值如果大于水平方向振动速度值（优
+先同轴承）的 0.80 倍，且这个最大值的 1-6 倍频之和大于 80%总值。结论：基础松动、
+软脚等基础垂直刚度不足故障。检查台板、水泥基础以及垫铁等紧固松动或台板不平。 
+2）FDLOOSE2--电机--卧式、刚性支撑 
+  如果 MDEV、MNDEV 至少一个有效，则这两个的最大值如果大于水平方向振动速度值
+（优先同轴承）的 0.80 倍，且这个最大值的 1-6 倍频之和大于 80%总值。结论：基础
+松动、软脚等基础垂直刚度不足故障。检查台板、水泥基础以及垫铁等紧固松动或台板
+不平。 
+             */
+            if (!PartParameter.IsStiffBase) return false;
+            bool found = false;
+            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Generic.Loose006)) found = true;
+            else if (Calc(NDEPoints.VelPoints,EquipmentFaultType.Generic.Loose006)) found = true;
+            else if (Calc(Points.VelPoints,EquipmentFaultType.Generic.Loose006)) found = true;
+            return found;
+
+            bool Calc(PointDataCollection velPoints, string code)
+            {
+                if (0 == velPoints.Count) return false;
+                var pVertical = velPoints.GetByDirectionId(PntDirectionID.Vertical).MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var pHorizontal = velPoints.GetByDirectionId(PntDirectionID.Horizontal).MaxItem(p => p.HistorySummaryData.MeasureValue);
+                if (pHorizontal == null || pVertical == null) return false;
+                if (!(0.8 * pHorizontal.HistorySummaryData.MeasureValue < pVertical.HistorySummaryData.MeasureValue)) return false;
+
+                var summary = pVertical.HistorySummaryData;
+                var timewave = pVertical.TimewaveData;
+
+                double limit_0p8_Overall = 0.8 * timewave.Overall;
+                int xFFTStartIndex = 0;
+                int xFFTCount = 6;
+                var partialOverall = timewave.SpectrumUtils.GetOverallByXFFT(xFFTStartIndex, xFFTCount);
+                if (limit_0p8_Overall < partialOverall)
+                {
+                    Config.Logger.Info(code);
+                    AddPossibleFault(pVertical, code);
+                    return true;
+                }
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 计算 STRESS 台板不平、管线应力等引起的壳体变形 
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcSTRESS()
+        {
+            /*
+            1）STRESS1--泵、风机 
+  如果 X 测点其 4 天趋势符合以下描述：大于 4 天拟合直线上对应点的所有振动速度值的
+平均值 Vmax 减去小于 4 天拟合直线上对应点的所有振动速度值的平均值 Vmin 的差大
+于 0.5Vmax。同时该测点 1-6 倍频之和大于总值的 80%。则设备存在壳体变形故障；检
+查基础台板变形或出入口管线应力。 
+2）STRESS1--电机 
+  如果 X 测点其 4 天趋势符合以下描述：大于 4 天拟合直线上对应点的所有振动速度值的
+平均值 Vmax 减去小于 4 天拟合直线上对应点的所有振动速度值的平均值 Vmin 的差大
+于 0.5Vmax。同时该测点 1-6 倍频之和大于总值的 80%。则设备存在壳体变形故障；检
+查基础台板变形。 
+             */
+            // todo
+            if (!PartParameter.IsStiffBase) return false;
+            bool found = false;
+            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Generic.Stress001)) found = true;
+            return found;
+
+            bool Calc(PointDataCollection velPoints, string code)
+            {
+                if (0 == velPoints.Count) return false;
+                var pVertical = velPoints.GetByDirectionId(PntDirectionID.Vertical).MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var pHorizontal = velPoints.GetByDirectionId(PntDirectionID.Horizontal).MaxItem(p => p.HistorySummaryData.MeasureValue);
+                if (pHorizontal == null || pVertical == null) return false;
+                if (!(0.8 * pHorizontal.HistorySummaryData.MeasureValue < pVertical.HistorySummaryData.MeasureValue)) return false;
+
+                var summary = pVertical.HistorySummaryData;
+                var timewave = pVertical.TimewaveData;
+
+                double limit_0p8_Overall = 0.8 * timewave.Overall;
+                int xFFTStartIndex = 0;
+                int xFFTCount = 6;
+                var partialOverall = timewave.SpectrumUtils.GetOverallByXFFT(xFFTStartIndex, xFFTCount);
+                if (limit_0p8_Overall < partialOverall)
+                {
+                    Config.Logger.Info(code);
+                    AddPossibleFault(pVertical, code);
+                    return true;
+                }
+                return false;
+            }
+        }
         #endregion
 
         #region 计算轴承
@@ -237,11 +379,29 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             CalcELECTRC2();
             CalcELECTRC3();
             CalcBearingFTF();
-            if (CalcIsAlarm()) // todo
+            if (CalcIsAccAlarm()) // todo
             {
                 CalcBearingBSF();
                 CalcBearingBPFO();
                 CalcBearingBPFI();
+            }
+            if(CalcIsVelAlarm()) // todo
+            {
+                CalcCLEARANCE();
+                CalcFDLOOSE();
+                CalcSTRESS();//todo
+            }
+            if (PartParameter.IsStiffBase) // 刚性基础
+            {
+                //todo 不对中 MISAGN3 
+                //todo 不平衡 UNBL10 
+
+            }
+            else // 柔性基础
+            {
+                //todo 不对中 MISAGN4 
+                //todo UNBL11
+
             }
         }
 
@@ -333,10 +493,10 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         }
 
         /// <summary>
-        /// 是否报警 
+        /// 是否加速度测点趋势报警 
         /// </summary>
         /// <returns></returns>
-        private bool CalcIsAlarm()
+        private bool CalcIsAccAlarm()
         {
             /*
             如果泵所有振动测点振动加速度值有一
@@ -368,6 +528,22 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 }
                 return false;
             }
+        }
+        /// <summary>
+        /// 是否速度测点趋势报警 
+        /// </summary>
+        /// <returns></returns>
+        private bool CalcIsVelAlarm()
+        {
+            /*
+            如果电机所有振动测点振动速度值有一个达到报警值，或者
+所有测点振动速度有效值虽然都没有达到报警值，但其中任
+一个测点在 4 天内的振动速度有效值趋势直线拟合斜率大
+于 0.375，则按以下进行配合间隙不良故障诊断分析。 
+             */
+            //todo
+            bool ret = false;
+            return ret;
         }
 
         #endregion

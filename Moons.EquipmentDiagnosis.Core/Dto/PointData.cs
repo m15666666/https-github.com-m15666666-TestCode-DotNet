@@ -167,6 +167,7 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public PointDataCollection VelPoints => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Vel));
         public PointDataCollection VelPoints_HasTimewave => new PointDataCollection(this.Where(item => item.SigType_ID == (int)SignalTypeIdEnum.Vel && item.HasTimewaveData() ));
 
+        public IEnumerable<PointData> GetByDirectionId(int directionId) => this.Where(p => p.PntDirect_NR == directionId);
         public int GetMaxPositionNo()
         {
             return this.Max(item => item.PositionNo);

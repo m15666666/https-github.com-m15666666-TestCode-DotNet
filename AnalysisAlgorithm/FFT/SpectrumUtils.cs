@@ -77,6 +77,17 @@ namespace AnalysisAlgorithm.FFT
         }
 
         /// <summary>
+        /// 从XFFT中获得部分倍频组成的总值overall
+        /// </summary>
+        /// <param name="startIndex">起始倍频下标，比如：0，对应1X</param>
+        /// <param name="count">从起始倍频开始的数量</param>
+        /// <returns>部分倍频组成的总值overall</returns>
+        public double GetOverallByXFFT(int startIndex, int count)
+        {
+            return SpectrumBasic.Overall_RmsSpectrum(XFFT, startIndex, count);
+        }
+
+        /// <summary>
         /// 获得一系列倍频的幅值
         /// </summary>
         /// <param name="fs"></param>

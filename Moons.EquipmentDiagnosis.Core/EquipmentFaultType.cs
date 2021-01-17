@@ -45,6 +45,22 @@ namespace Moons.EquipmentDiagnosis.Core
             /// </summary>
             public static readonly string Loose003 = "-Generic-Loose003:非联轴端轴承或轴上其它零部件存在松动或间隙不良";
             /// <summary>
+            /// 联轴端轴承配合间隙不良，检查联轴端轴承等部位动静安装配合状态
+            /// </summary>
+            public static readonly string Loose004 = "-Generic-Loose004:联轴端轴承配合间隙不良，检查联轴端轴承等部位动静安装配合状态";
+            /// <summary>
+            /// 非联轴端轴承配合间隙不良，检查非联轴端轴承等部位动静安装配合状态
+            /// </summary>
+            public static readonly string Loose005 = "-Generic-Loose005:非联轴端轴承配合间隙不良，检查非联轴端轴承等部位动静安装配合状态";
+            /// <summary>
+            /// 基础松动、软脚等基础垂直刚度不足故障。检查台板、水泥基础以及垫铁等紧固松动或台板不平
+            /// </summary>
+            public static readonly string Loose006 = "-Generic-Loose006:基础松动、软脚等基础垂直刚度不足故障。检查台板、水泥基础以及垫铁等紧固松动或台板不平";
+            /// <summary>
+            /// 设备存在壳体变形故障；检查基础台板变形或出入口管线应力
+            /// </summary>
+            public static readonly string Stress001 = "-Generic-Stress001:设备存在壳体变形故障；检查基础台板变形或出入口管线应力";
+            /// <summary>
             /// 电气故障
             /// </summary>
             public static readonly string Electric001 = "-Generic-Electric001:电气故障";

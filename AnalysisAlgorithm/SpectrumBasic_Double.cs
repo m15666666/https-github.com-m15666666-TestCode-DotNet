@@ -145,7 +145,7 @@ namespace AnalysisAlgorithm
         /// <param name="windowType">信号窗类型</param>
         /// <returns>总值</returns>
         public static _ValueT Overall_RmsSpectrum( _ValueT[] rmsSpectrum, int startIndex, int count,
-                                                   WindowType windowType )
+                                                   WindowType windowType = WindowType.Rectangular)
         {
             if( CollectionUtils.IsNullOrEmptyG( rmsSpectrum ) || count < 1 || rmsSpectrum.Length <= startIndex )
             {
