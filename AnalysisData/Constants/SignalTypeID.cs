@@ -1,4 +1,4 @@
-﻿namespace AnalysisData.Constants
+namespace AnalysisData.Constants
 {
     /// <summary>
     /// 信号类型ID
@@ -66,6 +66,11 @@
         /// 电压（数值）
         /// </summary>
         public const int Voltage = 418;
+
+        /// <summary>
+        /// 流量（数值）
+        /// </summary>
+        public const int LiquidFlow = 420;
 
         /// <summary>
         /// 亮度（数值）

@@ -11,7 +11,6 @@ namespace Moons.EquipmentDiagnosis.Core
     {
         public static class Generic
         {
-
             /// <summary>
             /// 轴承座或联轴器不同心
             /// </summary>
@@ -129,6 +128,26 @@ namespace Moons.EquipmentDiagnosis.Core
 
         public static class Pump
         {
+            /// <summary>
+            /// 汽蚀故障
+            /// </summary>
+            public static readonly string Liquid001 = "-Pump-Liquid001:汽蚀故障";
+            /// <summary>
+            /// 汽蚀故障或流体激励故障
+            /// </summary>
+            public static readonly string Liquid002 = "-Pump-Liquid002:汽蚀故障或流体激励故障";
+            /// <summary>
+            /// 回流故障
+            /// </summary>
+            public static readonly string Liquid003 = "-Pump-Liquid003:回流故障";
+            /// <summary>
+            /// 回流或流体激励故障
+            /// </summary>
+            public static readonly string Liquid004 = "-Pump-Liquid004:回流或流体激励故障";
+            /// <summary>
+            /// 叶轮偏心或流体不均故障
+            /// </summary>
+            public static readonly string Liquid005 = "-Pump-Liquid005:叶轮偏心或流体不均故障";
             
         }
     }

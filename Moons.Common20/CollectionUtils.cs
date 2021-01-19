@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Moons.Common20.Collections;
 
 namespace Moons.Common20
@@ -384,6 +385,16 @@ namespace Moons.Common20
                 }
             }
             return default( T );
+        }
+
+        public static T FirstOrDefault<T>(Func<T,bool> predicate, params IEnumerable<T>[] datas) where T : class
+        {
+            foreach( var data in datas)
+            {
+                var first = data.FirstOrDefault(predicate);
+                if (first != default) return first;
+            }
+            return default;
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -55,6 +55,29 @@ namespace Moons.Common20
         {
             return _timeBegin + TimeSpan.FromDays( time );
         }
+
+        #endregion
+
+        #region int32 minute / DateTime 转换
+
+        /// <summary>
+        /// 将时间转换为int32类型分钟数的起点
+        /// </summary>
+        public static DateTime Int32MinuteBegin { get; set; } = new DateTime(2000, 1, 1);
+
+        /// <summary>
+        /// DateTime转换为int32类型分钟数
+        /// </summary>
+        /// <param name="time">DateTime</param>
+        /// <returns>DateTime转换的int32类型分钟数</returns>
+        public static int TimeToInt32Minutes( DateTime time ) => (int)( time - Int32MinuteBegin ).TotalMinutes;
+
+        /// <summary>
+        /// int32类型分钟数转换为DateTime
+        /// </summary>
+        /// <param name="int32Minutes">double</param>
+        /// <returns>int32类型分钟数转换的DateTime</returns>
+        public static DateTime Int32MinuteToTime( int int32Minutes ) => Int32MinuteBegin + TimeSpan.FromMinutes( int32Minutes );
 
         #endregion
 

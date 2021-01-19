@@ -1,4 +1,3 @@
-using AnalysisAlgorithm;
 using Moons.Common20;
 using Moons.EquipmentDiagnosis.Core.Abstractions;
 using Moons.EquipmentDiagnosis.Core.Dto;
@@ -7,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using AnalysisData.FeatureFreq;
 using AnalysisData.Constants;
+using AnalysisAlgorithm;
 
 namespace Moons.EquipmentDiagnosis.Core.Implementations
 {
@@ -53,6 +53,62 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             Config.Logger.Info($"Add possible fault: {p.Point_ID},{p.PointPath},{code}");
         }
 
+        #region 查询历史数据
+
+        protected DateTime Now => DateTime.Now;
+
+        /// <summary>
+        /// 获得几天之内的summary数据
+        /// </summary>
+        /// <param name="point">PointData</param>
+        /// <param name="day">天数</param>
+        /// <returns></returns>
+        protected Int32MinuteSummary[] GetInt32MinuteSummaryByDays(PointData point, int days )
+        {
+            var now = Now;
+            HistoryQueryConditionData condition = new HistoryQueryConditionData
+            {
+                HistoryDataBegin = now.AddDays(-days),
+                HistoryDataEnd = now,
+            };
+            return Context.GetInt32MinuteSummary(point, condition);
+        }
+
+        /// <summary>
+        /// 计算线性相关系数
+        /// </summary>
+        /// <param name="x">按照采样时间升序排列的数据</param>
+        /// <param name="y">按照采样时间升序排列的数据</param>
+        /// <returns></returns>
+        protected double CalcPearsonCorrelationCoefficient(Int32MinuteSummary[] x, Int32MinuteSummary[] y)
+        {
+            if (CollectionUtils.IsNullOrEmptyG(x) || CollectionUtils.IsNullOrEmptyG(y)) return 0;
+            int indexX = 0, indexY = 0;
+            List<double> vXs = new List<double>();
+            List<double> vYs = new List<double>();
+            int lenX = x.Length;
+            int lenY = y.Length;
+            while( indexX < lenX && indexY < lenY)
+            {
+                var vX = x[indexX];
+                var vY = y[indexY];
+                if(vX.SampleMinute == vY.SampleMinute)
+                {
+                    vXs.Add(vX.MeasureValue);
+                    vYs.Add(vY.MeasureValue);
+                    indexX++;
+                    indexY++;
+                    continue;
+                }
+                if (vX.SampleMinute < vY.SampleMinute) indexX++;
+                else indexY++;
+            }
+            return vXs.Count == 0 ? 0 : StatisticsUtils.PearsonCorrelationCoefficient(vXs.ToArray(), vYs.ToArray());
+        }
+
+
+        #endregion
+
         #region 具体故障
 
         /// <summary>
@@ -91,14 +147,30 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         }
 
         /// <summary>
-        /// 计算摩擦
+        /// 计算 动静摩擦故障 
         /// </summary>
-        /// <returns>true:存在摩擦故障</returns>
+        /// <returns>true:存在故障</returns>
         protected virtual bool CalcRub()
         {
             /*
-              （1） 如果MDE-H-VEL、MDE-V-VEL、MDE-A-VEL的最大值的频谱中大于6X的所有整数倍频分量中至少有10个频率的幅值大于频谱中1X、2X、3X、4X、5X、6X的最高峰值的10%。结论：联轴端轴承或轴上零部件存在动静摩擦故障，检查联轴端轴承等部位动静安装配合状态。
-（2）如果MNDE-H-VEL、MNDE-V-VEL、MNDE-A-VEL的最大值的频谱中大于6X的所有整数倍频分量中至少有10个频率的幅值大于频谱中1X、2X、3X、4X、5X、6X的最高峰值的10%。结论：非联轴端轴承或轴上零部件存在动静摩擦，检查非联轴端轴承等部位动静安装配合状态。
+            1）RUB1--泵、风机（以下按（1）、（2）顺序依次判断） 
+（1）如果 FDE-H-VEL、FDE-V-VEL、FDE-A-VEL 的最大值的频谱中大于 6X 的所有整数倍
+频分量中至少有 10 个频率的幅值大于频谱中 1X、2X、3X、4X、5X、6X 的最高峰值的 10%。
+结论：联轴端轴承或轴上零部件存在动静摩擦故障，检查联轴端轴承等部位动静安装配合状
+态。 
+（2）如果 FNDE-H-VEL、FNDE-V-VEL、FNDE-A-VEL 的最大值的频谱中大于 6X 的所有整
+数倍频分量中至少有 10 个频率的幅值大于频谱中 1X、2X、3X、4X、5X、6X 的最高峰值的
+10%。结论：非联轴端轴承或轴上零部件存在松动动静摩擦，检查非联轴端轴承等部位动静
+安装配合状态。 
+      2）RUB2--电机（以下按（1）、（2）顺序依次判断） 
+  （1）  如果 MDE-H-VEL、MDE-V-VEL、MDE-A-VEL 的最大值的频谱中大于 6X 的所有整
+数倍频分量中至少有 10 个频率的幅值大于频谱中 1X、2X、3X、4X、5X、6X 的最高峰值的
+10%。结论：联轴端轴承或轴上零部件存在动静摩擦故障，检查联轴端轴承等部位动静安装
+配合状态。 
+（2）如果 MNDE-H-VEL、MNDE-V-VEL、MNDE-A-VEL 的最大值的频谱中大于 6X 的所有
+整数倍频分量中至少有 10 个频率的幅值大于频谱中 1X、2X、3X、4X、5X、6X 的最高峰值
+的 10%。结论：非联轴端轴承或轴上零部件存在动静摩擦，检查非联轴端轴承等部位动静安
+装配合状态。 
              */
             bool found = false;
             if (Calc(DEPoints.VelPoints,EquipmentFaultType.Generic.Rub003)) found = true;
@@ -140,6 +212,12 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 （2）如果 FNDE-H-VEL、FNDE-V-VEL、FNDE-A-VEL 的最大值的频谱中 1X、2X、3X、4X、5X
 之和大于 80%总值，且至少有 4 个分量幅值都大于 10%总值。结论：非联轴端轴承配合间隙
 不良，检查非联轴端轴承等部位动静安装配合状态。 
+              2）CLEARANCE2--电机（测点 X 与（1）、（2）对号入座） 
+（1）如果 MDE-H-VEL、MDE-V-VEL、MDE-A-VEL 的最大值的频谱中 1X、2X、3X、4X、5X 之
+和大于 80%总值，且至少有 4 个分量幅值都大于 10%总值。结论：联轴端轴承配合间隙不良，
+检查联轴端轴承等部位动静安装配合状态。 
+（2）如果 MNDE-H-VEL、MNDE-V-VEL、MNDE-A-VEL 的最大值的频谱中 1X、2X、3X、4X、5X 之和大于 80%总值，且至少有 4 个分量幅值都大于 10%总值。结论：非联轴端轴承配合
+间隙不良，检查非联轴端轴承等部位动静安装配合状态。 
              */
             bool found = false;
             if (Calc(DEPoints.VelPoints,EquipmentFaultType.Generic.Loose004)) found = true;
@@ -269,6 +347,191 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         }
         #endregion
 
+        #region 泵的流体相关故障
+
+        /// <summary>
+        /// 计算 流体激励故障  FL-EXCIT1 汽蚀-泵
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcFL_EXCIT1()
+        {
+            /*
+              泵入口压力小于 1.2 倍汽蚀余量（如果能计算的话），且加速度峰值最大测点的振动速
+度谱图上 60+1*谱图分辨率+......+500*谱图分辨率的所有谱线中至少有 200 个频率幅值
+大于谱图上最高峰值的 20%。则该泵存在汽蚀故障。 
+  如果没有泵入口压力，则如果加速度峰值最大测点的振动速度谱图上 60+1*谱图分辨率
++......+500*谱图分辨率的所有谱线中至少有 200 个频率幅值大于谱图上最高峰值的
+20%。则该泵存在汽蚀故障或流体激励故障。 
+             */
+            // todo
+            if (!PartParameter.IsStiffBase) return false;
+            bool found = false;
+            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid001)) found = true;
+            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid002)) found = true;
+            return found;
+
+            bool Calc(PointDataCollection velPoints, string code)
+            {
+                if (0 == velPoints.Count) return false;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 计算 流体激励故障 FL-EXCIT2 泵回流--泵 
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcFL_EXCIT2()
+        {
+            /*
+            如果泵背压大于泵出口压力（如果能计算的话），且加速度峰值最大测点的振动速度谱
+图上 60+1*谱图分辨率+......+300*谱图分辨率的所有谱线中至少有 100 个频率幅值大于
+谱图上最高峰值的 20%。则该泵存在回流故障。 
+            如果不能计算泵背压与出口压力，则加速度峰值最大测点的振动速度谱图上 60+1*谱图
+分辨率+......+300*谱图分辨率的所有谱线中至少有 100 个频率幅值大于谱图上最高峰值
+的 20%。则该泵存在回流或流体激励故障。 
+             */
+            // todo
+            if (!PartParameter.IsStiffBase) return false;
+            bool found = false;
+            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid003)) found = true;
+            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid004)) found = true;
+            return found;
+
+            bool Calc(PointDataCollection velPoints, string code)
+            {
+                if (0 == velPoints.Count) return false;
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 计算 泵、风机叶轮偏心或流体不均故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcRotor_ecc1(PointData pnt = null)
+        {
+            /*
+            1）Rotor-ecc1--泵、风机 
+  如果测点 X 的频谱上存在叶轮通过频率（主频*叶片数）的幅值大于总值 60%，则诊断
+为叶轮偏心或流体不均故障。 
+             */
+            bool found = false;
+            PointDataCollection points = pnt != null ? new PointDataCollection {pnt} : Points.VelPoints;
+            if (Calc(points,PartParameter?.FanFeatureFreqs,EquipmentFaultType.Pump.Liquid005)) found = true;
+            return found;
+
+            bool Calc(PointDataCollection velPoints,ICollection<FanFeatureFreq> featureFreqs,string code)
+            {
+                if (CollectionUtils.IsNullOrEmptyG(velPoints) || CollectionUtils.IsNullOrEmptyG(featureFreqs)) return false;
+                foreach( var point in velPoints )
+                {
+                    var summary = point.HistorySummaryData;
+                    var f0 = summary.F0;
+                    var timewave = point.TimewaveData;
+                    var spectrumUtils = timewave.SpectrumUtils;
+                    double limit = 0.6 * timewave.Overall;
+                    foreach( var featureFreq in featureFreqs)
+                    {
+                        var freq = featureFreq.BladeCount * featureFreq.ShaftMultiplier * f0;
+                        var featureValue = spectrumUtils.GetFFTAmp(freq);
+                        if (limit <= featureValue)
+                        {
+                            Config.Logger.Info(code);
+                            AddPossibleFault(point, code);
+                            return true;
+                        }
+                    }
+                }
+
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 计算 不对中故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcMISAGN1(PointData pnt = null)
+        {
+            /*
+            1）MISAGN1--通用风机、泵（离心风机、轴流风机、离心泵、轴流泵）、刚性基础 
+（1）如果 4 天内 X 与负载（电流 I、入口流量 Qi、出口流量 Qo，按优先顺序只取一个指标）
+线性相关系数 r 大于 0.3。（如果 I、Qi、Qo 其中一个有效，则（1）、（2）同时成立则为
+不对中故障；如果 I、Qi、Qo 均无效，则（1）忽略，只看（2）知否成立） 
+（2）（X 与下面对号入座） 
+              如果 FDE-A-VEL 或者 FNDE-A-VEL（按优先顺序只取一个）大于 0.7 倍 FDE-H-VEL 或者 0.7
+倍 FNDE-H-VEL 或者 1.5 倍 FDE-V-VEL 或者 1.5 倍 FNDE-V-VEL（按优先顺序只取一个）、
+且 FDE-A-VEL 或者 FNDE-A-VEL 其主频与 2 倍频的和大于通频值的 60%同时成立时。 
+              如果 FDE-H-VEL、FNDE-H-VEL、FDE-V-VEL、FNDE-V-VEL（取最大值）其主频与 2 倍频的
+和大于通频值的 80%同时成立时。 
+             */
+            bool found = false;
+            var code = EquipmentFaultType.Generic.Misalign001;
+            var firstLoadPoint = PartParameter.FirstLoadPoint;
+            if(firstLoadPoint != null)
+            {
+                int days = 4;
+                var trend1 = GetInt32MinuteSummaryByDays(pnt, days);
+                var trend2 = GetInt32MinuteSummaryByDays(firstLoadPoint, days);
+
+                var pearson = CalcPearsonCorrelationCoefficient(trend1, trend2);
+                const double limit_pearson = 0.3;
+                if (pearson <= limit_pearson) return false;
+            }
+
+            IEnumerable<PointData>[] pointDatas = new IEnumerable<PointData>[] {DEPoints,NDEPoints};
+            var pAxis = CollectionUtils.FirstOrDefault(p => p.IsAxial && p.IsVel,  pointDatas);
+            // 不存在轴向测点，走的二条规则
+            if (pAxis == null)
+            {
+                var pMaxVelHV = Points.Where(p => p.IsVel && (p.IsHorizontal || p.IsVertical)).MaxItem(p => p.MeasureValue);
+                if(pMaxVelHV != null)
+                {
+                    var point = pMaxVelHV;
+                    var summary = point.HistorySummaryData;
+                    var timewave = point.TimewaveData;
+                    var spectrumUtils = timewave.SpectrumUtils;
+                    // 如果 FDE-H-VEL、FNDE-H-VEL、FDE-V-VEL、FNDE-V-VEL（取最大值）其主频与 2 倍频的和大于通频值的 80%同时成立时
+                    if(0.8 * timewave.Overall < spectrumUtils.GetOverallByXFFT(0,2))
+                    {
+                        Config.Logger.Info(code);
+                        AddPossibleFault(point, code);
+                        found = true;
+                    }
+                }
+                return found;
+            }
+
+            double limit;
+            var pHorizontal = CollectionUtils.FirstOrDefault(p => p.IsHorizontal && p.IsVel,  pointDatas);
+            if(pHorizontal != null) limit = 0.7 * pHorizontal.HistorySummaryData.MeasureValue;
+            else
+            {
+                var pVertical = CollectionUtils.FirstOrDefault(p => p.IsVertical && p.IsVel,  pointDatas);
+                if (pVertical == null) return false;
+                limit = 1.5 * pVertical.HistorySummaryData.MeasureValue;
+            }
+            //  如果 FDE-A-VEL 或者 FNDE-A-VEL（按优先顺序只取一个）大于 0.7 倍 FDE-H-VEL 或者 0.7倍 FNDE-H-VEL 或者 1.5 倍 FDE-V-VEL 或者 1.5 倍 FNDE-V-VEL
+            if(limit < pAxis.HistorySummaryData.MeasureValue)
+            {
+                var point = pAxis;
+                var timewave = point.TimewaveData;
+                var spectrumUtils = timewave.SpectrumUtils;
+                // FDE-A-VEL 或者 FNDE-A-VEL 其主频与 2 倍频的和大于通频值的 60%同时成立时
+                if(0.6 * timewave.Overall < spectrumUtils.GetOverallByXFFT(0,2))
+                {
+                    Config.Logger.Info(code);
+                    AddPossibleFault(point, code);
+                    found = true;
+                }
+            }
+            return found;
+        }
+
+
+        #endregion
+
         #region 计算轴承
 
         /// <summary>
@@ -364,139 +627,14 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             return ret;
         }
         #endregion
-    }
 
-    /// <summary>
-    /// 电机诊断模型
-    /// </summary>
-    public class MotorDiagnosis001 : PartDiagnosisBase001
-    {
-        public override void DoDiagnosis()
-        {
-            CalcLoose();
-            CalcRub();
-            CalcELECTRC1();//todo
-            CalcELECTRC2();
-            CalcELECTRC3();
-            CalcBearingFTF();
-            if (CalcIsAccAlarm()) // todo
-            {
-                CalcBearingBSF();
-                CalcBearingBPFO();
-                CalcBearingBPFI();
-            }
-            if(CalcIsVelAlarm()) // todo
-            {
-                CalcCLEARANCE();
-                CalcFDLOOSE();
-                CalcSTRESS();//todo
-            }
-            if (PartParameter.IsStiffBase) // 刚性基础
-            {
-                //todo 不对中 MISAGN3 
-                //todo 不平衡 UNBL10 
-
-            }
-            else // 柔性基础
-            {
-                //todo 不对中 MISAGN4 
-                //todo UNBL11
-
-            }
-        }
-
-        #region 具体故障
-
-        /// <summary>
-        /// 计算转子断条 ELECTRC1 断条--电机 故障
-        /// </summary>
-        /// <returns></returns>
-        private bool CalcELECTRC1()
-        {
-            //todo
-            /*
-             1.1）ELECTRC1 断条--电机 
-  电机所有测点中振动速度值最大的频谱图上存在主频 1X 幅值大于 50%总值，且 1X+极
-数*滑差或 1X-极数*滑差的幅值大于 1X 幅值的 20%。诊断为断条故障。 
-             
-             */
-            return false;
-        }
-
-        /// <summary>
-        /// ELECTRC2 转子偏心、气隙不均、定子松动故障--电机 
-        /// </summary>
-        /// <returns></returns>
-        private bool CalcELECTRC2()
-        {
-            /*
-             1.2）ELECTRC2 转子偏心、气隙不均、定子松动故障--电机 
-  电机所有测点中振动速度值最大的频谱图上存在 100Hz，且其幅值大于总值的 50%。诊
-断为电机转系偏心或气隙不均或定子松动。 
-             */
-            bool found = false;
-            if (Calc(Points.VelPoints,EquipmentFaultType.Generic.Electric003)) found = true;
-            return found;
-
-            bool Calc(PointDataCollection velPoints, string code)
-            {
-                if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
-                var summary = point.HistorySummaryData;
-                var timewave = point.TimewaveData;
-
-                double limit = 0.5 * timewave.Overall;
-                if (limit < timewave.Hz100)
-                {
-                    Config.Logger.Info(code);
-                    AddPossibleFault(point, code);
-                    return true;
-                }
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// ELECTRC3 定子短路--电机 
-        /// </summary>
-        /// <returns></returns>
-        private bool CalcELECTRC3()
-        {
-            /*
-            1.3）ELECTRC3 定子短路--电机 
-  电机所有测点中振动速度值最大的频谱图上 100Hz、200Hz、300Hz、400Hz、600Hz 频
-率中至少有 3 个幅值大于频谱中最高幅值的 50%。诊断为定子短路故障。 
-             */
-            bool found = false;
-            if (Calc(Points.VelPoints,EquipmentFaultType.Generic.Electric004)) found = true;
-            return found;
-
-            bool Calc(PointDataCollection velPoints, string code)
-            {
-                if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
-                var summary = point.HistorySummaryData;
-                var timewave = point.TimewaveData;
-
-                double limit = 0.5 * timewave.HighestPeak;
-                var xHz100 = timewave.XHz100;
-                int startIndex = 0;
-                var count = ArrayUtils.Count(xHz100, startIndex, 5, v => limit < v);
-                if (3 <= count)
-                {
-                    Config.Logger.Info(code);
-                    AddPossibleFault(point, code);
-                    return true;
-                }
-                return false;
-            }
-        }
+        #region 计算是否趋势报警，并进一步计算故障
 
         /// <summary>
         /// 是否加速度测点趋势报警 
         /// </summary>
-        /// <returns></returns>
-        private bool CalcIsAccAlarm()
+        /// <returns>报警测点</returns>
+        protected virtual PointData CalcIsAccAlarm()
         {
             /*
             如果泵所有振动测点振动加速度值有一
@@ -504,10 +642,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 值趋势直线拟合斜率大于 0.417。 
              */
             //todo
-            if (CollectionUtils.IsNotEmptyG(PartParameter?.BearingFeatureFreqs)) return false;
-            bool found = false;
-            if (Calc(Points.VelPoints,EquipmentFaultType.Generic.Electric004)) found = true;
-            return found;
+            PointData ret = null;
+            return ret;
 
             bool Calc(PointDataCollection velPoints, string code)
             {
@@ -532,8 +668,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         /// <summary>
         /// 是否速度测点趋势报警 
         /// </summary>
-        /// <returns></returns>
-        private bool CalcIsVelAlarm()
+        /// <returns>报警测点</returns>
+        protected virtual PointData CalcIsVelAlarm()
         {
             /*
             如果电机所有振动测点振动速度值有一个达到报警值，或者
@@ -542,11 +678,11 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 于 0.375，则按以下进行配合间隙不良故障诊断分析。 
              */
             //todo
-            bool ret = false;
+            PointData ret = null;
             return ret;
         }
 
         #endregion
-
     }
+
 }

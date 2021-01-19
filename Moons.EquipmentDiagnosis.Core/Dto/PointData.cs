@@ -35,6 +35,8 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 信号类型
         /// </summary>
         public int SigType_ID { get; set; }
+        public bool IsAcc => SigType_ID == (int)SignalTypeIdEnum.Acc;
+        public bool IsVel => SigType_ID == (int)SignalTypeIdEnum.Vel;
 
         /// <summary>
         /// 工程单位编号
@@ -53,6 +55,9 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 对于二维测点表示起始方向，即Chn1的方向，而Chn2方向按照“注”推测
         /// </summary>
         public int PntDirect_NR { get; set; }
+        public bool IsAxial => PntDirect_NR == AnalysisData.Constants.PntDirectionID.Axial;
+        public bool IsHorizontal => PntDirect_NR == AnalysisData.Constants.PntDirectionID.Horizontal;
+        public bool IsVertical => PntDirect_NR == AnalysisData.Constants.PntDirectionID.Vertical;
 
         /// <summary>
         /// 旋转方向编号	tinyint		Not null	0-逆时针，1-顺时针 默认为逆时针
@@ -110,6 +115,7 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 历史summary数据
         /// </summary>
         public HistorySummaryData HistorySummaryData { get; set; }
+        public double MeasureValue => HistorySummaryData.MeasureValue;
 
         /// <summary>
         /// 时间波形数据
@@ -404,5 +410,21 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public double X4 => SpectrumUtils.X4;
         public double X5 => SpectrumUtils.X5;
         public double X6 => SpectrumUtils.X6;
+    }
+
+    /// <summary>
+    /// 使用int32表示采样时间对应的分钟数
+    /// </summary>
+    public class Int32MinuteSummary
+    {
+        /// <summary>
+        /// 采样时间
+        /// </summary>
+        public int SampleMinute { get; set; }
+
+        /// <summary>
+        /// 测量值
+        /// </summary>
+        public double MeasureValue { get; set; }
     }
 }

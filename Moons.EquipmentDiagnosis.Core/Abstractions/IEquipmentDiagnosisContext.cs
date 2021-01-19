@@ -33,6 +33,14 @@ namespace Moons.EquipmentDiagnosis.Core.Abstractions
         HistorySummaryDataCollection GetHistorySummaryData(PointData point, HistoryQueryConditionData condition);
 
         /// <summary>
+        /// 获得summary数据
+        /// </summary>
+        /// <param name="point">PointData</param>
+        /// <param name="condition">查询条件</param>
+        /// <returns></returns>
+        Int32MinuteSummary[] GetInt32MinuteSummary(PointData point, HistoryQueryConditionData condition);
+
+        /// <summary>
         /// 获得测点数据
         /// </summary>
         /// <param name="id"></param>
