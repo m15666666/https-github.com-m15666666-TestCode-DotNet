@@ -11,6 +11,15 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
     /// </summary>
     public class PartParameter
     {
+        #region 趋势相关
+
+        /// <summary>
+        /// 查询趋势数据的天数
+        /// </summary>
+        public int TrendDays { get; set; } = 4;
+
+        #endregion
+
         #region 特征频率相关
         /// <summary>
         /// 叶片通过特征频率集合
@@ -28,13 +37,28 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 支撑类型
         /// </summary>
         public int SupportTypeID { get; set; } = EquipSupportTypeID.TwoEnd;
+        /// <summary>
+        /// 是否为两端支撑
+        /// </summary>
+        public bool IsTwoEnd => SupportTypeID == EquipSupportTypeID.TwoEnd;
         #endregion
 
         #region 转速相关
+
         /// <summary>
         /// 转速类型
         /// </summary>
         public int SpeedTypeID { get; set; } = EquipSpeedTypeID.Stable;
+
+        /// <summary>
+        /// 是否变转速
+        /// </summary>
+        public bool IsUnStableSpeed => SpeedTypeID == EquipSpeedTypeID.Untable;
+        /// <summary>
+        /// 是否定转速
+        /// </summary>
+        public bool IsStableSpeed => SpeedTypeID == EquipSpeedTypeID.Stable;
+
         #endregion
 
         #region 基础相关
@@ -50,7 +74,7 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public bool IsStiffBase => BaseTypeID == EquipBaseTypeID.Stiffness;
 
         /// <summary>
-        /// 是否柔性基础
+        /// 是否弹性基础
         /// </summary>
         public bool IsFlexibilityBase => BaseTypeID == EquipBaseTypeID.Flexibility;
 

@@ -66,10 +66,10 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 PointData velAlmPoint = null;
                 foreach (var p in velPoints)
                 {
-                    if (p.IsAlm && maxVelAlm < p.HistorySummaryData.MeasureValue)
+                    if (p.IsAlm && maxVelAlm < p.MeasureValue)
                     {
                         velAlmPoint = p;
-                        maxVelAlm = p.HistorySummaryData.MeasureValue;
+                        maxVelAlm = p.MeasureValue;
                     }
                 }
                 if (velAlmPoint == null) return;
@@ -175,8 +175,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             {
                 if ( IsNoTimewaveData(mdeh) ||  IsNoTimewaveData(mndev) ) return;
 
-                var measureValue_h = mdeh.HistorySummaryData.MeasureValue;
-                var measureValue_v = mndev.HistorySummaryData.MeasureValue;
+                var measureValue_h = mdeh.MeasureValue;
+                var measureValue_v = mndev.MeasureValue;
 
                 var timewave_h = mdeh.TimewaveData;
                 double overall_h = timewave_h.Overall;

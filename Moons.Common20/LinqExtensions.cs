@@ -9,6 +9,8 @@ namespace Moons.Common20
     /// </summary>
     public static class LinqExtensions
     {
+        #region MaxItem,MinItem
+
         /// <summary>
         /// 获得最大值对应的元素对象
         /// </summary>
@@ -30,5 +32,27 @@ namespace Moons.Common20
         /// <returns>最小值对应的元素对象</returns>
         public static T MinItem<T, TProp>(this IEnumerable<T> source, Func<T, TProp> propSelector) =>
             source.OrderBy(propSelector).FirstOrDefault();
+
+        #endregion
+
+        #region all null
+
+        /// <summary>
+        /// 所有元素全都不为空
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool AllNotNull<T>(this IEnumerable<T> source) where T : class => source.All( item => item != null);
+
+        /// <summary>
+        /// 有元素为空
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static bool AnyNull<T>(this IEnumerable<T> source) where T : class => source.Any( item => item == null);
+
+        #endregion
     }
 }

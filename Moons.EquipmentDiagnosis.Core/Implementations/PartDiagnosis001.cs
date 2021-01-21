@@ -7,6 +7,7 @@ using System.Linq;
 using AnalysisData.FeatureFreq;
 using AnalysisData.Constants;
 using AnalysisAlgorithm;
+using Moons.EquipmentDiagnosis.Core.Utils;
 
 namespace Moons.EquipmentDiagnosis.Core.Implementations
 {
@@ -65,13 +66,74 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         /// <returns></returns>
         protected Int32MinuteSummary[] GetInt32MinuteSummaryByDays(PointData point, int days )
         {
+            var cache = point.NDaysRecordsCache;
+            if (cache != null) return cache;
+
             var now = Now;
             HistoryQueryConditionData condition = new HistoryQueryConditionData
             {
                 HistoryDataBegin = now.AddDays(-days),
                 HistoryDataEnd = now,
             };
-            return Context.GetInt32MinuteSummary(point, condition);
+            cache = Context.GetInt32MinuteSummary(point, condition);
+            point.NDaysRecordsCache = cache;
+            return cache;
+        }
+        /// <summary>
+        /// 获得几天之内的summary数据的斜率
+        /// </summary>
+        /// <param name="point">PointData</param>
+        /// <param name="day">天数</param>
+        /// <returns>斜率</returns>
+        protected double GetSlopeByDays(PointData point, int days )
+        {
+            var datas = GetInt32MinuteSummaryByDays(point, days);
+            if (CollectionUtils.IsNullOrEmptyG(datas)) return 0;
+            double[] x = new double[datas.Length];
+            double[] y = new double[datas.Length];
+            int i = 0;
+            foreach(var data in datas)
+            {
+                x[i] = data.SampleMinute;
+                y[i] = data.MeasureValue;
+                i++;
+            }
+            var lineFit = LineFitUtils.CreateByXYData(x, y);
+            return lineFit.K;
+        }
+
+        /// <summary>
+        /// 对变转速设备，转速变化是否匹配振动总值变化
+        /// </summary>
+        /// <param name="point">PointData</param>
+        /// <returns>true：匹配</returns>
+        protected bool IsSpeedMatchUnbalance(PointData point)
+        {
+            /*
+            （1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时成
+立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。以下同），且 X 测点的 V Nmax /V Nmin >= 0.7*(Nmax/Nmin)^2。
+             */
+            if(PartParameter.IsStableSpeed) return true;
+
+            var datas = GetInt32MinuteSummaryByDays(point, PartParameter.TrendDays);
+            if (CollectionUtils.IsNullOrEmptyG(datas)) return false;
+            int RevFunc(Int32MinuteSummary d) => d.Rev;
+            var maxRev = datas.MaxItem(RevFunc);
+            var minRev = datas.MinItem(RevFunc);
+            try
+            {
+                const double limit_revRatio = 1.01;
+                double revRatio = (double)maxRev.Rev / (double)minRev.Rev;
+                if (revRatio <= limit_revRatio) return true;
+
+                double rmsRatio = maxRev.MeasureValue / minRev.MeasureValue;
+                double limit_rmsRatio = 0.7 * revRatio * revRatio;
+                return (limit_rmsRatio <= rmsRatio);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -130,7 +192,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             bool Calc(PointDataCollection velPoints, string code)
             {
                 if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var point = velPoints.MaxMeasureValueP();
                 var summary = point.HistorySummaryData;
                 var timewave = point.TimewaveData;
 
@@ -180,7 +242,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             bool Calc(PointDataCollection velPoints, string code)
             {
                 if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var point = velPoints.MaxMeasureValueP();
                 var summary = point.HistorySummaryData;
                 var timewave = point.TimewaveData;
 
@@ -227,7 +289,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             bool Calc(PointDataCollection velPoints, string code)
             {
                 if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var point = velPoints.MaxMeasureValueP();
                 var summary = point.HistorySummaryData;
                 var timewave = point.TimewaveData;
 
@@ -275,10 +337,10 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             bool Calc(PointDataCollection velPoints, string code)
             {
                 if (0 == velPoints.Count) return false;
-                var pVertical = velPoints.GetByDirectionId(PntDirectionID.Vertical).MaxItem(p => p.HistorySummaryData.MeasureValue);
-                var pHorizontal = velPoints.GetByDirectionId(PntDirectionID.Horizontal).MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var pVertical = velPoints.GetByDirectionId(PntDirectionID.Vertical).MaxMeasureValueP();
+                var pHorizontal = velPoints.GetByDirectionId(PntDirectionID.Horizontal).MaxMeasureValueP();
                 if (pHorizontal == null || pVertical == null) return false;
-                if (!(0.8 * pHorizontal.HistorySummaryData.MeasureValue < pVertical.HistorySummaryData.MeasureValue)) return false;
+                if (!(0.8 * pHorizontal.MeasureValue < pVertical.MeasureValue)) return false;
 
                 var summary = pVertical.HistorySummaryData;
                 var timewave = pVertical.TimewaveData;
@@ -324,10 +386,10 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             bool Calc(PointDataCollection velPoints, string code)
             {
                 if (0 == velPoints.Count) return false;
-                var pVertical = velPoints.GetByDirectionId(PntDirectionID.Vertical).MaxItem(p => p.HistorySummaryData.MeasureValue);
-                var pHorizontal = velPoints.GetByDirectionId(PntDirectionID.Horizontal).MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var pVertical = velPoints.GetByDirectionId(PntDirectionID.Vertical).MaxMeasureValueP();
+                var pHorizontal = velPoints.GetByDirectionId(PntDirectionID.Horizontal).MaxMeasureValueP();
                 if (pHorizontal == null || pVertical == null) return false;
-                if (!(0.8 * pHorizontal.HistorySummaryData.MeasureValue < pVertical.HistorySummaryData.MeasureValue)) return false;
+                if (!(0.8 * pHorizontal.MeasureValue < pVertical.MeasureValue)) return false;
 
                 var summary = pVertical.HistorySummaryData;
                 var timewave = pVertical.TimewaveData;
@@ -448,11 +510,15 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             }
         }
 
+
+        #endregion
+
+        #region 不对中故障
         /// <summary>
-        /// 计算 不对中故障  
+        /// 计算 刚性基础 不对中故障  
         /// </summary>
         /// <returns>true:存在故障</returns>
-        protected virtual bool CalcMISAGN1(PointData pnt = null)
+        protected virtual bool CalcMISAGN1(PointData pnt)
         {
             /*
             1）MISAGN1--通用风机、泵（离心风机、轴流风机、离心泵、轴流泵）、刚性基础 
@@ -464,6 +530,59 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 倍 FNDE-H-VEL 或者 1.5 倍 FDE-V-VEL 或者 1.5 倍 FNDE-V-VEL（按优先顺序只取一个）、
 且 FDE-A-VEL 或者 FNDE-A-VEL 其主频与 2 倍频的和大于通频值的 60%同时成立时。 
               如果 FDE-H-VEL、FNDE-H-VEL、FDE-V-VEL、FNDE-V-VEL（取最大值）其主频与 2 倍频的
+和大于通频值的 80%同时成立时。 
+             */
+            const double verticalScale = 1.5;
+            return CalcMISAGN(pnt, verticalScale);
+        }
+        /// <summary>
+        /// 计算 弹性基础 不对中故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcMISAGN2(PointData pnt)
+        {
+            /*
+            2）MISAGN2---通用风机、（离心风机、轴流风机、离心泵、轴流泵）弹性基础 
+（1）如果 4 天内 X 与负载（电流 I、入口流量 Qi、出口流量 Qo，按优先顺序只取一个指标）
+线性相关系数 r 大于 0.3。（如果 I、Qi、Qo 其中一个有效，则（1）、（2）同时成立则为
+不对中故障；如果 I、Qi、Qo 均无效，则（1）忽略，只看（2）知否成立） 
+（2）（X 与下面对号入座） 
+  如果 FDE-A-VEL 或者 FNDE-A-VEL（按优先顺序只取一个）大于 0.7 倍 FDE-H-VEL 或者 0.7
+倍 FNDE-H-VEL 或者 0.7 倍 FDE-V-VEL 或者 0.7 倍 FNDE-V-VEL（按优先顺序只取一个）、
+且 FDE-A-VEL 或者 FNDE-A-VEL 其主频与 2 倍频的和大于通频值的 60%同时成立时。 
+  如果 FDE-H-VEL、FNDE-H-VEL、FDE-V-VEL、FNDE-V-VEL（取最大值）其主频与 2 倍频的
+和大于通频值的 80%同时成立时。 
+             */
+            const double verticalScale = 0.7;
+            return CalcMISAGN(pnt, verticalScale);
+        }
+
+        /// <summary>
+        /// 计算 不对中故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcMISAGN(PointData pnt, double verticalScale)
+        {
+            /*
+            1）MISAGN1--通用风机、泵（离心风机、轴流风机、离心泵、轴流泵）、刚性基础 
+（1）如果 4 天内 X 与负载（电流 I、入口流量 Qi、出口流量 Qo，按优先顺序只取一个指标）
+线性相关系数 r 大于 0.3。（如果 I、Qi、Qo 其中一个有效，则（1）、（2）同时成立则为
+不对中故障；如果 I、Qi、Qo 均无效，则（1）忽略，只看（2）知否成立） 
+（2）（X 与下面对号入座） 
+              如果 FDE-A-VEL 或者 FNDE-A-VEL（按优先顺序只取一个）大于 0.7 倍 FDE-H-VEL 或者 0.7
+倍 FNDE-H-VEL 或者 1.5 倍 FDE-V-VEL 或者 1.5 倍 FNDE-V-VEL（按优先顺序只取一个）、
+且 FDE-A-VEL 或者 FNDE-A-VEL 其主频与 2 倍频的和大于通频值的 60%同时成立时。 
+              如果 FDE-H-VEL、FNDE-H-VEL、FDE-V-VEL、FNDE-V-VEL（取最大值）其主频与 2 倍频的
+和大于通频值的 80%同时成立时。 
+            2）MISAGN2---通用风机、（离心风机、轴流风机、离心泵、轴流泵）弹性基础 
+（1）如果 4 天内 X 与负载（电流 I、入口流量 Qi、出口流量 Qo，按优先顺序只取一个指标）
+线性相关系数 r 大于 0.3。（如果 I、Qi、Qo 其中一个有效，则（1）、（2）同时成立则为
+不对中故障；如果 I、Qi、Qo 均无效，则（1）忽略，只看（2）知否成立） 
+（2）（X 与下面对号入座） 
+  如果 FDE-A-VEL 或者 FNDE-A-VEL（按优先顺序只取一个）大于 0.7 倍 FDE-H-VEL 或者 0.7
+倍 FNDE-H-VEL 或者 0.7 倍 FDE-V-VEL 或者 0.7 倍 FNDE-V-VEL（按优先顺序只取一个）、
+且 FDE-A-VEL 或者 FNDE-A-VEL 其主频与 2 倍频的和大于通频值的 60%同时成立时。 
+  如果 FDE-H-VEL、FNDE-H-VEL、FDE-V-VEL、FNDE-V-VEL（取最大值）其主频与 2 倍频的
 和大于通频值的 80%同时成立时。 
              */
             bool found = false;
@@ -485,7 +604,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             // 不存在轴向测点，走的二条规则
             if (pAxis == null)
             {
-                var pMaxVelHV = Points.Where(p => p.IsVel && (p.IsHorizontal || p.IsVertical)).MaxItem(p => p.MeasureValue);
+                var pMaxVelHV = Points.Where(p => p.IsVel && (p.IsHorizontal || p.IsVertical)).MaxMeasureValueP();
                 if(pMaxVelHV != null)
                 {
                     var point = pMaxVelHV;
@@ -505,15 +624,15 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 
             double limit;
             var pHorizontal = CollectionUtils.FirstOrDefault(p => p.IsHorizontal && p.IsVel,  pointDatas);
-            if(pHorizontal != null) limit = 0.7 * pHorizontal.HistorySummaryData.MeasureValue;
+            if(pHorizontal != null) limit = 0.7 * pHorizontal.MeasureValue;
             else
             {
                 var pVertical = CollectionUtils.FirstOrDefault(p => p.IsVertical && p.IsVel,  pointDatas);
                 if (pVertical == null) return false;
-                limit = 1.5 * pVertical.HistorySummaryData.MeasureValue;
+                limit = verticalScale * pVertical.MeasureValue;
             }
             //  如果 FDE-A-VEL 或者 FNDE-A-VEL（按优先顺序只取一个）大于 0.7 倍 FDE-H-VEL 或者 0.7倍 FNDE-H-VEL 或者 1.5 倍 FDE-V-VEL 或者 1.5 倍 FNDE-V-VEL
-            if(limit < pAxis.HistorySummaryData.MeasureValue)
+            if(limit < pAxis.MeasureValue)
             {
                 var point = pAxis;
                 var timewave = point.TimewaveData;
@@ -528,8 +647,454 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             }
             return found;
         }
+        #endregion
 
+        #region 不平衡故障
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL1(PointData pnt)
+        {
+            /*
+            1）UNBL1---通用风机（离心风机和轴流风机）--刚性基础、两端支撑 
+说明：符合“如果风机或泵所有振动测点振动速度值有一个达到报警值，或者所有测点振动速度有效值虽然都没有达到报警值，但其中任一
+个测点在 4 天内的振动速度有效值趋势直线拟合斜率大于 0.375。”的最大值的测点设为 X 测点。以下同  
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时成
+立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。以下同），且 X 测点的 V Nmax /V Nmin >0.7（Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  如果 FDE-H-VEL 与 FDE-V-VEL 同时有效（安装有传感器且是开机状态，以下同），FDE-H-VEL
+大于 2 倍 FDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 60%同时成立。 
+  如果 FNDE-H-VEL 与 FNDE-V-VEL 同时有效，FNDE-H-VEL 大于 2 倍 FNDE-V-VEL、FNDE-H-VEL
+主频幅值大于通频值的 60%同时成立时。 
+  如果 FDE-H-VEL 与 FNDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FDE-H-VEL 大
+于 2 倍 FNDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 60%同时成立时。 
+  如果 FNDE-H-VEL 与 FDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FNDE-H-VEL
+大于 2 倍 FDE-V-VEL、FNDE-H-VEL 主频幅值大于通频值的 60%同时成立时。 
+  如果 FDE-H-VEL 有效（只有 1 个传感器），FDE-H-VEL 主频幅值大于通频值的 80%成立。 
+  如果 FNDE-H-VEL 有效（只有 1 个传感器），FNDE-H-VEL 主频幅值大于通频值的 80%成 立时。 
+  如果 FDE-V-VEL 有效（只有 1 个传感器），FDE-V-VEL 主频幅值大于通频值的 90%成立 时。 
+  如果 FNDE-V-VEL 有效（只有 1 个传感器），FNDE-V-VEL 主频幅值大于通频值的 90%成 立时。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
 
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            var deVels = DEPoints.VelPoints;
+            var points = deVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code);
+
+            var ndeVels = NDEPoints.VelPoints;
+            points = ndeVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code);
+
+            var vels = Points.VelPoints;
+            points = vels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code);
+
+            var point = CollectionUtils.FirstOrDefault(p => p.IsHorizontal, deVels, ndeVels);
+            if (point != null) return CalcUNBL_H(point, code);
+            point = CollectionUtils.FirstOrDefault(p => p.IsVertical, deVels, ndeVels);
+            if (point != null) return CalcUNBL_V(point, code);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL2(PointData pnt)
+        {
+            /*
+            2）UNBL2---通用风机（离心风机和轴流风机）--刚性基础、悬臂支撑 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
+成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2
+。 
+（2）（测点 X 按以下对号入座） 
+  如果 FDE-H-VEL 与 FDE-V-VEL 同时有效（安装有传感器且是开机状态，以下同），FDE-H-VEL
+大于 2 倍 FDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 60%同时成立。 
+  如果 FNDE-H-VEL 与 FNDE-V-VEL 同时有效，FNDE-H-VEL 大于 2 倍 FNDE-V-VEL、FNDE-H-VEL
+主频幅值大于通频值的 60%同时成立时。 
+  如果 FDE-H-VEL 与 FNDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FDE-H-VEL 大
+于 2 倍 FNDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 60%同时成立时。 
+  如果 FNDE-H-VEL 与 FDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FNDE-H-VEL
+大于 2 倍 FDE-V-VEL、FNDE-H-VEL 主频幅值大于通频值的 60%同时成立时。 
+  如果 FDE-H-VEL 有效（只有 1 个传感器），FDE-H-VEL 主频幅值大于通频值的 80%成立。 
+  如果 FNDE-H-VEL 有效（只有 1 个传感器），FNDE-H-VEL 主频幅值大于通频值的 80%成 立时。 
+  如果 FDE-V-VEL 有效（只有 1 个传感器），FDE-V-VEL 主频幅值大于通频值的 90%成立 时。 
+  如果 FNDE-V-VEL 有效（只有 1 个传感器），FNDE-V-VEL 主频幅值大于通频值的 90% 成立时。 
+  如果只有 FDE-A-VEL 或 FNDE-A-VEL 有效，FDE-A-VEL 或 FNDE-A-VEL 主频幅值大于通频值 的 90%成立。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            var deVels = DEPoints.VelPoints;
+            var points = deVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code);
+
+            var ndeVels = NDEPoints.VelPoints;
+            points = ndeVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code);
+
+            var vels = Points.VelPoints;
+            points = vels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code);
+
+            var point = CollectionUtils.FirstOrDefault(p => p.IsHorizontal, deVels, ndeVels);
+            if (point != null) return CalcUNBL_H(point, code);
+            point = CollectionUtils.FirstOrDefault(p => p.IsVertical, deVels, ndeVels);
+            if (point != null) return CalcUNBL_V(point, code);
+            point = CollectionUtils.FirstOrDefault(p => p.IsAxial, deVels, ndeVels);
+            if (point != null) return CalcUNBL_A(point, code);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL3(PointData pnt)
+        {
+            /*
+            3）UNBL3---通用风机（离心风机和轴流风机）--弹性基础、两端支撑 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
+成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7（Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  如果 X 测点为 FDE-H-VEL、FDE-V-VEL、FNDE-H-VEL、FNDE-V-VEL 的其中一个，测点 X 其 主频幅值大于通频值的 80%成立。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            var deVels = DEPoints.VelPoints;
+
+            var ndeVels = NDEPoints.VelPoints;
+
+            var vels = Points.VelPoints;
+
+            var point = deVels.FirstOrDefault(p => p.IsHorizontal) ??
+                deVels.FirstOrDefault(p => p.IsVertical) ??
+                ndeVels.FirstOrDefault(p => p.IsHorizontal) ??
+                ndeVels.FirstOrDefault(p => p.IsVertical);
+
+            if (point != null) return CalcUNBL_OnePoint(point, code, 0.8);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL4(PointData pnt)
+        {
+            /*
+            4）UNBL4---通用风机（离心风机和轴流风机）--卧式、弹性基础、悬臂支撑 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
+成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  测点 X 其主频幅值大于通频值的 80%成立。 // todo
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            var deVels = DEPoints.VelPoints;
+
+            var ndeVels = NDEPoints.VelPoints;
+
+            var vels = Points.VelPoints;
+
+            var point = deVels.FirstOrDefault(p => p.IsHorizontal) ??
+                deVels.FirstOrDefault(p => p.IsVertical) ??
+                ndeVels.FirstOrDefault(p => p.IsHorizontal) ??
+                ndeVels.FirstOrDefault(p => p.IsVertical);
+
+            if (point != null) return CalcUNBL_OnePoint(point, code, 0.8);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL5(PointData pnt)
+        {
+            /*
+            5）UNBL5---通用泵（离心泵和轴流泵）--刚性基础、两端支撑 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时成
+立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。以下同），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  如果 FDE-H-VEL 与 FDE-V-VEL 同时有效（安装有传感器且是开机状态，以下同），FDE-H-VEL
+大于 3 倍 FDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 80%同时成立。 
+  如果 FNDE-H-VEL 与 FNDE-V-VEL 同时有效，FNDE-H-VEL 大于 3 倍 FNDE-V-VEL、FNDE-H-VEL
+主频幅值大于通频值的 80%同时成立时。 
+  如果 FDE-H-VEL 与 FNDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FDE-H-VEL 大
+于 3 倍 FNDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 80%同时成立时。 
+  如果 FNDE-H-VEL 与 FDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FNDE-H-VEL
+大于 3 倍 FDE-V-VEL、FNDE-H-VEL 主频幅值大于通频值的 80%同时成立时。 
+  如果 FDE-H-VEL 有效（只有 1 个传感器），FDE-H-VEL 主频幅值大于通频值的 80%成立。 
+  如果 FNDE-H-VEL 有效（只有 1 个传感器），FNDE-H-VEL 主频幅值大于通频值的 80%成 立时。 
+  如果 FDE-V-VEL 有效（只有 1 个传感器），FDE-V-VEL 主频幅值大于通频值的 90%成立。 
+  如果 FNDE-V-VEL 有效（只有 1 个传感器），FNDE-V-VEL 主频幅值大于通频值的 90%成 立。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            const double verticalScale = 3;
+            const double overallScale = 0.8;
+            var deVels = DEPoints.VelPoints;
+            var points = deVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var ndeVels = NDEPoints.VelPoints;
+            points = ndeVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var vels = Points.VelPoints;
+            points = vels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var point = CollectionUtils.FirstOrDefault(p => p.IsHorizontal, deVels, ndeVels);
+            if (point != null) return CalcUNBL_H(point, code);
+            point = CollectionUtils.FirstOrDefault(p => p.IsVertical, deVels, ndeVels);
+            if (point != null) return CalcUNBL_V(point, code);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL6(PointData pnt)
+        {
+            /*
+            6）UNBL6---通用泵（离心泵和轴流泵）--卧式、刚性基础、悬臂支撑 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
+成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  如果 FDE-H-VEL 与 FDE-V-VEL 同时有效（安装有传感器且是开机状态，以下同），FDE-H-VEL
+大于 3 倍 FDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 80%同时成立。 
+  如果 FNDE-H-VEL 与 FNDE-V-VEL 同时有效，FNDE-H-VEL 大于 3 倍 FNDE-V-VEL、FNDE-H-VEL
+主频幅值大于通频值的 80%同时成立时。 
+  如果 FDE-H-VEL 与 FNDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FDE-H-VEL 大
+于 3 倍 FNDE-V-VEL、FDE-H-VEL 主频幅值大于通频值的 80%同时成立时。 
+  如果 FNDE-H-VEL 与 FDE-V-VEL 同时有效（只有这 2 个传感器个传感器），FNDE-H-VEL大于 3 倍 FDE-V-VEL、FNDE-H-VEL 主频幅值大于通频值的 80%同时成立时。 
+  如果 FDE-H-VEL 有效（只有 1 个传感器），FDE-H-VEL 主频幅值大于通频值的 80%同时 成立。 
+  如果 FNDE-H-VEL 有效（只有 1 个传感器），FNDE-H-VEL 主频幅值大于通频值的 80%成 立时。 
+  如果 FDE-V-VEL 有效（只有 1 个传感器），FDE-V-VEL 主频幅值大于通频值的 90%成立 时。 
+  如果 FNDE-V-VEL 有效（只有 1 个传感器），FNDE-V-VEL 主频幅值大于通频值的 90% 成立时。 
+  如果只有 FDE-A-VEL 或 FNDE-A-VEL 有效，FDE-A-VEL 或 FNDE-A-VEL 主频幅值大于通频值 的 90%成立。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            const double verticalScale = 3;
+            const double overallScale = 0.8;
+            var deVels = DEPoints.VelPoints;
+            var points = deVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var ndeVels = NDEPoints.VelPoints;
+            points = ndeVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var vels = Points.VelPoints;
+            points = vels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var point = CollectionUtils.FirstOrDefault(p => p.IsHorizontal, deVels, ndeVels);
+            if (point != null) return CalcUNBL_H(point, code);
+            point = CollectionUtils.FirstOrDefault(p => p.IsVertical, deVels, ndeVels);
+            if (point != null) return CalcUNBL_V(point, code);
+            point = CollectionUtils.FirstOrDefault(p => p.IsAxial, deVels, ndeVels);
+            if (point != null) return CalcUNBL_A(point, code);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL7(PointData pnt)
+        {
+            /*
+            7）UNBL7---通用泵（离心泵和轴流泵）--弹性基础、两端支撑 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
+成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  如果 X 测点为 FDE-H-VEL、FDE-V-VEL、FNDE-H-VEL、FNDE-V-VEL 的其中一个，测点 X 其 主频幅值大于通频值的 80%成立。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            var deVels = DEPoints.VelPoints;
+
+            var ndeVels = NDEPoints.VelPoints;
+
+            var vels = Points.VelPoints;
+
+            var point = deVels.FirstOrDefault(p => p.IsHorizontal) ??
+                deVels.FirstOrDefault(p => p.IsVertical) ??
+                ndeVels.FirstOrDefault(p => p.IsHorizontal) ??
+                ndeVels.FirstOrDefault(p => p.IsVertical);
+
+            if (point != null) return CalcUNBL_OnePoint(point, code, 0.8);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL8(PointData pnt)
+        {
+            /*
+            8）UNBL8---通用泵（离心泵和轴流泵）--卧式、弹性基础、悬臂支撑 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时成
+立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  测点 X 其主频幅值大于通频值的 80%成立。 
+   // todo
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            var deVels = DEPoints.VelPoints;
+
+            var ndeVels = NDEPoints.VelPoints;
+
+            var vels = Points.VelPoints;
+
+            var point = deVels.FirstOrDefault(p => p.IsHorizontal) ??
+                deVels.FirstOrDefault(p => p.IsVertical) ??
+                ndeVels.FirstOrDefault(p => p.IsHorizontal) ??
+                ndeVels.FirstOrDefault(p => p.IsVertical);
+
+            if (point != null) return CalcUNBL_OnePoint(point, code, 0.8);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL10(PointData pnt)
+        {
+            /*
+            10）UNBL10---电机--刚性基础 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。以下同），且 X 测点的 V Nmax /V Nmin >0.7
+（Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  如果 MDE-H-VEL 与 MDE-V-VEL 同时有效（安装有传感器且是开机状态，以下同）， MDE-H-VEL 大于 3 倍 MDE-V-VEL、MDE-H-VEL 主频幅值大于通频值的 80%同时成立。 
+  如果 MNDE-H-VEL 与 MNDE-V-VEL 同时有效，MNDE-H-VEL 大于 3 倍 MNDE-V-VEL、 MNDE-H-VEL 主频幅值大于通频值的 80%同时成立时。 
+  如果 MDE-H-VEL 与 MNDE-V-VEL 同时有效（只有这 2 个传感器个传感器），MDE-H-VEL 大于 3 倍 MNDE-V-VEL、MDE-H-VEL 主频幅值大于通频值的 80%同时成立时。 
+  如果 MNDE-H-VEL 与 MDE-V-VEL 同时有效（只有这 2 个传感器个传感器），MNDE-H-VEL 大于 3 倍 MDE-V-VEL、MNDE-H-VEL 主频幅值大于通频值的 80%同时成立时。 
+  如果 MDE-H-VEL 有效（只有 1 个传感器），MDE-H-VEL 主频幅值大于通频值的 80%成 立。 
+  如果 MNDE-H-VEL 有效（只有 1 个传感器），MNDE-H-VEL 主频幅值大于通频值的 80% 成立时。 
+  如果 MDE-V-VEL 有效（只有 1 个传感器），MDE-V-VEL 主频幅值大于通频值的 90%成立。 
+  如果 MNDE-V-VEL 有效（只有 1 个传感器），MNDE-V-VEL 主频幅值大于通频值的 90% 成立。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            const double verticalScale = 3;
+            const double overallScale = 0.8;
+            var deVels = DEPoints.VelPoints;
+            var points = deVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var ndeVels = NDEPoints.VelPoints;
+            points = ndeVels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var vels = Points.VelPoints;
+            points = vels.GetFirstByDirectionIds(PntDirectionID.Horizontal, PntDirectionID.Vertical);
+            if(points.AllNotNull()) return CalcUNBL_HV(points[0], points[1], code, verticalScale, overallScale);
+
+            var point = CollectionUtils.FirstOrDefault(p => p.IsHorizontal, deVels, ndeVels);
+            if (point != null) return CalcUNBL_H(point, code);
+            point = CollectionUtils.FirstOrDefault(p => p.IsVertical, deVels, ndeVels);
+            if (point != null) return CalcUNBL_V(point, code);
+            return false;
+        }
+        /// <summary>
+        /// 计算 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL11(PointData pnt)
+        {
+            /*
+            11）UNBL11---电机--卧式、弹性基础 
+（1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
+成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
+（2）（测点 X 按以下对号入座） 
+  如果 X 测点为 FDE-H-VEL、FDE-V-VEL、FNDE-H-VEL、FNDE-V-VEL 的其中一个，测点 X 其 主频幅值大于通频值的 80%成立。 
+             */
+            if (!IsSpeedMatchUnbalance(pnt)) return false;
+
+            var code = EquipmentFaultType.Generic.Imbalance001;
+
+            var deVels = DEPoints.VelPoints;
+
+            var ndeVels = NDEPoints.VelPoints;
+
+            var vels = Points.VelPoints;
+
+            var point = deVels.FirstOrDefault(p => p.IsHorizontal) ??
+                deVels.FirstOrDefault(p => p.IsVertical) ??
+                ndeVels.FirstOrDefault(p => p.IsHorizontal) ??
+                ndeVels.FirstOrDefault(p => p.IsVertical);
+
+            if (point != null) return CalcUNBL_OnePoint(point, code, 0.8);
+            return false;
+        }
+
+        /// <summary>
+        /// 计算 水平 垂直 两个测点 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL_HV(PointData horizontal, PointData vertical, string code, double verticalScale = 2, double overallScale = 0.6)
+        { 
+            if (!(verticalScale * vertical.MeasureValue < horizontal.MeasureValue)) return false;
+            var point = horizontal;
+            var timewave = point.TimewaveData;
+            if(overallScale * timewave.Overall < timewave.X1)
+            {
+                Config.Logger.Info(code);
+                AddPossibleFault(point, code);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// 计算 水平 一个测点 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL_H(PointData point, string code) => CalcUNBL_OnePoint(point, code, 0.8);
+        /// <summary>
+        /// 计算 垂直 一个测点 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL_V(PointData point, string code) => CalcUNBL_OnePoint(point, code, 0.9);
+        /// <summary>
+        /// 计算 轴向 一个测点 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL_A(PointData point, string code) => CalcUNBL_OnePoint(point, code, 0.9);
+        /// <summary>
+        /// 计算 垂直 一个测点 不平衡故障  
+        /// </summary>
+        /// <returns>true:存在故障</returns>
+        protected virtual bool CalcUNBL_OnePoint(PointData point, string code, double x1Scale)
+        { 
+            var timewave = point.TimewaveData;
+            if(x1Scale * timewave.Overall < timewave.X1)
+            {
+                Config.Logger.Info(code);
+                AddPossibleFault(point, code);
+                return true;
+            }
+            return false;
+        }
         #endregion
 
         #region 计算轴承
@@ -641,29 +1206,16 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 个达到报警值，或者所有测点振动加速度有效值虽然都没有达到报警值，但其中任一个测点在 4 天内的振动加速度峰
 值趋势直线拟合斜率大于 0.417。 
              */
-            //todo
-            PointData ret = null;
-            return ret;
+            var points = Points.AccPoints;
+            var pMaxAlmVel = points.Where(p => p.IsAlm).MaxMeasureValueP();
+            if (pMaxAlmVel != null) return pMaxAlmVel;
 
-            bool Calc(PointDataCollection velPoints, string code)
-            {
-                if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
-                var summary = point.HistorySummaryData;
-                var timewave = point.TimewaveData;
-
-                double limit = 0.5 * timewave.HighestPeak;
-                var xHz100 = timewave.XHz100;
-                int startIndex = 0;
-                var count = ArrayUtils.Count(xHz100, startIndex, 5, v => limit < v);
-                if (3 <= count)
-                {
-                    Config.Logger.Info(code);
-                    AddPossibleFault(point, code);
-                    return true;
-                }
-                return false;
-            }
+            const int days = 4;
+            const double limit_slope = 0.417;
+            List<PointData> list = new List<PointData>();
+            foreach( var p in points)
+                if (limit_slope < GetSlopeByDays(p, days)) list.Add(p);
+            return list.MaxMeasureValueP();
         }
         /// <summary>
         /// 是否速度测点趋势报警 
@@ -677,9 +1229,16 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 一个测点在 4 天内的振动速度有效值趋势直线拟合斜率大
 于 0.375，则按以下进行配合间隙不良故障诊断分析。 
              */
-            //todo
-            PointData ret = null;
-            return ret;
+            var points = Points.VelPoints;
+            var pMaxAlm = points.Where(p => p.IsAlm).MaxMeasureValueP();
+            if (pMaxAlm != null) return pMaxAlm;
+
+            const int days = 4;
+            const double limit_slope = 0.375;
+            List<PointData> list = new List<PointData>();
+            foreach( var p in points)
+                if (limit_slope < GetSlopeByDays(p, days)) list.Add(p);
+            return list.MaxMeasureValueP();
         }
 
         #endregion

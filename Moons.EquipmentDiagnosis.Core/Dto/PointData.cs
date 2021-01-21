@@ -1,10 +1,51 @@
 using AnalysisAlgorithm.FFT;
+using Moons.Common20;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Moons.EquipmentDiagnosis.Core.Dto
 {
+    /// <summary>
+    /// PointData 集合扩展类
+    /// </summary>
+    public static class PointDatasExtensions
+    {
+        /// <summary>
+        /// 返回最大测量值对应的测点
+        /// </summary>
+        /// <param name="points"></param>
+        /// <returns></returns>
+        public static PointData MaxMeasureValueP(this IEnumerable<PointData> points) => points.MaxItem(p => p.MeasureValue);
+
+        /// <summary>
+        /// 清空N天查询记录缓存
+        /// </summary>
+        /// <param name="points"></param>
+        public static void ClearNDaysCache(this IEnumerable<PointData> points) { foreach (var p in points) p.NDaysRecordsCache = null; }
+
+        /// <summary>
+        /// 根据directionID返回若干测点
+        /// </summary>
+        /// <param name="points">测点集合</param>
+        /// <param name="directionIds"></param>
+        /// <returns>指定的测点，不存在返回null</returns>
+        public static PointData[] GetFirstByDirectionIds(this IEnumerable<PointData> points, params int[] directionIds)
+        {
+            PointData[] ret = new PointData[directionIds.Length];
+            for (int i = 0; i < ret.Length; i++) ret[i] = points.FirstOrDefault(p => p.PntDirect_NR == directionIds[i]);
+            return ret;
+        }
+        /// <summary>
+        /// 根据directionID返回测点
+        /// </summary>
+        /// <param name="points">测点集合</param>
+        /// <param name="directionId"></param>
+        /// <returns>指定的测点，不存在返回null</returns>
+        public static PointData GetFirstByDirectionId(this IEnumerable<PointData> points, int directionId) =>
+            points.FirstOrDefault(p => p.PntDirect_NR == directionId);
+    }
+
     /// <summary>
     /// 测点数据
     /// </summary>
@@ -133,6 +174,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 引用的代表数据库记录的测点对象
         /// </summary>
         public object RefPointOfDb { get; set; }
+
+        /// <summary>
+        /// N天查询记录的缓存
+        /// </summary>
+        public Int32MinuteSummary[] NDaysRecordsCache { get; set; }
     }
     
     public class PointDataCollection : List<PointData>
@@ -421,6 +467,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         /// 采样时间
         /// </summary>
         public int SampleMinute { get; set; }
+
+        /// <summary>
+        /// 分钟转速
+        /// </summary>
+        public int Rev { get; set; }
 
         /// <summary>
         /// 测量值

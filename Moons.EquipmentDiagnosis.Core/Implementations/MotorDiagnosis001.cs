@@ -38,18 +38,17 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 CalcCLEARANCE();
                 CalcFDLOOSE();
                 CalcSTRESS();
-            }
-            if (PartParameter.IsStiffBase) // 刚性基础
-            {
-                //todo 不对中 MISAGN3 
-                //todo 不平衡 UNBL10 
+                if (PartParameter.IsStiffBase) // 刚性基础
+                {
+                    //todo 不对中 MISAGN3 
+                    CalcUNBL10(almPoint);
 
-            }
-            else // 柔性基础
-            {
-                //todo 不对中 MISAGN4 
-                //todo UNBL11
-
+                }
+                else // 弹性基础
+                {
+                    //todo 不对中 MISAGN4 
+                    CalcUNBL11(almPoint);
+                }
             }
         }
 
@@ -89,7 +88,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             bool Calc(PointDataCollection velPoints, string code)
             {
                 if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var point = velPoints.MaxMeasureValueP();
                 var summary = point.HistorySummaryData;
                 var timewave = point.TimewaveData;
 
@@ -122,7 +121,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             bool Calc(PointDataCollection velPoints, string code)
             {
                 if (0 == velPoints.Count) return false;
-                var point = velPoints.MaxItem(p => p.HistorySummaryData.MeasureValue);
+                var point = velPoints.MaxMeasureValueP();
                 var summary = point.HistorySummaryData;
                 var timewave = point.TimewaveData;
 

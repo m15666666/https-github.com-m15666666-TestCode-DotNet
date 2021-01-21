@@ -15,7 +15,7 @@ namespace AnalysisData.Constants
         public const int Stiffness = 0;
 
         /// <summary>
-        /// 柔性基础
+        /// 弹性基础
         /// </summary>
         public const int Flexibility = 1;
     }

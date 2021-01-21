@@ -859,8 +859,10 @@ namespace DataSampler.Helper
             if (string.IsNullOrEmpty(id))
             {
                 var ip = IPAddress.IP;
-                if ( ip.StartsWith("127.") && ip != "127.0.0.1" ) id = ip;
+                if (ip.StartsWith("127.") && ip != "127.0.0.1") id = ip;
             }
+            else id = StringUtils.TrimToLower(id);
+
             if (!string.IsNullOrEmpty(id))
             {
                 var map = DataSamplerController.Instance._ip2SocketOfControl;

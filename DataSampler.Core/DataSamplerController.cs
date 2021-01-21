@@ -603,7 +603,11 @@ namespace DataSampler
             {
                 case CommandID.UploadData2DB:
                     {
-                        Upload2DB(commandMessage.Data);
+                        if(commandMessage.Data is VarStructArray array)
+                        {
+                            foreach (var data in array) Upload2DB(data);
+                        }
+                        else Upload2DB(commandMessage.Data);
                         break;
                     }
 

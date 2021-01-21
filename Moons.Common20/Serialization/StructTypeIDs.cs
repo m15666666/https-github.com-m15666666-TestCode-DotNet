@@ -1,4 +1,4 @@
-﻿namespace Moons.Common20.Serialization
+namespace Moons.Common20.Serialization
 {
     /// <summary>
     ///     结构类型ID
@@ -9,6 +9,11 @@
         ///     空的自定义数据的结构类型ID
         /// </summary>
         public const int EmptyCustomData = 0;
+
+        /// <summary>
+        ///     变长结构体数组
+        /// </summary>
+        public const int VarStructArray = 91;
 
         /// <summary>
         ///     变长字符串

@@ -859,6 +859,20 @@ namespace Moons.Common20.Serialization
                             StructTypeIDs.ByteArray,
                             toFromBytesUtils => toFromBytesUtils.ReadBytes( toFromBytesUtils.ByteCountLeft2Read )
                         },
+
+                        // 变长结构体数组
+                        {
+                            StructTypeIDs.VarStructArray,
+                            toFromBytesUtils => {
+                                int size = Math.Min(toFromBytesUtils.ReadInt32(), 1000); // 目前最多一次传送1000个结构体
+                                int structTypeID = toFromBytesUtils.ReadInt32();
+                                toFromBytesUtils.ByteCountLeft2Read -= 8;
+
+                                VarStructArray ret = new VarStructArray{StructTypeID = structTypeID};
+                                for( int i = 0; i < size; i++) ret.Add(ReadBodyMessage(toFromBytesUtils,structTypeID));
+                                return ret;
+                            }
+                        },
                     };
 
         /// <summary>
@@ -1038,16 +1052,37 @@ namespace Moons.Common20.Serialization
             int structTypeID = toFromBytesUtils.ReadInt32();
             toFromBytesUtils.ByteCountLeft2Read -= 8;
 
-            Func20<ToFromBytesUtils, object> handler = _structTypeID2CustomDataReader[structTypeID];
-            if( handler == null )
-            {
-                throw new ArgumentOutOfRangeException( string.Format( "Unkown struct type ID({0}).", structTypeID ) );
-            }
-
-            toFromBytesUtils.LogHandler("tofrombytes begin handle.");
-            object data = handler( toFromBytesUtils );
-            toFromBytesUtils.LogHandler("tofrombytes end handle.");
+            object data = ReadBodyMessage(toFromBytesUtils,structTypeID);
             return new CommandMessage {CommandID = commandID, StructTypeID = structTypeID, Data = data};
+        }
+
+        /// <summary>
+        ///     读取一个Body段数据对象
+        /// </summary>
+        /// <param name="toFromBytesUtils">ToFromBytesUtils</param>
+        /// <param name="structTypeID">类型ID</param>
+        /// <returns>一个Body段数据对象</returns>
+        private static object ReadBodyMessage(ToFromBytesUtils toFromBytesUtils, int structTypeID )
+        {
+            Func20<ToFromBytesUtils, object> handler = GetCustomDataReaderByStructTypeID(structTypeID);
+
+            toFromBytesUtils.LogHandler($"tofrombytes begin handle. {structTypeID}");
+            object data = handler( toFromBytesUtils );
+            toFromBytesUtils.LogHandler($"tofrombytes end handle. {structTypeID}");
+            return data;
+        }
+
+        /// <summary>
+        /// 根据structTypeID获得自定义的读取函数
+        /// </summary>
+        /// <param name="structTypeID">类型ID</param>
+        /// <returns></returns>
+        private static Func20<ToFromBytesUtils, object> GetCustomDataReaderByStructTypeID(int structTypeID)
+        {
+            Func20<ToFromBytesUtils, object> handler = _structTypeID2CustomDataReader[structTypeID];
+            return handler == null
+                ? throw new ArgumentOutOfRangeException( string.Format( "Unkown struct type ID({0}).", structTypeID ) )
+                : handler;
         }
 
         /// <summary>
