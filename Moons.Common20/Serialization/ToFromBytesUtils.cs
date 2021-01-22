@@ -22,11 +22,19 @@ namespace Moons.Common20.Serialization
             DefaultStringByteCount = 128;
         }
 
+        ///// <summary>
+        ///// ctor
+        ///// </summary>
+        ///// <param name="reader"></param>
+        //public ToFromBytesUtils( BinaryReader reader )
+        //{
+        //    Reader = reader;
+        //}
         /// <summary>
         /// ctor
         /// </summary>
         /// <param name="reader"></param>
-        public ToFromBytesUtils( BinaryReader reader )
+        public ToFromBytesUtils( IBinaryRead reader )
         {
             Reader = reader;
         }
@@ -35,7 +43,7 @@ namespace Moons.Common20.Serialization
         /// ctor
         /// </summary>
         /// <param name="writer"></param>
-        public ToFromBytesUtils( BinaryWriter writer )
+        public ToFromBytesUtils( IBinaryWrite writer )
         {
             Writer = writer;
         }
@@ -57,12 +65,14 @@ namespace Moons.Common20.Serialization
         /// <summary>
         ///     内部BinaryReader
         /// </summary>
-        private BinaryReader Reader { get; set; }
+        //private BinaryReader Reader { get; set; }
+        private IBinaryRead Reader { get; set; }
 
         /// <summary>
         ///     内部BinaryWriter
         /// </summary>
-        private BinaryWriter Writer { get; set; }
+        //private BinaryWriter Writer { get; set; }
+        private IBinaryWrite Writer { get; set; }
 
         /// <summary>
         /// Reader的基础流中还可以读取的字节数，用于：StructTypeIDs.ByteArray。
@@ -91,7 +101,7 @@ namespace Moons.Common20.Serialization
         /// </summary>
         /// <param name="reader">BinaryReader</param>
         /// <returns>字符串</returns>
-        public static string ReadVarString( BinaryReader reader )
+        public static string ReadVarString( IBinaryRead reader )
         {
             int encodingId = reader.ReadInt32();
 
@@ -125,7 +135,7 @@ namespace Moons.Common20.Serialization
         /// </summary>
         /// <param name="reader">BinaryReader</param>
         /// <returns>字符串</returns>
-        public static string ReadString( BinaryReader reader )
+        public static string ReadString( IBinaryRead reader )
         {
             return ReadString( reader, DefaultStringByteCount );
         }
@@ -136,7 +146,7 @@ namespace Moons.Common20.Serialization
         /// <param name="reader">BinaryReader</param>
         /// <param name="count">字节数</param>
         /// <returns>字符串</returns>
-        public static string ReadString( BinaryReader reader, int count )
+        public static string ReadString( IBinaryRead reader, int count )
         {
             return StringUtils.GBBytes2String( reader.ReadBytes( count ) );
         }
@@ -178,7 +188,7 @@ namespace Moons.Common20.Serialization
         /// </summary>
         /// <param name="writer">BinaryWriter</param>
         /// <param name="text">字符串</param>
-        public static void WriteString( BinaryWriter writer, string text )
+        public static void WriteString( IBinaryWrite writer, string text )
         {
             WriteString( writer, text, DefaultStringByteCount );
         }
@@ -189,7 +199,7 @@ namespace Moons.Common20.Serialization
         /// <param name="writer">BinaryWriter</param>
         /// <param name="text">字符串</param>
         /// <param name="count">字节数</param>
-        public static void WriteString( BinaryWriter writer, string text, int count )
+        public static void WriteString( IBinaryWrite writer, string text, int count )
         {
             writer.Write( StringUtils.GetGBFixLengthBytes( text, count ) );
         }
@@ -219,7 +229,7 @@ namespace Moons.Common20.Serialization
         /// <param name="writer">BinaryWriter</param>
         /// <param name="text">字符串</param>
         /// <param name="stringEncodingId">StringEncodingID</param>
-        public static void WriteVarString( BinaryWriter writer, string text, StringEncodingID stringEncodingId )
+        public static void WriteVarString( IBinaryWrite writer, string text, StringEncodingID stringEncodingId )
         {
             // 字符串编码ID，目前有：0：字节流中没有后续内容，1：ASCII，2：UTF8，4：BigEndianUnicode，8：Unicode，16：GB2312。
             int encodingId = 0;
@@ -252,14 +262,14 @@ namespace Moons.Common20.Serialization
 
         #region 读数据基本函数
 
-        /// <summary>
-        /// 读取bool值
-        /// </summary>
-        /// <returns></returns>
-        public bool ReadBoolean()
-        {
-            return Reader.ReadBoolean();
-        }
+        ///// <summary>
+        ///// 读取bool值
+        ///// </summary>
+        ///// <returns></returns>
+        //public bool ReadBoolean()
+        //{
+        //    return Reader.ReadBoolean();
+        //}
 
         /// <summary>
         ///     读取一个Int32类型作为bool值
@@ -296,9 +306,9 @@ namespace Moons.Common20.Serialization
         /// <returns>int数据</returns>
         public int ReadInt32()
         {
-            LogHandler("ReadInt32 begin");
+            //LogHandler("ReadInt32 begin");
             var ret = Reader.ReadInt32();
-            LogHandler($"ReadInt32: {ret}");
+            //LogHandler($"ReadInt32: {ret}");
             return ret;
         }
 
@@ -397,10 +407,12 @@ namespace Moons.Common20.Serialization
         private T[] ReadArray<T>( Func20<T> readHandler )
         {
             int count = ReadInt32();
-            if( count == 0 )
-            {
-                return new T[0];
-            }
+            if( count == 0 ) return new T[0];
+
+            if (typeof(T) == typeof(byte)) return Reader.ReadBytes(count) as T[];
+            if (typeof(T) == typeof(short)) return Reader.ReadInt16Array(count) as T[];
+            if (typeof(T) == typeof(int)) return Reader.ReadInt32Array(count) as T[];
+            if (typeof(T) == typeof(float)) return Reader.ReadSingleArray(count) as T[];
 
             var ret = new T[count];
             ReadArray( ret, readHandler );
@@ -539,9 +551,12 @@ namespace Moons.Common20.Serialization
         {
             float waveScale = ReadSingle();
             int itemLength = ReadInt32();
-            byte[] waveData = ReadByteArray();
-            var ret = new VarByteArrayWave {WaveScale = waveScale, ItemLength = itemLength, WaveData = waveData};
-            ret.InitInnerIntData();
+            //byte[] waveData = ReadByteArray();
+            //var ret = new VarByteArrayWave {WaveScale = waveScale, ItemLength = itemLength, WaveData = waveData};
+            //ret.InitInnerIntData();
+            int byteCount = ReadInt32();
+            var ret = new VarByteArrayWave {WaveScale = waveScale, ItemLength = itemLength};
+            ret.InitInnerIntData(Reader, byteCount);
             return ret;
         }
 
@@ -570,10 +585,10 @@ namespace Moons.Common20.Serialization
 
         #region 写数据基本函数
 
-        public void WriteBoolean( bool value )
-        {
-            Writer.Write( value );
-        }
+        //public void WriteBoolean( bool value )
+        //{
+        //    Writer.Write( value );
+        //}
 
         /// <summary>
         ///     写入一个Int32作为bool值
@@ -1007,10 +1022,16 @@ namespace Moons.Common20.Serialization
         /// <returns>命令对象</returns>
         public static CommandMessage ReadCommandMessage(byte[] bytes, int offset, int size, Action<ToFromBytesUtils> initHandler = null)
         {
-            using (MemoryStream stream = new MemoryStream(bytes, offset, size))
+            using (var reader = new ByteArrayReader(bytes,offset,size))
             {
-                return ReadCommandMessage(stream, initHandler);
+                var tofromUtils = new ToFromBytesUtils(reader) { ByteCountLeft2Read = size };
+                initHandler?.Invoke(tofromUtils);
+                return ReadCommandMessage(tofromUtils);
             }
+            //using (MemoryStream stream = new MemoryStream(bytes, offset, size))
+            //{
+            //    return ReadCommandMessage(stream, initHandler);
+            //}
         }
         /// <summary>
         ///     解析命令对象
@@ -1020,10 +1041,6 @@ namespace Moons.Common20.Serialization
         public static CommandMessage ReadCommandMessage(byte[] bytes)
         {
             return ReadCommandMessage(bytes, 0, bytes.Length);
-            //using (MemoryStream stream = new MemoryStream(bytes))
-            //{
-            //    return ReadCommandMessage(stream);
-            //}
         }
 
         /// <summary>
@@ -1033,7 +1050,7 @@ namespace Moons.Common20.Serialization
         /// <returns>命令对象</returns>
         public static CommandMessage ReadCommandMessage(Stream stream, Action<ToFromBytesUtils> initHandler = null)
         {
-            using (var reader = new BinaryReader(stream))
+            using (var reader = new BinaryRead(stream))
             {
                 var tofromUtils = new ToFromBytesUtils(reader) { ByteCountLeft2Read = (int)stream.Length };
                 initHandler?.Invoke(tofromUtils);
@@ -1094,7 +1111,7 @@ namespace Moons.Common20.Serialization
         {
             using( var stream = new MemoryStream() )
             {
-                using( var writer = new BinaryWriter( stream ) )
+                using( var writer = new BinaryWrite( stream ) )
                 {
                     WriteCommandMessage( commandMessage, new ToFromBytesUtils( writer ) );
                 }

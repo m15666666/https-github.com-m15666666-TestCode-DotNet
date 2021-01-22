@@ -13,5 +13,7 @@ namespace Moons.Common20.Serialization
         /// 结构类型ID
         /// </summary>
         public int StructTypeID { get; set; }
+
+        public override string ToString() => $"VSA:STID={StructTypeID}:{Count}";
     }
 }

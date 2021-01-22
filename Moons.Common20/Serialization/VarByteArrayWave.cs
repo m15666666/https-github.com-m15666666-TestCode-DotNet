@@ -38,6 +38,10 @@ namespace Moons.Common20.Serialization
         public byte[] WaveData { get; set; }
 
         /// <summary>
+        /// 内部的Int16类型数组
+        /// </summary>
+        private short[] InnerInt16Data { get; set; }
+        /// <summary>
         /// 内部的Int32类型数组
         /// </summary>
         private int[] InnerInt32Data { get; set; }
@@ -53,14 +57,20 @@ namespace Moons.Common20.Serialization
         {
             get
             {
-                int[] intData = InnerInt32Data;
-                if( intData != null )
+                if( InnerInt16Data  != null )
                 {
-                    var ret = new double[intData.Length];
-                    for( int index = 0; index < ret.Length; index++ )
-                    {
-                        ret[index] = intData[index] * WaveScale;
-                    }
+                    var data = InnerInt16Data;
+                    int len = data.Length;
+                    var ret = new double[len];
+                    for( int index = 0; index < len; index++ ) ret[index] = data[index] * WaveScale;
+                    return ret;
+                }
+                if( InnerInt32Data != null )
+                {
+                    var data = InnerInt32Data;
+                    int len = data.Length;
+                    var ret = new double[len];
+                    for( int index = 0; index < len; index++ ) ret[index] = data[index] * WaveScale;
                     return ret;
                 }
 
@@ -78,17 +88,24 @@ namespace Moons.Common20.Serialization
         /// <summary>
         /// 初始化内部整形的数据
         /// </summary>
-        public void InitInnerIntData()
+        private void ClearInnerIntData()
         {
+            InnerInt16Data = null;
             InnerInt32Data = null;
             InnerFloatData = null;
+        }
+
+        /// <summary>
+        /// 初始化内部整形的数据
+        /// </summary>
+        public void InitInnerIntData()
+        {
+            ClearInnerIntData();
 
             switch( ItemLength )
             {
                 case ItemType_Int16:
-                    short[] int16Data = ByteUtils.Bytes2Int16Array( WaveData );
-                    InnerInt32Data = new int[int16Data.Length];
-                    int16Data.CopyTo( InnerInt32Data, 0 );
+                    InnerInt16Data = ByteUtils.Bytes2Int16Array( WaveData );
                     return;
 
                 case ItemType_Int32:
@@ -97,6 +114,29 @@ namespace Moons.Common20.Serialization
 
                 case ItemType_Float32:
                     InnerFloatData = ByteUtils.Bytes2SingleArray( WaveData );
+                    return;
+            }
+            throw new ArgumentOutOfRangeException( string.Format( "Invalid ItemLength({0})", ItemLength ) );
+        }
+        /// <summary>
+        /// 初始化内部整形的数据
+        /// </summary>
+        public void InitInnerIntData(IBinaryRead binaryRead, int byteCount)
+        {
+            ClearInnerIntData();
+
+            switch( ItemLength )
+            {
+                case ItemType_Int16:
+                    InnerInt16Data = binaryRead.ReadInt16Array(byteCount / ByteUtils.ByteCountPerInt16);
+                    return;
+
+                case ItemType_Int32:
+                    InnerInt32Data = binaryRead.ReadInt32Array(byteCount / ByteUtils.ByteCountPerInt32);
+                    return;
+
+                case ItemType_Float32:
+                    InnerFloatData =  binaryRead.ReadSingleArray(byteCount / ByteUtils.ByteCountPerSingle);
                     return;
             }
             throw new ArgumentOutOfRangeException( string.Format( "Invalid ItemLength({0})", ItemLength ) );

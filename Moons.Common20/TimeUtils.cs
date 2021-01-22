@@ -1,3 +1,4 @@
+using Moons.Common20.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -305,6 +306,22 @@ namespace Moons.Common20
         }
 
         /// <summary>
+        /// 转化为以8个字节表示到秒的日期时间格式的字节数组
+        /// </summary>
+        /// <param name="writer">BinaryWriter</param>
+        /// <param name="dateTime">DateTime</param>
+        public static void ToDateTime8Bytes( IBinaryWrite writer, DateTime dateTime )
+        {
+            writer.Write( (short)dateTime.Year );
+            writer.Write( (byte)dateTime.Month );
+            writer.Write( (byte)dateTime.Day );
+            writer.Write( DayOfWeek2Byte( dateTime.DayOfWeek ) );
+            writer.Write( (byte)dateTime.Hour );
+            writer.Write( (byte)dateTime.Minute );
+            writer.Write( (byte)dateTime.Second );
+        }
+
+        /// <summary>
         /// 将字节数组转化为以8个字节表示到秒的日期时间格式的DateTime
         /// </summary>
         /// <param name="bytes">字节数组</param>
@@ -326,6 +343,26 @@ namespace Moons.Common20
         /// <param name="reader">BinaryReader</param>
         /// <returns>DateTime</returns>
         public static DateTime FromDateTime8Bytes( BinaryReader reader )
+        {
+            int year = reader.ReadInt16();
+            int month = reader.ReadByte();
+            int day = reader.ReadByte();
+// ReSharper disable UnusedVariable
+            int dayOfWeek = reader.ReadByte();
+// ReSharper restore UnusedVariable
+            int hour = reader.ReadByte();
+            int minute = reader.ReadByte();
+            int second = reader.ReadByte();
+
+            return new DateTime( year, month, day, hour, minute, second );
+        }
+
+        /// <summary>
+        /// 将字节数组转化为以8个字节表示到秒的日期时间格式的DateTime
+        /// </summary>
+        /// <param name="reader">BinaryReader</param>
+        /// <returns>DateTime</returns>
+        public static DateTime FromDateTime8Bytes( IBinaryRead reader )
         {
             int year = reader.ReadInt16();
             int month = reader.ReadByte();
@@ -375,6 +412,16 @@ namespace Moons.Common20
         /// <param name="reader">BinaryReader</param>
         /// <returns>DateTime</returns>
         public static DateTime FromDateTime14Bytes( BinaryReader reader )
+        {
+            return FromDateTime14Bytes( reader.ReadBytes( DateTimeFormat_DateTime14.Length ) );
+        }
+
+        /// <summary>
+        /// 将字节数组转化为以14个字符表示到秒的日期时间格式的DateTime
+        /// </summary>
+        /// <param name="reader">BinaryReader</param>
+        /// <returns>DateTime</returns>
+        public static DateTime FromDateTime14Bytes( IBinaryRead reader )
         {
             return FromDateTime14Bytes( reader.ReadBytes( DateTimeFormat_DateTime14.Length ) );
         }

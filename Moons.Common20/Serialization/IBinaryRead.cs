@@ -1,4 +1,4 @@
-﻿namespace Moons.Common20.Serialization
+namespace Moons.Common20.Serialization
 {
     /// <summary>
     ///     二进制读接口
@@ -80,5 +80,26 @@
         /// </summary>
         /// <returns>值</returns>
         double ReadDouble();
+
+        /// <summary>
+        /// 读取指定长度的int16类型的数组
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        short[] ReadInt16Array(int count);
+
+        /// <summary>
+        /// 读取指定长度的int32类型的数组
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        int[] ReadInt32Array(int count);
+
+        /// <summary>
+        /// 读取指定长度的Single类型的数组
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        float[] ReadSingleArray(int count);
     }
 }

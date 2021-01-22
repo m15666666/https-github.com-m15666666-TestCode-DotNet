@@ -28,6 +28,7 @@ namespace Moons.Common20.Test
         
         static void Main(string[] args)
         {
+            TestStream.TestBinaryRead();
             TestAsyncConsumerQueue();
             Console.Read();
             #region 为了调用roslyn时，能从默认的程序域中加载所有需要的程序集，需要先预先调用“需要的程序集”一下

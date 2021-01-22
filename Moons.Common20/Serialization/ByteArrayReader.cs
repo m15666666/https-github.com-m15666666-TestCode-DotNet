@@ -1,4 +1,5 @@
-﻿using System.IO;
+using System;
+using System.IO;
 
 namespace Moons.Common20.Serialization
 {
@@ -39,6 +40,48 @@ namespace Moons.Common20.Serialization
         public static ByteArrayReader CreateByArrayLength( int length )
         {
             return new ByteArrayReader( new byte[length] );
+        }
+
+        public override short[] ReadInt16Array(int count)// 性能好一些4334ms
+        {
+            const int Size = ByteUtils.ByteCountPerInt16;
+            
+            long pos = base.BaseStream.Position;
+            var ret = new short[count];
+            var buffer = Buffer;
+            for(int i = 0, start = Offset + (int)pos; i < count; i++, start += Size)
+                ret[i] = BitConverter.ToInt16(buffer, start);
+
+            base.BaseStream.Position = pos + Size * count;
+            return ret;
+        }
+
+        public override int[] ReadInt32Array(int count)
+        {
+            const int Size = ByteUtils.ByteCountPerInt32;
+            
+            long pos = base.BaseStream.Position;
+            var ret = new int[count];
+            var buffer = Buffer;
+            for(int i = 0, start = Offset + (int)pos; i < count; i++, start += Size)
+                ret[i] = BitConverter.ToInt32(buffer, start);
+
+            base.BaseStream.Position = pos + Size * count;
+            return ret;
+        }
+
+        public override float[] ReadSingleArray(int count)
+        {
+            const int Size = ByteUtils.ByteCountPerSingle;
+            
+            long pos = base.BaseStream.Position;
+            var ret = new float[count];
+            var buffer = Buffer;
+            for(int i = 0, start = Offset + (int)pos; i < count; i++, start += Size)
+                ret[i] = BitConverter.ToSingle(buffer, start);
+
+            base.BaseStream.Position = pos + Size * count;
+            return ret;
         }
 
         #endregion

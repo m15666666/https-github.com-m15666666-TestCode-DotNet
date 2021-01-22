@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 
 namespace Moons.Common20.Serialization
 {
@@ -17,7 +17,7 @@ namespace Moons.Common20.Serialization
         /// 从字节数组读出属性
         /// </summary>
         /// <param name="reader">BinaryReader</param>
-        void FromBytes( BinaryReader reader );
+        void FromBytes( IBinaryRead reader );
     }
 
     /// <summary>
