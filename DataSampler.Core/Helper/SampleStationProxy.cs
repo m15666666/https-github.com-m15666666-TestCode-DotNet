@@ -754,6 +754,8 @@ namespace DataSampler.Helper
 
         #region 辅助函数
 
+        #region 用于外部工具的函数
+
         /// <summary>
         ///     发送并接收一个命令消息对象，只用于兼容辛磊编写的“HDInitUtility”工具中的指令
         /// </summary>
@@ -788,6 +790,24 @@ namespace DataSampler.Helper
                 }
             }
         }
+
+        /// <summary>
+        ///     发送一个完整的字节包并接收一个命令消息对象，只用于外部测试工具
+        /// </summary>
+        /// <param name="wholePackageBytes">完整的字节包，一般从日志文件中获得，比如历史数据</param>
+        public void SendReceiveCommandBytes( byte[] wholePackageBytes )
+        {
+            using( SocketWrapper socketWrapper = CreateSocket() )
+            {
+                PackageSendReceive sendReceive = PackageSendReceive.CreatePackageSendReceive( socketWrapper );
+
+                sendReceive.SendBytes(wholePackageBytes);
+
+                sendReceive.ReceivePackage();
+            }
+        }
+
+        #endregion
 
         /// <summary>
         ///     发送并接收一个命令消息对象

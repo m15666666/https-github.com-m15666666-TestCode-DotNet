@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using DotNetty.Buffers;
 using DotNetty.Codecs;
@@ -13,6 +14,7 @@ namespace DataSampler.Core.Helper
     /// </summary>
     public class SamplerDecoder : ByteToMessageDecoder
     {
+        private readonly Stopwatch _sw = new Stopwatch();
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {
             var contextInfo = $"{Config.GetContextInfo(context)}: sampler decoder({GetHashCode()}) ";
@@ -30,29 +32,38 @@ namespace DataSampler.Core.Helper
                 }
                 input.MarkReaderIndex();
 
+                _sw.Restart();
+
                 //var headBytes = new byte[headCount];
                 //input.ReadBytes(headBytes);
                 //PackageSendReceive.CheckPart1(headBytes);
                 //PackageSendReceive.CheckPart2(headBytes, out bodyLength);
 
-                var headBuffer = input.ReadBytes(headCount);
+                //var headBuffer = input.ReadBytes(headCount);
+                var headBuffer = input.ReadSlice(headCount);
                 int bodyLength;
                 try
                 {
                     ArraySegment<byte> ioBuf = headBuffer.GetIoBuffer();
                     var headBytes = ioBuf.Array;
                     int offset = ioBuf.Offset;
-                    int count = ioBuf.Count;
+                    //int count = ioBuf.Count;
+                    int count = headCount;
                     PackageSendReceive.CheckPart1(headBytes.AsSpan(offset, count));
-                    Config.LogTcp($"{contextInfo}: checkpart1", ioBuf);
+
+                    _sw.Stop();
+
+                    Config.LogTcp($"{contextInfo}: checkpart1,{_sw.ElapsedMilliseconds} ms", ioBuf);
+
+                    _sw.Restart();
 
                     PackageSendReceive.CheckPart2(headBytes, offset, count, out bodyLength);
-                    Config.LogTcp($"{contextInfo}: checkpart2,{nameof(bodyLength)}: {bodyLength}");
+                    //Config.LogTcp($"{contextInfo}: checkpart2,{nameof(bodyLength)}: {bodyLength}");
                 }
                 finally
                 {
-                    headBuffer?.Release();
-                    Config.LogTcp($"{contextInfo}: headbuffer?.release");
+                    //headBuffer.Release();
+                    //Config.LogTcp($"{contextInfo}: headbuffer?.release");
                 }
 
                 if (input.ReadableBytes < bodyLength + tailCount)
@@ -69,19 +80,22 @@ namespace DataSampler.Core.Helper
                 //input.ReadBytes(tailBytes);
                 //PackageSendReceive.CheckPart3( bodyBytes,0, bodyBytes.Length, tailBytes);
 
-                var bodyBuffer = input.ReadBytes(bodyLength + tailCount);
+                //var bodyBuffer = input.ReadBytes(bodyLength + tailCount);
+                var bodyBuffer = input.ReadRetainedSlice(bodyLength + tailCount);
                 {
                     ArraySegment<byte> ioBuf = bodyBuffer.GetIoBuffer();
                     var bodyBytes = ioBuf.Array;
                     int offset = ioBuf.Offset;
-                    Config.LogTcp($"{contextInfo}: checkpart3", ioBuf);
+                    //Config.LogTcp($"{contextInfo}: checkpart3", ioBuf);
 
                     var tailBytes = bodyBytes.AsSpan(offset + bodyLength, tailCount);
                     PackageSendReceive.CheckPart3(bodyBytes.AsSpan(offset, bodyLength), tailBytes);
 
                     output.Add(bodyBuffer);
+
+                    _sw.Stop();
                 }
-                Config.LogTcp($"{contextInfo}: {nameof(decodeCount)}: {++decodeCount}.");
+                Config.LogTcp($"{contextInfo}:dCount:{++decodeCount},{_sw.ElapsedMilliseconds} ms.");
 
                 //output.Add(bodyBytes);
             }

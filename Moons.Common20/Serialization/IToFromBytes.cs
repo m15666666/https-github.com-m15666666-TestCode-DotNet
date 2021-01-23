@@ -11,7 +11,7 @@ namespace Moons.Common20.Serialization
         /// 将对象转换为字节
         /// </summary>
         /// <param name="writer">BinaryWriter</param>
-        void ToBytes( BinaryWriter writer );
+        void ToBytes( IBinaryWrite writer );
 
         /// <summary>
         /// 从字节数组读出属性

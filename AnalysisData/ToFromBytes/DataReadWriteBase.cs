@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using Moons.Common20;
 using Moons.Common20.Serialization;
@@ -26,7 +26,7 @@ namespace AnalysisData.ToFromBytes
         /// <summary>
         /// BinaryWriter
         /// </summary>
-        public BinaryWriter BinaryWriter
+        public IBinaryWrite BinaryWriter
         {
             set { WriteBytesUtils = new ToFromBytesUtils( value ); }
         }
@@ -34,7 +34,7 @@ namespace AnalysisData.ToFromBytes
         /// <summary>
         /// BinaryReader
         /// </summary>
-        public BinaryReader BinaryReader
+        public IBinaryRead BinaryReader
         {
             set { ReadBytesUtils = new ToFromBytesUtils( value ); }
         }

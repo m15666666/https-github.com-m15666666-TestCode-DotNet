@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using AnalysisData.ToFromBytes;
 using DotNetty.Buffers;
@@ -17,22 +18,30 @@ namespace DataSampler.Core.Helper
     {
         //public override void ChannelActive(IChannelHandlerContext context) => context.WriteAndFlushAsync(this.initialMessage);
 
+        private readonly Stopwatch _sw = new Stopwatch();
+
         protected override void ChannelRead0(IChannelHandlerContext context, IByteBuffer message)
         {
             var contextInfo = $"{Config.GetContextInfo(context)}, hanlder({GetHashCode()})";
             Config.LogTcp($"{contextInfo}: read command messge begin...");
+
+            _sw.Restart();
+
             ArraySegment<byte> ioBuf = message.GetIoBuffer();
             var bodyBytes = ioBuf.Array;
             int offset = ioBuf.Offset;
             int count = ioBuf.Count;
-            Config.LogTcp($"{contextInfo}: SamplerServerHandler", ioBuf);
+            //Config.LogTcp($"{contextInfo}: SamplerServerHandler", ioBuf);
 
             //Action<string> logHandler = m =>  Config.LogTcp($"{contextInfo}: {m}");
             CommandMessage command = ToFromBytesUtils.ReadCommandMessage(bodyBytes, offset, count - PackageSendReceive.Count_Tail,
                 null//tofromUtils => tofromUtils.LogHandler = logHandler
                 );
 
+            _sw.Stop();
+
             //Config.LogTcp("read command messge end.");
+            Config.LogTcp($"{contextInfo}: sw:{_sw.ElapsedMilliseconds} ms");
             Config.LogCommandMessage(command, contextInfo);
             //Config.LogTcp("log command messge end.");
             Action<byte[]> sendHandler = bytes => context.WriteAsync(bytes);

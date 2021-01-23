@@ -88,7 +88,7 @@ namespace Moons.Common20.Serialization
         /// <summary>
         /// 初始化内部整形的数据
         /// </summary>
-        private void ClearInnerIntData()
+        private void ClearInnerData()
         {
             InnerInt16Data = null;
             InnerInt32Data = null;
@@ -100,7 +100,7 @@ namespace Moons.Common20.Serialization
         /// </summary>
         public void InitInnerIntData()
         {
-            ClearInnerIntData();
+            ClearInnerData();
 
             switch( ItemLength )
             {
@@ -123,7 +123,7 @@ namespace Moons.Common20.Serialization
         /// </summary>
         public void InitInnerIntData(IBinaryRead binaryRead, int byteCount)
         {
-            ClearInnerIntData();
+            ClearInnerData();
 
             switch( ItemLength )
             {

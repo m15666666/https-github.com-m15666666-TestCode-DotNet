@@ -24,8 +24,8 @@ namespace DataSampler
         {
             EnvironmentUtils.IsDebug = true;
             
-            //InitLog4net();
-            InitSerilog();
+            InitLog4net();
+            //InitSerilog();
 
             TraceUtils.Info("Starting Datasampler. time stamp: 2019-08-02.");
 

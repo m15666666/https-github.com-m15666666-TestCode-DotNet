@@ -34,7 +34,7 @@ namespace Moons.Common20.Serialization
         /// 将对象转换为字节
         /// </summary>
         /// <param name="writer">BinaryWriter</param>
-        public void ToBytes( BinaryWriter writer )
+        public void ToBytes( IBinaryWrite writer )
         {
         }
 
@@ -53,7 +53,7 @@ namespace Moons.Common20.Serialization
         /// 将对象转换为字节
         /// </summary>
         /// <param name="writer">BinaryWriter</param>
-        public virtual void WriteToBytes( BinaryWriter writer )
+        public virtual void WriteToBytes( IBinaryWrite writer )
         {
         }
 
@@ -61,7 +61,7 @@ namespace Moons.Common20.Serialization
         /// 从字节数组读出属性
         /// </summary>
         /// <param name="reader">BinaryReader</param>
-        public virtual void ReadFromBytes( BinaryReader reader )
+        public virtual void ReadFromBytes( IBinaryRead reader )
         {
         }
 
