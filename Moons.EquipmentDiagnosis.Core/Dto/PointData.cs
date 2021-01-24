@@ -418,6 +418,16 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public double[] Timewave { get; set; }
 
         /// <summary>
+        /// 频率分辨率
+        /// </summary>
+        public double FrequencyResolution => SpectrumUtils.FrequencyResolution;
+
+        /// <summary>
+        /// 频率分辨率小于等于0.5hz，可以诊断电气故障
+        /// </summary>
+        public bool IsFreqResolutionMatchELECTRCFault => FrequencyResolution <= 0.5;
+
+        /// <summary>
         /// 幅值谱或有效值谱中的整数分频，下标为0对应1X
         /// </summary>
         public double[] XFFT => SpectrumUtils.XFFT;

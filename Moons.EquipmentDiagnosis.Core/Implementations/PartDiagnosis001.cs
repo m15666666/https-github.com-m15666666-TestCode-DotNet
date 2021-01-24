@@ -180,6 +180,13 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         protected virtual bool CalcLoose()
         {
             /*
+            1）LOOSE1--风机、泵（以下按（1）、（2）顺序依次判断） 
+（1）如果 FDE-H-VEL、FDE-V-VEL、FDE-A-VEL 的最大值的测点频谱中 0.5X、1.5X、2.5X、3.5X、
+4.5X、5.5X 至少有 3 个大于 1X、2X、3X、4X、5X、6X 的最高峰值的 20%。结论：联轴端轴
+承或轴上其它零部件存在松动或间隙不良。 
+（2）如果 FNDE-H-VEL、FNDE-V-VEL、FNDE-A-VEL 的最大值的测点频谱中 0.5X、1.5X、2.5X、
+3.5X、4.5X、5.5X 至少有 3 个大于 1X、2X、3X、4X、5X、6X 的最高峰值的 20%。。结论：
+非联轴端轴承或轴上其它零部件存在松动或间隙不良。 
              2）LOOSE2-电机（以下按（1）、（2）顺序依次判断）
 （1）如果MDE-H-VEL、MDE-V-VEL、MDE-A-VEL的最大值的测点频谱中0.5X、1.5X、2.5X、3.5X、4.5X、5.5X至少有3个大于1X、2X、3X、4X、5X、6X的最高峰值的20%。结论：联轴端轴承或轴上其它零部件存在松动或间隙不良。
 如果MNDE-H-VEL、MNDE-V-VEL、MNDE-A-VEL的最大值的测点频谱中0.5X、1.5X、2.5X、3.5X、4.5X、5.5X至少有3个大于1X、2X、3X、4X、5X、6X的最高峰值的20%。结论：非联轴端轴承或轴上其它零部件存在松动或间隙不良。
@@ -363,7 +370,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         /// 计算 STRESS 台板不平、管线应力等引起的壳体变形 
         /// </summary>
         /// <returns>true:存在故障</returns>
-        protected virtual bool CalcSTRESS()
+        protected virtual bool CalcSTRESS(PointData pnt)
         {
             /*
             1）STRESS1--泵、风机 
@@ -590,7 +597,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             var firstLoadPoint = PartParameter.FirstLoadPoint;
             if(firstLoadPoint != null)
             {
-                int days = 4;
+                int days = PartParameter.TrendDays;
                 var trend1 = GetInt32MinuteSummaryByDays(pnt, days);
                 var trend2 = GetInt32MinuteSummaryByDays(firstLoadPoint, days);
 
@@ -1207,15 +1214,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 值趋势直线拟合斜率大于 0.417。 
              */
             var points = Points.AccPoints;
-            var pMaxAlmVel = points.Where(p => p.IsAlm).MaxMeasureValueP();
-            if (pMaxAlmVel != null) return pMaxAlmVel;
-
-            const int days = 4;
             const double limit_slope = 0.417;
-            List<PointData> list = new List<PointData>();
-            foreach( var p in points)
-                if (limit_slope < GetSlopeByDays(p, days)) list.Add(p);
-            return list.MaxMeasureValueP();
+            return CalcIsAlarm(points, limit_slope);
         }
         /// <summary>
         /// 是否速度测点趋势报警 
@@ -1230,15 +1230,21 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 于 0.375，则按以下进行配合间隙不良故障诊断分析。 
              */
             var points = Points.VelPoints;
+            const double limit_slope = 0.375;
+            return CalcIsAlarm(points, limit_slope);
+        }
+
+        private PointData CalcIsAlarm(IEnumerable<PointData> points, double limit_slope)
+        {
             var pMaxAlm = points.Where(p => p.IsAlm).MaxMeasureValueP();
             if (pMaxAlm != null) return pMaxAlm;
 
-            const int days = 4;
-            const double limit_slope = 0.375;
-            List<PointData> list = new List<PointData>();
-            foreach( var p in points)
-                if (limit_slope < GetSlopeByDays(p, days)) list.Add(p);
-            return list.MaxMeasureValueP();
+            int days = PartParameter.TrendDays;
+            return points.Where(p => limit_slope < GetSlopeByDays(p, days)).MaxMeasureValueP();
+            //List<PointData> list = new List<PointData>();
+            //foreach( var p in points)
+            //    if (limit_slope < GetSlopeByDays(p, PartParameter.TrendDays)) list.Add(p);
+            //return list.MaxMeasureValueP();
         }
 
         #endregion

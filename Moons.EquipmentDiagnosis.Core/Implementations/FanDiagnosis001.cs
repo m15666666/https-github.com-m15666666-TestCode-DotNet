@@ -28,7 +28,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             {
                 CalcCLEARANCE();
                 CalcFDLOOSE();
-                CalcSTRESS();
+                CalcSTRESS(almPoint);
                 CalcRotor_ecc1(almPoint);
 
                 if (PartParameter.IsStiffBase) CalcMISAGN1(almPoint);

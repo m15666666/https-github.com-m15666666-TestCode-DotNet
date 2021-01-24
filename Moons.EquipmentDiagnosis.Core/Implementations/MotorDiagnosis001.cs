@@ -19,6 +19,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
     {
         public override void DoDiagnosis()
         {
+            Points.ClearNDaysCache();
+
             CalcLoose();
             CalcRub();
             CalcELECTRC1();//todo
@@ -37,7 +39,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
             {
                 CalcCLEARANCE();
                 CalcFDLOOSE();
-                CalcSTRESS();
+                CalcSTRESS(almPoint);
                 if (PartParameter.IsStiffBase) // 刚性基础
                 {
                     //todo 不对中 MISAGN3 
@@ -50,6 +52,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                     CalcUNBL11(almPoint);
                 }
             }
+
+            Points.ClearNDaysCache();
         }
 
         #region 具体故障
@@ -91,6 +95,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 var point = velPoints.MaxMeasureValueP();
                 var summary = point.HistorySummaryData;
                 var timewave = point.TimewaveData;
+                if (!timewave.IsFreqResolutionMatchELECTRCFault) return false;
 
                 double limit = 0.5 * timewave.Overall;
                 if (limit < timewave.Hz100)
@@ -111,7 +116,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         {
             /*
             1.3）ELECTRC3 定子短路--电机 
-  电机所有测点中振动速度值最大的频谱图上 100Hz、200Hz、300Hz、400Hz、600Hz 频
+  电机所有测点中振动速度值最大的频谱图上 100Hz、200Hz、300Hz、400Hz、500Hz 频
 率中至少有 3 个幅值大于频谱中最高幅值的 50%。诊断为定子短路故障。 
              */
             bool found = false;
@@ -124,6 +129,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 var point = velPoints.MaxMeasureValueP();
                 var summary = point.HistorySummaryData;
                 var timewave = point.TimewaveData;
+                if (!timewave.IsFreqResolutionMatchELECTRCFault) return false;
 
                 double limit = 0.5 * timewave.HighestPeak;
                 var xHz100 = timewave.XHz100;

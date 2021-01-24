@@ -37,6 +37,11 @@ namespace AnalysisAlgorithm.FFT
         public double F0 { get; set; }
 
         /// <summary>
+        /// 频率分辨率
+        /// </summary>
+        public double FrequencyResolution { get; set; }
+
+        /// <summary>
         /// 时间波形长度
         /// </summary>
         public int TimeWaveLength => Timewave != null? Timewave.Length : 0;
@@ -55,6 +60,8 @@ namespace AnalysisAlgorithm.FFT
             Fs = fs;
 
             F0 = f0;
+
+            FrequencyResolution = Fs / timewave.Length;
 
             XFFT = GetXFFTBySpectrum(fs, f0, f0, timeWaveLength, FFTAmp);
             XHalfFFT = GetXFFTBySpectrum(fs, 0.5 * f0, f0, timeWaveLength, FFTAmp);
