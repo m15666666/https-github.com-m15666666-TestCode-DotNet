@@ -4,9 +4,12 @@ using log4net;
 using log4net.Config;
 using log4net.Repository;
 using Moons.Common20;
+using Moons.Common20.Serialization;
 using Moons.Log4net;
+using SocketLib;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace DataSampler.Test
@@ -97,7 +100,55 @@ namespace DataSampler.Test
             var bytes =StringUtils.HexString2Bytes(byteHex_8192);
             #endregion
 
+            #region 测试本地解包性能
+
+            // warm up
+            UnPackage(bytes);
+            Stopwatch sw = new Stopwatch();
+            sw.Restart();
+            int loopcount = 10000;
+            for (int i = 0; i < loopcount; i++)
+                UnPackage(bytes);
+            sw.Stop();
+            Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
+
+            #endregion
+
+            // 测试发送到服务器的性能
             stationProxy.SendReceiveCommandBytes(bytes,100,false);
+        }
+        /// <summary>
+        /// 从字节数组解包，用于测试本地解包性能
+        /// </summary>
+        /// <param name="bytes"></param>
+        /// <returns></returns>
+        private static object UnPackage(byte[] bytes)
+        {
+            // 测试本地解包性能
+            int headCount = PackageSendReceive.Count_Head;
+            int tailCount = PackageSendReceive.Count_Tail;
+            ArraySegment<byte> headBuffer = new ArraySegment<byte>(bytes, 0, headCount);
+            int bodyLength;
+            {
+            ArraySegment<byte> ioBuf = headBuffer;
+                var headBytes = ioBuf.Array;
+                int offset = ioBuf.Offset;
+                int count = headCount;
+                PackageSendReceive.CheckPart1(headBytes.AsSpan(offset, count));
+                PackageSendReceive.CheckPart2(headBytes, offset, count, out bodyLength);
+            }
+            var bodyBuffer = new ArraySegment<byte>(bytes,headCount,bodyLength + tailCount);
+            {
+                ArraySegment<byte> ioBuf = bodyBuffer;
+                var bodyBytes = ioBuf.Array;
+                int offset = ioBuf.Offset;
+                int count = ioBuf.Count;
+                var tailBytes = bodyBytes.AsSpan(offset + bodyLength, tailCount);
+                PackageSendReceive.CheckPart3(bodyBytes.AsSpan(offset, bodyLength), tailBytes);
+                return ToFromBytesUtils.ReadCommandMessage(bodyBytes, offset, count - PackageSendReceive.Count_Tail,
+                    null
+                    );
+            }
         }
     }
 }
