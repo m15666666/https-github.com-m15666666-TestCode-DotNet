@@ -17,8 +17,6 @@ namespace DataSampler.Core.Helper
         private readonly Stopwatch _sw = new Stopwatch();
         protected override void Decode(IChannelHandlerContext context, IByteBuffer input, List<object> output)
         {
-            var contextInfo = $"{Config.GetContextInfo(context)}: sampler decoder({GetHashCode()}) ";
-            Config.LogTcp($"{contextInfo}: begin...");
             int headCount = PackageSendReceive.Count_Head;
             int tailCount = PackageSendReceive.Count_Tail;
 
@@ -27,9 +25,10 @@ namespace DataSampler.Core.Helper
             {
                 if (input.ReadableBytes < headCount + tailCount)
                 {
-                    if( decodeCount == 0 ) Config.LogTcp($"{contextInfo}: if (input.ReadableBytes < headCount + tailCount).");
+                    //if( decodeCount == 0 ) Config.LogTcp($"{contextInfo}: if (input.ReadableBytes < headCount + tailCount).");
                     break;
                 }
+                var contextInfo = $"sampdecode({GetHashCode()})@{Config.GetContextInfo(context)} ";
                 input.MarkReaderIndex();
 
                 _sw.Restart();
@@ -68,7 +67,7 @@ namespace DataSampler.Core.Helper
 
                 if (input.ReadableBytes < bodyLength + tailCount)
                 {
-                    Config.LogTcp($"{contextInfo}: if (input.ReadableBytes < bodyLength + tailCount ).");
+                    //Config.LogTcp($"{contextInfo}: if (input.ReadableBytes < bodyLength + tailCount ).");
                     input.ResetReaderIndex();
                     return;
                 }
@@ -99,7 +98,7 @@ namespace DataSampler.Core.Helper
 
                 //output.Add(bodyBytes);
             }
-            Config.LogTcp($"{contextInfo}: end.");
+            //Config.LogTcp($"{contextInfo}: end.");
         }
     }
 }

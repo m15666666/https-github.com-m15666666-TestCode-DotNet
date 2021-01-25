@@ -1,4 +1,4 @@
-﻿using DotNetty.Common.Internal.Logging;
+using DotNetty.Common.Internal.Logging;
 using DotNetty.Handlers.Logging;
 using DotNetty.Handlers.Tls;
 using DotNetty.Transport.Bootstrapping;
@@ -23,9 +23,13 @@ namespace DataSampler.Core.Helper
     {
         internal void Init()
         {
-            var f = new LoggerFactory();
-            f.AddProvider(new LoggerProvider(Config.TcpLogger));
-            InternalLoggerFactory.DefaultFactory = f;
+            var config = Config.DatasamplerConfigDto;
+            if (config.Debug)
+            {
+                var f = new LoggerFactory();
+                f.AddProvider(new LoggerProvider(Config.TcpLogger));
+                InternalLoggerFactory.DefaultFactory = f;
+            }
         }
 
         #region Dispose

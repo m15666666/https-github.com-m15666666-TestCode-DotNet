@@ -795,15 +795,18 @@ namespace DataSampler.Helper
         ///     发送一个完整的字节包并接收一个命令消息对象，只用于外部测试工具
         /// </summary>
         /// <param name="wholePackageBytes">完整的字节包，一般从日志文件中获得，比如历史数据</param>
-        public void SendReceiveCommandBytes( byte[] wholePackageBytes )
+        public void SendReceiveCommandBytes( byte[] wholePackageBytes, int times = 1, bool receivePackage = true )
         {
             using( SocketWrapper socketWrapper = CreateSocket() )
             {
                 PackageSendReceive sendReceive = PackageSendReceive.CreatePackageSendReceive( socketWrapper );
 
-                sendReceive.SendBytes(wholePackageBytes);
+                for (int i = 0; i < times; i++)
+                {
+                    sendReceive.SendBytes(wholePackageBytes);
 
-                sendReceive.ReceivePackage();
+                    if (receivePackage) sendReceive.ReceivePackage();
+                }
             }
         }
 

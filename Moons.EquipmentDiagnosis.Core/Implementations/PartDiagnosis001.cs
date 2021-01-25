@@ -384,7 +384,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 于 0.5Vmax。同时该测点 1-6 倍频之和大于总值的 80%。则设备存在壳体变形故障；检
 查基础台板变形。 
              */
-            // todo
+            //todo
             if (!PartParameter.IsStiffBase) return false;
             bool found = false;
             if (Calc(DEPoints.VelPoints,EquipmentFaultType.Generic.Stress001)) found = true;
@@ -432,7 +432,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 +......+500*谱图分辨率的所有谱线中至少有 200 个频率幅值大于谱图上最高峰值的
 20%。则该泵存在汽蚀故障或流体激励故障。 
              */
-            // todo
+            //todo
             if (!PartParameter.IsStiffBase) return false;
             bool found = false;
             if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid001)) found = true;
@@ -460,7 +460,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 分辨率+......+300*谱图分辨率的所有谱线中至少有 100 个频率幅值大于谱图上最高峰值
 的 20%。则该泵存在回流或流体激励故障。 
              */
-            // todo
+            //todo
             if (!PartParameter.IsStiffBase) return false;
             bool found = false;
             if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid003)) found = true;
@@ -608,7 +608,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 
             IEnumerable<PointData>[] pointDatas = new IEnumerable<PointData>[] {DEPoints,NDEPoints};
             var pAxis = CollectionUtils.FirstOrDefault(p => p.IsAxial && p.IsVel,  pointDatas);
-            // 不存在轴向测点，走的二条规则
+            // 不存在轴向测点，走的第二条规则
             if (pAxis == null)
             {
                 var pMaxVelHV = Points.Where(p => p.IsVel && (p.IsHorizontal || p.IsVertical)).MaxMeasureValueP();
@@ -797,7 +797,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 （1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
 成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
 （2）（测点 X 按以下对号入座） 
-  测点 X 其主频幅值大于通频值的 80%成立。 // todo
+  测点 X 其主频幅值大于通频值的 80%成立。 //todo
              */
             if (!IsSpeedMatchUnbalance(pnt)) return false;
 
