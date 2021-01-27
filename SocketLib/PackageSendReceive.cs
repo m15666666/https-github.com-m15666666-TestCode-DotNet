@@ -435,7 +435,23 @@ namespace SocketLib
         {
             byte bodyCrc = CrcUtils.CrcDefault8;
             XORCRC8.Crc(buffer, 0, buffer.Length, ref bodyCrc);
-
+            CheckPart3CrcEtc(bodyCrc, tailBytes);
+        }
+        /// <summary>
+        /// 检查第三部分：包体、包尾crc，包尾分界符。
+        /// </summary>
+        public static void CheckPart3(byte[] buffer, int offset, int size, Span<byte> tailBytes)
+        {
+            //CheckPart3(buffer.AsSpan(offset, size), tailBytes);
+            byte bodyCrc = CrcUtils.CrcDefault8;
+            XORCRC8.Crc(buffer, offset, size, ref bodyCrc);
+            CheckPart3CrcEtc(bodyCrc, tailBytes);
+        }
+        /// <summary>
+        /// 检查第三部分：包体、包尾crc，包尾分界符。
+        /// </summary>
+        private static void CheckPart3CrcEtc(byte bodyCrc, Span<byte> tailBytes)
+        {
             byte transferBodyCrc = tailBytes[0];
             bool ok = bodyCrc == transferBodyCrc;
             if (!ok)
@@ -451,31 +467,6 @@ namespace SocketLib
                 throw new PackageStructException(string.Format("Package tail split error({0}).", StringUtils.ToHex(tailBytes)))
                 { StructError = PackageStructError.PackageTail };
             }
-        }
-        /// <summary>
-        /// 检查第三部分：包体、包尾crc，包尾分界符。
-        /// </summary>
-        public static void CheckPart3(byte[] buffer, int offset, int size, byte[] tailBytes)
-        {
-            CheckPart3(buffer.AsSpan(offset, size), tailBytes.AsSpan());
-            //byte bodyCrc = CrcUtils.CrcDefault8;
-            //XORCRC8.Crc(buffer, offset, size, ref bodyCrc);
-
-            //byte transferBodyCrc = ArrayUtils.First(tailBytes);
-            //bool ok = bodyCrc == transferBodyCrc;
-            //if (!ok)
-            //{
-            //    throw new PackageStructException(string.Format("Package tail crc error, {0} != {1}({2}).", bodyCrc, transferBodyCrc,
-            //                                                     StringUtils.ToHex(tailBytes)))
-            //    { StructError = PackageStructError.PackageTailCrc };
-            //}
-
-            //ok = ArrayUtils.Equal(PackageTails, 0, tailBytes, PackageTailBytesIndex, PackageTails.Length);
-            //if (!ok)
-            //{
-            //    throw new PackageStructException(string.Format("Package tail split error({0}).", StringUtils.ToHex(tailBytes)))
-            //    { StructError = PackageStructError.PackageTail };
-            //}
         }
 
         #endregion

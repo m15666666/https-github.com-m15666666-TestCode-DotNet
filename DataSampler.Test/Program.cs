@@ -4,18 +4,26 @@ using log4net;
 using log4net.Config;
 using log4net.Repository;
 using Moons.Common20;
+using Moons.Common20.CRC;
 using Moons.Common20.Serialization;
 using Moons.Log4net;
 using SocketLib;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Text;
 
 namespace DataSampler.Test
 {
     class Program
     {
+        private static void EnterToContinue()
+        {
+            Console.WriteLine("enter to continue...");
+            Console.ReadLine();
+        }
+
         static void Main(string[] args)
         {
             ILoggerRepository repository = LogManager.CreateRepository("NETCoreRepository");
@@ -29,8 +37,7 @@ namespace DataSampler.Test
 
             EnvironmentUtils.IsDebug = true;
 
-            Console.WriteLine("enter to start");
-            Console.ReadLine();
+            EnterToContinue();
             try
             {
                 Config.InitStructReadWriteHandler();
@@ -102,39 +109,99 @@ namespace DataSampler.Test
 
             #region 测试本地解包性能
 
+            const int loopcount = 10000;
+            TestCRC8SpanPerformance(bytes, loopcount);
+            TestCRC8SpanPerformance(bytes, loopcount);
+            TestCRC8SpanPerformance(bytes, loopcount);
+            TestCRC8ByteArrayPerformance(bytes, loopcount);
+            TestCRC8ByteArrayPerformance(bytes, loopcount);
+            TestCRC8ByteArrayPerformance(bytes, loopcount);
+
+            TestLocalUnPackagePerformance(bytes, loopcount);
+            TestLocalUnPackagePerformance(bytes, loopcount);
+            TestLocalUnPackagePerformance(bytes, loopcount);
+
+            #endregion
+
+            EnterToContinue();
+
+            // 测试发送到服务器的性能
+            stationProxy.SendReceiveCommandBytes(bytes,100,false);
+        }
+
+        #region 测试本地解包性能
+
+        /// <summary>
+        /// 测试crc8 span性能，比直接访问数组计算每次大概慢0.02ms。10000次慢230ms。
+        /// </summary>
+        private static void TestCRC8SpanPerformance(byte[] bytes, int loopcount)
+        {
+            var (headCount, bodyLength) = UnPackage(bytes);
+            Stopwatch sw = new Stopwatch();
+            sw.Restart();
+            for (int i = 0; i < loopcount; i++)
+            {
+                var buffer = bytes.AsSpan(headCount, bodyLength);
+                byte bodyCrc = CrcUtils.CrcDefault8;
+                XORCRC8.Crc(buffer, 0, buffer.Length, ref bodyCrc);
+
+            }
+            sw.Stop();
+            Console.WriteLine($"crc8 span: {sw.ElapsedMilliseconds} ms");
+        }
+        /// <summary>
+        /// 测试crc8 字节数组性能
+        /// </summary>
+        private static void TestCRC8ByteArrayPerformance(byte[] bytes, int loopcount)
+        {
+            var (headCount, bodyLength) = UnPackage(bytes);
+            Stopwatch sw = new Stopwatch();
+            sw.Restart();
+            for (int i = 0; i < loopcount; i++)
+            {
+                byte bodyCrc = CrcUtils.CrcDefault8;
+                XORCRC8.Crc(bytes, headCount, bodyLength, ref bodyCrc);
+
+            }
+            sw.Stop();
+            Console.WriteLine($"crc8 byte array: {sw.ElapsedMilliseconds} ms");
+        }
+
+        /// <summary>
+        /// 测试本地解包性能
+        /// </summary>
+        private static void TestLocalUnPackagePerformance(byte[] bytes, int loopcount)
+        {
             // warm up
             UnPackage(bytes);
             Stopwatch sw = new Stopwatch();
             sw.Restart();
-            int loopcount = 10000;
             for (int i = 0; i < loopcount; i++)
                 UnPackage(bytes);
             sw.Stop();
-            Console.WriteLine($"{sw.ElapsedMilliseconds} ms");
+            Console.WriteLine($"LocalUnPackagePerformance: {sw.ElapsedMilliseconds} ms");
 
-            #endregion
-
-            // 测试发送到服务器的性能
-            stationProxy.SendReceiveCommandBytes(bytes,100,false);
         }
         /// <summary>
         /// 从字节数组解包，用于测试本地解包性能
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns></returns>
-        private static object UnPackage(byte[] bytes)
+        private static (int,int) UnPackage(byte[] bytes)
         {
+            bool checkParts = true;// 切换，用于测试checkpart部分对性能的影响，实测下来CheckPart3影响较大，超过60%。
             // 测试本地解包性能
             int headCount = PackageSendReceive.Count_Head;
             int tailCount = PackageSendReceive.Count_Tail;
             ArraySegment<byte> headBuffer = new ArraySegment<byte>(bytes, 0, headCount);
             int bodyLength;
             {
-            ArraySegment<byte> ioBuf = headBuffer;
+                ArraySegment<byte> ioBuf = headBuffer;
                 var headBytes = ioBuf.Array;
                 int offset = ioBuf.Offset;
                 int count = headCount;
-                PackageSendReceive.CheckPart1(headBytes.AsSpan(offset, count));
+                if(checkParts)PackageSendReceive.CheckPart1(headBytes.AsSpan(offset, count));
+                //PackageSendReceive.CheckPart1(headBytes.AsSpan(offset, count));
                 PackageSendReceive.CheckPart2(headBytes, offset, count, out bodyLength);
             }
             var bodyBuffer = new ArraySegment<byte>(bytes,headCount,bodyLength + tailCount);
@@ -144,11 +211,12 @@ namespace DataSampler.Test
                 int offset = ioBuf.Offset;
                 int count = ioBuf.Count;
                 var tailBytes = bodyBytes.AsSpan(offset + bodyLength, tailCount);
-                PackageSendReceive.CheckPart3(bodyBytes.AsSpan(offset, bodyLength), tailBytes);
-                return ToFromBytesUtils.ReadCommandMessage(bodyBytes, offset, count - PackageSendReceive.Count_Tail,
-                    null
-                    );
+                if(checkParts)PackageSendReceive.CheckPart3(bodyBytes, offset, bodyLength, tailBytes);
+                //var o = ToFromBytesUtils.ReadCommandMessage(bodyBytes, offset, count - PackageSendReceive.Count_Tail);
+
+                return (headCount, bodyLength);
             }
         }
+        #endregion
     }
 }

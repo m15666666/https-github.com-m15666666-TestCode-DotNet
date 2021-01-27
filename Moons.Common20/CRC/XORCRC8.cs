@@ -38,11 +38,12 @@ namespace Moons.Common20.CRC
         /// <param name="ret">输入和输出</param>
         public static void Crc( byte[] buffer, int offset, int size, ref byte ret )
         {
+            //byte result = ret;
             int bound = offset + size;
             for( int index = offset; index < bound; index++ )
-            {
                 ret ^= buffer[index];
-            }
+
+            //ret = result;
         }
 
         /// <summary>
@@ -54,11 +55,12 @@ namespace Moons.Common20.CRC
         /// <param name="ret">输入和输出</param>
         public static void Crc( Span<byte> buffer, int offset, int size, ref byte ret )
         {
+            byte result = ret;
             int bound = offset + size;
             for( int index = offset; index < bound; index++ )
-            {
-                ret ^= buffer[index];
-            }
+                result ^= buffer[index];
+            
+            ret = result;
         }
 
         #endregion

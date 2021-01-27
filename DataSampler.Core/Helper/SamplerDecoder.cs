@@ -88,7 +88,8 @@ namespace DataSampler.Core.Helper
                     //Config.LogTcp($"{contextInfo}: checkpart3", ioBuf);
 
                     var tailBytes = bodyBytes.AsSpan(offset + bodyLength, tailCount);
-                    PackageSendReceive.CheckPart3(bodyBytes.AsSpan(offset, bodyLength), tailBytes);
+                    //PackageSendReceive.CheckPart3(bodyBytes.AsSpan(offset, bodyLength), tailBytes);
+                    PackageSendReceive.CheckPart3(bodyBytes, offset, bodyLength, tailBytes);
 
                     output.Add(bodyBuffer);
 

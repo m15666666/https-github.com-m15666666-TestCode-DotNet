@@ -284,7 +284,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 timewave = p.TimewaveData = Context.GetTimewaveData(summary);
             }
             if (summary == null || timewave == null) return;
-            if (summary.RotSpeed_NR <= 0) summary.RotSpeed_NR = p.DefaultRotSpeed;
+            //if (summary.RotSpeed_NR <= 0) summary.RotSpeed_NR = p.DefaultRotSpeed;
             var rev = summary.RotSpeed_NR;
             if (rev <= 0) return;
 
