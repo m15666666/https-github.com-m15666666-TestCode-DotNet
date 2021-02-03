@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Moons.Common20.Test
 {
+    /// <summary>
+    /// 测试不同流实现的性能
+    /// </summary>
     public class TestStream
     {
         /// <summary>

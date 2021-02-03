@@ -28,7 +28,7 @@ using System.Text;
 
 /// <summary>
 /// https://leetcode-cn.com/problems/convert-a-number-to-hexadecimal/
-///
+/// 405. 数字转换为十六进制数
 ///
 /// </summary>
 internal class ConvertANumberToHexadecimalSolution
