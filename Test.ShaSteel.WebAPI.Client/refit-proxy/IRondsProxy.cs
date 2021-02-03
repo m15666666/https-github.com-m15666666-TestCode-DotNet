@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Refit;
 using Test.ShaSteel.WebAPI.Core;
 
-namespace Test.ShaSteel.WebAPI.Client.refit_proxy
+namespace Test.ShaSteel.WebAPI.Client
 {
     /// <summary>
+    /// 容知webapi接口，同时兼容refit
     /// https://github.com/reactiveui/refit
     /// </summary>
-    public interface IRefitProxy
+    public interface IRondsProxy
     {
         [Post("/VibMetaData")]
         Task<VibMetaDataOutputDto> VibMetaDataAsync([Body] VibMetaDataInput value);

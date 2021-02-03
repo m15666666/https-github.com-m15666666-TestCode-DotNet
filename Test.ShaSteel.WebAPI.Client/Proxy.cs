@@ -16,7 +16,7 @@ namespace Test.ShaSteel.WebAPI.Client
     using Test.ShaSteel.WebAPI.Core;
     using System = global::System;
 
-    public partial class Client
+    public partial class Client : IRondsProxy
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
@@ -136,7 +136,7 @@ namespace Test.ShaSteel.WebAPI.Client
             }
         }
 
-        public async System.Threading.Tasks.Task<TOutput> PostAsync<TInput,TOutput>(string url, TInput input, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<TOutput> PostAsync<TInput,TOutput>(string url, TInput input, System.Threading.CancellationToken cancellationToken) where TOutput : class
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append(url);
@@ -221,12 +221,21 @@ namespace Test.ShaSteel.WebAPI.Client
 
         public bool ReadResponseAsString { get; set; }
 
-        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers)
+        protected virtual async System.Threading.Tasks.Task<ObjectResponseResult<T>> ReadObjectResponseAsync<T>(System.Net.Http.HttpResponseMessage response, System.Collections.Generic.IReadOnlyDictionary<string, System.Collections.Generic.IEnumerable<string>> headers) where T : class
         {
             if (response == null || response.Content == null)
             {
                 TraceUtils.Info($"ReadObjectResponseAsync response empty return.");
                 return new ObjectResponseResult<T>(default(T), string.Empty);
+            }
+
+            bool isRetString = typeof(T) == typeof(string);
+            if (isRetString)
+            {
+                var responseText = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                TraceUtils.Info($"ReadResponseAsString, responseText:{responseText}.");
+
+                return new ObjectResponseResult<T>(responseText as T, responseText);
             }
 
             if (ReadResponseAsString)
