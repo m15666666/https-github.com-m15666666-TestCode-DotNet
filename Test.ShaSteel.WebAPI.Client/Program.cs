@@ -20,6 +20,11 @@ namespace Test.ShaSteel.WebAPI.Client
         private const string TimePattern = "yyyy-MM-dd HH:mm:ss";
 
         private static bool UseRefit = false;//true;
+        private const string Url = "http://wjwkf.ronds.com:6480/api/services/app/VDiagnosis/";
+        private const string Code = "01020100610600014";
+        private const string FullPath = "沙钢集团\\润忠高线厂棒线三车间\\1#线\\8#斯太尔摩风机\\驱动侧轴承振动";
+        //private const string Code = "01030200061410152";
+        //private const string FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)";
 
         private static async Task Main(string[] args)
         {
@@ -33,12 +38,13 @@ namespace Test.ShaSteel.WebAPI.Client
             TraceUtils.Info("Starting Test.ShaSteel.WebAPI.Client. time stamp: 2019-11-11.");
 
             var url = ConfigurationManager.AppSettings["url"];
+            url = Url;
             TraceUtils.Info($"url:{url}.");
 
             #region 2021-2-2 测试
 
             await Test_2021_02_02();
-            return;
+            //return;
 
             #endregion 2021-2-2 测试
 
@@ -56,7 +62,8 @@ namespace Test.ShaSteel.WebAPI.Client
 
             using (HttpClient httpClient = new HttpClient())
             {
-                var swaggerProxy = new Client(url, httpClient);
+                var swaggerProxy = new Proxy2(url, httpClient);
+                //var swaggerProxy = new Client(url, httpClient);
 
                 while (true)
                 {
@@ -128,8 +135,8 @@ namespace Test.ShaSteel.WebAPI.Client
                 VibMetaDataOutputDto metaOutput = null;
                 metaOutput = await client.VibMetaDataAsync(new VibMetaDataInput
                 {
-                    Code = "01030200061410152",
-                    FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                    Code = Code,//"01030200061410152",
+                    FullPath = FullPath,//"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
                     MeasDate = "2019-11-12 16:19:22",//DateTime.Now.ToString(TimePattern),
                     MeasValue = 186.27f,
                     WaveLength = WaveLength, // 波形长度，采样点数
@@ -164,8 +171,8 @@ namespace Test.ShaSteel.WebAPI.Client
 
                 ProcessDatasInput processDatasInput = new ProcessDatasInput
                 {
-                    Code = "01030200061410152",
-                    FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                    Code = Code,//"01030200061410152",
+                    FullPath = FullPath,//"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
                     TSDatas = new TSDataInput[] {
                                 new TSDataInput{
                                     MeasDate = DateTime.Now.ToString(TimePattern),
@@ -183,8 +190,8 @@ namespace Test.ShaSteel.WebAPI.Client
 
                 VibAlarmInput vibAlarmInput = new VibAlarmInput
                 {
-                    Code = "01030200061410152",
-                    FullPath = "沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
+                    Code = Code,//"01030200061410152",
+                    FullPath = FullPath,//"沙钢集团\\三车间\\1#线\\加热炉鼓风机电机（2）\\自由侧轴承振动\\4K加速度波形(0~5000)",
                     AlarmDate = DateTime.Now.ToString(TimePattern),
                     AlarmDec = "alarm come",
                     AlarmLevel = 3
@@ -276,12 +283,16 @@ namespace Test.ShaSteel.WebAPI.Client
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                var url = "http://wjwkf.ronds.com:6480/api/services/app/VDiagnosis/";
-                var clients = new List<IRondsProxy> { RestService.For<IRondsProxy>(url), new Client(url, httpClient) };
+                var url = Url;// "http://wjwkf.ronds.com:6480/api/services/app/VDiagnosis/";
+                var clients = new List<IRondsProxy> { 
+                    new Proxy2(url, httpClient) ,
+                    RestService.For<IRondsProxy>(url), 
+                    new Client(url, httpClient) 
+                };
                 VibAlarmInput vibAlarmInput = new VibAlarmInput
                 {
-                    Code = "01020100610600014",
-                    FullPath = "沙钢集团\\润忠高线厂棒线三车间\\1#线\\8#斯太尔摩风机\\驱动侧轴承振动",
+                    Code = Code,//"01020100610600014",
+                    FullPath = FullPath,//"沙钢集团\\润忠高线厂棒线三车间\\1#线\\8#斯太尔摩风机\\驱动侧轴承振动",
                     AlarmDate = DateTime.Now.ToString(TimePattern),
                     AlarmDec = "alarm come",
                     AlarmLevel = 3
