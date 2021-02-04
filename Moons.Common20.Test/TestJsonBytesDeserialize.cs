@@ -24,9 +24,6 @@ namespace Moons.Common20.Test
 
             //Newtonsoft.Json
             // warm up
-            Memory<byte> a = null;
-            ArraySegment<byte> b = null;
-            testBytes.AsMemory()
             {
                 var s = Encoding.UTF8.GetString(testBytes);
                 var o = System.Text.Json.JsonSerializer.Deserialize(s, typeof(TestJsonObject));
