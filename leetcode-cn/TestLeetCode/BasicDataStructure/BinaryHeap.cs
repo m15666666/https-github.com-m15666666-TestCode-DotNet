@@ -12,10 +12,10 @@ namespace TestLeetCode.BasicDataStructure
     }
 
     /// <summary>
-    /// 二叉堆详解实现优先级队列
+    /// 优先级队列基类
     /// </summary>
     /// <typeparam name="Key"></typeparam>
-    public class MaxPQ<Key> where Key : System.IComparable<Key>
+    public abstract class MaxPQBase<Key>
     {
         // 存储元素的数组
         private Key[] pq;
@@ -27,7 +27,7 @@ namespace TestLeetCode.BasicDataStructure
         /// </summary>
         private readonly bool _maxOrMin = true;
 
-        public MaxPQ(int cap, bool maxOrMin = true)
+        public MaxPQBase(int cap, bool maxOrMin = true)
         {
             // 索引 0 不用，所以多分配一个空间
             pq = new Key[cap + 1];
@@ -77,8 +77,11 @@ namespace TestLeetCode.BasicDataStructure
             pq[j] = temp;
         }
 
+        // 比较两个数组元素的大小，子类实现
+        protected abstract int Compare(Key i, Key j);
+
         // pq[i] 是否比 pq[j] 小？
-        private bool Less(int i, int j) => (_maxOrMin ? pq[i].CompareTo(pq[j]) : pq[j].CompareTo(pq[i])) < 0;
+        private bool Less(int i, int j) => (_maxOrMin ? Compare(pq[i], pq[j]) : Compare(pq[j], pq[i])) < 0;
 
         private int Parent(int i) => i / 2;
 
@@ -114,5 +117,32 @@ namespace TestLeetCode.BasicDataStructure
         // 返回当前队列中最大元素
         public Key Max => pq[1];
         public int Count => N;
+    }
+    /// <summary>
+    /// 使用Comparison比较的优先级队列
+    /// </summary>
+    /// <typeparam name="Key"></typeparam>
+    public class MaxPQ2<Key> : MaxPQBase<Key>
+    {
+        // 自定义的比较大小的函数
+        private readonly Comparison<Key> _comparison;
+
+        public MaxPQ2(Comparison<Key> comparison, int cap, bool maxOrMin = true) : base(cap, maxOrMin)
+        {
+            _comparison = comparison;
+        }
+
+        protected override int Compare(Key i, Key j) => _comparison(i, j);
+    }
+
+    /// <summary>
+    /// 使用IComparable比较的优先级队列
+    /// </summary>
+    /// <typeparam name="Key"></typeparam>
+    public class MaxPQ<Key> : MaxPQBase<Key> where Key : IComparable<Key>
+    {
+        public MaxPQ(int cap, bool maxOrMin = true) : base(cap, maxOrMin) {}
+
+        protected override int Compare(Key i, Key j) => i.CompareTo(j);
     }
 }
