@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,6 +18,11 @@ namespace DataSampler.Core.Dto
         /// 是否使用netty
         /// </summary>
         public bool UseNetty { get; set; }
+
+        /// <summary>
+        /// linux下面使用libuv库
+        /// </summary>
+        public bool UseLibuv { get; set; } = true;
 
         /// <summary>
         /// 是否打印tcp信息

@@ -18,10 +18,10 @@ namespace DataSampler.Test
 {
     class Program
     {
-        private static void EnterToContinue()
+        private static string EnterToContinue(string msg = "")
         {
-            Console.WriteLine("enter to continue...");
-            Console.ReadLine();
+            Console.WriteLine($"enter to continue {msg} ...");
+            return Console.ReadLine();
         }
 
         static void Main(string[] args)
@@ -46,7 +46,8 @@ namespace DataSampler.Test
                 Config.TcpLogger = EnvironmentUtils.Logger;
 
                 var sampleStationProxy = new SampleStationProxy();
-                sampleStationProxy.SampleStationData.DataSamplerIP = "127.0.0.1";
+                //sampleStationProxy.SampleStationData.SampleStationIP = "127.0.0.1";
+                sampleStationProxy.IPAddress.IP = "127.0.0.1";
 
                 TestSendWaveData(sampleStationProxy);
 
@@ -109,24 +110,51 @@ namespace DataSampler.Test
 
             #region 测试本地解包性能
 
-            const int loopcount = 10000;
-            TestCRC8SpanPerformance(bytes, loopcount);
-            TestCRC8SpanPerformance(bytes, loopcount);
-            TestCRC8SpanPerformance(bytes, loopcount);
-            TestCRC8ByteArrayPerformance(bytes, loopcount);
-            TestCRC8ByteArrayPerformance(bytes, loopcount);
-            TestCRC8ByteArrayPerformance(bytes, loopcount);
+            //const int loopcount = 10000;
+            //TestCRC8SpanPerformance(bytes, loopcount);
+            //TestCRC8SpanPerformance(bytes, loopcount);
+            //TestCRC8SpanPerformance(bytes, loopcount);
+            //TestCRC8ByteArrayPerformance(bytes, loopcount);
+            //TestCRC8ByteArrayPerformance(bytes, loopcount);
+            //TestCRC8ByteArrayPerformance(bytes, loopcount);
 
-            TestLocalUnPackagePerformance(bytes, loopcount);
-            TestLocalUnPackagePerformance(bytes, loopcount);
-            TestLocalUnPackagePerformance(bytes, loopcount);
+            //TestLocalUnPackagePerformance(bytes, loopcount);
+            //TestLocalUnPackagePerformance(bytes, loopcount);
+            //TestLocalUnPackagePerformance(bytes, loopcount);
 
             #endregion
 
             EnterToContinue();
 
-            // 测试发送到服务器的性能
-            stationProxy.SendReceiveCommandBytes(bytes,100,false);
+            // 测试发送到服务器的性能,127.0.0.1
+            //stationProxy.SendReceiveCommandBytes(bytes,100,false);
+
+            // 测试多个连接发送数据到服务器
+            {
+                int tcpCount = 100;
+                EnterToContinue($"establish {tcpCount} connections");
+                List<SampleStationProxy> list = new List<SampleStationProxy>();
+                for (int i = 0; i < tcpCount; i++)
+                {
+                    var proxy = new SampleStationProxy();
+                    proxy.IPAddress.IP = "39.101.211.148";
+                    proxy.IPAddress.Port = 32001;
+                    list.Add(proxy);
+                }
+
+                int dataCount = 100;
+                EnterToContinue($"send {dataCount} datas");
+                string line = "";
+                while (!string.Equals(line, "q"))
+                {
+                    foreach (var proxy in list)
+                        proxy.SendReceiveCommandBytes(bytes, dataCount, false);
+
+                    EnterToContinue("enter q to exit loop");
+                }
+
+                EnterToContinue("return");
+            }
         }
 
         #region 测试本地解包性能

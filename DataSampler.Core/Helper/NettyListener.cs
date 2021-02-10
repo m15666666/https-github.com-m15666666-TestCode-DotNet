@@ -13,6 +13,9 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using DotNetty.Transport.Libuv;
+using System.Runtime.InteropServices;
+using System.Runtime;
 
 namespace DataSampler.Core.Helper
 {
@@ -69,15 +72,15 @@ namespace DataSampler.Core.Helper
         #endregion
 
         #region 变量
-        /// <summary>
-        /// 
-        /// </summary>
-        private MultithreadEventLoopGroup _bossGroup;
+
+        //private MultithreadEventLoopGroup _bossGroup;
+        private IEventLoopGroup _bossGroup;
 
         /// <summary>
         /// 工作线程组，默认为内核数*2的线程数
         /// </summary>
-        private MultithreadEventLoopGroup _workerGroup;
+        //private MultithreadEventLoopGroup _workerGroup;
+        private IEventLoopGroup _workerGroup;
 
         private IChannel _boundChannel;
 
@@ -85,10 +88,30 @@ namespace DataSampler.Core.Helper
 
         internal async Task RunServerAsync()
         {
-            // 主工作线程组，设置为1个线程
-            _bossGroup = new MultithreadEventLoopGroup(1);
-            // 工作线程组，默认为内核数*2的线程数
-            _workerGroup = new MultithreadEventLoopGroup();
+            var useLibuv = Config.DatasamplerConfigDto.UseLibuv; 
+
+            if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                if (!useLibuv) useLibuv = true;
+                GCSettings.LatencyMode = GCLatencyMode.SustainedLowLatency;
+            }
+
+            if (useLibuv)
+            {
+                var dispatcher = new DispatcherEventLoopGroup();
+                _bossGroup = dispatcher;
+                _workerGroup = new WorkerEventLoopGroup(dispatcher);
+            }
+            else
+            {
+                // 主工作线程组，设置为1个线程
+                _bossGroup = new MultithreadEventLoopGroup(1);
+                // 工作线程组，默认为内核数*2的线程数
+                _workerGroup = new MultithreadEventLoopGroup();
+            }
+
+            //_bossGroup = new MultithreadEventLoopGroup(1);
+            //_workerGroup = new MultithreadEventLoopGroup();
             X509Certificate2 tlsCertificate = null;
             //if (ServerSettings.IsSsl) //如果使用加密通道
             //{
@@ -96,17 +119,32 @@ namespace DataSampler.Core.Helper
             //}
             try
             {
-
-                //声明一个服务端Bootstrap，每个Netty服务端程序，都由ServerBootstrap控制，
-                //通过链式的方式组装需要的参数
-
                 var bootstrap = new ServerBootstrap();
-                bootstrap
-                    .Group(_bossGroup, _workerGroup) // 设置主和工作线程组
-                    .Channel<TcpServerSocketChannel>() // 设置通道模式为TcpSocket
-                    .Option(ChannelOption.SoBacklog, 100) // 设置网络IO参数等，这里可以设置很多参数，当然你对网络调优和参数设置非常了解的话，你可以设置，或者就用默认参数吧
+                bootstrap.Group(_bossGroup, _workerGroup);
+
+                if (useLibuv)
+                {
+                    bootstrap.Channel<TcpServerChannel>();
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+                        || RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    {
+                        bootstrap
+                            .Option(ChannelOption.SoReuseport, true)
+                            .ChildOption(ChannelOption.SoReuseaddr, true);
+                    }
+                }
+                else
+                {
+                    bootstrap.Channel<TcpServerSocketChannel>();
+                }
+
+                //var bootstrap = new ServerBootstrap();
+                //bootstrap.Group(_bossGroup, _workerGroup) // 设置主和工作线程组
+                //.Channel<TcpServerSocketChannel>() // 设置通道模式为TcpSocket
+                    bootstrap.Option(ChannelOption.SoBacklog, 8192) // 设置网络IO参数等，这里可以设置很多参数，当然你对网络调优和参数设置非常了解的话，你可以设置，或者就用默认参数吧
                     .Handler(new LoggingHandler("SRV-LSTN")) //在主线程组上设置一个打印日志的处理器
-                    .ChildHandler(new ActionChannelInitializer<ISocketChannel>(channel =>
+                    //.ChildHandler(new ActionChannelInitializer<ISocketChannel>(channel =>
+                    .ChildHandler(new ActionChannelInitializer<IChannel>(channel =>
                     { //工作线程连接器 是设置了一个管道，服务端主线程所有接收到的信息都会通过这个管道一层层往下传输
                       //同时所有出栈的消息 也要这个管道的所有处理器进行一步步处理
                         IChannelPipeline pipeline = channel.Pipeline;
