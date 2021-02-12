@@ -1,0 +1,60 @@
+# host
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: testv1
+  name: host
+  labels:
+    app: host
+spec:
+  serviceName: host
+  selector:
+    matchLabels:
+      app: host
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: host
+    spec:
+      volumes: # 定义数据卷
+        - name: log
+          hostPath: # 映射到宿主机目录的数据卷
+            path: /data/testv1/host/log
+            type: DirectoryOrCreate
+      containers: # 定义使用的容器
+        - name: host
+          image: testk8sweb
+          imagePullPolicy: Never
+          # registry.cn-shanghai.aliyuncs.com/testk8sweb 
+          ports: # 指定容器暴露的端口
+            - name: port
+              containerPort: 80
+          volumeMounts: # 容器挂载数据卷
+            - name: log
+              mountPath: /app/App_Data/Logs
+          resources:
+            requests:
+              memory: "512Mi"
+            limits:
+              memory: "4096Mi"
+              # cpu: "1"
+
+# --- internal service ---
+
+# --- web host ---
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: testv1
+  name: host-ser
+spec:
+  type: NodePort
+  selector:
+    app: host
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 31999   

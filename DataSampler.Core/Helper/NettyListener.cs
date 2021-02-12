@@ -4,18 +4,16 @@ using DotNetty.Handlers.Tls;
 using DotNetty.Transport.Bootstrapping;
 using DotNetty.Transport.Channels;
 using DotNetty.Transport.Channels.Sockets;
+using DotNetty.Transport.Libuv;
 using Microsoft.Extensions.Logging;
 using Moons.Common20;
 using Moons.Common20.Logging;
 using System;
-using System.Collections.Generic;
+using System.Runtime;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using DotNetty.Transport.Libuv;
-using System.Runtime.InteropServices;
-using System.Runtime;
 
 namespace DataSampler.Core.Helper
 {
