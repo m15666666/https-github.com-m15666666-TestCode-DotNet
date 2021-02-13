@@ -23,6 +23,13 @@ spec:
           hostPath: # 映射到宿主机目录的数据卷
             path: /data/testv1/host/log
             type: DirectoryOrCreate
+        - name: appsettings # 从configMap映射数据卷
+          configMap:
+            name: testv1-file-config # configMap 名称
+            items:
+              - key: appsettings.json # configMap 中 data 的key
+                path: appsettings.json # 映射到路径
+
       containers: # 定义使用的容器
         - name: host
           image: testk8sweb
@@ -31,9 +38,15 @@ spec:
           ports: # 指定容器暴露的端口
             - name: port
               containerPort: 80
+          envFrom: # 容器环境变量从 configMap 中获取
+            - configMapRef:
+                name: testv1-env-config
           volumeMounts: # 容器挂载数据卷
             - name: log
               mountPath: /app/App_Data/Logs
+            - name: appsettings
+              mountPath: /app/appsettings.json
+              subPath: appsettings.json
           resources:
             requests:
               memory: "512Mi"

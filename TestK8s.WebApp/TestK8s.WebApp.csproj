@@ -28,6 +28,9 @@
     <None Update="k8sfiles\namespace.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="k8sfiles\testv1_config.yaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="k8sfiles\testv1_host.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

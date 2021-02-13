@@ -1,0 +1,14 @@
+# config
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: testv1
+  name: testv1-env-config
+data:
+
+  # === datasample ===
+  Logging__LogLevel__Default: "Warning"
+  ConfigDto__A: "true"
+  ConfigDto__B: "12883"
+  ConfigDto_C: "20000"
