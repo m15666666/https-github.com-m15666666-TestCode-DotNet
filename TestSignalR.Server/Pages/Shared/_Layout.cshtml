@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -44,6 +44,56 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/signalr.min.js" asp-append-version="false"></script>
+
+    <script type="text/javascript">
+        const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/messagehub")
+        //.withAutomaticReconnect()
+            .build();
+        let signalRLabel1 = "sendSignalRMessage";
+
+        connection.on("ReceiveMessage", (user, message) => {
+            console.timeEnd(signalRLabel1);
+            let msg = `js client receive: ${user}: ${message}`;
+            console.log(msg);
+            }
+        );
+
+        connection.onreconnecting(error => {
+            console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
+            console.log("reconnecting...");
+            console.log(error);
+        });
+
+        connection.onreconnected(connectionId => {
+            console.assert(connection.state === signalR.HubConnectionState.Connected);
+            console.log("reconnected.");
+        });
+
+        async function start() {
+            try {
+                await connection.start();
+                console.assert(connection.state === signalR.HubConnectionState.Connected);
+                console.log("SignalR Connected.");
+
+                //await sendSignalRMessage();
+            } catch (err) {
+                console.assert(connection.state === signalR.HubConnectionState.Disconnected);
+                console.log(err);
+                // setTimeout(() => start(), 5000);
+            }
+        };
+        async function sendSignalRMessage() {
+            try {
+                console.time(signalRLabel1);
+                await connection.invoke("SendMessage", "jack", "js client message");
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

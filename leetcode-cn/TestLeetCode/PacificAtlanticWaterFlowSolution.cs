@@ -168,6 +168,211 @@ class PacificAtlanticWaterFlowSolution
     //}
 }
 /*
+
+深度搜索DFS
+jawhiow
+发布于 2019-05-23
+12.4k
+分析：
+首先拿到这道题很明显能够判断出是一个二维平面回溯算法的题目，所以首先我们要准备一个移动坐标：
+
+
+分别表示上右下左
+self.directs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+一个判定是否在范围内的函数：
+
+
+def in_area(self, x, y):
+    return 0 <= x < self.m and 0 <= y < self.n
+然后继续分析，这道题是要寻找一个坐标既能够到达太平洋也能到达大西洋，但是这个过程一般不是一次深度搜索就能够完成的，所以我们从各边界开始逆流进行搜索。然后用两个二维数组进行记录，相当于进行了 44 次深度搜索，具体答案可以参考以下代码。
+
+代码：
+
+class Solution:
+    def __init__(self):
+        self.result_all = None
+        # 分别表示上右下左
+        self.directs = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+        self.m = 0
+        self.n = 0
+        # 表示能流到太平洋
+        self.po = None
+        # 表示能流到大西洋
+        self.ao = None
+        self.visited = None
+    
+    
+    def pacificAtlantic(self, matrix) :
+        # 初始化一些东西
+        self.result_all = []
+        self.m = len(matrix)
+        if self.m == 0:
+            return self.result_all
+        self.n = len(matrix[0])
+        self.ao = [[0] * self.n for _ in range(self.m)]
+        self.po = [[0] * self.n for _ in range(self.m)]
+        self.visited = [[0] * self.n for _  in range(self.m)]
+
+        # 本题顺着流不太好做，我们用逆流的方式来思考
+        # 从上面的太平洋逆流
+        for i in range(0, 1):
+            for j in range(self.n):
+                self.dfs(matrix, i, j, True)
+        # 从左边的太平洋逆流
+        self.visited = [[0] * self.n for _  in range(self.m)]
+        for i in range(self.m):
+            for j in range(0, 1):
+                self.dfs(matrix, i, j, True)
+        # 下面的大西洋
+        self.visited = [[0] * self.n for _  in range(self.m)]
+        for i in range(self.m - 1, self.m):
+            for j in range(self.n):
+                self.dfs(matrix, i, j, False)
+        # 右边的大西洋
+        self.visited = [[0] * self.n for _  in range(self.m)]
+        for i in range(self.m):
+            for j in range(self.n -1, self.n):
+                self.dfs(matrix, i, j, False)
+        
+        for i in range(self.m):
+            for j in range(self.n):
+                if self.po[i][j] == 1 and self.ao[i][j] == 1:
+                    self.result_all.append((i, j))
+        return self.result_all
+
+    def dfs(self, matrix, x, y, flag):
+        if self.visited[x][y] == 1:
+            return
+        self.visited[x][y] = 1
+        if flag:
+            # 表示是太平洋
+            self.po[x][y] = 1
+        else:
+            # 表示是大西洋
+            self.ao[x][y] = 1
+
+        for i in range(4):
+            newx = x + self.directs[i][0]
+            newy = y + self.directs[i][1]
+            if not self.in_area(newx, newy):
+                continue
+            if matrix[x][y] > matrix[newx][newy]:
+                continue
+            self.dfs(matrix, newx, newy, flag)
+        return
+    
+    def in_area(self, x, y):
+        return 0 <= x < self.m and 0 <= y < self.n
+
+空间复杂度更小，时间复杂度更小。
+
+class Solution {
+    private int m, n;
+    private int[][] direction = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+    private boolean in_area(int x, int y){
+        return 0 <= x && x < m && 0 <= y && y < n;
+    }
+    private void dfs(int[][] matrix, int x, int y, int[][] tmp){
+        tmp[x][y] = 1;
+        for (int[] d : direction) {
+            int newx = x + d[0];
+            int newy = y + d[1];
+            if (!in_area(newx, newy) || matrix[x][y] > matrix[newx][newy] || tmp[newx][newy] == 1){
+                continue;
+            }
+            dfs(matrix, newx, newy, tmp);
+        }
+    }
+    public List<List<Integer>> pacificAtlantic(int[][] matrix) {
+        List<List<Integer>> ans = new ArrayList<>();
+        if (matrix == null || matrix.length == 0)
+            return ans;
+        m = matrix.length;
+        n = matrix[0].length;
+        int[][] po = new int[m][n], ao = new int[m][n]; //po 太平洋，ao 大西洋
+        for (int i = 0; i < n; ++i){
+            dfs(matrix, 0, i, po);
+            dfs(matrix, m - 1, i, ao);
+        }
+        for (int i = 0; i < m; ++i){
+            dfs(matrix, i, 0, po);
+            dfs(matrix, i, n - 1, ao);
+        }
+        for (int i = 0; i < m; ++i) {
+            for (int j = 0; j < n; ++j) {
+                if (po[i][j] == 1 && ao[i][j] == 1){
+                    ans.add(Arrays.asList(i, j));
+                }
+            }
+        }
+        return ans;
+    }
+}```
+
+public class Solution
+{
+    private static int[,] dires = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+    private int m, n;
+    private int[][] matrix;
+
+    public IList<IList<int>> PacificAtlantic(int[][] matrix)
+    {
+        List<IList<int>> res = new List<IList<int>>();
+        m = matrix.Length;
+        if (m == 0)
+            return res;
+        n = matrix[0].Length;
+        if (n == 0)
+            return res;
+        this.matrix = matrix;
+        bool[,] canReachP = new bool[m,n];
+        bool[,] canReachA = new bool[m,n];
+        for (int i = 0; i < n; i++)
+        {
+            dfs(0, i, canReachP);
+            dfs(m - 1, i, canReachA);
+        }
+        for (int i = 0; i < m; i++)
+        {
+            dfs(i, 0, canReachP);
+            dfs(i, n - 1, canReachA);
+        }
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (canReachA[i,j] && canReachP[i,j])
+                {
+                    List<int> temp = new List<int>();
+                    temp.Add(i);
+                    temp.Add(j);
+                    res.Add(temp);
+                }
+            }
+        }
+        return res;
+    }
+
+    public void dfs(int x,int y,bool[,] canReach)
+    {
+        canReach[x,y] = true;
+        for (int i = 0; i < 4; i++)
+        {
+            int newX = x + dires[i,0];
+            int newY = y + dires[i,1];
+            if (isIn(newX, newY) && matrix[x][y] <= matrix[newX][newY] && !canReach[newX,newY])
+            {
+                dfs(newX, newY, canReach);
+            }
+        }
+    }
+
+    private bool isIn(int x, int y)
+    {
+        return x >= 0 && x < m && y >= 0 && y < n;
+    }
+}
+
 public class Solution {
     
     private static int[] dx = new int [] { -1, 0, 1, 0};
