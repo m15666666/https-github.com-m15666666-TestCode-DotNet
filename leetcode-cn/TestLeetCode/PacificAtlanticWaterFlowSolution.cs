@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -52,85 +52,120 @@ class PacificAtlanticWaterFlowSolution
         //Console.WriteLine(string.Join(",", ret.Select(v => v.ToString())));
     }
 
-    public IList<int[]> PacificAtlantic(int[][] matrix)
+    public IList<IList<int>> PacificAtlantic(int[][] matrix)
     {
-        if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0) return new List<int[]>();
+        if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0) return new List<IList<int>>();
 
-        List<int[]> ret = new List<int[]>();
+        int[,] dires = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+
+        List<IList<int>> ret = new List<IList<int>>();
         int m = matrix.Length;
         int n = matrix[0].Length;
-        byte[,] flags = new byte[m, n];
-        for( int i = 0; i < m; i++)
+        bool[,] canReachP = new bool[m,n];
+        bool[,] canReachA = new bool[m,n];
+        for (int i = 0; i < n; i++)
         {
-            for( int j = 0; j < n; j++)
+            Dfs(0, i, canReachP);
+            Dfs(m - 1, i, canReachA);
+        }
+        for (int i = 0; i < m; i++)
+        {
+            Dfs(i, 0, canReachP);
+            Dfs(i, n - 1, canReachA);
+        }
+        for (int i = 0; i < m; i++)
+            for (int j = 0; j < n; j++)
+                if (canReachA[i,j] && canReachP[i,j]) ret.Add(new[]{ i,j});
+        return ret;
+
+        void Dfs(int x,int y, bool[,] canReach)
+        {
+            canReach[x,y] = true;
+            for (int i = 0; i < 4; i++)
             {
-                if (PacificAtlantic(matrix, m, n, i, j, flags) == TwoOcean) ret.Add(new[] { i, j });
+                int newX = x + dires[i,0];
+                int newY = y + dires[i,1];
+                if (IsIn(newX, newY) && matrix[x][y] <= matrix[newX][newY] && !canReach[newX,newY]) Dfs(newX, newY, canReach);
             }
         }
 
-        return ret;
+        bool IsIn(int x, int y) => -1 < x && x < m && -1 < y && y < n;
     }
+    //public IList<IList<int>> PacificAtlantic(int[][] matrix)
+    //{
+    //    if (matrix == null || matrix.Length == 0 || matrix[0].Length == 0) return new List<IList<int>>();
 
-    private const byte Atlantic = 0x02;
-    private const byte Pacific = 0x01;
-    /// <summary>
-    /// 可以连通两个海洋
-    /// </summary>
-    private const byte TwoOcean = Atlantic | Pacific;
+    //    List<IList<int>> ret = new List<IList<int>>();
+    //    int m = matrix.Length;
+    //    int n = matrix[0].Length;
+    //    byte[,] flags = new byte[m, n];
+    //    for( int i = 0; i < m; i++)
+    //        for( int j = 0; j < n; j++)
+    //            if (PacificAtlantic(matrix, m, n, i, j, flags) == TwoOcean) ret.Add(new[] { i, j });
 
-    /// <summary>
-    /// 计算完毕的格子
-    /// </summary>
-    private const byte Calculated = 0x80;
+    //    return ret;
+    //}
 
-    /// <summary>
-    /// 计算中的格子
-    /// </summary>
-    private const byte Calculating = 0x40;
+    //private const byte Atlantic = 0x02;
+    //private const byte Pacific = 0x01;
+    ///// <summary>
+    ///// 可以连通两个海洋
+    ///// </summary>
+    //private const byte TwoOcean = Atlantic | Pacific;
 
-    private byte PacificAtlantic(int[][] matrix, int m, int n, int i, int j, byte[,] flags)
-    {
-        byte flag = flags[i, j];
-        if ((flag & Calculated) == Calculated) return (byte)(flag & TwoOcean);
-        if ((flag & Calculating) == Calculating) return 0;
-        flags[i, j] = Calculating;
+    ///// <summary>
+    ///// 计算完毕的格子
+    ///// </summary>
+    //private const byte Calculated = 0x80;
 
-        var v = matrix[i][j];
-        byte ret = 0;
+    ///// <summary>
+    ///// 计算中的格子
+    ///// </summary>
+    //private const byte Calculating = 0x40;
 
-        if (i == 0) ret |= Pacific;
-        else if( matrix[i-1][j] <= v ) ret |= PacificAtlantic(matrix, m, n, i - 1, j, flags);
+    //private static byte PacificAtlantic(int[][] matrix, int m, int n, int i, int j, byte[,] flags)
+    //{
+    //    byte flag = flags[i, j];
+    //    if ((flag & Calculated) == Calculated) return (byte)(flag & TwoOcean);
+    //    if ((flag & Calculating) == Calculating) return 0;
+    //    flags[i, j] = Calculating;
 
-        if(ret == TwoOcean)
-        {
-            flags[i, j] = (byte)(Calculated & ret);
-            return ret;
-        }
+    //    var v = matrix[i][j];
+    //    byte ret = 0;
 
-        if (j == 0) ret |= Pacific;
-        else if(matrix[i][j-1] <= v) ret |= PacificAtlantic(matrix, m, n, i, j - 1, flags);
+    //    if (i == 0) ret |= Pacific;
+    //    else if( matrix[i-1][j] <= v ) ret |= PacificAtlantic(matrix, m, n, i - 1, j, flags);
 
-        if (ret == TwoOcean)
-        {
-            flags[i, j] = (byte)(Calculated & ret);
-            return ret;
-        }
+    //    if(ret == TwoOcean)
+    //    {
+    //        flags[i, j] = (byte)(Calculated & ret);
+    //        return ret;
+    //    }
 
-        if (i == m - 1) ret |= Atlantic;
-        else if(matrix[i+1][j] <= v) ret |= PacificAtlantic(matrix, m, n, i + 1, j, flags);
+    //    if (j == 0) ret |= Pacific;
+    //    else if(matrix[i][j-1] <= v) ret |= PacificAtlantic(matrix, m, n, i, j - 1, flags);
 
-        if (ret == TwoOcean)
-        {
-            flags[i, j] = (byte)(Calculated & ret);
-            return ret;
-        }
+    //    if (ret == TwoOcean)
+    //    {
+    //        flags[i, j] = (byte)(Calculated & ret);
+    //        return ret;
+    //    }
 
-        if (j == n - 1) ret |= Atlantic;
-        else if (matrix[i][j+1] <= v) ret |= PacificAtlantic(matrix, m, n, i, j + 1, flags);
+    //    if (i == m - 1) ret |= Atlantic;
+    //    else if(matrix[i+1][j] <= v) ret |= PacificAtlantic(matrix, m, n, i + 1, j, flags);
 
-        flags[i, j] = (byte)(Calculated & ret);
-        return ret;
-    }
+    //    if (ret == TwoOcean)
+    //    {
+    //        flags[i, j] = (byte)(Calculated & ret);
+    //        return ret;
+    //    }
+
+    //    if (j == n - 1) ret |= Atlantic;
+    //    else if (matrix[i][j+1] <= v) ret |= PacificAtlantic(matrix, m, n, i, j + 1, flags);
+
+    //    flags[i, j] = (byte)(Calculated & ret);
+    //    return ret;
+    //}
 }
 /*
 public class Solution {
