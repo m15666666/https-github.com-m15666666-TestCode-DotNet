@@ -42,13 +42,13 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 CalcSTRESS(almPoint);
                 if (PartParameter.IsStiffBase) // 刚性基础
                 {
-                    //todo 不对中 MISAGN3 
+                    CalcMISAGN1(almPoint);
                     CalcUNBL10(almPoint);
 
                 }
                 else // 弹性基础
                 {
-                    //todo 不对中 MISAGN4 
+                    CalcMISAGN2(almPoint);
                     CalcUNBL11(almPoint);
                 }
             }

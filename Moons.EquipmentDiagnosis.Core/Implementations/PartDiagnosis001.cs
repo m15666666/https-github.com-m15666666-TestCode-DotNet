@@ -433,6 +433,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 20%。则该泵存在汽蚀故障或流体激励故障。 
              */
             //todo
+            return false;
             if (!PartParameter.IsStiffBase) return false;
             bool found = false;
             if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid001)) found = true;
@@ -461,6 +462,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 的 20%。则该泵存在回流或流体激励故障。 
              */
             //todo
+            return false;
             if (!PartParameter.IsStiffBase) return false;
             bool found = false;
             if (Calc(DEPoints.VelPoints,EquipmentFaultType.Pump.Liquid003)) found = true;
