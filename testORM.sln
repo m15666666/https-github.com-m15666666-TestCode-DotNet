@@ -171,7 +171,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{E944A30F-566
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestK8s.WebApp", "TestK8s.WebApp\TestK8s.WebApp.csproj", "{E912CBE2-57A9-40AC-BCA2-372152BFE7D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSignalR.Client", "TestSignalR.Client\TestSignalR.Client.csproj", "{08383481-5DA8-4E78-85A3-8BB87B5E989B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSignalR.Client", "TestSignalR.Client\TestSignalR.Client.csproj", "{08383481-5DA8-4E78-85A3-8BB87B5E989B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "k8sDocuments", "k8sDocuments\k8sDocuments.csproj", "{06B653B4-C44C-4D5D-9145-FAE57DC14050}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -483,6 +485,10 @@ Global
 		{08383481-5DA8-4E78-85A3-8BB87B5E989B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08383481-5DA8-4E78-85A3-8BB87B5E989B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08383481-5DA8-4E78-85A3-8BB87B5E989B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06B653B4-C44C-4D5D-9145-FAE57DC14050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B653B4-C44C-4D5D-9145-FAE57DC14050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06B653B4-C44C-4D5D-9145-FAE57DC14050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06B653B4-C44C-4D5D-9145-FAE57DC14050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -508,6 +514,7 @@ Global
 		{CA2FC3E0-A8CD-4D6E-B814-8217D201D292} = {79D1C177-F442-4DCC-930C-6955A36B3588}
 		{E912CBE2-57A9-40AC-BCA2-372152BFE7D7} = {E944A30F-566C-4148-9778-30BE87676CFA}
 		{08383481-5DA8-4E78-85A3-8BB87B5E989B} = {79D1C177-F442-4DCC-930C-6955A36B3588}
+		{06B653B4-C44C-4D5D-9145-FAE57DC14050} = {E944A30F-566C-4148-9778-30BE87676CFA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2DC060E9-C762-46B9-AA23-B34AFA45B59E}

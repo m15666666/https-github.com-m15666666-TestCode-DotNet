@@ -78,9 +78,9 @@ namespace AnalysisAlgorithm.FFT
         /// </summary>
         /// <param name="freq"></param>
         /// <returns></returns>
-        public double GetFFTAmp(double freq)
+        public double GetFFTAmp(double freq, int peakOffset = 1)
         {
-            return GetFFTAmpBySpectrum(Fs, freq, TimeWaveLength, FFTAmp);
+            return GetFFTAmpBySpectrum(Fs, freq, TimeWaveLength, FFTAmp, peakOffset);
         }
 
         /// <summary>

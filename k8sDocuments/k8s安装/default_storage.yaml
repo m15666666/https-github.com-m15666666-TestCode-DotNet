@@ -1,0 +1,31 @@
+# hostPath volume
+# redis-master, kubectl edit statefulset redis-master
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: default-pv2
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/default/pv2"
+    type: DirectoryOrCreate
+
+# redis-slave, kubectl edit statefulset redis-slave    
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: default-pv3
+spec:
+  capacity:
+    storage: 8Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/default/pv3"
+    type: DirectoryOrCreate    
+

@@ -23,7 +23,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 
             CalcLoose();
             CalcRub();
-            CalcELECTRC1();//todo
+            CalcELECTRC1();
             CalcELECTRC2();
             CalcELECTRC3();
             CalcBearingFTF();
@@ -64,14 +64,48 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         /// <returns></returns>
         private bool CalcELECTRC1()
         {
-            //todo
             /*
              1.1）ELECTRC1 断条--电机 
   电机所有测点中振动速度值最大的频谱图上存在主频 1X 幅值大于 50%总值，且 1X+极
 数*滑差或 1X-极数*滑差的幅值大于 1X 幅值的 20%。诊断为断条故障。 
              
              */
-            return false;
+            if (PartParameter.IsUnStableSpeed) return false;
+
+            bool found = false;
+            if (Calc(Points.VelPoints,EquipmentFaultType.Generic.Electric002)) found = true;
+            return found;
+
+            bool Calc(PointDataCollection velPoints, string code)
+            {
+                if (0 == velPoints.Count) return false;
+                var point = velPoints.MaxMeasureValueP();
+                var summary = point.HistorySummaryData;
+                var timewave = point.TimewaveData;
+                var spectrumUtils = timewave.SpectrumUtils;
+                if (!timewave.IsFreqResolutionMatchELECTRCFault) return false;
+                
+                double offsetFreq = PartParameter.MotorSlipDiffFrequence;
+                if (offsetFreq <= double.Epsilon) return false;
+
+                var freqResolution = spectrumUtils.FrequencyResolution;
+                if (offsetFreq < 2 * freqResolution) return false;
+
+                int peakOffset = 3 * freqResolution <= offsetFreq ? 1 : 0;
+                double leftFreq = spectrumUtils.F0 - offsetFreq;
+                double rightFreq = spectrumUtils.F0 - offsetFreq;
+                var leftAmp = spectrumUtils.GetFFTAmp(leftFreq, peakOffset);
+                var rightAmp = spectrumUtils.GetFFTAmp(rightFreq, peakOffset);
+
+                double limit = 0.2 * timewave.X1;
+                if (limit < leftAmp || limit < rightAmp)
+                {
+                    Config.Logger.Info(code);
+                    AddPossibleFault(point, code);
+                    return true;
+                }
+                return false;
+            }
         }
 
         /// <summary>
