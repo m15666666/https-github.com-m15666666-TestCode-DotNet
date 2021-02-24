@@ -432,7 +432,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 +......+500*谱图分辨率的所有谱线中至少有 200 个频率幅值大于谱图上最高峰值的
 20%。则该泵存在汽蚀故障或流体激励故障。 
              */
-            //todo
+            //todo 暂时不作
             return false;
             if (!PartParameter.IsStiffBase) return false;
             bool found = false;
@@ -461,7 +461,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 分辨率+......+300*谱图分辨率的所有谱线中至少有 100 个频率幅值大于谱图上最高峰值
 的 20%。则该泵存在回流或流体激励故障。 
              */
-            //todo
+            //todo 暂时不作
             return false;
             if (!PartParameter.IsStiffBase) return false;
             bool found = false;
@@ -799,7 +799,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 （1）如果 4 天内最大转速 Nmax/Nmin>1.01（说明：如果成立，则（1）和（2）必须同时
 成立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
 （2）（测点 X 按以下对号入座） 
-  测点 X 其主频幅值大于通频值的 80%成立。 //todo
+  测点 X 其主频幅值大于通频值的 80%成立。
              */
             if (!IsSpeedMatchUnbalance(pnt)) return false;
 
@@ -811,10 +811,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 
             var vels = Points.VelPoints;
 
-            var point = deVels.FirstOrDefault(p => p.IsHorizontal) ??
-                deVels.FirstOrDefault(p => p.IsVertical) ??
-                ndeVels.FirstOrDefault(p => p.IsHorizontal) ??
-                ndeVels.FirstOrDefault(p => p.IsVertical);
+            var point = pnt; // 弹性基础，只要取最大或者报警的测点即可，因为不容易区分水平和垂直
 
             if (point != null) return CalcUNBL_OnePoint(point, code, 0.8);
             return false;
@@ -960,7 +957,6 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 立，才能确定为不平衡；否则（1）忽略，只看（2）是否成立。），且 X 测点的 V Nmax /V Nmin >0.7 （Nmax/Nmin） 2 。 
 （2）（测点 X 按以下对号入座） 
   测点 X 其主频幅值大于通频值的 80%成立。 
-   // todo
              */
             if (!IsSpeedMatchUnbalance(pnt)) return false;
 
@@ -972,10 +968,8 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 
             var vels = Points.VelPoints;
 
-            var point = deVels.FirstOrDefault(p => p.IsHorizontal) ??
-                deVels.FirstOrDefault(p => p.IsVertical) ??
-                ndeVels.FirstOrDefault(p => p.IsHorizontal) ??
-                ndeVels.FirstOrDefault(p => p.IsVertical);
+            // 弹性基础，只要取最大或者报警的测点即可，因为不容易区分水平和垂直
+            var point = pnt;
 
             if (point != null) return CalcUNBL_OnePoint(point, code, 0.8);
             return false;
