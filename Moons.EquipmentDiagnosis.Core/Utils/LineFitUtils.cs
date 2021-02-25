@@ -44,7 +44,7 @@ namespace Moons.EquipmentDiagnosis.Core.Utils
         public double CalcY( double x)
         {
             var ret = LineCoef.Item1 + LineCoef.Item2 * x;
-            Debug.WriteLine($"LineFitUtils.CalcY:x={x},y={ret}");
+            //Debug.WriteLine($"LineFitUtils.CalcY:x={x},y={ret}");
             return ret;
         }
     }

@@ -88,7 +88,13 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         protected double GetSlopeByDays(PointData point, int days )
         {
             var datas = GetInt32MinuteSummaryByDays(point, days);
-            if (CollectionUtils.IsNullOrEmptyG(datas)) return 0;
+            if (CollectionUtils.IsNullOrEmptyG(datas) || datas.Length < 2 ) return 0;
+            var lineFit = GetLineFit(datas);
+            return lineFit.K;
+        }
+        private LineFitUtils GetLineFit(Int32MinuteSummary[] datas )
+        {
+            if (CollectionUtils.IsNullOrEmptyG(datas) || datas.Length < 2) return null;
             double[] x = new double[datas.Length];
             double[] y = new double[datas.Length];
             int i = 0;
@@ -98,8 +104,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
                 y[i] = data.MeasureValue;
                 i++;
             }
-            var lineFit = LineFitUtils.CreateByXYData(x, y);
-            return lineFit.K;
+            return LineFitUtils.CreateByXYData(x, y);
         }
 
         /// <summary>
@@ -384,35 +389,48 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
 于 0.5Vmax。同时该测点 1-6 倍频之和大于总值的 80%。则设备存在壳体变形故障；检
 查基础台板变形。 
              */
-            //todo
-            if (!PartParameter.IsStiffBase) return false;
-            bool found = false;
-            if (Calc(DEPoints.VelPoints,EquipmentFaultType.Generic.Stress001)) found = true;
-            return found;
+            var datas = GetInt32MinuteSummaryByDays(pnt, PartParameter.TrendDays);
+            if (CollectionUtils.IsNullOrEmptyG(datas) || datas.Length < 30) return false;
 
-            bool Calc(PointDataCollection velPoints, string code)
+            var lineFit = GetLineFit(datas);
+            var higher = new List<double>();// 高于拟和线的值
+            var lower = new List<double>();// 低于拟和线的值
+            double max = double.MinValue, min = double.MaxValue;
+            foreach(var data in datas)
             {
-                if (0 == velPoints.Count) return false;
-                var pVertical = velPoints.GetByDirectionId(PntDirectionID.Vertical).MaxMeasureValueP();
-                var pHorizontal = velPoints.GetByDirectionId(PntDirectionID.Horizontal).MaxMeasureValueP();
-                if (pHorizontal == null || pVertical == null) return false;
-                if (!(0.8 * pHorizontal.MeasureValue < pVertical.MeasureValue)) return false;
-
-                var summary = pVertical.HistorySummaryData;
-                var timewave = pVertical.TimewaveData;
-
-                double limit_0p8_Overall = 0.8 * timewave.Overall;
-                int xFFTStartIndex = 0;
-                int xFFTCount = 6;
-                var partialOverall = timewave.SpectrumUtils.GetOverallByXFFT(xFFTStartIndex, xFFTCount);
-                if (limit_0p8_Overall < partialOverall)
-                {
-                    Config.Logger.Info(code);
-                    AddPossibleFault(pVertical, code);
-                    return true;
-                }
-                return false;
+                var v = data.MeasureValue;
+                if (max < v) max = v;
+                if (v < min) min = v;
+                var fit = lineFit.CalcY(data.SampleMinute);
+                if (fit < v) higher.Add(v);
+                else lower.Add(v);
             }
+            if (max - min < 0.1) return false; // 波动过于小返回
+            
+            int bigCount = Math.Max(higher.Count, lower.Count);
+            int smallCount = Math.Min(higher.Count, lower.Count);
+            // 数量差距大于20%，返回
+            if ((0.2 * datas.Length) < (bigCount - smallCount)) return false;
+
+            var averageMax = higher.Average();
+            var averageMin = lower.Average();
+            // 上下平均值偏差小于大值的50%，返回
+            if ((averageMax - averageMin) < 0.5 * averageMax) return false;
+
+            string code = EquipmentFaultType.Generic.Stress001;
+            var summary = pnt.HistorySummaryData;
+            var timewave = pnt.TimewaveData;
+            double limit_0p8_Overall = 0.8 * timewave.Overall;
+            int xFFTStartIndex = 0;
+            int xFFTCount = 6;
+            var partialOverall = timewave.SpectrumUtils.GetOverallByXFFT(xFFTStartIndex, xFFTCount);
+            if (limit_0p8_Overall < partialOverall)
+            {
+                Config.Logger.Info(code);
+                AddPossibleFault(pnt, code);
+                return true;
+            }
+            return false;
         }
         #endregion
 
