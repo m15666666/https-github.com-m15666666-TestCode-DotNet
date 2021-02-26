@@ -379,6 +379,7 @@ if __name__ == '__main__':
     basedir = sys.path[0]
     wavefile = "wave1.txt" # 8192长度的波形，字节数32768左右，字符串长度65740。
     wavefile = "wave-tcpdump.txt" # tcpdump captured wave
+    wavefile = "2021-02-26-tcpdump.txt" # tcpdump captured wave
     filepath = os.path.join(basedir, wavefile)
     fo = open(filepath, "r")
     line = fo.readline()
