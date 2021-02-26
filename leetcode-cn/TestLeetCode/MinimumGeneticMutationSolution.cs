@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,12 +87,15 @@ class MinimumGeneticMutationSolution
                     foreach (char c in Genes)
                     {
                         if (old == c) continue;
-                        char[] next = (char[])previous.Clone();
-                        next[j] = c;
 
-                        var code = GetGeneHashCode(next);
+                        previous[j] = c;
+                        var code = GetGeneHashCode(previous);
+                        previous[j] = old;
+                        //var code = GetGeneHashCode(next);
                         if (hashcodeBank.Contains(code) && !visited.Contains(code))
                         {
+                            char[] next = (char[])previous.Clone();
+                            next[j] = c;
                             visited.Add(code);
                             queue.Enqueue(next);
                         }
@@ -104,7 +107,7 @@ class MinimumGeneticMutationSolution
         return -1;
     }
 
-    private static char[] Genes = new char[] { 'A', 'C', 'G', 'T' };
+    private static readonly char[] Genes = new char[] { 'A', 'C', 'G', 'T' };
 
     /// <summary>
     /// 获得基因hashcode，基因长度为8.
@@ -117,25 +120,89 @@ class MinimumGeneticMutationSolution
         foreach( var c in gene)
         {
             ret <<= 2;
-            switch (c)
+            ret += c switch
             {
-                case 'A':
-                    ret += 0;
-                    break;
+                'A' => 0,
+                'C' => 1,
+                'G' => 2,
+                'T' => 3,
+                _ => throw new NotImplementedException()
+            };
+            //switch (c)
+            //{
+            //    case 'A':
+            //        ret += 0;
+            //        break;
 
-                case 'C':
-                    ret += 1;
-                    break;
+            //    case 'C':
+            //        ret += 1;
+            //        break;
 
-                case 'G':
-                    ret += 2;
-                    break;
+            //    case 'G':
+            //        ret += 2;
+            //        break;
 
-                case 'T':
-                    ret += 3;
-                    break;
-            }
+            //    case 'T':
+            //        ret += 3;
+            //        break;
+            //}
         }
         return ret;
     }
 }
+/*
+public class Solution {
+    public int MinMutation(string start, string end, string[] bank) {
+        int result = 0;
+
+        List<string> inputList = new List<string>();
+        List<string> nextList = new List<string>();
+        List<string> checkList = bank.ToList();
+        inputList.Add(start);
+
+        while(inputList.Count > 0 && checkList.Count > 0)
+        {
+            result++;
+            foreach(var input in inputList)
+            {
+                for(var i=0; i<checkList.Count; i++)
+                {
+                    var check = checkList[i];
+                    if(IsOneDiff(input, check))
+                    {
+                        if(check == end)
+                        {
+                            return result;
+                        }
+                        else
+                        {
+                            nextList.Add(check);
+                            checkList.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                }
+            }
+
+            inputList = nextList;
+            nextList = new List<string>();
+        }
+
+        return -1;
+    }
+
+    public bool IsOneDiff(string input, string check)
+    {
+        int diffCount = 0;
+        for(var i=0; i<8; i++)
+        {
+            if(input[i] != check[i] && ++diffCount > 1)
+            {
+                return false;
+            }
+        }
+        return diffCount == 1;
+    }
+} 
+ 
+*/
