@@ -14,10 +14,27 @@ import os
 
 
 if __name__ == '__main__':
+    import platform
     import sys
-    p7zTest = '"C:\\Program Files\\7-Zip\\7z.exe" t {}'
-    p7zAdd = '"C:\\Program Files\\7-Zip\\7z.exe" a {}.7z {}'
-    p7zExact = '"C:\\Program Files\\7-Zip\\7z.exe" e {}'
+
+
+    gzAdd = 'tar -zcvf {}.tgz {}'
+    gzExtract = 'tar -zxvf {}'
+
+    #https://blog.csdn.net/gatieme/article/details/45674367
+    osType = platform.system()
+    print(osType)
+    isWindows = osType == 'Windows'
+    isLinux = osType == 'Linux'
+#    for env in platform.os.environ:
+#        print(env)
+    #isWindows = False
+    p7z = '"C:\\Program Files\\7-Zip\\7z.exe"' if isWindows else '7z'
+    #p7zTest = p7z + ' t {}'
+    p7zTest = '%s t {}' % p7z
+    p7zAdd = p7z + ' a {}.7z {}'
+    p7zExtract = p7z + ' e {}'
+    #if(isLinux):
 
     basePath = sys.path[0]
     #basePath = """D:\\1\\imgs""" # 7z files dir
@@ -34,7 +51,7 @@ if __name__ == '__main__':
                 #continue
                 #os.system(f'mspaint {img}')
                 #os.system(p7zTest.format(filename))
-                os.system(p7zExact.format(filename))
+                os.system(p7zExtract.format(filename))
             if(parts[1] == '.img'):
                 print("compress {}".format(filename))
                 #os.system(f'mspaint {img}')
