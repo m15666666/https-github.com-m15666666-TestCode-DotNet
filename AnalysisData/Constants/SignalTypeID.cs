@@ -48,14 +48,19 @@ namespace AnalysisData.Constants
         public const int ShaftPosition = 121;
 
         /// <summary>
-        /// 转速
+        /// 扭距, DataType_ID = 3, UnitType_ID = 103
         /// </summary>
-        public const int Rev = 410;
+        public const int Torque = 406;
 
         /// <summary>
         /// 温度
         /// </summary>
         public const int Tempt = 409;
+
+        /// <summary>
+        /// 转速
+        /// </summary>
+        public const int Rev = 410;
 
         /// <summary>
         /// 电流（数值）
