@@ -13,6 +13,7 @@ namespace TestLeetCode
             var classname = $"{StringUtils.Capitalize("substring-with-concatenation-of-all-words", "-")}Solution";
             Debug.WriteLine(classname);
 
+            new ArrangingCoinsSolution().Test();
             new StrongPasswordCheckerSolution().Test();
             new ConvertANumberToHexadecimalSolution().Test();
             //new LongestAbsoluteFilePathSolution().Test();
