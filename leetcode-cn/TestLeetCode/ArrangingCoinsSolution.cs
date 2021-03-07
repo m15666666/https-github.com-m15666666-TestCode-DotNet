@@ -1,8 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 
 /*
 你总共有 n 枚硬币，你需要将它们摆成一个阶梯形状，第 k 行就必须正好有 k 枚硬币。
@@ -34,55 +30,66 @@ n = 8
 因为第四行不完整，所以返回3.
 
 */
+
 /// <summary>
 /// https://leetcode-cn.com/problems/arranging-coins/
 /// 441. 排列硬币
-/// 
+///
 /// </summary>
-class ArrangingCoinsSolution
+internal class ArrangingCoinsSolution
 {
     public void Test()
     {
         var ret = ArrangeCoins(1804289383);
     }
 
-    public int ArrangeCoins(int n) {
+    public int ArrangeCoins(int n)
+    {
+        // 下面三个版本都可以工作
+
         // 等差数列求和公式：设 k*(k+1)/2 = n，
         // 利用求根公式 (-b +/- sqrt(b^2 - 4ac))/2a，k为非负舍弃负根：k = (-1 + sqrt(1 + 8n ))/ 2
         // 针对n = 1804289383，数字太大，必须首先将n转换为double，否则8*n将产生溢出，计算错误。
-        double delta = 1 + 8 * (double)n;
-        return (int)((-1 + Math.Sqrt(delta) ) / 2);
+        ////double delta = 1 + 8 * (double)n;
+        ////return (int)((-1 + Math.Sqrt(delta) ) / 2);
 
-        //long delta = 1 + 8 * (long)n;
-        //return (int)((-1 + Sqrt(delta) ) / 2);
-        //static long Sqrt(long v)
-        //{
-        //    if (v < 2) return v;
-        //    long low = 1, high = v / 2; // 
-        //    while (low <= high) {
-        //        long mid = (low + high) / 2;
-        //        long sumofk = mid * mid;// 针对n = 1804289383，数字太多，long类型也无法容纳
-        //        if ( sumofk == v ) return mid;
-        //        if (v < sumofk) high = mid - 1;
-        //        else low = mid + 1;
-        //    }
-        //    return low - 1;
-        //}
-
+        long delta = 1 + 8 * (long)n;
+        return (int)((-1 + Sqrt(delta)) / 2);
+        static long Sqrt(long v)
+        {
+            if (v < 2) return v;
+            long low = 1, high = v / 2;
+            while (low <= high)
+            {
+                long mid = (low + high) / 2;
+                long sumofk = mid * mid;
+                // 针对n = 1804289383，数字太多，long类型也无法容纳，所以主动检测是否溢出
+                if (sumofk < 0) // 溢出，减小上限
+                {
+                    high = mid - 1;
+                    continue;
+                }
+                if (sumofk == v) return mid;
+                if (v < sumofk) high = mid - 1;
+                else low = mid + 1;
+            }
+            return low - 1; // 等价于high
+        }
 
         if (n < 2) return n;
         long low = 1, high = n;
-        while (low <= high) {
+        while (low <= high)
+        {
             long mid = (low + high) / 2;
             long sumofk = mid * (mid + 1) / 2;
-            if (( sumofk <= n ) && (n < sumofk + mid + 1)) return (int)mid;
+            if ((sumofk <= n) && (n < sumofk + mid + 1)) return (int)mid;
             if (n < sumofk) high = mid - 1;
             else low = mid + 1;
         }
         throw new ArgumentException(nameof(n));
     }
-
 }
+
 /*
 用求和公式反解
 _Breiman
@@ -110,7 +117,7 @@ class Solution:
             elif n<k+k*(k-1)//2:
                 k2 = k-1
             else:
-                k1 = k+1      
+                k1 = k+1
 
 public class Solution {
     public int ArrangeCoins(int n) {
