@@ -21,6 +21,11 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         public string EquipmentType { get; set; }
 
         /// <summary>
+        /// 设备参数
+        /// </summary>
+        public List<PartParameter> PartParameters { get; set; } = new List<PartParameter>();
+
+        /// <summary>
         /// 测点
         /// </summary>
         public PointDataCollection Points { get; set; } = new PointDataCollection();

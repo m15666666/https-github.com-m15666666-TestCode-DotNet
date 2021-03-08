@@ -45,6 +45,7 @@ namespace Moons.EquipmentDiagnosis.Core.Implementations
         //protected string EquipmentType => _equipmentData.EquipmentType;
 
         private List<PossibleFault> _possibleFaults = new List<PossibleFault>();
+        public IList<PossibleFault> PossibleFaults => _possibleFaults;
         protected bool HasPossibleFaults => 0 < _possibleFaults.Count;
 
         protected void AddPossibleFault(PointData p, string code)

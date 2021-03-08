@@ -332,10 +332,10 @@ namespace Moons.EquipmentDiagnosis.Core.Dto
         ///// </summary>
         //public int SigType_NR { get; set; }
 
-        ///// <summary>
-        /////     数据长度
-        ///// </summary>
-        //public int DatLen_NR { get; set; }
+        /// <summary>
+        ///     数据长度
+        /// </summary>
+        public int DatLen_NR { get; set; }
 
         public int RotSpeed_NR { get; set; }
         public float F0 => RotSpeed_NR / 60f;
