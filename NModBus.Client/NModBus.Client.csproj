@@ -6,7 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NModbus" Version="3.0.61" />
+    <PackageReference Include="NModbus" Version="3.0.62" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Modbus资料\" />
   </ItemGroup>
 
 </Project>

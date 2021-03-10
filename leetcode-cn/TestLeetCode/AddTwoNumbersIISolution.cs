@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -78,6 +78,53 @@ class AddTwoNumbersIISolution
     };
 }
 /*
+
+两数相加 II
+力扣官方题解
+发布于 2020-04-13
+36.6k
+📺 视频题解
+
+📖 文字题解
+方法一：栈
+思路与算法
+
+本题的主要难点在于链表中数位的顺序与我们做加法的顺序是相反的，为了逆序处理所有数位，我们可以使用栈：把所有数字压入栈中，再依次取出相加。计算过程中需要注意进位的情况。
+
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Deque<Integer> stack1 = new LinkedList<Integer>();
+        Deque<Integer> stack2 = new LinkedList<Integer>();
+        while (l1 != null) {
+            stack1.push(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            stack2.push(l2.val);
+            l2 = l2.next;
+        }
+        int carry = 0;
+        ListNode ans = null;
+        while (!stack1.isEmpty() || !stack2.isEmpty() || carry != 0) {
+            int a = stack1.isEmpty() ? 0 : stack1.pop();
+            int b = stack2.isEmpty() ? 0 : stack2.pop();
+            int cur = a + b + carry;
+            carry = cur / 10;
+            cur %= 10;
+            ListNode curnode = new ListNode(cur);
+            curnode.next = ans;
+            ans = curnode;
+        }
+        return ans;
+    }
+}
+复杂度分析
+
+时间复杂度：O(max(m, n))O(max(m,n))，其中 mm 与 nn 分别为两个链表的长度。我们需要遍历每个链表。
+
+空间复杂度：O(m + n)O(m+n)，其中 mm 与 nn 分别为两个链表的长度。这是我们把链表内容放入栈中所用的空间。
+
 public class Solution {
     public ListNode AddTwoNumbers(ListNode l1, ListNode l2) {
         Stack<int> s1 = new Stack<int>();
