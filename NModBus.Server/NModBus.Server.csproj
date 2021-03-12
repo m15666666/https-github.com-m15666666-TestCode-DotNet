@@ -3,6 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <!-- 
+    项目文件(.csproj)中添加RuntimeIdentifier配置项，如下(只能指定一个，如含多个RuntimeIdentifier配置项则按最后一个指定的目标平台发布)
+    发布项目，项目就是自包含的,存放在指定发布路径中(我这里文件发布到默认路径在项目bin\Release\PublishOutput中)
+    修改目标平台到项目文件中修改RuntimeIdentifier项后再发布即可
+    不想发布自包含项目时，删除RuntimeIdentifier项即可
+    -->
+    <!--<RuntimeIdentifier>win81-x64</RuntimeIdentifier>-->
   </PropertyGroup>
 
   <ItemGroup>
